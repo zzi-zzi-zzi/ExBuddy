@@ -5,8 +5,8 @@
 	using Interfaces;
 	using ff14bot;
 
-	[GatheringRotation("Onix460", 33, 600)]
-	public sealed class Onix460GatheringRotation : CollectableGatheringRotation, IGetOverridePriority
+	[GatheringRotation("Collect460", 33, 600)]
+	public sealed class Collect460GatheringRotation : CollectableGatheringRotation, IGetOverridePriority
 	{
 		#region IGetOverridePriority Members
 		int IGetOverridePriority.GetOverridePriority(ExGatherTag tag)
