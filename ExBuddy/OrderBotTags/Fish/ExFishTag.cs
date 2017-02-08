@@ -1125,9 +1125,9 @@ namespace ExBuddy.OrderBotTags.Fish
 			isSitting = false;
 		}
 
-		protected virtual double GetFishLimit()
+		protected virtual int GetFishLimit()
 		{
-			return Convert.ToInt64(MathEx.Random(MinimumFishPerSpot, MaximumFishPerSpot));
+			return Convert.ToInt32(MathEx.Random(MinimumFishPerSpot, MaximumFishPerSpot));
 		}
 
 		protected void ShuffleFishSpots()
