@@ -121,17 +121,17 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
         #endregion
 
         #region RedCrafter
-        SoulOfTheCrafter = -6,
+        SoulOfTheCrafter = -51,
 
-        RedCrafterToken = -5,
+        RedCrafterToken = -50,
 
-        GoblinCup = -4,
+        GoblinCup = -49,
 
-        CompetenceIV = -3,
+        CompetenceIV = -48,
 
-        CunningIV = -2,
+        CunningIV = -47,
 
-        CommandIV = -1,
+        CommandIV = -46,
         #endregion
 
         #region BlueGatherer
