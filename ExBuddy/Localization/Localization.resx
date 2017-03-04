@@ -199,7 +199,7 @@
     <value>Mooching, this will be the only mooch.</value>
   </data>
   <data name="ExFish_NoCordial" xml:space="preserve">
-    <value>No Cordial avilable, buy more</value>
+    <value>No Cordial available, buy more </value>
   </data>
   <data name="ExFish_NoSenceOfFish" xml:space="preserve">
     <value>You do not sense any fish here.</value>
@@ -505,7 +505,7 @@
     <value>Using cordial when it becomes available</value>
   </data>
   <data name="ExGather_CordialNotAvailable" xml:space="preserve">
-    <value>No Cordial avilable, buy more</value>
+    <value>No Cordial available, buy more </value>
   </data>
   <data name="ExGather_CordialUse" xml:space="preserve">
     <value>Using Cordial -&gt; Waiting (sec): {0}, CurrentGP: {1}</value>
