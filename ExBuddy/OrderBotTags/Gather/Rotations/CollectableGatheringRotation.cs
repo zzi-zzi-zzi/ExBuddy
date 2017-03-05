@@ -107,23 +107,37 @@
 		public override bool ShouldForceGather(ExGatherTag tag)
 		{
 			return !tag.IsEphemeral() && !tag.IsUnspoiled();
-		}
+        }
 
-		protected async Task AppraiseAndRebuff(ExGatherTag tag)
-		{
-			await Impulsive(tag);
+        protected async Task AppraiseAndRebuff(ExGatherTag tag)
+        {
+            await Impulsive(tag);
 
-			if (HasDiscerningEye)
-			{
-				await tag.Cast(Ability.SingleMind);
-			}
-			else
-			{
-				await tag.Cast(Ability.DiscerningEye);
-			}
-		}
+            if (HasDiscerningEye)
+            {
+                await tag.Cast(Ability.SingleMind);
+            }
+            else
+            {
+                await tag.Cast(Ability.DiscerningEye);
+            }
+        }
 
-		protected async Task Discerning(ExGatherTag tag)
+        protected async Task SingleMindAppraiseAndRebuff(ExGatherTag tag)
+        {
+            await SingleMindImpulsive(tag);
+
+            if (HasDiscerningEye)
+            {
+                await tag.Cast(Ability.SingleMind);
+            }
+            else
+            {
+                await tag.Cast(Ability.DiscerningEye);
+            }
+        }
+
+        protected async Task Discerning(ExGatherTag tag)
 		{
 			await tag.Cast(Ability.DiscerningEye);
 		}
