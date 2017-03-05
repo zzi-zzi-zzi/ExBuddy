@@ -425,7 +425,7 @@ namespace ExBuddy.OrderBotTags.Fish
                 }
             }
 
-            if (missingGp >= 280 && CordialType == CordialType.Cordial)
+            if (missingGp >= 280 && (CordialType == CordialType.Cordial || CordialType == CordialType.Auto))
             {
                 if (await UseCordial(CordialType.Cordial))
                 {
