@@ -1,12 +1,5 @@
 namespace ExBuddy.OrderBotTags.Fish
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Linq;
-    using System.Text.RegularExpressions;
-    using System.Threading.Tasks;
-    using System.Windows.Media;
     using Buddy.Coroutines;
     using Clio.Common;
     using Clio.Utilities;
@@ -23,6 +16,13 @@ namespace ExBuddy.OrderBotTags.Fish
     using ff14bot.Objects;
     using ff14bot.RemoteWindows;
     using ff14bot.Settings;
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Linq;
+    using System.Text.RegularExpressions;
+    using System.Threading.Tasks;
+    using System.Windows.Media;
     using TreeSharp;
     using Action = TreeSharp.Action;
 
@@ -532,7 +532,7 @@ namespace ExBuddy.OrderBotTags.Fish
             }
         }
 
-        #endregion
+        #endregion Aura Properties
 
         #region Fields
 
@@ -571,7 +571,7 @@ namespace ExBuddy.OrderBotTags.Fish
 
         private bool spotinit;
 
-        #endregion
+        #endregion Fields
 
         #region Public Properties
 
@@ -669,7 +669,7 @@ namespace ExBuddy.OrderBotTags.Fish
         [XmlElement("PatienceTugs")]
         public List<PatienceTug> PatienceTugs { get; set; }
 
-        #endregion
+        #endregion Public Properties
 
         #region Private Properties
 
@@ -693,7 +693,7 @@ namespace ExBuddy.OrderBotTags.Fish
             get { return Fish.Bait.FindMatch(Baits).BaitItem.Id == FishingManager.SelectedBaitItemId; }
         }
 
-        #endregion
+        #endregion Private Properties
 
         #region Fishing Composites
 
@@ -988,7 +988,7 @@ namespace ExBuddy.OrderBotTags.Fish
             }
         }
 
-        #endregion
+        #endregion Fishing Composites
 
         #region Composites
 
@@ -1058,7 +1058,7 @@ namespace ExBuddy.OrderBotTags.Fish
             }
         }
 
-        #endregion
+        #endregion Composites
 
         #region Ability Checks and Actions
 
@@ -1072,7 +1072,7 @@ namespace ExBuddy.OrderBotTags.Fish
             return Actionmanager.DoAction((uint)ability, ExProfileBehavior.Me);
         }
 
-        #endregion
+        #endregion Ability Checks and Actions
 
         #region Methods
 
@@ -1227,6 +1227,6 @@ namespace ExBuddy.OrderBotTags.Fish
             }
         }
 
-        #endregion
+        #endregion Methods
     }
 }

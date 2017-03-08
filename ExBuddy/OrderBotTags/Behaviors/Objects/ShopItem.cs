@@ -3,66 +3,84 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
     public enum ShopItem
     {
 #if RB_CN
-        CrpDelineation = -10,
+        // Update for patch 3.4
 
-        BsmDelineation = -9,
+        RedGatherToken = -25,
 
-        ArmDelineation = -8,
+        GoblinDice = -24,
 
-        GsmDelineation = -7,
-
-        LtwDelineation = -6,
-
-        WvrDelineation = -5,
-
-        AlcDelineation = -4,
-
-        CulDelineation = -3,
-
-        CommercialEngineeringManual = -2,
-
-        RedCrafterToken = 0,
-
-        RedGatherToken = 1,
-
-        CommercialSurvivalManual = 5,
-
-        HiCordial = 6,
-
-        BlueGatherToken = 7,
+        BlueGatherToken = -20,
 
         BlueToken = BlueGatherToken,
 
-        RedBalloon = 9,
+        HiCordial = -19,
 
-        MagmaWorm = 10,
+        CommercialSurvivalManual = -18,
 
-        FiendWorm = 11,
+        RedCrafterToken = -15,
 
-        BruteLeech = 12,
+        GoblinCup = -14,
 
-        CraneFly = 13,
+        BruteLeech = -12,
 
-        KukuruPowder = 30,
+        CraneFly = -11,
 
-        BouillonCube = 31,
+        FiendWorm = -10,
 
-        BeanSauce = 32,
+        MagmaWorm = -9,
 
-        BeanPaste = 33,
+        RedBalloon = -8,
 
-        GoldenApple = 34,
+        BlueCrafterToken = 0,
 
-        SolsticeGarlic = 35,
+        CommercialEngineeringManual = 1,
 
-        MatureOliveOil = 36,
+        SweetCreamMilk = 2,
 
-        LoaghtanFilet = 37,
+        StoneCheese = 3,
 
-        PowderedMermanHorn = 38
+        HeavensEgg = 4,
+
+        CarbonFiber = 5,
+
+        LoaghtanFilet = 6,
+
+        GoldenApple = 7,
+
+        SolsticeGarlic = 8,
+
+        MatureOliveOil = 9,
+
+        PowderedMermanHorn = 10,
+
+        BouillonCube = 11,
+
+        BeanSauce = 12,
+
+        BeanPaste = 13,
+
+        KukuruPowder = 14,
+
+        CrpDelineation = 20,
+
+        BsmDelineation = 21,
+
+        ArmDelineation = 22,
+
+        GsmDelineation = 23,
+
+        LtwDelineation = 24,
+
+        WvrDelineation = 25,
+
+        AlcDelineation = 26,
+
+        CulDelineation = 27
 
 #else
+
         #region BlueCrafter
+
         BlueCrafterToken = 0,
 
         CommercialEngineeringManual = 1,
@@ -118,107 +136,127 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
         AlcDelineation = 26,
 
         CulDelineation = 27,
-        #endregion
+
+        #endregion BlueCrafter
 
         #region RedCrafter
-        SoulOfTheCrafter = -51,
 
-        RedCrafterToken = -50,
+        SoulOfTheCrafter = -100,
 
-        GoblinCup = -49,
+        RedCrafterToken = -99,
 
-        CompetenceIV = -48,
+        GoblinCup = -98,
 
-        CunningIV = -47,
+        CompetenceIV = -97,
 
-        CommandIV = -46,
-        #endregion
+        CunningIV = -96,
+
+        CommandIV = -95,
+
+        CompetenceV = -94,
+
+        CunningV = -93,
+
+        CommandV = -92,
+
+        #endregion RedCrafter
 
         #region BlueGatherer
-        BlueGatherToken = -40,
+
+        BlueGatherToken = -200,
 
         BlueToken = BlueGatherToken,
 
-        HiCordial = -39,
+        HiCordial = -199,
 
-        CommercialSurvivalManual = -38,
+        CommercialSurvivalManual = -198,
 
-        TrailblazersScarf = -37,
+        TrailblazersScarf = -197,
 
-        TrailblazersVest = -36,
+        TrailblazersVest = -196,
 
-        TrailblazersWristguards = -35,
+        TrailblazersWristguards = -195,
 
-        TrailblazersSlops = -34,
+        TrailblazersSlops = -194,
 
-        TrailblazersShoes = -33,
+        TrailblazersShoes = -193,
 
-        BruteLeech = -32,
+        BruteLeech = -192,
 
-        CraneFly = -31,
+        CraneFly = -191,
 
-        FiendWorm = -30,
+        FiendWorm = -190,
 
-        MagmaWorm = -29,
+        MagmaWorm = -189,
 
-        RedBalloon = -28,
+        RedBalloon = -188,
 
-        CrownTrout = -27,
+        CrownTrout = -187,
 
-        CrownTroutHQ = -26,
+        CrownTroutHQ = -186,
 
-        RetributionStaff = -25,
+        RetributionStaff = -185,
 
-        RetributionStaffHQ = -24,
+        RetributionStaffHQ = -184,
 
-        ThiefBetta = -23,
+        ThiefBetta = -183,
 
-        ThiefBettaHQ = -22,
+        ThiefBettaHQ = -182,
 
-        GoldsmithCrab = -21,
+        GoldsmithCrab = -181,
 
-        GoldsmithCrabHQ = -20,
+        GoldsmithCrabHQ = -180,
 
-        Pterodactyl = -19,
+        Pterodactyl = -179,
 
-        PterodactylHQ = -18,
+        PterodactylHQ = -178,
 
-        Eurhinosaur = -17,
+        Eurhinosaur = -177,
 
-        EurhinosaurHQ = -16,
+        EurhinosaurHQ = -176,
 
-        GemMarimo = -15,
+        GemMarimo = -175,
 
-        GemMarimoHQ = -14,
+        GemMarimoHQ = -174,
 
-        Sphalerite = -13,
+        Sphalerite = -173,
 
-        SphaleriteHQ = -12,
+        SphaleriteHQ = -172,
 
-        WindSilk = -11,
+        WindSilk = -171,
 
-        CloudCottonBoll = -10,
+        CloudCottonBoll = -170,
 
-        CloudCottonBollHQ = -9,
+        CloudCottonBollHQ = -169,
 
-        DinosaurLeather = -8,
+        DinosaurLeather = -168,
 
-        RoyalMistletoe = -7,
+        RoyalMistletoe = -167,
 
-        RoyalMistletoeHQ = -6,
-        #endregion
+        RoyalMistletoeHQ = -166,
+
+        #endregion BlueGatherer
 
         #region RedGatherer
-        RedGatherToken = -45,
 
-        GoblinDice = -44,
+        RedGatherToken = -300,
 
-        GuerdonIV = -43,
+        GoblinDice = -299,
 
-        GuileIV = -42,
+        GuerdonIV = -298,
 
-        GraspIV = -41
-        #endregion
+        GuileIV = -297,
+
+        GraspIV = -296,
+
+        GuerdonV = -295,
+
+        GuileV = -294,
+
+        GraspV = -293
+
+        #endregion RedGatherer
+
 #endif
     }
 }

@@ -1,10 +1,10 @@
 ﻿namespace ExBuddy.Helpers
 {
-    using System.Linq;
     using ExBuddy.Enumerations;
     using ExBuddy.Logging;
     using ff14bot.Managers;
     using ff14bot.Objects;
+    using System.Linq;
 
     public static class Cordial
     {

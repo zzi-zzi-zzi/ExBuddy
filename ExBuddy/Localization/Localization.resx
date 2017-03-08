@@ -415,7 +415,7 @@
     <value>Purchases complete.</value>
   </data>
   <data name="ExTurnInCollectable_Purchased" xml:space="preserve">
-    <value>Purchased item {0} for {1} {2} scrips at {3} ET; Remaining Scrips: {4}</value>
+    <value>Purchased {5} {0} for {1} {2} scrips at {3} ET; Remaining Scrips: {4}</value>
   </data>
   <data name="ExTurnInCollectable_PurchaseTimeout" xml:space="preserve">
     <value>Timeout during purchase of {0}</value>

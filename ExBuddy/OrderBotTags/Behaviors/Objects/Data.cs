@@ -1,10 +1,10 @@
 namespace ExBuddy.OrderBotTags.Behaviors.Objects
 {
-    using System.Collections.Generic;
-    using System.Linq;
     using Clio.Utilities;
     using ExBuddy.GameObjects.Npcs;
     using ExBuddy.Interfaces;
+    using System.Collections.Generic;
+    using System.Linq;
 
     internal static class Data
     {
@@ -84,223 +84,124 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
         {
 #if RB_CN
 			{
-                ShopItem.CrpDelineation,
+                ShopItem.BlueCrafterToken,
                 new ShopItemInfo
                 {
-                    Index = 10 + (int) ShopItem.CrpDelineation,
+                    Index = (int) ShopItem.BlueCrafterToken,
                     ShopType = ShopType.BlueCrafter,
-                    ItemId = 12669 + (int) ShopItem.CrpDelineation,
-                    Cost = 250,
-                    Yield = 10
-                }
-            },
-            {
-                ShopItem.BsmDelineation,
-                new ShopItemInfo
-                {
-                    Index = 10 + (int) ShopItem.BsmDelineation,
-                    ShopType = ShopType.BlueCrafter,
-                    ItemId = 12669 + (int) ShopItem.BsmDelineation,
-                    Cost = 250,
-                    Yield = 10
-                }
-            },
-            {
-                ShopItem.ArmDelineation,
-                new ShopItemInfo
-                {
-                    Index = 10 + (int) ShopItem.ArmDelineation,
-                    ShopType = ShopType.BlueCrafter,
-                    ItemId = 12669 + (int) ShopItem.ArmDelineation,
-                    Cost = 250,
-                    Yield = 10
-                }
-            },
-            {
-                ShopItem.GsmDelineation,
-                new ShopItemInfo
-                {
-                    Index = 10 + (int) ShopItem.GsmDelineation,
-                    ShopType = ShopType.BlueCrafter,
-                    ItemId = 12669 + (int) ShopItem.GsmDelineation,
-                    Cost = 250,
-                    Yield = 10
-                }
-            },
-            {
-                ShopItem.LtwDelineation,
-                new ShopItemInfo
-                {
-                    Index = 10 + (int) ShopItem.LtwDelineation,
-                    ShopType = ShopType.BlueCrafter,
-                    ItemId = 12669 + (int) ShopItem.LtwDelineation,
-                    Cost = 250,
-                    Yield = 10
-                }
-            },
-            {
-                ShopItem.WvrDelineation,
-                new ShopItemInfo
-                {
-                    Index = 10 + (int) ShopItem.WvrDelineation,
-                    ShopType = ShopType.BlueCrafter,
-                    ItemId = 12669 + (int) ShopItem.WvrDelineation,
-                    Cost = 250,
-                    Yield = 10
-                }
-            },
-            {
-                ShopItem.AlcDelineation,
-                new ShopItemInfo
-                {
-                    Index = 10 + (int) ShopItem.AlcDelineation,
-                    ShopType = ShopType.BlueCrafter,
-                    ItemId = 12669 + (int) ShopItem.AlcDelineation,
-                    Cost = 250,
-                    Yield = 10
-                }
-            },
-            {
-                ShopItem.CulDelineation,
-                new ShopItemInfo
-                {
-                    Index = 10 + (int) ShopItem.CulDelineation,
-                    ShopType = ShopType.BlueCrafter,
-                    ItemId = 12669 + (int) ShopItem.CulDelineation,
-                    Cost = 250,
-                    Yield = 10
+                    ItemId = 12839,
+                    Cost = 50,
+                    Yield = 1
                 }
             },
             {
                 ShopItem.CommercialEngineeringManual,
                 new ShopItemInfo
                 {
-                    Index = 10 + (int) ShopItem.CommercialEngineeringManual,
+                    Index = (int) ShopItem.CommercialEngineeringManual,
                     ShopType = ShopType.BlueCrafter,
-                    ItemId = 12669 + (int) ShopItem.CommercialEngineeringManual,
+                    ItemId = 12667,
                     Cost = 45,
                     Yield = 1
                 }
             },
             {
-                ShopItem.RedCrafterToken,
+                ShopItem.SweetCreamMilk,
                 new ShopItemInfo
                 {
-                    Index = 0,
-                    ShopType = ShopType.RedCrafter,
-                    ItemId = 12838,
-                    Cost = 50,
-                    Yield = 1
-                }
-            },
-            {
-                ShopItem.RedGatherToken,
-                new ShopItemInfo
-                {
-                    Index = 0,
-                    ShopType = ShopType.RedGatherer,
-                    ItemId = 12840,
-                    Cost = 50,
-                    Yield = 1
-                }
-            },
-            {
-                ShopItem.CommercialSurvivalManual,
-                new ShopItemInfo
-                {
-                    Index = (int) ShopItem.CommercialSurvivalManual,
-                    ShopType = ShopType.BlueGatherer,
-                    ItemId = 12668,
-                    Cost = 75,
-                    Yield = 1
-                }
-            },
-            {
-                ShopItem.HiCordial,
-                new ShopItemInfo
-                {
-                    Index = (int) ShopItem.HiCordial,
-                    ShopType = ShopType.BlueGatherer,
-                    ItemId = 12669,
-                    Cost = 100,
-                    Yield = 1
-                }
-            },
-            {
-                ShopItem.BlueToken,
-                new ShopItemInfo
-                {
-                    Index = (int) ShopItem.BlueToken,
-                    ShopType = ShopType.BlueGatherer,
-                    ItemId = 12841,
-                    Cost = 50,
-                    Yield = 1
-                }
-            },
-            {
-                ShopItem.RedBalloon,
-                new ShopItemInfo
-                {
-                    Index = (int) ShopItem.RedBalloon,
-                    ShopType = ShopType.BlueGatherer,
-                    ItemId = 12708,
-                    Cost = 50,
-                    Yield = 50
-                }
-            },
-            {
-                ShopItem.MagmaWorm,
-                new ShopItemInfo
-                {
-                    Index = (int) ShopItem.MagmaWorm,
-                    ShopType = ShopType.BlueGatherer,
-                    ItemId = 12709,
-                    Cost = 52,
-                    Yield = 50
-                }
-            },
-            {
-                ShopItem.FiendWorm,
-                new ShopItemInfo
-                {
-                    Index = (int) ShopItem.FiendWorm,
-                    ShopType = ShopType.BlueGatherer,
-                    ItemId = 12710,
-                    Cost = 55,
-                    Yield = 50
-                }
-            },
-            {
-                ShopItem.BruteLeech,
-                new ShopItemInfo
-                {
-                    Index = (int) ShopItem.BruteLeech,
-                    ShopType = ShopType.BlueGatherer,
-                    ItemId = 12711,
-                    Cost = 60,
-                    Yield = 50
-                }
-            },
-            {
-                ShopItem.CraneFly,
-                new ShopItemInfo
-                {
-                    Index = (int) ShopItem.CraneFly,
-                    ShopType = ShopType.BlueGatherer,
-                    ItemId = 12712,
-                    Cost = 60,
-                    Yield = 50
-                }
-            },
-            {
-                ShopItem.KukuruPowder,
-                new ShopItemInfo
-                {
-                    Index = (int) ShopItem.KukuruPowder,
+                    Index = (int) ShopItem.SweetCreamMilk,
                     ShopType = ShopType.BlueCrafter,
-                    ItemId = 12886,
+                    ItemId = 16734,
+                    Cost = 16,
+                    Yield = 1
+                }
+            },
+            {
+                ShopItem.StoneCheese,
+                new ShopItemInfo
+                {
+                    Index = (int) ShopItem.StoneCheese,
+                    ShopType = ShopType.BlueCrafter,
+                    ItemId = 16735,
+                    Cost = 16,
+                    Yield = 1
+                }
+            },
+            {
+                ShopItem.HeavensEgg,
+                new ShopItemInfo
+                {
+                    Index = (int) ShopItem.HeavensEgg,
+                    ShopType = ShopType.BlueCrafter,
+                    ItemId = 15652,
+                    Cost = 16,
+                    Yield = 1
+                }
+            },
+            {
+                ShopItem.CarbonFiber,
+                new ShopItemInfo
+                {
+                    Index = (int) ShopItem.CarbonFiber,
+                    ShopType = ShopType.BlueCrafter,
+                    ItemId = 5339,
                     Cost = 50,
-                    Yield = 3
+                    Yield = 1
+                }
+            },
+            {
+                ShopItem.LoaghtanFilet,
+                new ShopItemInfo
+                {
+                    Index = (int) ShopItem.LoaghtanFilet,
+                    ShopType = ShopType.BlueCrafter,
+                    ItemId = 14145,
+                    Cost = 10,
+                    Yield = 1
+                }
+            },
+            {
+                ShopItem.GoldenApple,
+                new ShopItemInfo
+                {
+                    Index = (int) ShopItem.GoldenApple,
+                    ShopType = ShopType.BlueCrafter,
+                    ItemId = 14142,
+                    Cost = 10,
+                    Yield = 1
+                }
+            },
+            {
+                ShopItem.SolsticeGarlic,
+                new ShopItemInfo
+                {
+                    Index = (int) ShopItem.SolsticeGarlic,
+                    ShopType = ShopType.BlueCrafter,
+                    ItemId = 14143,
+                    Cost = 10,
+                    Yield = 1
+                }
+            },
+            {
+                ShopItem.MatureOliveOil,
+                new ShopItemInfo
+                {
+                    Index = (int) ShopItem.MatureOliveOil,
+                    ShopType = ShopType.BlueCrafter,
+                    ItemId = 14144,
+                    Cost = 10,
+                    Yield = 1
+                }
+            },
+            {
+                ShopItem.PowderedMermanHorn,
+                new ShopItemInfo
+                {
+                    Index = (int) ShopItem.PowderedMermanHorn,
+                    ShopType = ShopType.BlueCrafter,
+                    ItemId = 14937,
+                    Cost = 12,
+                    Yield = 1
                 }
             },
             {
@@ -310,8 +211,8 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                     Index = (int) ShopItem.BouillonCube,
                     ShopType = ShopType.BlueCrafter,
                     ItemId = 12905,
-                    Cost = 40,
-                    Yield = 5
+                    Cost = 8,
+                    Yield = 1
                 }
             },
             {
@@ -337,63 +238,241 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 }
             },
             {
-                ShopItem.GoldenApple,
+                ShopItem.KukuruPowder,
                 new ShopItemInfo
                 {
-                    Index = (int) ShopItem.GoldenApple,
+                    Index = (int) ShopItem.KukuruPowder,
                     ShopType = ShopType.BlueCrafter,
-                    ItemId = 14142,
-                    Cost = 50,
-                    Yield = 5
+                    ItemId = 12886,
+                    Cost = 16,
+                    Yield = 1
                 }
             },
             {
-                ShopItem.SolsticeGarlic,
+                ShopItem.CrpDelineation,
                 new ShopItemInfo
                 {
-                    Index = (int) ShopItem.SolsticeGarlic,
+                    Index = (int) ShopItem.CrpDelineation,
                     ShopType = ShopType.BlueCrafter,
-                    ItemId = 14143,
-                    Cost = 50,
-                    Yield = 5
+                    ItemId = 12659,
+                    Cost = 25,
+                    Yield = 1
                 }
             },
             {
-                ShopItem.MatureOliveOil,
+                ShopItem.BsmDelineation,
                 new ShopItemInfo
                 {
-                    Index = (int) ShopItem.MatureOliveOil,
+                    Index = (int) ShopItem.BsmDelineation,
                     ShopType = ShopType.BlueCrafter,
-                    ItemId = 14144,
-                    Cost = 50,
-                    Yield = 5
+                    ItemId = 12660,
+                    Cost = 25,
+                    Yield = 1
                 }
             },
             {
-                ShopItem.LoaghtanFilet,
+                ShopItem.ArmDelineation,
                 new ShopItemInfo
                 {
-                    Index = (int) ShopItem.LoaghtanFilet,
+                    Index = (int) ShopItem.ArmDelineation,
                     ShopType = ShopType.BlueCrafter,
-                    ItemId = 14145,
-                    Cost = 50,
-                    Yield = 5
+                    ItemId = 12661,
+                    Cost = 25,
+                    Yield = 1
                 }
             },
             {
-                ShopItem.PowderedMermanHorn,
+                ShopItem.GsmDelineation,
                 new ShopItemInfo
                 {
-                    Index = (int) ShopItem.PowderedMermanHorn,
+                    Index = (int) ShopItem.GsmDelineation,
                     ShopType = ShopType.BlueCrafter,
-                    ItemId = 14937,
-                    Cost = 60,
-                    Yield = 5
+                    ItemId = 12662,
+                    Cost = 25,
+                    Yield = 1
+                }
+            },
+            {
+                ShopItem.LtwDelineation,
+                new ShopItemInfo
+                {
+                    Index = (int) ShopItem.LtwDelineation,
+                    ShopType = ShopType.BlueCrafter,
+                    ItemId = 12663,
+                    Cost = 25,
+                    Yield = 1
+                }
+            },
+            {
+                ShopItem.WvrDelineation,
+                new ShopItemInfo
+                {
+                    Index = (int) ShopItem.WvrDelineation,
+                    ShopType = ShopType.BlueCrafter,
+                    ItemId = 12664,
+                    Cost = 25,
+                    Yield = 1
+                }
+            },
+            {
+                ShopItem.AlcDelineation,
+                new ShopItemInfo
+                {
+                    Index = (int) ShopItem.AlcDelineation,
+                    ShopType = ShopType.BlueCrafter,
+                    ItemId = 12665,
+                    Cost = 25,
+                    Yield = 1
+                }
+            },
+            {
+                ShopItem.CulDelineation,
+                new ShopItemInfo
+                {
+                    Index = (int) ShopItem.CulDelineation,
+                    ShopType = ShopType.BlueCrafter,
+                    ItemId = 12666,
+                    Cost = 25,
+                    Yield = 1
+                }
+            },
+            {
+                ShopItem.RedCrafterToken,
+                new ShopItemInfo
+                {
+                    Index = 15 + (int) ShopItem.RedCrafterToken,
+                    ShopType = ShopType.RedCrafter,
+                    ItemId = 12838,
+                    Cost = 50,
+                    Yield = 1
+                }
+            },
+            {
+                ShopItem.GoblinCup,
+                new ShopItemInfo
+                {
+                    Index = 15 + (int) ShopItem.GoblinCup,
+                    ShopType = ShopType.RedCrafter,
+                    ItemId = 14104,
+                    Cost = 50,
+                    Yield = 1
+                }
+            },
+            {
+                ShopItem.BlueGatherToken,
+                new ShopItemInfo
+                {
+                    Index = 20 + (int) ShopItem.BlueGatherToken,
+                    ShopType = ShopType.BlueGatherer,
+                    ItemId = 12841,
+                    Cost = 50,
+                    Yield = 1
+                }
+            },
+            {
+                ShopItem.HiCordial,
+                new ShopItemInfo
+                {
+                    Index = 20 + (int) ShopItem.HiCordial,
+                    ShopType = ShopType.BlueGatherer,
+                    ItemId = 12669,
+                    Cost = 33,
+                    Yield = 1
+                }
+            },
+            {
+                ShopItem.CommercialSurvivalManual,
+                new ShopItemInfo
+                {
+                    Index = 20 + (int) ShopItem.CommercialSurvivalManual,
+                    ShopType = ShopType.BlueGatherer,
+                    ItemId = 12668,
+                    Cost = 75,
+                    Yield = 1
+                }
+            },
+            {
+                ShopItem.BruteLeech,
+                new ShopItemInfo
+                {
+                    Index = 20 + (int) ShopItem.BruteLeech,
+                    ShopType = ShopType.BlueGatherer,
+                    ItemId = 12711,
+                    Cost = 1,
+                    Yield = 1
+                }
+            },
+            {
+                ShopItem.CraneFly,
+                new ShopItemInfo
+                {
+                    Index = 20 + (int) ShopItem.CraneFly,
+                    ShopType = ShopType.BlueGatherer,
+                    ItemId = 12712,
+                    Cost = 1,
+                    Yield = 1
+                }
+            },
+            {
+                ShopItem.FiendWorm,
+                new ShopItemInfo
+                {
+                    Index = 20 + (int) ShopItem.FiendWorm,
+                    ShopType = ShopType.BlueGatherer,
+                    ItemId = 12710,
+                    Cost = 1,
+                    Yield = 1
+                }
+            },
+            {
+                ShopItem.MagmaWorm,
+                new ShopItemInfo
+                {
+                    Index = 20 + (int) ShopItem.MagmaWorm,
+                    ShopType = ShopType.BlueGatherer,
+                    ItemId = 12709,
+                    Cost = 1,
+                    Yield = 1
+                }
+            },
+            {
+                ShopItem.RedBalloon,
+                new ShopItemInfo
+                {
+                    Index = 20 + (int) ShopItem.RedBalloon,
+                    ShopType = ShopType.BlueGatherer,
+                    ItemId = 12708,
+                    Cost = 1,
+                    Yield = 1
+                }
+            },
+            {
+                ShopItem.RedGatherToken,
+                new ShopItemInfo
+                {
+                    Index = 25 + (int) ShopItem.RedGatherToken,
+                    ShopType = ShopType.RedGatherer,
+                    ItemId = 12840,
+                    Cost = 50,
+                    Yield = 1
+                }
+            },
+            {
+                ShopItem.GoblinDice,
+                new ShopItemInfo
+                {
+                    Index = 25 + (int) ShopItem.GoblinDice,
+                    ShopType = ShopType.RedGatherer,
+                    ItemId = 14105,
+                    Cost = 50,
+                    Yield = 1
                 }
             }
 
-#else            
+#else
+
             #region BlueCrafter
+
             {
                 ShopItem.BlueCrafterToken,
                 new ShopItemInfo
@@ -702,14 +781,16 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                     Yield = 1
                 }
             },
-            #endregion
+
+            #endregion BlueCrafter
 
             #region RedCrafter
+
             {
                 ShopItem.SoulOfTheCrafter,
                 new ShopItemInfo
                 {
-                    Index = 51 + (int) ShopItem.SoulOfTheCrafter,
+                    Index = 100 + (int) ShopItem.SoulOfTheCrafter,
                     ShopType = ShopType.RedCrafter,
                     ItemId = 10336,
                     Cost = 480,
@@ -720,7 +801,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.RedCrafterToken,
                 new ShopItemInfo
                 {
-                    Index = 51 + (int) ShopItem.RedCrafterToken,
+                    Index = 100 + (int) ShopItem.RedCrafterToken,
                     ShopType = ShopType.RedCrafter,
                     ItemId = 12838,
                     Cost = 50,
@@ -731,7 +812,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.GoblinCup,
                 new ShopItemInfo
                 {
-                    Index = 51 + (int) ShopItem.GoblinCup,
+                    Index = 100 + (int) ShopItem.GoblinCup,
                     ShopType = ShopType.RedCrafter,
                     ItemId = 14104,
                     Cost = 50,
@@ -742,7 +823,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.CompetenceIV,
                 new ShopItemInfo
                 {
-                    Index = 51 + (int) ShopItem.CompetenceIV,
+                    Index = 100 + (int) ShopItem.CompetenceIV,
                     ShopType = ShopType.RedCrafter,
                     ItemId = 5702,
                     Cost = 50,
@@ -753,7 +834,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.CunningIV,
                 new ShopItemInfo
                 {
-                    Index = 51 + (int) ShopItem.CunningIV,
+                    Index = 100 + (int) ShopItem.CunningIV,
                     ShopType = ShopType.RedCrafter,
                     ItemId = 5707,
                     Cost = 50,
@@ -764,21 +845,56 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.CommandIV,
                 new ShopItemInfo
                 {
-                    Index = 51 + (int) ShopItem.CommandIV,
+                    Index = 100 + (int) ShopItem.CommandIV,
                     ShopType = ShopType.RedCrafter,
                     ItemId = 5712,
                     Cost = 50,
                     Yield = 1
                 }
             },
-            #endregion
+            {
+                ShopItem.CompetenceV,
+                new ShopItemInfo
+                {
+                    Index = 100 + (int) ShopItem.CompetenceV,
+                    ShopType = ShopType.RedCrafter,
+                    ItemId = 5703,
+                    Cost = 400,
+                    Yield = 1
+                }
+            },
+            {
+                ShopItem.CunningV,
+                new ShopItemInfo
+                {
+                    Index = 100 + (int) ShopItem.CunningV,
+                    ShopType = ShopType.RedCrafter,
+                    ItemId = 5708,
+                    Cost = 400,
+                    Yield = 1
+                }
+            },
+            {
+                ShopItem.CommandV,
+                new ShopItemInfo
+                {
+                    Index = 100 + (int) ShopItem.CommandV,
+                    ShopType = ShopType.RedCrafter,
+                    ItemId = 5713,
+                    Cost = 400,
+                    Yield = 1
+                }
+            },
+
+            #endregion RedCrafter
 
             #region BlueGatherer
+
             {
                 ShopItem.BlueGatherToken,
                 new ShopItemInfo
                 {
-                    Index = 40 + (int) ShopItem.BlueGatherToken,
+                    Index = 200 + (int) ShopItem.BlueGatherToken,
                     ShopType = ShopType.BlueGatherer,
                     ItemId = 12841,
                     Cost = 50,
@@ -789,7 +905,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.HiCordial,
                 new ShopItemInfo
                 {
-                    Index = 40 + (int) ShopItem.HiCordial,
+                    Index = 200 + (int) ShopItem.HiCordial,
                     ShopType = ShopType.BlueGatherer,
                     ItemId = 12669,
                     Cost = 33,
@@ -800,7 +916,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.CommercialSurvivalManual,
                 new ShopItemInfo
                 {
-                    Index = 40 + (int) ShopItem.CommercialSurvivalManual,
+                    Index = 200 + (int) ShopItem.CommercialSurvivalManual,
                     ShopType = ShopType.BlueGatherer,
                     ItemId = 12668,
                     Cost = 75,
@@ -811,7 +927,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.TrailblazersScarf,
                 new ShopItemInfo
                 {
-                    Index = 40 + (int) ShopItem.TrailblazersScarf,
+                    Index = 200 + (int) ShopItem.TrailblazersScarf,
                     ShopType = ShopType.BlueGatherer,
                     ItemId = 11986,
                     Cost = 200,
@@ -822,7 +938,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.TrailblazersVest,
                 new ShopItemInfo
                 {
-                    Index = 40 + (int) ShopItem.TrailblazersVest,
+                    Index = 200 + (int) ShopItem.TrailblazersVest,
                     ShopType = ShopType.BlueGatherer,
                     ItemId = 11991,
                     Cost = 270,
@@ -833,7 +949,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.TrailblazersWristguards,
                 new ShopItemInfo
                 {
-                    Index = 40 + (int) ShopItem.TrailblazersWristguards,
+                    Index = 200 + (int) ShopItem.TrailblazersWristguards,
                     ShopType = ShopType.BlueGatherer,
                     ItemId = 11996,
                     Cost = 150,
@@ -844,7 +960,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.TrailblazersSlops,
                 new ShopItemInfo
                 {
-                    Index = 40 + (int) ShopItem.TrailblazersSlops,
+                    Index = 200 + (int) ShopItem.TrailblazersSlops,
                     ShopType = ShopType.BlueGatherer,
                     ItemId = 12004,
                     Cost = 100,
@@ -855,7 +971,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.TrailblazersShoes,
                 new ShopItemInfo
                 {
-                    Index = 40 + (int) ShopItem.TrailblazersShoes,
+                    Index = 200 + (int) ShopItem.TrailblazersShoes,
                     ShopType = ShopType.BlueGatherer,
                     ItemId = 12009,
                     Cost = 100,
@@ -866,7 +982,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.BruteLeech,
                 new ShopItemInfo
                 {
-                    Index = 40 + (int) ShopItem.BruteLeech,
+                    Index = 200 + (int) ShopItem.BruteLeech,
                     ShopType = ShopType.BlueGatherer,
                     ItemId = 12711,
                     Cost = 1,
@@ -877,7 +993,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.CraneFly,
                 new ShopItemInfo
                 {
-                    Index = 40 + (int) ShopItem.CraneFly,
+                    Index = 200 + (int) ShopItem.CraneFly,
                     ShopType = ShopType.BlueGatherer,
                     ItemId = 12712,
                     Cost = 1,
@@ -888,7 +1004,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.FiendWorm,
                 new ShopItemInfo
                 {
-                    Index = 40 + (int) ShopItem.FiendWorm,
+                    Index = 200 + (int) ShopItem.FiendWorm,
                     ShopType = ShopType.BlueGatherer,
                     ItemId = 12710,
                     Cost = 1,
@@ -899,7 +1015,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.MagmaWorm,
                 new ShopItemInfo
                 {
-                    Index = 40 + (int) ShopItem.MagmaWorm,
+                    Index = 200 + (int) ShopItem.MagmaWorm,
                     ShopType = ShopType.BlueGatherer,
                     ItemId = 12709,
                     Cost = 1,
@@ -910,7 +1026,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.RedBalloon,
                 new ShopItemInfo
                 {
-                    Index = 40 + (int) ShopItem.RedBalloon,
+                    Index = 200 + (int) ShopItem.RedBalloon,
                     ShopType = ShopType.BlueGatherer,
                     ItemId = 12708,
                     Cost = 1,
@@ -921,7 +1037,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.CrownTrout,
                 new ShopItemInfo
                 {
-                    Index = 40 + (int) ShopItem.CrownTrout,
+                    Index = 200 + (int) ShopItem.CrownTrout,
                     ShopType = ShopType.BlueGatherer,
                     ItemId = 13737,
                     Cost = 10,
@@ -932,7 +1048,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.CrownTroutHQ,
                 new ShopItemInfo
                 {
-                    Index = 40 + (int) ShopItem.CrownTroutHQ,
+                    Index = 200 + (int) ShopItem.CrownTroutHQ,
                     ShopType = ShopType.BlueGatherer,
                     ItemId = 13737,
                     Cost = 25,
@@ -943,7 +1059,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.RetributionStaff,
                 new ShopItemInfo
                 {
-                    Index = 40 + (int) ShopItem.RetributionStaff,
+                    Index = 200 + (int) ShopItem.RetributionStaff,
                     ShopType = ShopType.BlueGatherer,
                     ItemId = 13738,
                     Cost = 20,
@@ -954,7 +1070,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.RetributionStaffHQ,
                 new ShopItemInfo
                 {
-                    Index = 40 + (int) ShopItem.RetributionStaffHQ,
+                    Index = 200 + (int) ShopItem.RetributionStaffHQ,
                     ShopType = ShopType.BlueGatherer,
                     ItemId = 13738,
                     Cost = 50,
@@ -965,7 +1081,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.ThiefBetta,
                 new ShopItemInfo
                 {
-                    Index = 40 + (int) ShopItem.ThiefBetta,
+                    Index = 200 + (int) ShopItem.ThiefBetta,
                     ShopType = ShopType.BlueGatherer,
                     ItemId = 13739,
                     Cost = 10,
@@ -976,7 +1092,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.ThiefBettaHQ,
                 new ShopItemInfo
                 {
-                    Index = 40 + (int) ShopItem.ThiefBettaHQ,
+                    Index = 200 + (int) ShopItem.ThiefBettaHQ,
                     ShopType = ShopType.BlueGatherer,
                     ItemId = 13739,
                     Cost = 25,
@@ -987,7 +1103,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.GoldsmithCrab,
                 new ShopItemInfo
                 {
-                    Index = 40 + (int) ShopItem.GoldsmithCrab,
+                    Index = 200 + (int) ShopItem.GoldsmithCrab,
                     ShopType = ShopType.BlueGatherer,
                     ItemId = 13740,
                     Cost = 10,
@@ -998,7 +1114,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.GoldsmithCrabHQ,
                 new ShopItemInfo
                 {
-                    Index = 40 + (int) ShopItem.GoldsmithCrabHQ,
+                    Index = 200 + (int) ShopItem.GoldsmithCrabHQ,
                     ShopType = ShopType.BlueGatherer,
                     ItemId = 13740,
                     Cost = 25,
@@ -1009,7 +1125,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.Pterodactyl,
                 new ShopItemInfo
                 {
-                    Index = 40 + (int) ShopItem.Pterodactyl,
+                    Index = 200 + (int) ShopItem.Pterodactyl,
                     ShopType = ShopType.BlueGatherer,
                     ItemId = 13733,
                     Cost = 40,
@@ -1020,7 +1136,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.PterodactylHQ,
                 new ShopItemInfo
                 {
-                    Index = 40 + (int) ShopItem.PterodactylHQ,
+                    Index = 200 + (int) ShopItem.PterodactylHQ,
                     ShopType = ShopType.BlueGatherer,
                     ItemId = 13733,
                     Cost = 100,
@@ -1031,7 +1147,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.Eurhinosaur,
                 new ShopItemInfo
                 {
-                    Index = 40 + (int) ShopItem.Eurhinosaur,
+                    Index = 200 + (int) ShopItem.Eurhinosaur,
                     ShopType = ShopType.BlueGatherer,
                     ItemId = 13734,
                     Cost = 10,
@@ -1042,7 +1158,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.EurhinosaurHQ,
                 new ShopItemInfo
                 {
-                    Index = 40 + (int) ShopItem.EurhinosaurHQ,
+                    Index = 200 + (int) ShopItem.EurhinosaurHQ,
                     ShopType = ShopType.BlueGatherer,
                     ItemId = 13734,
                     Cost = 25,
@@ -1053,7 +1169,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.GemMarimo,
                 new ShopItemInfo
                 {
-                    Index = 40 + (int) ShopItem.GemMarimo,
+                    Index = 200 + (int) ShopItem.GemMarimo,
                     ShopType = ShopType.BlueGatherer,
                     ItemId = 13736,
                     Cost = 20,
@@ -1064,7 +1180,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.GemMarimoHQ,
                 new ShopItemInfo
                 {
-                    Index = 40 + (int) ShopItem.GemMarimoHQ,
+                    Index = 200 + (int) ShopItem.GemMarimoHQ,
                     ShopType = ShopType.BlueGatherer,
                     ItemId = 13736,
                     Cost = 50,
@@ -1075,7 +1191,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.Sphalerite,
                 new ShopItemInfo
                 {
-                    Index = 40 + (int) ShopItem.Sphalerite,
+                    Index = 200 + (int) ShopItem.Sphalerite,
                     ShopType = ShopType.BlueGatherer,
                     ItemId = 13750,
                     Cost = 20,
@@ -1086,7 +1202,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.SphaleriteHQ,
                 new ShopItemInfo
                 {
-                    Index = 40 + (int) ShopItem.SphaleriteHQ,
+                    Index = 200 + (int) ShopItem.SphaleriteHQ,
                     ShopType = ShopType.BlueGatherer,
                     ItemId = 13750,
                     Cost = 50,
@@ -1097,7 +1213,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.WindSilk,
                 new ShopItemInfo
                 {
-                    Index = 40 + (int) ShopItem.WindSilk,
+                    Index = 200 + (int) ShopItem.WindSilk,
                     ShopType = ShopType.BlueGatherer,
                     ItemId = 13744,
                     Cost = 150,
@@ -1108,7 +1224,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.CloudCottonBoll,
                 new ShopItemInfo
                 {
-                    Index = 40 + (int) ShopItem.CloudCottonBoll,
+                    Index = 200 + (int) ShopItem.CloudCottonBoll,
                     ShopType = ShopType.BlueGatherer,
                     ItemId = 13753,
                     Cost = 20,
@@ -1119,7 +1235,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.CloudCottonBollHQ,
                 new ShopItemInfo
                 {
-                    Index = 40 + (int) ShopItem.CloudCottonBollHQ,
+                    Index = 200 + (int) ShopItem.CloudCottonBollHQ,
                     ShopType = ShopType.BlueGatherer,
                     ItemId = 13753,
                     Cost = 50,
@@ -1130,7 +1246,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.DinosaurLeather,
                 new ShopItemInfo
                 {
-                    Index = 40 + (int) ShopItem.DinosaurLeather,
+                    Index = 200 + (int) ShopItem.DinosaurLeather,
                     ShopType = ShopType.BlueGatherer,
                     ItemId = 13745,
                     Cost = 150,
@@ -1141,7 +1257,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.RoyalMistletoe,
                 new ShopItemInfo
                 {
-                    Index = 40 + (int) ShopItem.RoyalMistletoe,
+                    Index = 200 + (int) ShopItem.RoyalMistletoe,
                     ShopType = ShopType.BlueGatherer,
                     ItemId = 13752,
                     Cost = 20,
@@ -1152,21 +1268,23 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.RoyalMistletoeHQ,
                 new ShopItemInfo
                 {
-                    Index = 40 + (int) ShopItem.RoyalMistletoeHQ,
+                    Index = 200 + (int) ShopItem.RoyalMistletoeHQ,
                     ShopType = ShopType.BlueGatherer,
                     ItemId = 13752,
                     Cost = 50,
                     Yield = 1
                 }
             },
-            #endregion
+
+            #endregion BlueGatherer
 
             #region RedGatherer
+
 			{
                 ShopItem.RedGatherToken,
                 new ShopItemInfo
                 {
-                    Index = 45 + (int) ShopItem.RedGatherToken,
+                    Index = 300 + (int) ShopItem.RedGatherToken,
                     ShopType = ShopType.RedGatherer,
                     ItemId = 12840,
                     Cost = 50,
@@ -1177,7 +1295,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.GoblinDice,
                 new ShopItemInfo
                 {
-                    Index = 45 + (int) ShopItem.GoblinDice,
+                    Index = 300 + (int) ShopItem.GoblinDice,
                     ShopType = ShopType.RedGatherer,
                     ItemId = 14105,
                     Cost = 50,
@@ -1188,7 +1306,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.GuerdonIV,
                 new ShopItemInfo
                 {
-                    Index = 45 + (int) ShopItem.GuerdonIV,
+                    Index = 300 + (int) ShopItem.GuerdonIV,
                     ShopType = ShopType.RedGatherer,
                     ItemId = 5687,
                     Cost = 50,
@@ -1199,7 +1317,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.GuileIV,
                 new ShopItemInfo
                 {
-                    Index = 45 + (int) ShopItem.GuileIV,
+                    Index = 300 + (int) ShopItem.GuileIV,
                     ShopType = ShopType.RedGatherer,
                     ItemId = 5692,
                     Cost = 50,
@@ -1210,14 +1328,49 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
                 ShopItem.GraspIV,
                 new ShopItemInfo
                 {
-                    Index = 45 + (int) ShopItem.GraspIV,
+                    Index = 300 + (int) ShopItem.GraspIV,
                     ShopType = ShopType.RedGatherer,
                     ItemId = 5697,
                     Cost = 50,
                     Yield = 1
                 }
+            },
+            {
+                ShopItem.GuerdonV,
+                new ShopItemInfo
+                {
+                    Index = 300 + (int) ShopItem.GuerdonV,
+                    ShopType = ShopType.RedGatherer,
+                    ItemId = 5688,
+                    Cost = 400,
+                    Yield = 1
+                }
+            },
+            {
+                ShopItem.GuileV,
+                new ShopItemInfo
+                {
+                    Index = 300 + (int) ShopItem.GuileV,
+                    ShopType = ShopType.RedGatherer,
+                    ItemId = 5693,
+                    Cost = 400,
+                    Yield = 1
+                }
+            },
+            {
+                ShopItem.GraspV,
+                new ShopItemInfo
+                {
+                    Index = 300 + (int) ShopItem.GraspV,
+                    ShopType = ShopType.RedGatherer,
+                    ItemId = 5698,
+                    Cost = 400,
+                    Yield = 1
+                }
             }
-            #endregion
+
+            #endregion RedGatherer
+
 #endif
 		};
 

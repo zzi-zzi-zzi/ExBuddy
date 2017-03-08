@@ -1,12 +1,5 @@
 ﻿namespace ExBuddy.OrderBotTags.Gather
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Linq;
-    using System.Reflection;
-    using System.Threading.Tasks;
-    using System.Windows.Media;
     using Buddy.Coroutines;
     using Clio.Utilities;
     using Clio.XmlEngine;
@@ -28,6 +21,13 @@
     using ff14bot.NeoProfiles;
     using ff14bot.Objects;
     using ff14bot.RemoteWindows;
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Linq;
+    using System.Reflection;
+    using System.Threading.Tasks;
+    using System.Windows.Media;
     using TreeSharp;
 
     [LoggerName("ExGather")]
@@ -206,12 +206,15 @@
                     case CordialType.WateredCordial:
                         gpBeforeGather += 150;
                         break;
+
                     case CordialType.Cordial:
                         gpBeforeGather += 300;
                         break;
+
                     case CordialType.HiCordial:
                         gpBeforeGather += 400;
                         break;
+
                     case CordialType.Auto:
                         if (DataManager.GetItem((uint)CordialType.HiCordial).ItemCount() > 0)
                         {
@@ -740,7 +743,7 @@
                 return await WaitForGpRegain(waitForGp.Value);
             }
 
-            if (gp + 300 >= waitForGp.Value && CordialType == CordialType.Cordial)
+            if (gp + 300 >= waitForGp.Value && (CordialType == CordialType.Cordial || CordialType == CordialType.Auto))
             {
                 // If we used the Cordial or the CordialType is only Cordial, not WateredCordial, Auto or HiCordial, then return
                 if (await UseCordial(CordialType.Cordial, ttg.RealSecondsTillStartGathering))
