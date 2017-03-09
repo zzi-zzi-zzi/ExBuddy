@@ -386,9 +386,9 @@ namespace ExBuddy.OrderBotTags.Behaviors
                 }
 
                 await Coroutine.Sleep(600);
-                while (purchaseItemData.ItemCount() < purchaseItem.MaxCount && Behaviors.ShouldContinue)
+                var scripsLeft = Memory.Scrips.GetRemainingScripsByShopType(purchaseItemInfo.ShopType);
+                while (purchaseItemData.ItemCount() < purchaseItem.MaxCount && scripsLeft >= purchaseItemInfo.Cost && Behaviors.ShouldContinue)
                 {
-                    var scripsLeft = Memory.Scrips.GetRemainingScripsByShopType(purchaseItemInfo.ShopType);
                     int QtyLeftToBuy = purchaseItem.MaxCount - (int)purchaseItemData.ItemCount();
                     int QtyBuyable = scripsLeft / purchaseItemInfo.Cost;
                     int QtyToBuy = Math.Min(99, Math.Min(QtyLeftToBuy, QtyBuyable));
