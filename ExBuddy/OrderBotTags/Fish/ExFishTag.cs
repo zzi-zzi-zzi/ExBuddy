@@ -540,7 +540,15 @@ namespace ExBuddy.OrderBotTags.Fish
 
         protected static readonly Random SitRng = new Random();
 
-        protected static Regex FishRegex = new Regex(Localization.Localization.ExFish_FishRegex, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        protected static Regex FishRegex = new Regex(
+
+#if RB_CN
+            @"[\u4e00-\u9fa5A-Za-z0-9·]+成功钓上了|[\u4e00-\u9fa5]+",
+#else
+            @"You land(?: a| an)? (.+) measuring (\d{1,4}\.\d) ilms!", // Entrax fix
+#endif
+            RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
         protected static Regex FishSizeRegex = new Regex(@"(\d{1,4}\.\d)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         protected static FishResult FishResult = new FishResult();

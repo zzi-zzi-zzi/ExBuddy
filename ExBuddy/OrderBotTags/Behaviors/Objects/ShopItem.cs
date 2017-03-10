@@ -3,33 +3,8 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
     public enum ShopItem
     {
 #if RB_CN
-        // Update for patch 3.4
 
-        RedGatherToken = -25,
-
-        GoblinDice = -24,
-
-        BlueGatherToken = -20,
-
-        BlueToken = BlueGatherToken,
-
-        HiCordial = -19,
-
-        CommercialSurvivalManual = -18,
-
-        RedCrafterToken = -15,
-
-        GoblinCup = -14,
-
-        BruteLeech = -12,
-
-        CraneFly = -11,
-
-        FiendWorm = -10,
-
-        MagmaWorm = -9,
-
-        RedBalloon = -8,
+        #region BlueCrafter
 
         BlueCrafterToken = 0,
 
@@ -61,6 +36,16 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 
         KukuruPowder = 14,
 
+        AdeptsHat = 15,
+
+        AdeptsGown = 16,
+
+        AdeptsGloves = 17,
+
+        AdeptsHose = 18,
+
+        AdeptsThighboots = 19,
+
         CrpDelineation = 20,
 
         BsmDelineation = 21,
@@ -75,7 +60,127 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 
         AlcDelineation = 26,
 
-        CulDelineation = 27
+        CulDelineation = 27,
+
+        #endregion BlueCrafter
+
+        #region RedCrafter
+
+        SoulOfTheCrafter = -91,
+
+        RedCrafterToken = -100,
+
+        GoblinCup = -99,
+
+        CompetenceIV = -98,
+
+        CunningIV = -97,
+
+        CommandIV = -96,
+
+        CompetenceV = -95,
+
+        CunningV = -94,
+
+        CommandV = -92,
+
+        #endregion RedCrafter
+
+        #region BlueGatherer
+
+        BlueGatherToken = -200,
+
+        BlueToken = BlueGatherToken,
+
+        HiCordial = -199,
+
+        CommercialSurvivalManual = -198,
+
+        TrailblazersScarf = -197,
+
+        TrailblazersVest = -196,
+
+        TrailblazersWristguards = -195,
+
+        TrailblazersSlops = -194,
+
+        TrailblazersShoes = -193,
+
+        BruteLeech = -192,
+
+        CraneFly = -191,
+
+        FiendWorm = -190,
+
+        MagmaWorm = -189,
+
+        RedBalloon = -188,
+
+        CrownTrout = -187,
+
+        CrownTroutHQ = -186,
+
+        RetributionStaff = -185,
+
+        RetributionStaffHQ = -184,
+
+        ThiefBetta = -183,
+
+        ThiefBettaHQ = -182,
+
+        GoldsmithCrab = -181,
+
+        GoldsmithCrabHQ = -180,
+
+        Pterodactyl = -179,
+
+        PterodactylHQ = -178,
+
+        Eurhinosaur = -177,
+
+        EurhinosaurHQ = -176,
+
+        GemMarimo = -175,
+
+        GemMarimoHQ = -174,
+
+        Sphalerite = -173,
+
+        SphaleriteHQ = -172,
+
+        WindSilk = -171,
+
+        CloudCottonBoll = -170,
+
+        CloudCottonBollHQ = -169,
+
+        DinosaurLeather = -168,
+
+        RoyalMistletoe = -167,
+
+        RoyalMistletoeHQ = -166,
+
+        #endregion BlueGatherer
+
+        #region RedGatherer
+
+        RedGatherToken = -300,
+
+        GoblinDice = -299,
+
+        GuerdonIV = -298,
+
+        GuileIV = -297,
+
+        GraspIV = -296,
+
+        GuerdonV = -295,
+
+        GuileV = -294,
+
+        GraspV = -293
+
+        #endregion RedGatherer
 
 #else
 
