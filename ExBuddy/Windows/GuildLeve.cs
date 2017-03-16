@@ -36,7 +36,7 @@
 
         public SendActionResult AcceptLeve(uint guildLeveId)
         {
-            return TrySendAction(2, 3, 2, 4, guildLeveId);
+            return TrySendAction(2, 3, 3, 4, guildLeveId);
         }
 
         public static bool HasLeve(uint leveId)
