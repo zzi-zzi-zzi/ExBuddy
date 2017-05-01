@@ -107,6 +107,20 @@
             return false;
         }
 
+        public static int CollectableCount(int id, int collectability)
+        {
+            int count = 0;
+
+            foreach (BagSlot slot in InventoryManager.FilledSlots)
+            {
+                if (slot.RawItemId == id && slot.Collectability >= collectability)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+
         public static bool TrueFor(int id, TimeSpan span)
         {
             ConditionTimer timer;

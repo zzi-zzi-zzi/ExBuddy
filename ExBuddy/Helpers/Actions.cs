@@ -22,7 +22,7 @@ namespace ExBuddy.Helpers
             var result = Actionmanager.DoAction(id, Core.Player);
 
             var ticks = 0;
-            while (result == false && ticks++ < 5 && Behaviors.ShouldContinue)
+            while (result == false && ticks++ < 10 && Behaviors.ShouldContinue)
             {
                 result = Actionmanager.DoAction(id, Core.Player);
                 await Coroutine.Yield();

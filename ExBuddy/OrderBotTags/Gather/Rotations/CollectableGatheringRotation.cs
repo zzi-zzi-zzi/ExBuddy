@@ -218,6 +218,13 @@
             await tag.Cast(Ability.MethodicalAppraisal);
         }
 
+        protected async Task UtmostDiscerningImpulsive(ExGatherTag tag)
+        {
+            await tag.Cast(Ability.UtmostCaution);
+            await tag.Cast(Ability.DiscerningEye);
+            await tag.Cast(Ability.ImpulsiveAppraisal);
+        }
+
         protected async Task UtmostImpulsive(ExGatherTag tag)
         {
             await tag.Cast(Ability.UtmostCaution);
@@ -235,6 +242,13 @@
             await tag.Cast(Ability.UtmostCaution);
             await tag.Cast(Ability.SingleMind);
             await tag.Cast(Ability.MethodicalAppraisal);
+        }
+
+        protected async Task UtmostSingleMindImpulsive(ExGatherTag tag)
+        {
+            await tag.Cast(Ability.UtmostCaution);
+            await tag.Cast(Ability.SingleMind);
+            await tag.Cast(Ability.ImpulsiveAppraisal);
         }
     }
 }

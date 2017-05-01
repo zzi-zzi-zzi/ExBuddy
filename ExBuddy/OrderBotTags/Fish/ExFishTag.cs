@@ -649,6 +649,10 @@ namespace ExBuddy.OrderBotTags.Fish
         [XmlAttribute("ShuffleFishSpots")]
         public bool Shuffle { get; set; }
 
+        [DefaultValue(true)]
+        [XmlAttribute("EnableKeeper")]
+        public bool EnableKeeper { get; set; }
+
         [XmlAttribute("SitRate")]
         public float SitRate { get; set; }
 
@@ -825,7 +829,8 @@ namespace ExBuddy.OrderBotTags.Fish
                     new Decorator(
                         ret =>
                             CanDoAbility(Abilities.Mooch) && MoochLevel != 0 && mooch < MoochLevel && MoochConditionCheck()
-                            && (Keepers.Count == 0
+                            && (!EnableKeeper
+                                || Keepers.Count == 0
                                 || Keepers.All(k => !string.Equals(k.Name, FishResult.FishName, StringComparison.InvariantCultureIgnoreCase))
                                 || Keepers.Any(
                                     k =>
@@ -911,7 +916,7 @@ namespace ExBuddy.OrderBotTags.Fish
                                     r =>
                                     {
                                         // If its not a keeper AND we aren't mooching or we can't mooch, then release
-                                        if (!Keepers.Any(FishResult.IsKeeper) && (MoochLevel == 0 || !CanDoAbility(Abilities.Mooch)))
+                                        if (!Keepers.Any(FishResult.IsKeeper) && (MoochLevel == 0 || !CanDoAbility(Abilities.Mooch)) && EnableKeeper)
                                         {
                                             DoAbility(Abilities.Release);
                                             Logger.Info(Localization.Localization.ExFish_Release + FishResult.Name);

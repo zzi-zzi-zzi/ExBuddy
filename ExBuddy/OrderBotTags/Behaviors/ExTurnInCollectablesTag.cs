@@ -615,7 +615,7 @@ namespace ExBuddy.OrderBotTags.Behaviors
 
             if (Collectables == null)
             {
-                item = slots.FirstOrDefault(i => i.Collectability > 0);
+                item = slots.FirstOrDefault(i => i.Collectability > 0 && i.RawItemId != 17557 && i.RawItemId != 17558 && i.RawItemId != 17559 && i.RawItemId != 17560 && i.RawItemId != 17561);
             }
             else
             {

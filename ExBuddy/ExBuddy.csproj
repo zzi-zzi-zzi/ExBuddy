@@ -71,6 +71,20 @@
     </Compile>
     <Compile Include="Localization\LocalizationInitializer.cs" />
     <Compile Include="Offsets\SecondaryOffsets.cs" />
+    <Compile Include="OrderBotTags\Gather\Rotations\Collect321GatheringRotation.cs" />
+    <Compile Include="OrderBotTags\Gather\Rotations\Collect346GatheringRotation.cs" />
+    <Compile Include="OrderBotTags\Gather\Rotations\Collect390GatheringRotation.cs" />
+    <Compile Include="OrderBotTags\Gather\Rotations\Collect402GatheringRotation.cs" />
+    <Compile Include="OrderBotTags\Gather\Rotations\Collect410GatheringRotation.cs" />
+    <Compile Include="OrderBotTags\Gather\Rotations\Collect459GatheringRotation.cs" />
+    <Compile Include="OrderBotTags\Gather\Rotations\Collect460GatheringRotation.cs" />
+    <Compile Include="OrderBotTags\Gather\Rotations\Collect515GatheringRotation.cs" />
+    <Compile Include="OrderBotTags\Gather\Rotations\EarthElementGatheringRotation.cs" />
+    <Compile Include="OrderBotTags\Gather\Rotations\FireElementGatheringRotation.cs" />
+    <Compile Include="OrderBotTags\Gather\Rotations\IceElementGatheringRotation.cs" />
+    <Compile Include="OrderBotTags\Gather\Rotations\LightningElementGatheringRotation.cs" />
+    <Compile Include="OrderBotTags\Gather\Rotations\WaterElementGatheringRotation.cs" />
+    <Compile Include="OrderBotTags\Gather\Rotations\WindElementGatheringRotation.cs" />
     <Compile Include="Plugins\Skywatcher\Objects\Location.cs" />
     <Compile Include="Plugins\Skywatcher\Objects\LocationIndex.cs" />
     <Compile Include="Plugins\Skywatcher\Objects\WeatherRate.cs" />
