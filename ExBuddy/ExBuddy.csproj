@@ -78,6 +78,7 @@
     <Compile Include="OrderBotTags\Gather\Rotations\Collect410GatheringRotation.cs" />
     <Compile Include="OrderBotTags\Gather\Rotations\Collect459GatheringRotation.cs" />
     <Compile Include="OrderBotTags\Gather\Rotations\Collect460GatheringRotation.cs" />
+    <Compile Include="OrderBotTags\Gather\Rotations\Collect480GatheringRotation.cs" />
     <Compile Include="OrderBotTags\Gather\Rotations\Collect515GatheringRotation.cs" />
     <Compile Include="OrderBotTags\Gather\Rotations\EarthElementGatheringRotation.cs" />
     <Compile Include="OrderBotTags\Gather\Rotations\FireElementGatheringRotation.cs" />
@@ -157,7 +158,7 @@
     <Compile Include="Interfaces\INamedItem.cs" />
     <Compile Include="OrderBotTags\Gather\NamedItemCollection.cs" />
     <Compile Include="OrderBotTags\Gather\Rotations\Collect505GatheringRotation.cs" />
-    <Compile Include="OrderBotTags\Gather\Rotations\Collect495GatheringRotation.cs" />
+    <Compile Include="OrderBotTags\Gather\Rotations\Collect499GatheringRotation.cs" />
     <Compile Include="OrderBotTags\Gather\Rotations\Collect490GatheringRotation.cs" />
     <Compile Include="OrderBotTags\Gather\Rotations\GetTwoHQGatheringRotation.cs" />
     <Compile Include="OrderBotTags\Gather\Rotations\EphemeralRotation.cs" />
