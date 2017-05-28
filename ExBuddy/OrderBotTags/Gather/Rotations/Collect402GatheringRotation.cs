@@ -37,6 +37,7 @@
 					await SingleMindMethodical(tag);
 					await SingleMindMethodical(tag);
 					await DiscerningMethodical(tag);
+					await IncreaseChance(tag);
 					return true;
 				}
 

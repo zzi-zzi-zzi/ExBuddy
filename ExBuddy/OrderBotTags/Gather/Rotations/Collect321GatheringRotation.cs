@@ -37,6 +37,7 @@
 					await SingleMindImpulsive(tag);
 					await SingleMindImpulsive(tag);
 					await SingleMindMethodical(tag);
+					await IncreaseChance(tag);
 					return true;
 				}
 

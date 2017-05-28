@@ -50,7 +50,6 @@
 						if (HasDiscerningEye)
 						{
 							await UtmostSingleMindMethodical(tag);
-							await IncreaseChance(tag);
 							appraisalsRemaining--;
 						}
 
@@ -71,9 +70,9 @@
 						if (appraisalsRemaining == 1)
 						{
 							await UtmostDiscerningMethodical(tag);
-							await IncreaseChance(tag);
 						}
 
+						await IncreaseChance(tag);
 						return true;
 					}
 				}

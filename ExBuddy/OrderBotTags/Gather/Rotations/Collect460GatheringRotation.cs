@@ -43,6 +43,7 @@
 					await Methodical(tag);
 					await UtmostCaution(tag);
 					await Methodical(tag);
+					await IncreaseChance(tag);
 					return true;
 				}
 

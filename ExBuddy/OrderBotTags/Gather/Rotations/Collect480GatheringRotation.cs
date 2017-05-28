@@ -55,7 +55,6 @@
 					}
 				}
 			}
-
 			await IncreaseChance(tag);
 
 			return true;

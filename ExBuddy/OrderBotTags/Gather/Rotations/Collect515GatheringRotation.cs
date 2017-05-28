@@ -37,6 +37,7 @@
 					await DiscerningMethodical(tag);
 					await DiscerningMethodical(tag);
 					await DiscerningMethodical(tag);
+					await IncreaseChance(tag);
 					return true;
 				}
 

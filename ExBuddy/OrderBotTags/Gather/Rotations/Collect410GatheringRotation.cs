@@ -37,6 +37,7 @@
 					await AppraiseAndRebuff(tag);
 					await AppraiseAndRebuff(tag);
 					await Methodical(tag);
+					await IncreaseChance(tag);
 					return true;
 				}
 
