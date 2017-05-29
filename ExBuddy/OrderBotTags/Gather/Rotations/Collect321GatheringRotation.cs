@@ -2,6 +2,7 @@
 {
 	using Attributes;
 	using ff14bot;
+	using ff14bot.Managers;
 	using Interfaces;
 	using System.Threading.Tasks;
 
@@ -32,7 +33,7 @@
 			}
 			else
 			{
-				if (Core.Player.CurrentGP >= 600)
+				if (Core.Player.CurrentGP >= 600 && (GatheringManager.SwingsRemaining > 4 || tag.CanUseCordial(Attributes.RequiredTimeInSeconds)))
 				{
 					if (Core.Player.ClassLevel >= 57)
 					{
