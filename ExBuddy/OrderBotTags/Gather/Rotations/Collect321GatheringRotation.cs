@@ -34,11 +34,23 @@
 			{
 				if (Core.Player.CurrentGP >= 600)
 				{
-					await SingleMindImpulsive(tag);
-					await SingleMindImpulsive(tag);
-					await SingleMindMethodical(tag);
-					await IncreaseChance(tag);
-					return true;
+					if (Core.Player.ClassLevel >= 57)
+					{
+						await SingleMindImpulsive(tag);
+						await SingleMindImpulsive(tag);
+						await SingleMindMethodical(tag);
+						await IncreaseChance(tag);
+						return true;
+					}
+					else
+					{
+						await Discerning(tag);
+						await AppraiseAndRebuff(tag);
+						await AppraiseAndRebuff(tag);
+						await Methodical(tag);
+						await IncreaseChance(tag);
+						return true;
+					}
 				}
 
 				await Impulsive(tag);
