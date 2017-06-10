@@ -3,190 +3,190 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 	public enum ShopItem
 	{
 #if RB_CN
+        
+        #region BlueCrafter
 
-		#region BlueCrafter
+		BlueCrafterToken = 0,
 
-        BlueCrafterToken = 0,
+		CommercialEngineeringManual = 1,
 
-        CommercialEngineeringManual = 1,
+		SweetCreamMilk = 2,
 
-        SweetCreamMilk = 2,
+		StoneCheese = 3,
 
-        StoneCheese = 3,
+		HeavensEgg = 4,
 
-        HeavensEgg = 4,
+		CarbonFiber = 5,
 
-        CarbonFiber = 5,
+		LoaghtanFilet = 6,
 
-        LoaghtanFilet = 6,
+		GoldenApple = 7,
 
-        GoldenApple = 7,
+		SolsticeGarlic = 8,
 
-        SolsticeGarlic = 8,
+		MatureOliveOil = 9,
 
-        MatureOliveOil = 9,
+		PowderedMermanHorn = 10,
 
-        PowderedMermanHorn = 10,
+		BouillonCube = 11,
 
-        BouillonCube = 11,
+		BeanSauce = 12,
 
-        BeanSauce = 12,
+		BeanPaste = 13,
 
-        BeanPaste = 13,
+		KukuruPowder = 14,
 
-        KukuruPowder = 14,
+		AdeptsHat = 15,
 
-        AdeptsHat = 15,
+		AdeptsGown = 16,
 
-        AdeptsGown = 16,
+		AdeptsGloves = 17,
 
-        AdeptsGloves = 17,
+		AdeptsHose = 18,
 
-        AdeptsHose = 18,
+		AdeptsThighboots = 19,
 
-        AdeptsThighboots = 19,
+		CrpDelineation = 20,
 
-        CrpDelineation = 20,
+		BsmDelineation = 21,
 
-        BsmDelineation = 21,
+		ArmDelineation = 22,
 
-        ArmDelineation = 22,
+		GsmDelineation = 23,
 
-        GsmDelineation = 23,
+		LtwDelineation = 24,
 
-        LtwDelineation = 24,
+		WvrDelineation = 25,
 
-        WvrDelineation = 25,
+		AlcDelineation = 26,
 
-        AlcDelineation = 26,
+		CulDelineation = 27,
 
-        CulDelineation = 27,
+        #endregion BlueCrafter
 
-		#endregion BlueCrafter
+        #region RedCrafter
 
-		#region RedCrafter
+		SoulOfTheCrafter = -100,
 
-        SoulOfTheCrafter = -91,
+		RedCrafterToken = -99,
 
-        RedCrafterToken = -100,
+		GoblinCup = -98,
 
-        GoblinCup = -99,
+		CompetenceIV = -97,
 
-        CompetenceIV = -98,
+		CunningIV = -96,
 
-        CunningIV = -97,
+		CommandIV = -95,
 
-        CommandIV = -96,
+		CompetenceV = -94,
 
-        CompetenceV = -95,
+		CunningV = -93,
 
-        CunningV = -94,
+		CommandV = -92,
 
-        CommandV = -92,
+        #endregion RedCrafter
 
-		#endregion RedCrafter
+        #region BlueGatherer
 
-		#region BlueGatherer
+		BlueGatherToken = -200,
 
-        BlueGatherToken = -200,
+		BlueToken = BlueGatherToken,
 
-        BlueToken = BlueGatherToken,
+		HiCordial = -199,
 
-        HiCordial = -199,
+		CommercialSurvivalManual = -198,
 
-        CommercialSurvivalManual = -198,
+		TrailblazersScarf = -197,
 
-        TrailblazersScarf = -197,
+		TrailblazersVest = -196,
 
-        TrailblazersVest = -196,
+		TrailblazersWristguards = -195,
 
-        TrailblazersWristguards = -195,
+		TrailblazersSlops = -194,
 
-        TrailblazersSlops = -194,
+		TrailblazersShoes = -193,
 
-        TrailblazersShoes = -193,
+		BruteLeech = -192,
 
-        BruteLeech = -192,
+		CraneFly = -191,
 
-        CraneFly = -191,
+		FiendWorm = -190,
 
-        FiendWorm = -190,
+		MagmaWorm = -189,
 
-        MagmaWorm = -189,
+		RedBalloon = -188,
 
-        RedBalloon = -188,
+		CrownTrout = -187,
 
-        CrownTrout = -187,
+		CrownTroutHQ = -186,
 
-        CrownTroutHQ = -186,
+		RetributionStaff = -185,
 
-        RetributionStaff = -185,
+		RetributionStaffHQ = -184,
 
-        RetributionStaffHQ = -184,
+		ThiefBetta = -183,
 
-        ThiefBetta = -183,
+		ThiefBettaHQ = -182,
 
-        ThiefBettaHQ = -182,
+		GoldsmithCrab = -181,
 
-        GoldsmithCrab = -181,
+		GoldsmithCrabHQ = -180,
 
-        GoldsmithCrabHQ = -180,
+		Pterodactyl = -179,
 
-        Pterodactyl = -179,
+		PterodactylHQ = -178,
 
-        PterodactylHQ = -178,
+		Eurhinosaur = -177,
 
-        Eurhinosaur = -177,
+		EurhinosaurHQ = -176,
 
-        EurhinosaurHQ = -176,
+		GemMarimo = -175,
 
-        GemMarimo = -175,
+		GemMarimoHQ = -174,
 
-        GemMarimoHQ = -174,
+		Sphalerite = -173,
 
-        Sphalerite = -173,
+		SphaleriteHQ = -172,
 
-        SphaleriteHQ = -172,
+		WindSilk = -171,
 
-        WindSilk = -171,
+		CloudCottonBoll = -170,
 
-        CloudCottonBoll = -170,
+		CloudCottonBollHQ = -169,
 
-        CloudCottonBollHQ = -169,
+		DinosaurLeather = -168,
 
-        DinosaurLeather = -168,
+		RoyalMistletoe = -167,
 
-        RoyalMistletoe = -167,
+		RoyalMistletoeHQ = -166,
 
-        RoyalMistletoeHQ = -166,
+        #endregion BlueGatherer
 
-		#endregion BlueGatherer
+        #region RedGatherer
 
-		#region RedGatherer
+		RedGatherToken = -300,
 
-        RedGatherToken = -300,
+		GoblinDice = -299,
 
-        GoblinDice = -299,
+		GuerdonIV = -298,
 
-        GuerdonIV = -298,
+		GuileIV = -297,
 
-        GuileIV = -297,
+		GraspIV = -296,
 
-        GraspIV = -296,
+		GuerdonV = -295,
 
-        GuerdonV = -295,
+		GuileV = -294,
 
-        GuileV = -294,
+		GraspV = -293
 
-        GraspV = -293
-
-		#endregion RedGatherer
+        #endregion RedGatherer
 
 #else
 
-		#region BlueCrafter
+        #region BlueCrafter
 
-		BlueCrafterToken = 0,
+        BlueCrafterToken = 0,
 
 		CommercialEngineeringManual = 1,
 
