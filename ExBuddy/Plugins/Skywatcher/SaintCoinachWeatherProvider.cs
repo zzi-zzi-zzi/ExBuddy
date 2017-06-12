@@ -15,40 +15,45 @@
 
 		private static readonly IDictionary<int, int> ZoneMap = new Dictionary<int, int>
 		{
-			{129, 27}, // Limsa Lominsa
-			{134, 30}, // Middle LN
-			{135, 31}, // Lower LN
-			{137, 32}, // Eastern LN
-			{138, 33}, // Western LN
-			{139, 34}, // Upper LN
-			{180, 350}, // Outer LN
-			//{ 250, 8 }, // Wolves' Den Pier
-			{339, 425}, // Mist
-			{132, 39}, // Gridania
+			{-1, -1}, // Daidem Easy
+			{-2, -2}, // Daidem
+			{-3, -3}, // Daidem Hard
+			{128, 28}, // Limsa Lominsa Upper Decks
+			{129, 29}, // Limsa Lominsa Lower Decks
+			{130, 40}, // Ul'dah - Steps of Nald
+			{131, 41}, // Ul'dah - Steps of Thal
+			{132, 52}, // New Gridania
+			{133, 53}, // Old Gridania
+			{134, 30}, // Middle La Noscea
+			{135, 31}, // Lower La Noscea
+			{137, 32}, // Eastern La Noscea
+			{138, 33}, // Western La Noscea
+			{139, 34}, // Upper La Noscea
+			{140, 42}, // Western Thanalan
+			{141, 43}, // Central Thanalan
+			{144, 1484}, // The Gold Saucer
+			{145, 44}, // Eastern Thanalan
+			{146, 45}, // Southern Thanalan
+			{147, 46}, // Northern Thanalan
 			{148, 54}, // Central Shroud
 			{152, 55}, // East Shroud
 			{153, 56}, // South Shroud
 			{154, 57}, // North Shroud
-			{340, 426}, // Lavender Beds
-			{130, 51}, // Ul'dah
-			{140, 42}, // Western Than
-			{141, 43}, // Central Than
-			{145, 44}, // Eastern Than
-			{146, 45}, // Southern Than
-			{147, 46}, // Northern Than
-			{341, 427}, // Goblet
-			{418, 62}, // Ishgard
-			{155, 63}, // CCH
-			{397, 2200}, // CWH
+			{155, 63}, // Coerthas Central Highlands
 			{156, 67}, // Mor Dhona
-			{401, 2100}, // Sea of Clouds
-			{402, 2101}, // Azys Lla
-			{-1, -1}, // Daidem Easy
-			{-2, -2}, // Daidem
-			{-3, -3}, // Daidem Hard
-			{398, 2000}, // Drav Fore
-			{399, 2001}, // Drav Hinterlands
+			{180, 350}, // Outer La Noscea
+			{250, 358}, // Wolves' Den Pier
+			{339, 425}, // Mist
+			{340, 426}, // Lavender Beds
+			{341, 427}, // Goblet
+			{397, 2200}, // Coerthas Western Highlands
+			{398, 2000}, // The Dravanian Forelands
+			{399, 2001}, // The Dravanian Hinterlands
 			{400, 2002}, // Churning Mists
+			{401, 2100}, // Sea of Clouds
+			{402, 2101}, // Azys Lla 
+			{418, 2300}, // Foundation
+			{419, 2301}, // The Pillars
 			{478, 2082} // Idyllshire
 		};
 

@@ -32,7 +32,7 @@
 			}
 			else
 			{
-				if (Core.Player.CurrentGP >= 600)
+				if (Core.Player.CurrentGP >= 600 && tag.GatherItem.Chance < 98)
 				{
 					await SingleMindMethodical(tag);
 					await SingleMindMethodical(tag);
