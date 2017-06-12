@@ -672,6 +672,10 @@ namespace ExBuddy.OrderBotTags.Fish
 		[XmlAttribute("Patience")]
 		public Abilities Patience { get; set; }
 
+		[DefaultValue("600")]
+		[XmlAttribute("MinimumGGPatience")]
+		public int MinimumGGPatience { get; set; }
+
 		[XmlAttribute("FishEyes")]
 		public bool FishEyes { get; set; }
 
@@ -877,7 +881,7 @@ namespace ExBuddy.OrderBotTags.Fish
 							Patience > Abilities.None
 							&& (FishingManager.State == FishingState.None || FishingManager.State == FishingState.PoleReady) && !HasPatience
 							&& CanDoAbility(Patience) &&
-							(ExProfileBehavior.Me.CurrentGP >= 600 || ExProfileBehavior.Me.CurrentGPPercent > 99.0f),
+							(ExProfileBehavior.Me.CurrentGP >= MinimumGGPatience || ExProfileBehavior.Me.CurrentGPPercent > 99.0f),
 						new Sequence(
 							new Action(
 								r =>

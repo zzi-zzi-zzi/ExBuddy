@@ -33,7 +33,7 @@
 			}
 			else
 			{
-				if (Core.Player.CurrentGP >= 600 && (GatheringManager.SwingsRemaining > 4 || tag.CanUseCordial(Attributes.RequiredTimeInSeconds)))
+				if (Core.Player.CurrentGP >= 600 && (GatheringManager.SwingsRemaining > 4 || tag.CanUseCordial()))
 				{
 					if (Core.Player.ClassLevel >= 57)
 					{
