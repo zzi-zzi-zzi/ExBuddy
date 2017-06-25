@@ -14,6 +14,10 @@
 	using System.Threading.Tasks;
 	using PurifyDialog = ExBuddy.Windows.PurifyDialog;
 
+#if RB_CN
+    using ActionManager = ff14bot.Managers.Actionmanager;
+#endif
+
 	[LoggerName("ExPurify")]
 	[XmlElement("ExPurify")]
 	[XmlElement("ExReduce")]
@@ -64,7 +68,7 @@
 						return true;
 					}
 
-					Actionmanager.Dismount();
+					ActionManager.Dismount();
 					return false;
 				}))
 			{

@@ -7,6 +7,10 @@
 	using System.Collections.Generic;
 	using System.Threading.Tasks;
 
+#if RB_CN
+    using ActionManager = ff14bot.Managers.Actionmanager;
+#endif
+
 	// Purposely not putting attribute or interface for overriding, This is for backwards compatibility only override turned off automatically.
 	public sealed class GatheringSkillOrderGatheringRotation : SmartGatheringRotation
 	{
@@ -32,9 +36,9 @@
 				// Ignoring times to cast.... no skills would ever be cast more than once.
 				SpellData spellData;
 
-				if (!Actionmanager.CurrentActions.TryGetValue(gatheringSkill.SpellName, out spellData))
+				if (!ActionManager.CurrentActions.TryGetValue(gatheringSkill.SpellName, out spellData))
 				{
-					Actionmanager.CurrentActions.TryGetValue(gatheringSkill.SpellId, out spellData);
+					ActionManager.CurrentActions.TryGetValue(gatheringSkill.SpellId, out spellData);
 				}
 
 				if (spellData == null)

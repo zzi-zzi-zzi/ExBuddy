@@ -4,6 +4,9 @@
 	using ff14bot;
 	using ff14bot.Managers;
 	using System.Threading.Tasks;
+#if RB_CN
+    using ActionManager = ff14bot.Managers.Actionmanager;
+#endif
 
 	[GatheringRotation("EarthElement", 30, 400)]
 	public sealed class EarthElementGatheringRotation : SmartGatheringRotation
@@ -13,7 +16,7 @@
 			if (Core.Player.CurrentGP > 399)
 			{
 				await Wait();
-				Actionmanager.DoAction(217U, Core.Player);
+				ActionManager.DoAction(217U, Core.Player);
 			}
 
 			return await base.ExecuteRotation(tag);

@@ -2,6 +2,7 @@ namespace ExBuddy.OrderBotTags.Gather.Rotations
 {
 	using ExBuddy.Attributes;
 	using ExBuddy.Interfaces;
+	using System.Threading.Tasks;
 
 	//Name, RequiredTime, RequiredGpBreakpoints
 	[GatheringRotation("RegularNode")]
@@ -20,5 +21,10 @@ namespace ExBuddy.OrderBotTags.Gather.Rotations
 		}
 
 		#endregion IGetOverridePriority Members
+
+		public override async Task<bool> ExecuteRotation(ExGatherTag tag)
+		{
+			return true;
+		}
 	}
 }

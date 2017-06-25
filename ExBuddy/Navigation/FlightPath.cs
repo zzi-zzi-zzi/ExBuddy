@@ -310,6 +310,8 @@ namespace ExBuddy.Navigation
 							var alternateWaypoint = previousWaypoint.AddRandomDirection(distancePerWaypoint);
 							while (WorldManager.Raycast(previousWaypoint, alternateWaypoint, out hit) && Behaviors.ShouldContinue)
 							{
+								await Coroutine.Yield();
+
 								if (alternateCount > 20)
 								{
 									if (uncorrectedErrors >= MaxUncorrectedErrors)

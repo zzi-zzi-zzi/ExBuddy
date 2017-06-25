@@ -12,6 +12,13 @@ namespace ExBuddy.Plugins.EnableFlight
 	using ff14bot.Helpers;
 	using ff14bot.Managers;
 	using ff14bot.Navigation;
+
+#if !RB_CN
+
+	using ff14bot.Pathing.Service_Navigation;
+
+#endif
+
 	using ff14bot.RemoteWindows;
 	using System;
 	using System.ComponentModel;
@@ -71,10 +78,14 @@ namespace ExBuddy.Plugins.EnableFlight
 
 		private void DisposeNav()
 		{
-			var nav = Navigator.NavigationProvider as GaiaNavigator;
+#if RB_CN
+            var nav = Navigator.NavigationProvider as GaiaNavigator;
+#else
+			var nav = Navigator.NavigationProvider as ServiceNavigationProvider;
+#endif
 			if (nav != null)
 			{
-				Logger.Info("Disposing the GaiaNavigator");
+				Logger.Info("Disposing the ServiceNavigationProvider");
 				try
 				{
 					nav.Dispose();

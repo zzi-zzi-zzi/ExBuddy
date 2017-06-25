@@ -24,7 +24,9 @@
 						{Ability.IncreaseGatherQuality10, 225},
 						{Ability.IncreaseGatherQuality30, 226},
 						{Ability.Truth, 221},
+						{Ability.IncreaseGatherQuality30100, 271},
 						{Ability.IncreaseGatherChance50, 294},
+						{Ability.ImpulsiveAppraisalII, 302},
 						{Ability.IncreaseGatherChanceOnce15, 4086},
 						{Ability.IncreaseGatherYieldOnce, 4087},
 						{Ability.CollectorsGlove, 4088},
@@ -56,7 +58,9 @@
 						{Ability.IncreaseGatherQuality10, 242},
 						{Ability.IncreaseGatherQuality30, 243},
 						{Ability.Truth, 238},
+						{Ability.IncreaseGatherQuality30100, 270},
 						{Ability.IncreaseGatherChance50, 295},
+						{Ability.ImpulsiveAppraisalII, 301},
 						{Ability.IncreaseGatherChanceOnce15, 4072},
 						{Ability.IncreaseGatherYieldOnce, 4073},
 						{Ability.CollectorsGlove, 4074},
@@ -118,7 +122,11 @@
 
 		Truth, // = 238,221
 
+		IncreaseGatherQuality30100, // = 238,221
+
 		IncreaseGatherChance50, // = 295,294
+
+		ImpulsiveAppraisalII, // = 301,302
 
 		IncreaseGatherChanceOnce15, // 4072, 4086
 

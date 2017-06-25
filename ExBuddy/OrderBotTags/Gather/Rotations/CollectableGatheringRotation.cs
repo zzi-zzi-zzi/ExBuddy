@@ -109,9 +109,176 @@
 			return !tag.IsEphemeral() && !tag.IsUnspoiled();
 		}
 
+		protected async Task Discerning(ExGatherTag tag)
+		{
+			await tag.Cast(Ability.DiscerningEye);
+		}
+
+		protected async Task SingleMind(ExGatherTag tag)
+		{
+			await tag.Cast(Ability.SingleMind);
+		}
+
+		protected async Task UtmostCaution(ExGatherTag tag)
+		{
+			await tag.Cast(Ability.UtmostCaution);
+		}
+
+		protected async Task Methodical(ExGatherTag tag)
+		{
+			await tag.Cast(Ability.MethodicalAppraisal);
+		}
+
+		protected async Task DiscerningMethodical(ExGatherTag tag)
+		{
+			await tag.Cast(Ability.DiscerningEye);
+			await tag.Cast(Ability.MethodicalAppraisal);
+		}
+
+		protected async Task SingleMindMethodical(ExGatherTag tag)
+		{
+			await tag.Cast(Ability.SingleMind);
+			await tag.Cast(Ability.MethodicalAppraisal);
+		}
+
+		protected async Task UtmostMethodical(ExGatherTag tag)
+		{
+			await tag.Cast(Ability.UtmostCaution);
+			await tag.Cast(Ability.MethodicalAppraisal);
+		}
+
+		protected async Task UtmostSingleMindMethodical(ExGatherTag tag)
+		{
+			await tag.Cast(Ability.UtmostCaution);
+			await tag.Cast(Ability.SingleMind);
+			await tag.Cast(Ability.MethodicalAppraisal);
+		}
+
+		protected async Task UtmostDiscerningMethodical(ExGatherTag tag)
+		{
+			await tag.Cast(Ability.UtmostCaution);
+			await tag.Cast(Ability.DiscerningEye);
+			await tag.Cast(Ability.MethodicalAppraisal);
+		}
+
+		protected async Task Impulsive(ExGatherTag tag)
+		{
+			await tag.Cast(Ability.ImpulsiveAppraisal);
+		}
+
+		protected async Task DiscerningImpulsive(ExGatherTag tag)
+		{
+			await tag.Cast(Ability.DiscerningEye);
+			await tag.Cast(Ability.ImpulsiveAppraisal);
+		}
+
+		protected async Task SingleMindImpulsive(ExGatherTag tag)
+		{
+			await tag.Cast(Ability.SingleMind);
+			await tag.Cast(Ability.ImpulsiveAppraisal);
+		}
+
+		protected async Task UtmostImpulsive(ExGatherTag tag)
+		{
+			await tag.Cast(Ability.UtmostCaution);
+			await tag.Cast(Ability.ImpulsiveAppraisal);
+		}
+
+		protected async Task UtmostSingleMindImpulsive(ExGatherTag tag)
+		{
+			await tag.Cast(Ability.UtmostCaution);
+			await tag.Cast(Ability.SingleMind);
+			await tag.Cast(Ability.ImpulsiveAppraisal);
+		}
+
+		protected async Task UtmostDiscerningImpulsive(ExGatherTag tag)
+		{
+			await tag.Cast(Ability.UtmostCaution);
+			await tag.Cast(Ability.DiscerningEye);
+			await tag.Cast(Ability.ImpulsiveAppraisal);
+		}
+
+		protected async Task ImpulsiveII(ExGatherTag tag)
+		{
+			await tag.Cast(Ability.ImpulsiveAppraisalII);
+		}
+
+		protected async Task DiscerningImpulsiveII(ExGatherTag tag)
+		{
+			await tag.Cast(Ability.DiscerningEye);
+			await tag.Cast(Ability.ImpulsiveAppraisalII);
+		}
+
+		protected async Task SingleMindImpulsiveII(ExGatherTag tag)
+		{
+			await tag.Cast(Ability.SingleMind);
+			await tag.Cast(Ability.ImpulsiveAppraisalII);
+		}
+
+		protected async Task UtmostImpulsiveII(ExGatherTag tag)
+		{
+			await tag.Cast(Ability.UtmostCaution);
+			await tag.Cast(Ability.ImpulsiveAppraisalII);
+		}
+
+		protected async Task UtmostSingleMindImpulsiveII(ExGatherTag tag)
+		{
+			await tag.Cast(Ability.UtmostCaution);
+			await tag.Cast(Ability.SingleMind);
+			await tag.Cast(Ability.ImpulsiveAppraisal);
+		}
+
+		protected async Task UtmostDiscerningImpulsiveII(ExGatherTag tag)
+		{
+			await tag.Cast(Ability.UtmostCaution);
+			await tag.Cast(Ability.DiscerningEye);
+			await tag.Cast(Ability.ImpulsiveAppraisalII);
+		}
+
+		protected async Task Instinctual(ExGatherTag tag)
+		{
+			await tag.Cast(Ability.InstinctualAppraisal);
+		}
+
+		protected async Task DiscerningInstinctual(ExGatherTag tag)
+		{
+			await tag.Cast(Ability.DiscerningEye);
+			await tag.Cast(Ability.ImpulsiveAppraisalII);
+		}
+
+		protected async Task SingleMindInstinctual(ExGatherTag tag)
+		{
+			await tag.Cast(Ability.SingleMind);
+			await tag.Cast(Ability.ImpulsiveAppraisalII);
+		}
+
+		protected async Task UtmostInstinctual(ExGatherTag tag)
+		{
+			await tag.Cast(Ability.UtmostCaution);
+			await tag.Cast(Ability.ImpulsiveAppraisalII);
+		}
+
+		protected async Task UtmostSingleMindInstinctual(ExGatherTag tag)
+		{
+			await tag.Cast(Ability.UtmostCaution);
+			await tag.Cast(Ability.SingleMind);
+			await tag.Cast(Ability.ImpulsiveAppraisal);
+		}
+
+		protected async Task UtmostDiscerningInstinctual(ExGatherTag tag)
+		{
+			await tag.Cast(Ability.UtmostCaution);
+			await tag.Cast(Ability.DiscerningEye);
+			await tag.Cast(Ability.ImpulsiveAppraisalII);
+		}
+
 		protected async Task AppraiseAndRebuff(ExGatherTag tag)
 		{
+#if RB_CN
 			await Impulsive(tag);
+#else
+			await ImpulsiveII(tag);
+#endif
 
 			if (HasDiscerningEye)
 			{
@@ -125,7 +292,11 @@
 
 		protected async Task SingleMindAppraiseAndRebuff(ExGatherTag tag)
 		{
+#if RB_CN
 			await SingleMindImpulsive(tag);
+#else
+			await SingleMindImpulsiveII(tag);
+#endif
 
 			if (HasDiscerningEye)
 			{
@@ -135,28 +306,6 @@
 			{
 				await tag.Cast(Ability.DiscerningEye);
 			}
-		}
-
-		protected async Task Discerning(ExGatherTag tag)
-		{
-			await tag.Cast(Ability.DiscerningEye);
-		}
-
-		protected async Task DiscerningImpulsive(ExGatherTag tag)
-		{
-			await tag.Cast(Ability.DiscerningEye);
-			await tag.Cast(Ability.ImpulsiveAppraisal);
-		}
-
-		protected async Task DiscerningMethodical(ExGatherTag tag)
-		{
-			await tag.Cast(Ability.DiscerningEye);
-			await tag.Cast(Ability.MethodicalAppraisal);
-		}
-
-		protected async Task Impulsive(ExGatherTag tag)
-		{
-			await tag.Cast(Ability.ImpulsiveAppraisal);
 		}
 
 		protected override async Task<bool> IncreaseChance(ExGatherTag tag)
@@ -189,66 +338,16 @@
 			return true;
 		}
 
-		protected async Task Methodical(ExGatherTag tag)
-		{
-			await tag.Cast(Ability.MethodicalAppraisal);
-		}
-
-		protected async Task SingleMindImpulsive(ExGatherTag tag)
-		{
-			await tag.Cast(Ability.SingleMind);
-			await tag.Cast(Ability.ImpulsiveAppraisal);
-		}
-
-		protected async Task SingleMindMethodical(ExGatherTag tag)
-		{
-			await tag.Cast(Ability.SingleMind);
-			await tag.Cast(Ability.MethodicalAppraisal);
-		}
-
-		protected async Task UtmostCaution(ExGatherTag tag)
-		{
-			await tag.Cast(Ability.UtmostCaution);
-		}
-
-		protected async Task UtmostDiscerningMethodical(ExGatherTag tag)
+		protected async Task UtmostDiscerning(ExGatherTag tag)
 		{
 			await tag.Cast(Ability.UtmostCaution);
 			await tag.Cast(Ability.DiscerningEye);
-			await tag.Cast(Ability.MethodicalAppraisal);
 		}
 
-		protected async Task UtmostDiscerningImpulsive(ExGatherTag tag)
-		{
-			await tag.Cast(Ability.UtmostCaution);
-			await tag.Cast(Ability.DiscerningEye);
-			await tag.Cast(Ability.ImpulsiveAppraisal);
-		}
-
-		protected async Task UtmostImpulsive(ExGatherTag tag)
-		{
-			await tag.Cast(Ability.UtmostCaution);
-			await tag.Cast(Ability.ImpulsiveAppraisal);
-		}
-
-		protected async Task UtmostMethodical(ExGatherTag tag)
-		{
-			await tag.Cast(Ability.UtmostCaution);
-			await tag.Cast(Ability.MethodicalAppraisal);
-		}
-
-		protected async Task UtmostSingleMindMethodical(ExGatherTag tag)
+		protected async Task UtmostSingleMind(ExGatherTag tag)
 		{
 			await tag.Cast(Ability.UtmostCaution);
 			await tag.Cast(Ability.SingleMind);
-			await tag.Cast(Ability.MethodicalAppraisal);
-		}
-
-		protected async Task UtmostSingleMindImpulsive(ExGatherTag tag)
-		{
-			await tag.Cast(Ability.UtmostCaution);
-			await tag.Cast(Ability.SingleMind);
-			await tag.Cast(Ability.ImpulsiveAppraisal);
 		}
 	}
 }

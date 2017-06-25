@@ -19,6 +19,10 @@
 	using System.Threading.Tasks;
 	using System.Windows.Media;
 
+#if RB_CN
+    using ActionManager = ff14bot.Managers.Actionmanager;
+#endif
+
 	[LoggerName("FlightMover")]
 	public class FlightEnabledSlideMover : LogColors, IFlightEnabledPlayerMover
 	{
@@ -93,7 +97,7 @@
 
 		public void EnsureFlying()
 		{
-			if (!MovementManager.IsFlying && Actionmanager.CanMount == 0)
+			if (!MovementManager.IsFlying && ActionManager.CanMount == 0)
 			{
 				if (!takeoffStopwatch.IsRunning)
 				{
@@ -278,7 +282,7 @@
 		internal static bool ShouldFlyInternal(Vector3 destination)
 		{
 			return MovementManager.IsFlying
-				   || (Actionmanager.CanMount == 0
+				   || (ActionManager.CanMount == 0
 					   &&
 					   ((destination.Distance3D(GameObjectManager.LocalPlayer.Location) >=
 						 CharacterSettings.Instance.MountDistance)

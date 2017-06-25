@@ -30,6 +30,10 @@
 	using System.Windows.Media;
 	using TreeSharp;
 
+#if RB_CN
+    using ActionManager = ff14bot.Managers.Actionmanager;
+#endif
+
 	[LoggerName("ExGather")]
 	[XmlElement("ExGather")]
 	[XmlElement("GatherCollectable")]
@@ -421,7 +425,13 @@
 			var windowItems = GatheringManager.GatheringWindowItems.ToArray();
 
 			// TODO: move method to common so we use it on fish too
-			if (InventoryItemCount() >= 100)
+				if (InventoryItemCount() >=
+#if RB_CN
+				100
+#else
+				140
+#endif
+				)
 			{
 				if (Items.Count > 0)
 				{
@@ -834,7 +844,11 @@
 
 			if (ExProfileBehavior.Me.ClassLevel < 46
 				|| ExProfileBehavior.Me.HasAura(
-					(int)
+#if RB_CN
+                    (int)
+#else
+					(uint)
+#endif
 						(ExProfileBehavior.Me.CurrentJob == ClassJobType.Miner
 							? AbilityAura.TruthOfMountains
 							: AbilityAura.TruthOfForests)))
@@ -1371,7 +1385,7 @@
 				await CloseGatheringWindow();
 				ResetInternal();
 
-				await Coroutine.Wait(2000, () => ExProfileBehavior.Me.InCombat || Actionmanager.CanMount == 0);
+				await Coroutine.Wait(2000, () => ExProfileBehavior.Me.InCombat || ActionManager.CanMount == 0);
 				return false;
 			}
 
@@ -1607,7 +1621,7 @@
 						{
 							if (ExProfileBehavior.Me.IsMounted && CordialSpellData.Cooldown.TotalSeconds < 2)
 							{
-								Actionmanager.Dismount();
+								ActionManager.Dismount();
 								return false;
 							}
 

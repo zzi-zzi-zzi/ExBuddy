@@ -7,6 +7,10 @@ namespace ExBuddy.OrderBotTags.Gather.Rotations
 	using System.Linq;
 	using System.Threading.Tasks;
 
+#if RB_CN
+    using ActionManager = ff14bot.Managers.Actionmanager;
+#endif
+
 	//Name, RequiredTime, RequiredGpBreakpoints
 	[GatheringRotation("Elemental", 0)]
 	public class ElementalGatheringRotation : SmartGatheringRotation, IGetOverridePriority
@@ -45,11 +49,11 @@ namespace ExBuddy.OrderBotTags.Gather.Rotations
 
 			await Wait();
 
-			var ward = WardSkills.FirstOrDefault(w => Actionmanager.CanCast(w, Core.Player));
+			var ward = WardSkills.FirstOrDefault(w => ActionManager.CanCast(w, Core.Player));
 
 			if (ward > 0)
 			{
-				Actionmanager.DoAction(ward, Core.Player);
+				ActionManager.DoAction(ward, Core.Player);
 				await IncreaseChance(tag);
 			}
 

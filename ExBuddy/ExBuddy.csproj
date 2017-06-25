@@ -31,19 +31,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Clio.Localization">
-      <HintPath>..\Assembly\Clio.Localization.dll</HintPath>
+    <Reference Include="Clio.Localization, Version=1.0.406.0, Culture=neutral, PublicKeyToken=48d7174f8a943034, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Rebornbuddy64BETA\Clio.Localization.dll</HintPath>
     </Reference>
-    <Reference Include="GreyMagic">
-      <HintPath>..\Assembly\GreyMagic.dll</HintPath>
+    <Reference Include="GreyMagic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=260525fa2b0e778a, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Rebornbuddy64BETA\GreyMagic.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="Quest Behaviors_1537820551">
       <HintPath>..\Assembly\Quest Behaviors_1537820551.dll</HintPath>
     </Reference>
-    <Reference Include="RebornBuddy">
-      <HintPath>..\Assembly\RebornBuddy.exe</HintPath>
+    <Reference Include="RebornBuddy, Version=1.0.406.0, Culture=neutral, PublicKeyToken=48d7174f8a943034, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Rebornbuddy64BETA\RebornBuddy.exe</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -80,6 +83,7 @@
     <Compile Include="OrderBotTags\Gather\Rotations\Collect460GatheringRotation.cs" />
     <Compile Include="OrderBotTags\Gather\Rotations\Collect480GatheringRotation.cs" />
     <Compile Include="OrderBotTags\Gather\Rotations\Collect515GatheringRotation.cs" />
+    <Compile Include="OrderBotTags\Gather\Rotations\Collect600GatheringRotation.cs" />
     <Compile Include="OrderBotTags\Gather\Rotations\EarthElementGatheringRotation.cs" />
     <Compile Include="OrderBotTags\Gather\Rotations\FireElementGatheringRotation.cs" />
     <Compile Include="OrderBotTags\Gather\Rotations\IceElementGatheringRotation.cs" />
@@ -223,7 +227,6 @@
     <None Include="Data\ExBuddy_CN.s3db" />
     <None Include="Data\locationIndex.json" />
     <None Include="Data\weatherRateIndex.json" />
-    <None Include="OrderBotTags\Gather\Prototype\SafeCollectAdamantite.cs.proto" />
     <Compile Include="OrderBotTags\Gather\Rotations\Collect115GatheringRotation.cs" />
     <Compile Include="OrderBotTags\Gather\Rotations\Collect345GatheringRotation.cs" />
     <Compile Include="OrderBotTags\Gather\Rotations\Collect450GatheringRotation.cs" />
@@ -260,35 +263,6 @@
   <ItemGroup>
     <Content Include="Data\msd.xml" />
     <Content Include="Data\msd_cn.xml" />
-    <Content Include="OrderBotTags\Behaviors\Examples\ExBuddy_[O][ALC][LEVE]_Lanolin+EnchantedElectrumInk-TurnIns.xml" />
-    <Content Include="OrderBotTags\Behaviors\Examples\TurnInCollectables.xml" />
-    <Content Include="OrderBotTags\Behaviors\Examples\UseAethernet.xml" />
-    <Content Include="OrderBotTags\Fish\Examples\Fishing_Forager_Supra_Lucis.xml" />
-    <Content Include="OrderBotTags\Fish\Examples\Fishing_IlluminatiPerch.xml" />
-    <Content Include="OrderBotTags\Fish\Examples\Fishing_WarmwaterBichir.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\AdamantiteChysahl.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\AdamantiteOre_AzysLla.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\ChysahlGreens_CWH.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\Cyclops Onion.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\EphemeralAll.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\FreeRangeCollect450.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\FreeRangeCollect550.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\FreeRangeCollectAll.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\FreeRangeGatherAll.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\Hardsilver Ore.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\Highland Wheat.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\Mythrite Ore.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\Mythrite Sand.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\Porcini_Churning.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\Raw Chrysolite.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\Raw Larimar.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\Raw Mormorion.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\Stalk of Ramie.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\Titanium Ore.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\Transform\Botany-Crystal Farming.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\Transform\GatherToGatherCollectable.xslt" />
-    <Content Include="OrderBotTags\Gather\Examples\Wyrm Obsidian.xml" />
-    <Content Include="OrderBotTags\Gather\Prototype\Profiles\AdamantiteOre_AzysLla.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OrderBotTags\Schema\Fish.xsd">
