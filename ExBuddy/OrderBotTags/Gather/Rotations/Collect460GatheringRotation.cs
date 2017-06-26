@@ -30,18 +30,22 @@
 				await SingleMindMethodical(tag);
 				await UtmostCaution(tag);
 				await Methodical(tag);
+#if RB_CN
 				await UtmostCaution(tag);
+#endif
 				await Methodical(tag);
 			}
 			else
 			{
-				if (Core.Player.CurrentGP >= 600 && tag.GatherItem.Chance < 98)
+				if (Core.Player.CurrentGP >= 600)
 				{
 					await SingleMindMethodical(tag);
 					await SingleMindMethodical(tag);
 					await UtmostCaution(tag);
 					await Methodical(tag);
-					await UtmostCaution(tag);
+#if RB_CN
+				await UtmostCaution(tag);
+#endif
 					await Methodical(tag);
 					await IncreaseChance(tag);
 					return true;
