@@ -29,6 +29,7 @@
 				await SingleMindMethodical(tag);
 				await DiscerningMethodical(tag);
 				await DiscerningMethodical(tag);
+				await IncreaseChance(tag);
 			}
 			else
 			{

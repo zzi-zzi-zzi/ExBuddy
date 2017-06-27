@@ -30,7 +30,9 @@
 			{
 				await UtmostCaution(tag);
 				await AppraiseAndRebuff(tag);
-				await UtmostMethodical(tag);
+#if RB_CN
+				await UtmostCaution(tag);
+#endif
 				await AppraiseAndRebuff(tag);
 				await Methodical(tag);
 				await IncreaseChance(tag);

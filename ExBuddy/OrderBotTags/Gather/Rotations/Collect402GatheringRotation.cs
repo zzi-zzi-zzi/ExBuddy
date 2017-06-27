@@ -32,8 +32,13 @@
 			}
 			else
 			{
+#if RB_CN
+				if (Core.Player.CurrentGP >= 600 && tag.GatherItem.Chance < 98)
+				{
+#else
 				if (Core.Player.CurrentGP >= 600)
 				{
+#endif
 					await SingleMindMethodical(tag);
 					await SingleMindMethodical(tag);
 					await DiscerningMethodical(tag);

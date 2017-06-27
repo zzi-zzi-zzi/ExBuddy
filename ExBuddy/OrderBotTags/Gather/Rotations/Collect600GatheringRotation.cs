@@ -30,7 +30,7 @@
 			{
 				bool utmostCaution = true;
 				bool singleMind = true;
-				await ImpulsiveII(tag);
+				await Impulsive(tag);
 
 				if (HasDiscerningEye)
 				{
@@ -38,7 +38,7 @@
 					utmostCaution = false;
 				}
 
-				await ImpulsiveII(tag);
+				await Impulsive(tag);
 
 				if (HasDiscerningEye)
 				{
@@ -54,7 +54,7 @@
 					}
 				}
 
-				await ImpulsiveII(tag);
+				await Impulsive(tag);
 
 				if (!utmostCaution)
 				{
@@ -63,9 +63,9 @@
 						await SingleMind(tag);
 					}
 					await Instinctual(tag);
+					await IncreaseChance(tag);
 				}
 
-				await IncreaseChance(tag);
 				return true;
 			}
 

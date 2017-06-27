@@ -953,8 +953,13 @@ namespace ExBuddy.OrderBotTags.Fish
 			{
 				return new Decorator(
 					// TODO: Log reason for quit.
-					ret => InventoryManager.FilledSlots.Count(c => c.BagId != InventoryBagId.KeyItems) >= 100,
-					IsDoneAction);
+					ret => InventoryManager.FilledSlots.Count(c => c.BagId != InventoryBagId.KeyItems) >=
+#if RB_CN
+				100
+#else
+				140
+#endif
+					,IsDoneAction);
 			}
 		}
 

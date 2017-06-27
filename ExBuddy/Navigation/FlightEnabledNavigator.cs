@@ -543,12 +543,12 @@ namespace ExBuddy.Navigation
 
 		public double PathPrecisionSqr
 		{
-			get { return 4.0; }
+			get { return 2.25; }
 		}
 
 		public double PathPrecision
 		{
-			get { return 2.0; }
+			get { return 1.5; }
 		}
 
 		public bool VerboseLogging { get; set; }
