@@ -79,9 +79,17 @@
 
 		protected internal bool ShouldFly { get; private set; }
 
-		#region IDisposable Members
+        /// <summary>
+        /// for science... This is a bad way to test if we are swimming...
+        /// </summary>
+	    public bool IsSwimming
+	    {
+	        get { return (WorldManager.ZoneId == 613 && WorldManager.SubZoneId == 2750); }
+	    }
 
-		public void Dispose()
+	    #region IDisposable Members
+
+        public void Dispose()
 		{
 			if (!disposed)
 			{
@@ -167,7 +175,7 @@
 
 		public void ForceLanding()
 		{
-			if (MovementManager.IsFlying)
+			if (MovementManager.IsFlying && !IsSwimming)
 			{
 				if (!landingStopwatch.IsRunning)
 				{

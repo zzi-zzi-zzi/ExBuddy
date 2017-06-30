@@ -18,5 +18,8 @@ namespace ExBuddy.Interfaces
 		Task SetShouldFlyAsync(Task<Func<Vector3, bool>> shouldFlyToFunc);
 
 		bool ShouldFlyTo(Vector3 destination);
-	}
+
+        bool IsSwimming { get; }
+
+    }
 }
