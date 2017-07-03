@@ -32,15 +32,10 @@
         public static int WeeklyRedGathererOffset = 0x28;
 #else
 		public static int BlueGathererOffset = 0x10;
-
 		public static int RedCrafterOffset = 0x8;
-
 		public static int RedGathererOffset = 0x18;
-
 		public static int CenturioSealsOffset = 0x20;
-
 		public static int WeeklyRedCrafterOffset = 0x24;
-
 		public static int WeeklyRedGathererOffset = 0x28;
 #endif
 	}

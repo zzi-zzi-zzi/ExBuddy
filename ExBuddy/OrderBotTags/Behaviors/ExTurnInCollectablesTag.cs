@@ -48,7 +48,12 @@ namespace ExBuddy.OrderBotTags.Behaviors
 		[XmlAttribute("ForcePurchase")]
 		public bool ForcePurchase { get; set; }
 
+#if RB_CN
 		[DefaultValue(Locations.Idyllshire)]
+#else
+
+		[DefaultValue(Locations.RhalgrsReach)]
+#endif
 		[XmlAttribute("Location")]
 		public Locations Location { get; set; }
 
@@ -304,7 +309,11 @@ namespace ExBuddy.OrderBotTags.Behaviors
 
 			var itemsToPurchase = ShopPurchases.Where(ShouldPurchaseItem).ToArray();
 			var npc = GameObjectManager.GetObjectByNPCId(shopExchangeCurrencyNpc.NpcId);
+#if RB_CN
 			var shopType = ShopType.BlueGatherer;
+#else
+			var shopType = ShopType.RedGatherer50;
+#endif
 			var shopExchangeCurrency = new ShopExchangeCurrency();
 			foreach (var purchaseItem in itemsToPurchase)
 			{
@@ -350,16 +359,18 @@ namespace ExBuddy.OrderBotTags.Behaviors
 					return true;
 				}
 
+#if RB_CN
 				if (Location == Locations.MorDhona
 					&& (purchaseItemInfo.ShopType == ShopType.RedCrafter || purchaseItemInfo.ShopType == ShopType.RedGatherer))
 				{
 					Logger.Warn(Localization.Localization.ExTurnInCollectable_FailedPurchaseMorDhona, purchaseItemData.EnglishName);
 					continue;
 				}
-
+#endif
 				ticks = 0;
 				while (SelectIconString.IsOpen && ticks++ < 5 && Behaviors.ShouldContinue)
 				{
+#if RB_CN
 					if (Location == Locations.MorDhona)
 					{
 						// Blue crafter = 0, Blue gather = 1
@@ -369,6 +380,9 @@ namespace ExBuddy.OrderBotTags.Behaviors
 					{
 						SelectIconString.ClickSlot((uint)purchaseItemInfo.ShopType);
 					}
+#else
+					SelectIconString.ClickSlot((uint)purchaseItemInfo.ShopType);
+#endif
 
 					await shopExchangeCurrency.Refresh(5000);
 				}
@@ -702,7 +716,7 @@ namespace ExBuddy.OrderBotTags.Behaviors
 				return false;
 			}
 
-			// check cost
+#if RB_CN
 			switch (info.ShopType)
 			{
 				case ShopType.BlueCrafter:
@@ -733,6 +747,39 @@ namespace ExBuddy.OrderBotTags.Behaviors
 					}
 					break;
 			}
+#else
+			// check cost
+			switch (info.ShopType)
+			{
+				case ShopType.RedCrafter50:
+					if (Memory.Scrips.RedCrafter < info.Cost)
+					{
+						return false;
+					}
+					break;
+
+				case ShopType.RedCrafter61:
+					if (Memory.Scrips.RedCrafter < info.Cost)
+					{
+						return false;
+					}
+					break;
+
+				case ShopType.RedGatherer50:
+					if (Memory.Scrips.RedGatherer < info.Cost)
+					{
+						return false;
+					}
+					break;
+
+				case ShopType.RedGatherer61:
+					if (Memory.Scrips.RedGatherer < info.Cost)
+					{
+						return false;
+					}
+					break;
+			}
+#endif
 
 			return true;
 		}

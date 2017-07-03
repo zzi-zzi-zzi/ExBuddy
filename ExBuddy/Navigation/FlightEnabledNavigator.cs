@@ -469,7 +469,6 @@ namespace ExBuddy.Navigation
 {
 	using Clio.Common;
 	using Clio.Utilities;
-	using ExBuddy.Attributes;
 	using ExBuddy.Interfaces;
 	using ExBuddy.Logging;
 	using ff14bot;
@@ -486,8 +485,25 @@ namespace ExBuddy.Navigation
 	using System.Threading.Tasks;
 	using System.Windows.Media;
 
-	[LoggerName("FlightNav")]
-	public sealed class FlightEnabledNavigator : WrappingNavigationProvider, ILogColors, IDisposable
+	public sealed class FlightEnabledNavigatorLogColors : ILogColors
+	{
+		public Color Error
+		{
+			get { return Colors.Red; }
+		}
+
+		public Color Info
+		{
+			get { return Colors.SkyBlue; }
+		}
+
+		public Color Warn
+		{
+			get { return Colors.PaleVioletRed; }
+		}
+	}
+
+	public sealed class FlightEnabledNavigator : WrappingNavigationProvider, IDisposable
 	{
 		private readonly IFlightNavigationArgs flightNavigationArgs;
 
@@ -515,7 +531,7 @@ namespace ExBuddy.Navigation
 			IFlightEnabledPlayerMover playerMover,
 			IFlightNavigationArgs flightNavigationArgs) : base(innerNavigator)
 		{
-			logger = new Logger();
+			logger = new Logger(new FlightEnabledNavigatorLogColors(), "FlightNav");
 			this.playerMover = playerMover;
 			this.flightNavigationArgs = flightNavigationArgs;
 			Navigator.NavigationProvider = this;
@@ -525,21 +541,6 @@ namespace ExBuddy.Navigation
 		}
 
 		public FlightPath CurrentPath { get; internal set; }
-
-		public Color Error
-		{
-			get { return Colors.Red; }
-		}
-
-		public Color Info
-		{
-			get { return Colors.SkyBlue; }
-		}
-
-		public Color Warn
-		{
-			get { return Colors.PaleVioletRed; }
-		}
 
 		public double PathPrecisionSqr
 		{
@@ -741,22 +742,6 @@ namespace ExBuddy.Navigation
 			return MoveResult.Moved;
 		}
 
-		//private async Task<bool> MoveToNoFlight(Vector3 location)
-		//{
-		//	var result = MoveResult.GeneratingPath;
-		//	while (Core.Player.Location.Distance3D(location) > PathPrecision || result != MoveResult.ReachedDestination
-		//		   || result != MoveResult.Done)
-		//	{
-		//		generatingPath = true;
-		//		result = innerNavigator.MoveTo(location, "Temporary Waypoint");
-		//		await Coroutine.Yield();
-		//	}
-		//
-		//	generatingPath = false;
-		//
-		//	return true;
-		//}
-
 		private bool ShouldGeneratePath(Vector3 target, float radius = 0.0f)
 		{
 			if (origin != Core.Player.Location)
@@ -822,7 +807,7 @@ namespace ExBuddy.Navigation
 				return MoveResult.GeneratingPath;
 			}
 
-			if (!playerMover.CanFly || (parameters.MapId != null && parameters.MapId != -1 && parameters.MapId != WorldManager.ZoneId) || (!MovementManager.IsFlying && !playerMover.ShouldFlyTo(parameters.Location)))
+			if ((!playerMover.IsSwimming && !playerMover.CanFly) || (parameters.MapId != null && parameters.MapId != -1 && parameters.MapId != WorldManager.ZoneId) || (!MovementManager.IsFlying && !playerMover.ShouldFlyTo(parameters.Location)))
 			{
 				return Original.MoveTo(parameters);
 			}

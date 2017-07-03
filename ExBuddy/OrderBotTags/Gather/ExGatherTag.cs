@@ -425,7 +425,7 @@
 			var windowItems = GatheringManager.GatheringWindowItems.ToArray();
 
 			// TODO: move method to common so we use it on fish too
-				if (InventoryItemCount() >=
+			if (InventoryItemCount() >=
 #if RB_CN
 				100
 #else
@@ -724,7 +724,7 @@
 				}
 			}
 
-			if (gp + 150 >= waitForGp.Value && CordialType == CordialType.WateredCordial)
+			if (gp + 200 >= waitForGp.Value && CordialType == CordialType.WateredCordial)
 			{
 				// If we used the Watered Cordial or the CordialType is only WateredCordial, not Cordial, Auto or HiCordial, then return
 				if (await UseCordial(CordialType.WateredCordial, ttg.RealSecondsTillStartGathering))
@@ -753,7 +753,7 @@
 				return await WaitForGpRegain(waitForGp.Value);
 			}
 
-			if (gp + 300 >= waitForGp.Value && (CordialType == CordialType.Cordial || CordialType == CordialType.Auto))
+			if (gp + 350 >= waitForGp.Value && (CordialType == CordialType.Cordial || CordialType == CordialType.Auto))
 			{
 				// If we used the Cordial or the CordialType is only Cordial, not WateredCordial, Auto or HiCordial, then return
 				if (await UseCordial(CordialType.Cordial, ttg.RealSecondsTillStartGathering))

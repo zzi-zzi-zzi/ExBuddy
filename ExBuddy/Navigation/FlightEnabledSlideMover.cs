@@ -81,6 +81,16 @@
 
 		protected internal bool ShouldFly { get; private set; }
 
+#if RB_CN
+#else
+
+		public bool IsSwimming
+		{
+			get { return (WorldManager.ZoneId == 613 && WorldManager.SubZoneId == 2750); }
+		}
+
+#endif
+
 		#region IDisposable Members
 
 		public void Dispose()
@@ -169,7 +179,11 @@
 
 		public void ForceLanding()
 		{
+#if RB_CN
 			if (MovementManager.IsFlying)
+#else
+			if (MovementManager.IsFlying && !IsSwimming)
+#endif
 			{
 				if (!landingStopwatch.IsRunning)
 				{

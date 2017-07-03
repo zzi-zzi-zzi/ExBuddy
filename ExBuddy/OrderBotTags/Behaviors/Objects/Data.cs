@@ -8,6 +8,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 
 	internal static class Data
 	{
+#if RB_CN
 		public static readonly Dictionary<Locations, IList<INpc>> NpcMap = new Dictionary<Locations, IList<INpc>>
 		{
 			{
@@ -79,14 +80,70 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 				}
 			}
 		};
+#else
+
+		public static readonly Dictionary<Locations, IList<INpc>> NpcMap = new Dictionary<Locations, IList<INpc>>
+		{
+			{
+				Locations.LimsaLominsaLowerDecks,
+				new INpc[]
+				{
+					new FreeCompanyChest
+					{
+						AetheryteId = 8,
+						ZoneId = 129,
+						Location = new Vector3("-200, 17.04425, 58.76245"),
+						NpcId = 2000470,
+						Name = "Company Chest"
+					}
+				}
+			},
+			{
+				Locations.UldahStepsOfNald,
+				new INpc[]
+				{
+					new FreeCompanyChest
+					{
+						AetheryteId = 9,
+						ZoneId = 130,
+						Location = new Vector3("-149.3096, 4.53186, -91.38635"),
+						NpcId = 2000470,
+						Name = "Company Chest"
+					}
+				}
+			},
+			{
+				Locations.RhalgrsReach,
+				new INpc[]
+				{
+					new MasterPieceSupply
+					{
+						AetheryteId = 104,
+						ZoneId = 635,
+						Location = new Vector3("-68.13159, 0.00999999, 65.84265"),
+						NpcId = 1019457
+					},
+					new ShopExchangeCurrency
+					{
+						AetheryteId = 104,
+						ZoneId = 635,
+						Location = new Vector3("-65.69012, 0.00999999, 67.21594"),
+						NpcId = 1019458
+					}
+				}
+			}
+		};
+
+#endif
 
 		public static readonly Dictionary<ShopItem, ShopItemInfo> ShopItemMap = new Dictionary<ShopItem, ShopItemInfo>
 		{
+#if RB_CN
 
-        #region BlueCrafter
+			#region BlueCrafter
 
         {
-            ShopItem.BlueCrafterToken,
+			ShopItem.BlueCrafterToken,
 			new ShopItemInfo
 			{
 				Index = (int) ShopItem.BlueCrafterToken,
@@ -394,9 +451,9 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 			}
 		},
 
-        #endregion BlueCrafter
+			#endregion BlueCrafter
 
-        #region RedCrafter
+			#region RedCrafter
 
         {
 			ShopItem.SoulOfTheCrafter,
@@ -498,9 +555,9 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 			}
 		},
 
-        #endregion RedCrafter
+			#endregion RedCrafter
 
-        #region BlueGatherer
+			#region BlueGatherer
 
         {
 			ShopItem.BlueGatherToken,
@@ -888,9 +945,9 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 			}
 		},
 
-        #endregion BlueGatherer
+			#endregion BlueGatherer
 
-        #region RedGatherer
+			#region RedGatherer
 
 		{
 			ShopItem.RedGatherToken,
@@ -981,8 +1038,735 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 			}
 		}
 
-        #endregion RedGatherer
+			#endregion RedGatherer
 
+#else
+
+			#region RedCrafter50
+
+        {
+			ShopItem.SoulOfTheCrafter,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.SoulOfTheCrafter,
+				ShopType = ShopType.RedCrafter50,
+				ItemId = 10336,
+				Cost = 480,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.CommercialEngineeringManual,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.CommercialEngineeringManual,
+				ShopType = ShopType.RedCrafter50,
+				ItemId = 12667,
+				Cost = 30,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.CrpDelineation,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.CrpDelineation,
+				ShopType = ShopType.RedCrafter50,
+				ItemId = 12659,
+				Cost = 15,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.BsmDelineation,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.BsmDelineation,
+				ShopType = ShopType.RedCrafter50,
+				ItemId = 12660,
+				Cost = 15,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.ArmDelineation,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.ArmDelineation,
+				ShopType = ShopType.RedCrafter50,
+				ItemId = 12661,
+				Cost = 15,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.GsmDelineation,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.GsmDelineation,
+				ShopType = ShopType.RedCrafter50,
+				ItemId = 12662,
+				Cost = 15,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.LtwDelineation,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.LtwDelineation,
+				ShopType = ShopType.RedCrafter50,
+				ItemId = 12663,
+				Cost = 15,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.WvrDelineation,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.WvrDelineation,
+				ShopType = ShopType.RedCrafter50,
+				ItemId = 12664,
+				Cost = 15,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.AlcDelineation,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.AlcDelineation,
+				ShopType = ShopType.RedCrafter50,
+				ItemId = 12665,
+				Cost = 15,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.CulDelineation,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.CulDelineation,
+				ShopType = ShopType.RedCrafter50,
+				ItemId = 12666,
+				Cost = 15,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.CompetenceIV,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.CompetenceIV,
+				ShopType = ShopType.RedCrafter50,
+				ItemId = 5702,
+				Cost = 25,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.CompetenceV,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.CompetenceV,
+				ShopType = ShopType.RedCrafter50,
+				ItemId = 5703,
+				Cost = 400,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.CunningIV,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.CunningIV,
+				ShopType = ShopType.RedCrafter50,
+				ItemId = 5707,
+				Cost = 25,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.CunningV,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.CunningV,
+				ShopType = ShopType.RedCrafter50,
+				ItemId = 5708,
+				Cost = 400,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.CommandIV,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.CommandIV,
+				ShopType = ShopType.RedCrafter50,
+				ItemId = 5712,
+				Cost = 25,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.CommandV,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.CommandV,
+				ShopType = ShopType.RedCrafter50,
+				ItemId = 5713,
+				Cost = 400,
+				Yield = 1
+			}
+		},
+
+			#endregion RedCrafter50
+
+			#region RedCrafter61
+
+		{
+			ShopItem.DomanIronHalfheartSaw,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.DomanIronHalfheartSaw - 100,
+				ShopType = ShopType.RedCrafter61,
+				ItemId = 19527,
+				Cost = 400,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.DomanIronClawHammer,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.DomanIronClawHammer - 100,
+				ShopType = ShopType.RedCrafter61,
+				ItemId = 19538,
+				Cost = 400,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.DomanIronLumpHammer,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.DomanIronLumpHammer - 100,
+				ShopType = ShopType.RedCrafter61,
+				ItemId = 19528,
+				Cost = 400,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.DomanIronFile,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.DomanIronFile - 100,
+				ShopType = ShopType.RedCrafter61,
+				ItemId = 19539,
+				Cost = 400,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.DomanIronRaisingHammer,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.DomanIronRaisingHammer - 100,
+				ShopType = ShopType.RedCrafter61,
+				ItemId = 19529,
+				Cost = 400,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.DomanIronPliers,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.DomanIronPliers - 100,
+				ShopType = ShopType.RedCrafter61,
+				ItemId = 19540,
+				Cost = 400,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.DuriumTextureHammer,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.DuriumTextureHammer - 100,
+				ShopType = ShopType.RedCrafter61,
+				ItemId = 19530,
+				Cost = 400,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.SlateGrindingWheel,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.SlateGrindingWheel - 100,
+				ShopType = ShopType.RedCrafter61,
+				ItemId = 19541,
+				Cost = 400,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.DomanIronHeadKnife,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.DomanIronHeadKnife - 100,
+				ShopType = ShopType.RedCrafter61,
+				ItemId = 19531,
+				Cost = 400,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.DomanIronAwl,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.DomanIronAwl - 100,
+				ShopType = ShopType.RedCrafter61,
+				ItemId = 19542,
+				Cost = 400,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.DzoHornNeedle,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.DzoHornNeedle - 100,
+				ShopType = ShopType.RedCrafter61,
+				ItemId = 19532,
+				Cost = 400,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.PineSpinningWheel,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.PineSpinningWheel - 100,
+				ShopType = ShopType.RedCrafter61,
+				ItemId = 19543,
+				Cost = 400,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.DomanIronAlembic,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.DomanIronAlembic - 100,
+				ShopType = ShopType.RedCrafter61,
+				ItemId = 19533,
+				Cost = 400,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.DomanIronMortar,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.DomanIronMortar - 100,
+				ShopType = ShopType.RedCrafter61,
+				ItemId = 19544,
+				Cost = 400,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.DomanIronFrypan,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.DomanIronFrypan - 100,
+				ShopType = ShopType.RedCrafter61,
+				ItemId = 19534,
+				Cost = 400,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.DomanIronCulinaryKnife,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.DomanIronCulinaryKnife - 100,
+				ShopType = ShopType.RedCrafter61,
+				ItemId = 19545,
+				Cost = 400,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.KudzuCapofCrafting,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.KudzuCapofCrafting - 100,
+				ShopType = ShopType.RedCrafter61,
+				ItemId = 19632,
+				Cost = 180,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.KudzuRobeofCrafting,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.KudzuRobeofCrafting - 100,
+				ShopType = ShopType.RedCrafter61,
+				ItemId = 19633,
+				Cost = 400,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.DuriumChaplets,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.DuriumChaplets - 100,
+				ShopType = ShopType.RedCrafter61,
+				ItemId = 19634,
+				Cost = 180,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.KudzuCulottesofCrafting,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.KudzuCulottesofCrafting - 100,
+				ShopType = ShopType.RedCrafter61,
+				ItemId = 19635,
+				Cost = 160,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.TigerskinBootsofCrafting,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.TigerskinBootsofCrafting - 100,
+				ShopType = ShopType.RedCrafter61,
+				ItemId = 19636,
+				Cost = 160,
+				Yield = 1
+			}
+		},
+
+			#endregion RedCrafter61
+
+			#region RedGatherer50
+
+		{
+			ShopItem.HiCordial,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.HiCordial - 200,
+				ShopType = ShopType.RedGatherer50,
+				ItemId = 12669,
+				Cost = 20,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.CommercialSurvivalManual,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.CommercialSurvivalManual - 200,
+				ShopType = ShopType.RedGatherer50,
+				ItemId = 12668,
+				Cost = 30,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.GiantCraneFly,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.GiantCraneFly - 200,
+				ShopType = ShopType.RedGatherer50,
+				ItemId = 12712,
+				Cost = 1,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.BruteLeech,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.BruteLeech - 200,
+				ShopType = ShopType.RedGatherer50,
+				ItemId = 12711,
+				Cost = 1,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.FiendWorm,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.FiendWorm - 200,
+				ShopType = ShopType.RedGatherer50,
+				ItemId = 12710,
+				Cost = 1,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.MagmaWorm,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.MagmaWorm - 200,
+				ShopType = ShopType.RedGatherer50,
+				ItemId = 12709,
+				Cost = 1,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.RedBalloon,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.RedBalloon - 200,
+				ShopType = ShopType.RedGatherer50,
+				ItemId = 12708,
+				Cost = 1,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.GuerdonIV,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.GuerdonIV - 200,
+				ShopType = ShopType.RedGatherer50,
+				ItemId = 5687,
+				Cost = 25,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.GuerdonV,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.GuerdonV - 200,
+				ShopType = ShopType.RedGatherer50,
+				ItemId = 5688,
+				Cost = 400,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.GuileIV,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.GuileIV - 200,
+				ShopType = ShopType.RedGatherer50,
+				ItemId = 5692,
+				Cost = 25,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.GuileV,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.GuileV - 200,
+				ShopType = ShopType.RedGatherer50,
+				ItemId = 5693,
+				Cost = 400,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.GraspIV,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.GraspIV - 200,
+				ShopType = ShopType.RedGatherer50,
+				ItemId = 5697,
+				Cost = 25,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.GraspV,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.GraspV - 200,
+				ShopType = ShopType.RedGatherer50,
+				ItemId = 5698,
+				Cost = 400,
+				Yield = 1
+			}
+		},
+
+			#endregion RedGatherer50
+
+			#region RedGatherer61
+		
+		{
+			ShopItem.FolkloreGatherToken,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.FolkloreGatherToken - 300,
+				ShopType = ShopType.RedGatherer61,
+				ItemId = 20260,
+				Cost = 50,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.DomanIronPickaxe,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.DomanIronPickaxe - 300,
+				ShopType = ShopType.RedGatherer61,
+				ItemId = 19535,
+				Cost = 400,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.DomanIronSledgehammer,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.DomanIronSledgehammer - 300,
+				ShopType = ShopType.RedGatherer61,
+				ItemId = 19546,
+				Cost = 400,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.DomanIronHatchet,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.DomanIronHatchet - 300,
+				ShopType = ShopType.RedGatherer61,
+				ItemId = 19536,
+				Cost = 400,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.DomanIronScythe,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.DomanIronScythe - 300,
+				ShopType = ShopType.RedGatherer61,
+				ItemId = 19547,
+				Cost = 400,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.PineFishingRod,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.PineFishingRod - 300,
+				ShopType = ShopType.RedGatherer61,
+				ItemId = 19537,
+				Cost = 400,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.TigerskinCapofGathering,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.TigerskinCapofGathering - 300,
+				ShopType = ShopType.RedGatherer61,
+				ItemId = 19637,
+				Cost = 300,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.KudzuCoatofGathering,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.KudzuCoatofGathering - 300,
+				ShopType = ShopType.RedGatherer61,
+				ItemId = 19638,
+				Cost = 400,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.TigerskinFingerlessGlovesofGathering,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.TigerskinFingerlessGlovesofGathering - 300,
+				ShopType = ShopType.RedGatherer61,
+				ItemId = 19639,
+				Cost = 200,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.KudzuCulottesofGathering,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.KudzuCulottesofGathering - 300,
+				ShopType = ShopType.RedGatherer61,
+				ItemId = 19640,
+				Cost = 150,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.TigerskinBootsofGathering,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.TigerskinBootsofGathering - 300,
+				ShopType = ShopType.RedGatherer61,
+				ItemId = 19641,
+				Cost = 150,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.SuspendingMinnow,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.SuspendingMinnow - 300,
+				ShopType = ShopType.RedGatherer61,
+				ItemId = 20619,
+				Cost = 50,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.BreamLure,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.BreamLure - 300,
+				ShopType = ShopType.RedGatherer61,
+				ItemId = 20618,
+				Cost = 50,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.Silkworm,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.Silkworm - 300,
+				ShopType = ShopType.RedGatherer61,
+				ItemId = 20616,
+				Cost = 5,
+				Yield = 1
+			}
+		},
+
+			#endregion RedGatherer61
+
+#endif
 		};
 
 		public static IEnumerable<INpc> GetNpcsByLocation(Locations location)

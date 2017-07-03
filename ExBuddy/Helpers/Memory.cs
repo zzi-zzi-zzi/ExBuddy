@@ -3,6 +3,7 @@
 	using ExBuddy.Offsets;
 	using ExBuddy.OrderBotTags.Behaviors.Objects;
 	using ff14bot;
+	using ff14bot.Managers;
 	using GreyMagic;
 	using System;
 	using System.Linq;
@@ -38,6 +39,7 @@
 			}
 		}
 
+#if RB_CN
 		public static class Scrips
 		{
 			public static int BlueCrafter
@@ -95,5 +97,55 @@
 				return 0;
 			}
 		}
+#else
+
+		public static class Scrips
+		{
+			public static int RedCrafter
+			{
+				get
+				{
+					return (int)SpecialCurrencyManager.GetCurrencyCount(SpecialCurrency.RedCraftersScrips);
+				}
+			}
+
+			public static int RedGatherer
+			{
+				get
+				{
+					return (int)SpecialCurrencyManager.GetCurrencyCount(SpecialCurrency.RedGatherersScrips);
+				}
+			}
+
+			public static int CenturioSeals
+			{
+				get
+				{
+					return Core.Memory.Read<int>(ScripsOffsets.BasePtr + ScripsOffsets.CenturioSealsOffset);
+				}
+			}
+
+			public static int GetRemainingScripsByShopType(ShopType shopType)
+			{
+				switch (shopType)
+				{
+					case ShopType.RedCrafter50:
+						return Scrips.RedCrafter;
+
+					case ShopType.RedCrafter61:
+						return Scrips.RedCrafter;
+
+					case ShopType.RedGatherer50:
+						return Scrips.RedGatherer;
+
+					case ShopType.RedGatherer61:
+						return Scrips.RedGatherer;
+				}
+
+				return 0;
+			}
+		}
+
+#endif
 	}
 }

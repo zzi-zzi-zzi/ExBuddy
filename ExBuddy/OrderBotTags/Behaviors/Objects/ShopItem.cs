@@ -2,8 +2,9 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 {
 	public enum ShopItem
 	{
+#if RB_CN
 
-        #region BlueCrafter
+		#region BlueCrafter
 
         BlueCrafterToken = 0,
 
@@ -181,5 +182,152 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 
 		#endregion RedGatherer
 
+#else
+
+		#region RedCrafter50
+
+		SoulOfTheCrafter = 0,
+
+		CommercialEngineeringManual = 1,
+
+		CrpDelineation = 2,
+
+		BsmDelineation = 3,
+
+		ArmDelineation = 4,
+
+		GsmDelineation = 5,
+
+		LtwDelineation = 6,
+
+		WvrDelineation = 7,
+
+		AlcDelineation = 8,
+
+		CulDelineation = 9,
+
+		CompetenceIV = 10,
+
+		CompetenceV = 11,
+
+		CunningIV = 12,
+
+		CunningV = 13,
+
+		CommandIV = 14,
+
+		CommandV = 15,
+
+		#endregion RedCrafter50
+
+		#region RedCrafter61
+
+		DomanIronHalfheartSaw = 100,
+
+		DomanIronClawHammer = 101,
+
+		DomanIronLumpHammer = 102,
+
+		DomanIronFile = 103,
+
+		DomanIronRaisingHammer = 104,
+
+		DomanIronPliers = 105,
+
+		DuriumTextureHammer = 106,
+
+		SlateGrindingWheel = 107,
+
+		DomanIronHeadKnife = 108,
+
+		DomanIronAwl = 109,
+
+		DzoHornNeedle = 110,
+
+		PineSpinningWheel = 111,
+
+		DomanIronAlembic = 112,
+
+		DomanIronMortar = 113,
+
+		DomanIronFrypan = 114,
+
+		DomanIronCulinaryKnife = 115,
+
+		KudzuCapofCrafting = 116,
+
+		KudzuRobeofCrafting = 117,
+
+		DuriumChaplets = 118,
+
+		KudzuCulottesofCrafting = 119,
+
+		TigerskinBootsofCrafting = 120,
+
+		#endregion RedCrafter61
+
+		#region RedGatherer50
+
+		HiCordial = 200,
+
+		CommercialSurvivalManual = 201,
+
+		GiantCraneFly = 202,
+
+		BruteLeech = 203,
+
+		FiendWorm = 204,
+
+		MagmaWorm = 205,
+
+		RedBalloon = 206,
+
+		GuerdonIV = 207,
+
+		GuerdonV = 208,
+
+		GuileIV = 209,
+
+		GuileV = 210,
+
+		GraspIV = 211,
+
+		GraspV = 212,
+
+		#endregion RedGatherer50
+
+		#region RedGatherer61
+		
+		FolkloreGatherToken = 300,
+
+		DomanIronPickaxe = 301,
+
+		DomanIronSledgehammer = 302,
+
+		DomanIronHatchet = 303,
+
+		DomanIronScythe = 304,
+
+		PineFishingRod = 305,
+
+		TigerskinCapofGathering = 306,
+
+		KudzuCoatofGathering = 307,
+
+		TigerskinFingerlessGlovesofGathering = 308,
+
+		KudzuCulottesofGathering = 309,
+
+		TigerskinBootsofGathering = 310,
+
+		SuspendingMinnow = 311,
+
+		BreamLure = 312,
+
+		Silkworm = 313
+
+		#endregion RedGatherer61
+
+#endif
 	}
 }

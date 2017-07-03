@@ -71,6 +71,7 @@
 				}
 			}
 
+#if RB_CN
 			if (Memory.Request.ItemId1 != bagSlot.RawItemId)
 			{
 				Request.Cancel();
@@ -81,6 +82,7 @@
 					item.EnglishName);
 				return false;
 			}
+#endif
 
 			requestAttempts = 0;
 			while (Request.IsOpen && requestAttempts++ < attempts && Behaviors.ShouldContinue && bagSlot.Item != null)
