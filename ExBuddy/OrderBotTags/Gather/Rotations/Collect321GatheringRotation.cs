@@ -30,6 +30,7 @@
 				await SingleMindImpulsive(tag);
 				await SingleMindImpulsive(tag);
 				await SingleMindMethodical(tag);
+				await IncreaseChance(tag);
 			}
 			else
 			{
@@ -41,7 +42,6 @@
 						await SingleMindImpulsive(tag);
 						await SingleMindMethodical(tag);
 						await IncreaseChance(tag);
-						return true;
 					}
 					else
 					{
@@ -50,14 +50,16 @@
 						await AppraiseAndRebuff(tag);
 						await Methodical(tag);
 						await IncreaseChance(tag);
-						return true;
 					}
 				}
-
-				await Impulsive(tag);
-				await Impulsive(tag);
-				await Methodical(tag);
+				else
+				{
+					await Impulsive(tag);
+					await Impulsive(tag);
+					await Methodical(tag);
+				}
 			}
+
 			return true;
 		}
 	}

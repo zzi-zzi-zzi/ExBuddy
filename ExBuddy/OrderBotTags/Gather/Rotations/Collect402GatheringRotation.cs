@@ -29,6 +29,7 @@
 				await SingleMindMethodical(tag);
 				await SingleMindMethodical(tag);
 				await DiscerningMethodical(tag);
+				await IncreaseChance(tag);
 			}
 			else
 			{
@@ -43,13 +44,15 @@
 					await SingleMindMethodical(tag);
 					await DiscerningMethodical(tag);
 					await IncreaseChance(tag);
-					return true;
 				}
-
-				await Impulsive(tag);
-				await Impulsive(tag);
-				await Methodical(tag);
+				else
+				{
+					await Impulsive(tag);
+					await Impulsive(tag);
+					await Methodical(tag);
+				}
 			}
+
 			return true;
 		}
 	}

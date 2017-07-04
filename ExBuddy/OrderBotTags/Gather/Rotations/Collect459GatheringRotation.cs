@@ -51,10 +51,12 @@
 						await Methodical(tag);
 					}
 				}
-
-				await Impulsive(tag);
-				await Impulsive(tag);
-				await Methodical(tag);
+				else
+				{
+					await Impulsive(tag);
+					await Impulsive(tag);
+					await Methodical(tag);
+				}
 			}
 
 			return true;

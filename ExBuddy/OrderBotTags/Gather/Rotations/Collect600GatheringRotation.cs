@@ -65,13 +65,13 @@
 					await Instinctual(tag);
 					await IncreaseChance(tag);
 				}
-
-				return true;
 			}
-
-			await Impulsive(tag);
-			await Impulsive(tag);
-			await Methodical(tag);
+			else
+			{
+				await Impulsive(tag);
+				await Impulsive(tag);
+				await Methodical(tag);
+			}
 
 			return true;
 		}
