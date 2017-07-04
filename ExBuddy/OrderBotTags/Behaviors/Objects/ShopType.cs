@@ -18,9 +18,15 @@
 
 		RedCrafter61,
 
+		YellowCrafter,
+
 		RedGatherer50,
 
-		RedGatherer61
+		RedGatherer61,
+
+		YellowGatherer,
+
+		YellowGathererItems
 #endif
 	}
 }

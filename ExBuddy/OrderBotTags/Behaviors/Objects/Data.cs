@@ -1608,7 +1608,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 			#endregion RedGatherer50
 
 			#region RedGatherer61
-		
+
 		{
 			ShopItem.FolkloreGatherToken,
 			new ShopItemInfo
@@ -1765,6 +1765,33 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 		},
 
 			#endregion RedGatherer61
+
+		#region YellowGathererItems
+		
+		{
+			ShopItem.BlueBobbit,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.BlueBobbit - 400,
+				ShopType = ShopType.YellowGathererItems,
+				ItemId = 20676,
+				Cost = 5,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.StoneflyLarva,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.StoneflyLarva - 400,
+				ShopType = ShopType.YellowGathererItems,
+				ItemId = 20675,
+				Cost = 5,
+				Yield = 1
+			}
+		}
+
+		#endregion YellowGathererItems
 
 #endif
 		};

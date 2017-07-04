@@ -82,7 +82,6 @@
 					item.EnglishName);
 				return false;
 			}
-#endif
 
 			requestAttempts = 0;
 			while (Request.IsOpen && requestAttempts++ < attempts && Behaviors.ShouldContinue && bagSlot.Item != null)
@@ -101,6 +100,34 @@
 				Logger.Instance.Warn(Localization.Localization.MasterPieceSupply_FullScrips, bagSlot.EnglishName);
 				return false;
 			}
+#else
+
+			if (Memory.Scrips.RedGatherer == 2000)
+			{
+				Logger.Instance.Warn(Localization.Localization.MasterPieceSupply_FullScrips, bagSlot.EnglishName);
+				return false;
+			}
+			else
+			{
+				requestAttempts = 0;
+				while (Request.IsOpen && requestAttempts++ < attempts && Behaviors.ShouldContinue && bagSlot.Item != null)
+				{
+					bagSlot.Handover();
+
+					await Behaviors.Wait(interval, () => Request.HandOverButtonClickable);
+
+					Request.HandOver();
+
+					await Behaviors.Wait(interval, () => !Request.IsOpen || SelectYesno.IsOpen);
+				}
+			}
+
+			if (SelectYesno.IsOpen)
+			{
+				Logger.Instance.Warn(Localization.Localization.MasterPieceSupply_FullScrips, bagSlot.EnglishName);
+				return false;
+			}
+#endif
 
 			return !Request.IsOpen;
 		}

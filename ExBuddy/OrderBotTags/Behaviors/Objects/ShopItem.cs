@@ -297,7 +297,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 		#endregion RedGatherer50
 
 		#region RedGatherer61
-		
+
 		FolkloreGatherToken = 300,
 
 		DomanIronPickaxe = 301,
@@ -324,9 +324,17 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 
 		BreamLure = 312,
 
-		Silkworm = 313
+		Silkworm = 313,
 
 		#endregion RedGatherer61
+
+		#region YellowGathererItems
+
+		BlueBobbit = 400,
+
+		StoneflyLarva = 401
+
+		#endregion YellowGathererItems
 
 #endif
 	}
