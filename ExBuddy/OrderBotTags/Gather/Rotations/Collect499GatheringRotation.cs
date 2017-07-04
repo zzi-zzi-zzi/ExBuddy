@@ -2,9 +2,11 @@
 {
 	using ExBuddy.Attributes;
 	using ExBuddy.Interfaces;
+	using ff14bot;
+	using ff14bot.Managers;
 	using System.Threading.Tasks;
 
-	[GatheringRotation("Collect499", 28, 600)]
+	[GatheringRotation("Ditto499", 28, 600)]
 	public sealed class Collect499GatheringRotation : CollectableGatheringRotation, IGetOverridePriority
 	{
 		#region IGetOverridePriority Members
@@ -24,12 +26,39 @@
 
 		public override async Task<bool> ExecuteRotation(ExGatherTag tag)
 		{
-			await DiscerningMethodical(tag);
-			await Discerning(tag);
-			await AppraiseAndRebuff(tag);
-			await Methodical(tag);
-			await IncreaseChance(tag);
+			if (tag.IsUnspoiled())
+			{
+				await DiscerningMethodical(tag);
+				await Discerning(tag);
+				await AppraiseAndRebuff(tag);
+				await Methodical(tag);
+				await IncreaseChance(tag);
+			}
+			else
+			{
+				if (Core.Player.CurrentGP >= 600)
+				{
+					if (GatheringManager.SwingsRemaining > 4)
+					{
+						await DiscerningMethodical(tag);
+						await Discerning(tag);
+						await AppraiseAndRebuff(tag);
+						await Methodical(tag);
+						await IncreaseChance(tag);
+					}
+					else
+					{
+						await Methodical(tag);
+						await Methodical(tag);
+						await Methodical(tag);
+						await Methodical(tag);
+					}
+				}
 
+				await Impulsive(tag);
+				await Impulsive(tag);
+				await Methodical(tag);
+			}
 			return true;
 		}
 	}

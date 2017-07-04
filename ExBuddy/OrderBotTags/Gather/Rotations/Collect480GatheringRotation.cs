@@ -2,9 +2,11 @@
 {
 	using ExBuddy.Attributes;
 	using ExBuddy.Interfaces;
+	using ff14bot;
+	using ff14bot.Managers;
 	using System.Threading.Tasks;
 
-	[GatheringRotation("Collect480", 31, 600, 400)]
+	[GatheringRotation("Ditto480", 31, 600, 400)]
 	public sealed class Collect480GatheringRotation : CollectableGatheringRotation, IGetOverridePriority
 	{
 		#region IGetOverridePriority Members
@@ -24,39 +26,39 @@
 
 		public override async Task<bool> ExecuteRotation(ExGatherTag tag)
 		{
-			await UtmostSingleMindImpulsive(tag);
-
-			if (HasDiscerningEye)
+			if (tag.IsUnspoiled())
 			{
+				await Discerning(tag);
+				await AppraiseAndRebuff(tag);
+				await AppraiseAndRebuff(tag);
 				await Methodical(tag);
-				await Impulsive(tag);
-				await UtmostSingleMindMethodical(tag);
+				await IncreaseChance(tag);
 			}
 			else
 			{
-				await Impulsive(tag);
-
-				if (HasDiscerningEye)
+				if (Core.Player.CurrentGP >= 600)
 				{
-					await Methodical(tag);
-					await UtmostSingleMindMethodical(tag);
-				}
-				else
-				{
-					await Impulsive(tag);
-
-					if (HasDiscerningEye)
+					if (GatheringManager.SwingsRemaining > 4)
 					{
-						await UtmostSingleMindMethodical(tag);
+						await Discerning(tag);
+						await AppraiseAndRebuff(tag);
+						await AppraiseAndRebuff(tag);
+						await Methodical(tag);
+						await IncreaseChance(tag);
 					}
 					else
 					{
-						await UtmostDiscerningMethodical(tag);
+						await Methodical(tag);
+						await Methodical(tag);
+						await Methodical(tag);
+						await Methodical(tag);
 					}
 				}
-			}
-			await IncreaseChance(tag);
 
+				await Impulsive(tag);
+				await Impulsive(tag);
+				await Methodical(tag);
+			}
 			return true;
 		}
 	}

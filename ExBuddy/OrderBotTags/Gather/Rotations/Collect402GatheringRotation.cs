@@ -5,7 +5,7 @@
 	using Interfaces;
 	using System.Threading.Tasks;
 
-	[GatheringRotation("Collect402", 30, 600)]
+	[GatheringRotation("Onix402", 30, 600)]
 	public sealed class Collect402GatheringRotation : CollectableGatheringRotation, IGetOverridePriority
 	{
 		#region IGetOverridePriority Members

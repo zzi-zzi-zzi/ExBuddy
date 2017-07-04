@@ -2,11 +2,12 @@
 {
 	using ExBuddy.Attributes;
 	using ExBuddy.Interfaces;
+	using ff14bot;
 	using ff14bot.Managers;
 	using System.Threading.Tasks;
 
 	// Get Two ++
-	[GatheringRotation("Collect470", 31, 600, 400)]
+	[GatheringRotation("Collect470", 31, 600)]
 	public sealed class Collect470GatheringRotation : CollectableGatheringRotation, IGetOverridePriority
 	{
 		#region IGetOverridePriority Members
@@ -26,40 +27,39 @@
 
 		public override async Task<bool> ExecuteRotation(ExGatherTag tag)
 		{
-			var gp = GameObjectManager.LocalPlayer.CurrentGP;
-			if (gp >= 600)
+			if (tag.IsUnspoiled())
 			{
 				await Discerning(tag);
-
 				await AppraiseAndRebuff(tag);
 				await AppraiseAndRebuff(tag);
-
 				await Methodical(tag);
+				await IncreaseChance(tag);
 			}
 			else
 			{
-				tag.Logger.Warn(
-					"Using alternate rotation to collect one or two due to CurrentGP: {0} being less than RequiredGP: {1}",
-					gp,
-					600);
-				// Less than 600 GP collect 1-2 rotation
-				await UtmostImpulsive(tag);
-
-				if (HasDiscerningEye)
+				if (Core.Player.CurrentGP >= 600)
 				{
-					await UtmostSingleMindMethodical(tag);
-				}
-				else
-				{
-					await UtmostCaution(tag);
-					await AppraiseAndRebuff(tag);
+					if (GatheringManager.SwingsRemaining > 4)
+					{
+						await Discerning(tag);
+						await AppraiseAndRebuff(tag);
+						await AppraiseAndRebuff(tag);
+						await Methodical(tag);
+						await IncreaseChance(tag);
+					}
+					else
+					{
+						await Methodical(tag);
+						await Methodical(tag);
+						await Methodical(tag);
+						await Methodical(tag);
+					}
 				}
 
-				await Methodical(tag);
+				await Impulsive(tag);
+				await Impulsive(tag);
 				await Methodical(tag);
 			}
-
-			await IncreaseChance(tag);
 			return true;
 		}
 	}

@@ -6,7 +6,7 @@
 	using Interfaces;
 	using System.Threading.Tasks;
 
-	[GatheringRotation("Collect321", 30, 600)]
+	[GatheringRotation("Ditto321", 30, 600)]
 	public sealed class Collect321GatheringRotation : CollectableGatheringRotation, IGetOverridePriority
 	{
 		#region IGetOverridePriority Members

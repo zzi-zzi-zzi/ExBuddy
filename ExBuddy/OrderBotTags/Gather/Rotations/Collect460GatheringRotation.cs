@@ -5,7 +5,7 @@
 	using Interfaces;
 	using System.Threading.Tasks;
 
-	[GatheringRotation("Collect460", 33, 600)]
+	[GatheringRotation("Onix460", 33, 600)]
 	public sealed class Collect460GatheringRotation : CollectableGatheringRotation, IGetOverridePriority
 	{
 		#region IGetOverridePriority Members
@@ -34,6 +34,7 @@
 				await UtmostCaution(tag);
 #endif
 				await Methodical(tag);
+				await IncreaseChance(tag);
 			}
 			else
 			{
