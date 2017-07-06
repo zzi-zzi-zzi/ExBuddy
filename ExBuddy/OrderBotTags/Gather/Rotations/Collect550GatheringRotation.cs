@@ -33,6 +33,7 @@
 #if RB_CN
 				await UtmostCaution(tag);
 #endif
+				await Methodical(tag);
 				await AppraiseAndRebuff(tag);
 				await Methodical(tag);
 				await IncreaseChance(tag);

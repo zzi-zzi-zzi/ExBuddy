@@ -1767,7 +1767,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 			#endregion RedGatherer61
 
 		#region YellowGathererItems
-		
+
 		{
 			ShopItem.BlueBobbit,
 			new ShopItemInfo

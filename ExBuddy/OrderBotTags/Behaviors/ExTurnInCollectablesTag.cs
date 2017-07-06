@@ -778,6 +778,13 @@ namespace ExBuddy.OrderBotTags.Behaviors
 						return false;
 					}
 					break;
+
+				case ShopType.YellowGathererItems:
+					if (Memory.Scrips.YellowGatherer < info.Cost)
+					{
+						return false;
+					}
+					break;
 			}
 #endif
 

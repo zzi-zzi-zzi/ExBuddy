@@ -4,6 +4,7 @@
 	using ExBuddy.OrderBotTags.Behaviors.Objects;
 	using ff14bot;
 	using ff14bot.Managers;
+	using ff14bot.NeoProfiles;
 	using GreyMagic;
 	using System;
 	using System.Linq;
@@ -117,6 +118,24 @@
 				}
 			}
 
+			public static int YellowCrafter
+			{
+				get
+				{
+					//return (int)SpecialCurrencyManager.GetCurrencyCount(SpecialCurrency.YellowGatherersScrips);
+					return (int)ConditionParser.ItemCount(17833);
+				}
+			}
+
+			public static int YellowGatherer
+			{
+				get
+				{
+					//return (int)SpecialCurrencyManager.GetCurrencyCount(SpecialCurrency.YellowGatherersScrips);
+					return (int)ConditionParser.ItemCount(17834);
+				}
+			}
+
 			public static int CenturioSeals
 			{
 				get
@@ -140,6 +159,9 @@
 
 					case ShopType.RedGatherer61:
 						return Scrips.RedGatherer;
+
+					case ShopType.YellowGathererItems:
+						return Scrips.YellowGatherer;
 				}
 
 				return 0;

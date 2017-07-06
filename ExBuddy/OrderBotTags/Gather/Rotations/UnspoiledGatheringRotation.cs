@@ -38,7 +38,6 @@ namespace ExBuddy.OrderBotTags.Gather.Rotations
 		public override async Task<bool> Prepare(ExGatherTag tag)
 		{
 			await Wait();
-
 			return tag.GatherItem.TryGatherItem() && await base.Prepare(tag);
 		}
 
