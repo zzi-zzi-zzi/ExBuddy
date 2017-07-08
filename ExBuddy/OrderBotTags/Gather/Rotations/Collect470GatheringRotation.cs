@@ -3,11 +3,9 @@
 	using ExBuddy.Attributes;
 	using ExBuddy.Interfaces;
 	using ff14bot;
-	using ff14bot.Managers;
 	using System.Threading.Tasks;
 
-	// Get Two ++
-	[GatheringRotation("Collect470", 31, 600)]
+	[GatheringRotation("Collect470", 35, 600)]
 	public sealed class Collect470GatheringRotation : CollectableGatheringRotation, IGetOverridePriority
 	{
 		#region IGetOverridePriority Members
@@ -39,21 +37,11 @@
 			{
 				if (Core.Player.CurrentGP >= 600)
 				{
-					if (GatheringManager.SwingsRemaining > 4)
-					{
-						await Discerning(tag);
-						await AppraiseAndRebuff(tag);
-						await AppraiseAndRebuff(tag);
-						await Methodical(tag);
-						await IncreaseChance(tag);
-					}
-					else
-					{
-						await Methodical(tag);
-						await Methodical(tag);
-						await Methodical(tag);
-						await Methodical(tag);
-					}
+					await Discerning(tag);
+					await AppraiseAndRebuff(tag);
+					await AppraiseAndRebuff(tag);
+					await Methodical(tag);
+					await IncreaseChance(tag);
 				}
 				else
 				{

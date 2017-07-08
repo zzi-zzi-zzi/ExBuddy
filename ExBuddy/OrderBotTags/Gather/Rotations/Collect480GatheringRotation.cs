@@ -6,7 +6,7 @@
 	using ff14bot.Managers;
 	using System.Threading.Tasks;
 
-	[GatheringRotation("Ditto480", 31, 600, 400)]
+	[GatheringRotation("Collect480", 35, 600)]
 	public sealed class Collect480GatheringRotation : CollectableGatheringRotation, IGetOverridePriority
 	{
 		#region IGetOverridePriority Members
