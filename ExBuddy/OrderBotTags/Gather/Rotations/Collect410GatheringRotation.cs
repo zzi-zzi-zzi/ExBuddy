@@ -2,10 +2,11 @@
 {
 	using Attributes;
 	using ff14bot;
+	using ff14bot.Managers;
 	using Interfaces;
 	using System.Threading.Tasks;
 
-	[GatheringRotation("Collect410", 35, 600)]
+	[GatheringRotation("Ditto410", 30, 600)]
 	public sealed class Collect410GatheringRotation : CollectableGatheringRotation, IGetOverridePriority
 	{
 		#region IGetOverridePriority Members
@@ -35,10 +36,20 @@
 			{
 				if (Core.Player.CurrentGP >= 600)
 				{
-					await SingleMindAppraiseAndRebuff(tag);
-					await AppraiseAndRebuff(tag);
-					await Methodical(tag);
-					await IncreaseChance(tag);
+					if (GatheringManager.SwingsRemaining > 4)
+					{
+						await SingleMindAppraiseAndRebuff(tag);
+						await AppraiseAndRebuff(tag);
+						await Methodical(tag);
+						await IncreaseChance(tag);
+					}
+					else
+					{
+						await Methodical(tag);
+						await Methodical(tag);
+						await Methodical(tag);
+						await Methodical(tag);
+					}
 				}
 				else
 				{
