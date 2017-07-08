@@ -38,7 +38,15 @@ namespace ExBuddy.OrderBotTags.Gather.Rotations
 		public override async Task<bool> Prepare(ExGatherTag tag)
 		{
 			await Wait();
-			return tag.GatherItem.TryGatherItem() && await base.Prepare(tag);
+			if (tag.GatherItem.CanGather)
+			{
+				return tag.GatherItem.TryGatherItem() && await base.Prepare(tag);
+			}
+			else
+			{
+				return await base.Prepare(tag);
+			}
+
 		}
 
 		protected override async Task<bool> IncreaseChance(ExGatherTag tag)
