@@ -2,10 +2,11 @@
 {
 	using Attributes;
 	using ff14bot;
+	using ff14bot.Managers;
 	using Interfaces;
 	using System.Threading.Tasks;
 
-	[GatheringRotation("Onix460", 33, 600)]
+	[GatheringRotation("Collect460", 33, 600)]
 	public sealed class Collect460GatheringRotation : CollectableGatheringRotation, IGetOverridePriority
 	{
 		#region IGetOverridePriority Members
@@ -27,33 +28,44 @@
 			if (tag.IsUnspoiled())
 			{
 				await SingleMindMethodical(tag);
-				await SingleMindMethodical(tag);
-				await UtmostCaution(tag);
-				await Methodical(tag);
-#if RB_CN
-				await UtmostCaution(tag);
-#endif
-				await Methodical(tag);
+				await DiscerningMethodical(tag);
+				await DiscerningMethodical(tag);
 				await IncreaseChance(tag);
+			}
+			else if (tag.IsEphemeral())
+			{
+				if (Core.Player.CurrentGP >= 600)
+				{
+					await SingleMindMethodical(tag);
+					await DiscerningMethodical(tag);
+					await DiscerningMethodical(tag);
+					await IncreaseChance(tag);
+				}
+				else
+				{
+					await Impulsive(tag);
+					await Impulsive(tag);
+					await Methodical(tag);
+				}
 			}
 			else
 			{
-#if RB_CN
-				if (Core.Player.CurrentGP >= 600 && tag.GatherItem.Chance < 98)
-				{
-#else
 				if (Core.Player.CurrentGP >= 600)
 				{
-#endif
-					await SingleMindMethodical(tag);
-					await SingleMindMethodical(tag);
-					await UtmostCaution(tag);
-					await Methodical(tag);
-#if RB_CN
-				await UtmostCaution(tag);
-#endif
-					await Methodical(tag);
-					await IncreaseChance(tag);
+					if (GatheringManager.SwingsRemaining > 4)
+					{
+						await SingleMindMethodical(tag);
+						await DiscerningMethodical(tag);
+						await DiscerningMethodical(tag);
+						await IncreaseChance(tag);
+					}
+					else
+					{
+						await Methodical(tag);
+						await Methodical(tag);
+						await Methodical(tag);
+						await Methodical(tag);
+					}
 				}
 				else
 				{
