@@ -27,6 +27,8 @@
 
 		public Vector3 Location { get; set; }
 
+		public Vector3 InteractLocation { get; set; }
+
 		public uint NpcId { get; set; }
 
 		#endregion IInteractWithNpc Members

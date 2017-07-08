@@ -121,6 +121,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 						AetheryteId = 104,
 						ZoneId = 635,
 						Location = new Vector3("-68.13159, 0.00999999, 65.84265"),
+						InteractLocation = new Vector3("-66.83437, 0.01000011, 63.90992>"),
 						NpcId = 1019457
 					},
 					new ShopExchangeCurrency
@@ -128,6 +129,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 						AetheryteId = 104,
 						ZoneId = 635,
 						Location = new Vector3("-65.69012, 0.00999999, 67.21594"),
+						InteractLocation = new Vector3("-66.83437, 0.01000011, 63.90992>"),
 						NpcId = 1019458
 					}
 				}

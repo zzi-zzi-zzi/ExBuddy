@@ -209,7 +209,7 @@ namespace ExBuddy.OrderBotTags.Behaviors
 				return false;
 			}
 
-			if (ExProfileBehavior.Me.Location.Distance(masterPieceSupplyNpc.Location) > 4)
+			if (ExProfileBehavior.Me.Location.Distance(masterPieceSupplyNpc.InteractLocation) > 4)
 			{
 				// too far away, should go back to MoveToNpc
 				return true;
@@ -260,7 +260,7 @@ namespace ExBuddy.OrderBotTags.Behaviors
 				return false;
 			}
 
-			if (ExProfileBehavior.Me.Location.Distance(masterPieceSupplyNpc.Location) <= 4)
+			if (ExProfileBehavior.Me.Location.Distance(masterPieceSupplyNpc.InteractLocation) <= 4)
 			{
 				// we are already there, continue
 				return false;
@@ -281,7 +281,7 @@ namespace ExBuddy.OrderBotTags.Behaviors
 				await masterPieceSupply.CloseInstanceGently();
 			}
 
-			if (ExProfileBehavior.Me.Location.Distance(shopExchangeCurrencyNpc.Location) <= 4)
+			if (ExProfileBehavior.Me.Location.Distance(shopExchangeCurrencyNpc.InteractLocation) <= 4)
 			{
 				// we are already there, continue
 				return false;
@@ -299,7 +299,7 @@ namespace ExBuddy.OrderBotTags.Behaviors
 
 		private async Task<bool> PurchaseItems()
 		{
-			if (ExProfileBehavior.Me.Location.Distance(shopExchangeCurrencyNpc.Location) > 4)
+			if (ExProfileBehavior.Me.Location.Distance(shopExchangeCurrencyNpc.InteractLocation) > 4)
 			{
 				// too far away, should go back to MoveToNpc
 				return true;
