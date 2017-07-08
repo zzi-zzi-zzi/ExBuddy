@@ -122,8 +122,7 @@
 			{
 				get
 				{
-					//return (int)SpecialCurrencyManager.GetCurrencyCount(SpecialCurrency.YellowGatherersScrips);
-					return (int)ConditionParser.ItemCount(17833);
+					return (int)SpecialCurrencyManager.GetCurrencyCount(SpecialCurrency.YellowGatherersScrips);
 				}
 			}
 
@@ -131,8 +130,7 @@
 			{
 				get
 				{
-					//return (int)SpecialCurrencyManager.GetCurrencyCount(SpecialCurrency.YellowGatherersScrips);
-					return (int)ConditionParser.ItemCount(17834);
+					return (int)SpecialCurrencyManager.GetCurrencyCount(SpecialCurrency.YellowGatherersScrips);
 				}
 			}
 
