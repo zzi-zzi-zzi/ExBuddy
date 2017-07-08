@@ -6,7 +6,7 @@
 	using System.Threading.Tasks;
 
 	// Get One ++
-	[GatheringRotation("Onix600", 33, 600)]
+	[GatheringRotation("Collect600", 35, 600)]
 	public sealed class Collect600GatheringRotation : CollectableGatheringRotation, IGetOverridePriority
 	{
 		#region IGetOverridePriority Members
