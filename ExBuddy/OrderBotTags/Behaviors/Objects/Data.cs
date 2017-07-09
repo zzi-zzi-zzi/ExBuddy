@@ -120,14 +120,14 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 					{
 						AetheryteId = 104,
 						ZoneId = 635,
-						Location = new Vector3("-68.13159, 0.00999999, 65.84265"),
+						Location = new Vector3("-67.64739, 0.00999999, 63.51791"),
 						NpcId = 1019457
 					},
 					new ShopExchangeCurrency
 					{
 						AetheryteId = 104,
 						ZoneId = 635,
-						Location = new Vector3("-65.69012, 0.00999999, 67.21594"),
+						Location = new Vector3("-67.64739, 0.00999999, 63.51791"),
 						NpcId = 1019458
 					}
 				}
