@@ -191,7 +191,7 @@
 		[XmlAttribute("While")]
 		public string While { get; set; }
 
-		[DefaultValue(1000)]
+		[DefaultValue(1500)]
 		[XmlAttribute("WindowDelay")]
 		public int WindowDelay { get; set; }
 
@@ -1337,7 +1337,7 @@
 					break;
 				}
 
-				if (attempts == 1 && WindowDelay <= 2000 && await Coroutine.Wait(WindowDelay, () => GatheringManager.WindowOpen))
+				if (attempts == 1 && WindowDelay <= 3000 && await Coroutine.Wait(WindowDelay, () => GatheringManager.WindowOpen))
 				{
 					// wait double on first attempt if delay less than 2 seconds.
 					break;
