@@ -84,9 +84,9 @@
 #if RB_CN
 #else
 
-		public bool IsSwimming
+		public bool IsDiving
 		{
-			get { return (WorldManager.ZoneId == 613 && WorldManager.SubZoneId == 2750); }
+			get { return MovementManager.IsDiving; }
 		}
 
 #endif
@@ -182,7 +182,7 @@
 #if RB_CN
 			if (MovementManager.IsFlying)
 #else
-			if (MovementManager.IsFlying && !IsSwimming)
+			if (MovementManager.IsFlying && !IsDiving)
 #endif
 			{
 				if (!landingStopwatch.IsRunning)

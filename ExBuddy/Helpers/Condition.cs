@@ -107,6 +107,18 @@
 			return false;
 		}
 
+		public static bool IsFateActive(int id)
+		{
+			foreach (FateData fate in FateManager.AllFates)
+			{
+				if (fate.Id == id && fate.Status == ff14bot.Enums.FateStatus.ACTIVE)
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+
 		public static int CollectableCount(int id, int collectability)
 		{
 			int count = 0;

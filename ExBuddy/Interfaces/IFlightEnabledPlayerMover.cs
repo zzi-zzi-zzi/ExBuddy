@@ -21,7 +21,7 @@ namespace ExBuddy.Interfaces
 
 #if RB_CN
 #else
-		bool IsSwimming { get; }
+		bool IsDiving { get; }
 #endif
 	}
 }

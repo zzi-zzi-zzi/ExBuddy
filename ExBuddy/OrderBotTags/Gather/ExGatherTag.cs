@@ -114,7 +114,7 @@
 		[XmlAttribute("DiscoverUnknowns")]
 		public bool DiscoverUnknowns { get; set; }
 
-		[DefaultValue(3.1f)]
+		[DefaultValue(2.5f)]
 		[XmlAttribute("Distance")]
 		public float Distance { get; set; }
 
@@ -1314,10 +1314,10 @@
 				   && Poi.Current.Unit.IsValid)
 			{
 				var ticks = 0;
-				while (MovementManager.IsFlying && ticks++ < 5 && Behaviors.ShouldContinue && Poi.Current.Unit.IsVisible
+				while (MovementManager.IsFlying && !MovementManager.IsDiving && ticks++ < 5 && Behaviors.ShouldContinue && Poi.Current.Unit.IsVisible
 					   && Poi.Current.Unit.IsValid)
 				{
-					var ground = ExProfileBehavior.Me.Location.GetFloor(10);
+					var ground = ExProfileBehavior.Me.Location.GetFloor(5);
 					if (Math.Abs(ground.Y - ExProfileBehavior.Me.Location.Y) > float.Epsilon)
 					{
 						var mover = Navigator.PlayerMover as IFlightEnabledPlayerMover;

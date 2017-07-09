@@ -379,13 +379,13 @@
     <value>Did not meet the condition to Purify, [{0}]</value>
   </data>
   <data name="ExPurify_Land" xml:space="preserve">
-    <value>Unable to land, can't reduce unless we land!</value>
+    <value>Can't reduce unless we land!</value>
   </data>
   <data name="ExSalvage_GetCondition" xml:space="preserve">
     <value>Did not meet the condition to salvage, [{0}]</value>
   </data>
   <data name="ExSalvage_Land" xml:space="preserve">
-    <value>Unable to land, can't salvage unless we land!</value>
+    <value>Can't salvage unless we land!</value>
   </data>
   <data name="ExTurnInCollectable_AttemptingTurnin" xml:space="preserve">
     <value>Attempting to turn in item {0} -&gt; 0x{1}</value>

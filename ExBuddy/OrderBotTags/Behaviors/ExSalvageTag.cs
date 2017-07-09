@@ -45,14 +45,7 @@
 				return isDone = true;
 			}
 
-			var ticks = 0;
-			while (MovementManager.IsFlying && ticks++ < 5 && Behaviors.ShouldContinue)
-			{
-				MovementManager.StartDescending();
-				await Coroutine.Wait(500, () => !MovementManager.IsFlying);
-			}
-
-			if (ticks > 5)
+			if (MovementManager.IsFlying || MovementManager.IsDiving)
 			{
 				Logger.Error(Localization.Localization.ExSalvage_Land);
 				return isDone = true;

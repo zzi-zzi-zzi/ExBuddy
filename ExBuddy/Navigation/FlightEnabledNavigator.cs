@@ -544,12 +544,12 @@ namespace ExBuddy.Navigation
 
 		public double PathPrecisionSqr
 		{
-			get { return 2.25; }
+			get { return 4; }
 		}
 
 		public double PathPrecision
 		{
-			get { return 1.5; }
+			get { return 2; }
 		}
 
 		public bool VerboseLogging { get; set; }
@@ -807,7 +807,7 @@ namespace ExBuddy.Navigation
 				return MoveResult.GeneratingPath;
 			}
 
-			if ((!playerMover.IsSwimming && !playerMover.CanFly) || (parameters.MapId != null && parameters.MapId != -1 && parameters.MapId != WorldManager.ZoneId) || (!MovementManager.IsFlying && !playerMover.ShouldFlyTo(parameters.Location)))
+			if ((!playerMover.IsDiving && !playerMover.CanFly) || (parameters.MapId != null && parameters.MapId != -1 && parameters.MapId != WorldManager.ZoneId) || (!MovementManager.IsFlying && !playerMover.ShouldFlyTo(parameters.Location)))
 			{
 				return Original.MoveTo(parameters);
 			}
