@@ -46,7 +46,6 @@ namespace ExBuddy.OrderBotTags.Gather.Rotations
 			{
 				return await base.Prepare(tag);
 			}
-
 		}
 
 		protected override async Task<bool> IncreaseChance(ExGatherTag tag)

@@ -45,7 +45,7 @@
 				{
 					await Impulsive(tag);
 					await Impulsive(tag);
-					await Methodical(tag);
+					await Instinctual(tag);
 				}
 			}
 			else
@@ -71,7 +71,7 @@
 				{
 					await Impulsive(tag);
 					await Impulsive(tag);
-					await Methodical(tag);
+					await Instinctual(tag);
 				}
 			}
 
