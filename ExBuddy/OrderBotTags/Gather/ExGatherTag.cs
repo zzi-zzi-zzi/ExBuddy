@@ -113,7 +113,7 @@
 		[XmlAttribute("DiscoverUnknowns")]
 		public bool DiscoverUnknowns { get; set; }
 
-		[DefaultValue(3.1f)]
+		[DefaultValue(3.0f)]
 		[XmlAttribute("Distance")]
 		public float Distance { get; set; }
 

@@ -167,8 +167,12 @@
 
 		public void ForceLanding()
 		{
-			if (MovementManager.IsFlying)
-			{
+#if RB_CN
+            if (MovementManager.IsFlying &&)
+#else
+            if(!MovementManager.IsDiving && MovementManager.IsFlying)
+#endif
+            {
 				if (!landingStopwatch.IsRunning)
 				{
 					landingStopwatch.Restart();
@@ -293,7 +297,7 @@
 			Logger.Info(Localization.Localization.FlightEnabledSlideMover_Default);
 		}
 
-		#region IFlightEnabledPlayerMover Members
+#region IFlightEnabledPlayerMover Members
 
 		public bool CanFly
 		{
@@ -321,9 +325,9 @@
 			return CanFly && (ShouldFly = shouldFlyToFunc(destination));
 		}
 
-		#endregion
+#endregion
 
-		#region IPlayerMover Members
+#region IPlayerMover Members
 
 		public void MoveStop()
 		{
@@ -358,6 +362,6 @@
 			}
 		}
 
-		#endregion
+#endregion
 	}
 }

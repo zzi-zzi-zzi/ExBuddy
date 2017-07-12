@@ -18,7 +18,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;RB_CN</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;RB_64</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -43,7 +43,7 @@
       <HintPath>..\Assembly\Quest Behaviors_1537820551.dll</HintPath>
     </Reference>
     <Reference Include="RebornBuddy">
-      <HintPath>D:\code\qqmoreCN\RebornBuddy.exe</HintPath>
+      <HintPath>..\Assembly\RebornBuddy.exe</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
