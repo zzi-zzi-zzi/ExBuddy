@@ -184,6 +184,12 @@ namespace ExBuddy.Navigation
 
 		private void HandlePathGenerationResult(Task<GeneratePathResult> task)
 		{
+
+		    foreach (var p in CurrentPath)
+		    {
+		        Logger.Instance.Info("Path: {0}", p.Location);
+		    }
+
 			switch (task.Result)
 			{
 				case GeneratePathResult.Success:
@@ -236,9 +242,10 @@ namespace ExBuddy.Navigation
 
 			if (distanceToNextHop >= PathPrecision)
 			{
-				//Navigator.PlayerMover.MoveTowards(CurrentPath.Current);
-				playerMover.MoveTowards(CurrentPath.Current);
-				return MoveResult.Moved;
+                //Navigator.PlayerMover.MoveTowards(CurrentPath.Current);
+
+                playerMover.MoveTowards(CurrentPath.Current);
+                return MoveResult.Moved;
 			}
 
 			if (!CurrentPath.Next())
@@ -340,7 +347,7 @@ namespace ExBuddy.Navigation
 				return MoveResult.GeneratingPath;
 			}
 
-		    if (!MovementManager.IsDiving && (!playerMover.CanFly || (parameters.MapId != null && parameters.MapId != -1 && parameters.MapId != WorldManager.ZoneId) || (!MovementManager.IsFlying && !playerMover.ShouldFlyTo(parameters.Location))))
+		    if (!playerMover.IsDiving && (!playerMover.CanFly || (parameters.MapId != null && parameters.MapId != -1 && parameters.MapId != WorldManager.ZoneId) || (!MovementManager.IsFlying && !playerMover.ShouldFlyTo(parameters.Location))))
             {
                 return Original.MoveTo(parameters);
 			}
