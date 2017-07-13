@@ -1,7 +1,7 @@
 namespace ExBuddy.OrderBotTags.Behaviors.Objects
 {
-	using System.ComponentModel;
 	using Clio.XmlEngine;
+	using System.ComponentModel;
 
 	[XmlElement("ShopPurchase")]
 	public class ShopPurchase

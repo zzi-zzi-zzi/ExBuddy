@@ -1,7 +1,5 @@
 ﻿namespace ExBuddy.OrderBotTags.Behaviors
 {
-	using System.Threading.Tasks;
-	using System.Windows.Media;
 	using Clio.XmlEngine;
 	using ExBuddy.Attributes;
 	using ExBuddy.Helpers;
@@ -10,6 +8,8 @@
 	using ff14bot.Managers;
 	using ff14bot.NeoProfiles;
 	using ff14bot.Objects;
+	using System.Threading.Tasks;
+	using System.Windows.Media;
 	using TreeSharp;
 
 	public abstract class ExProfileBehavior : ProfileBehavior, ILogColors
@@ -79,7 +79,9 @@
 			return new ExCoroutineAction(ctx => Main(), this);
 		}
 
-		protected virtual void DoReset() {}
+		protected virtual void DoReset()
+		{
+		}
 
 		protected abstract Task<bool> Main();
 
@@ -106,6 +108,6 @@
 			get { return Warn; }
 		}
 
-		#endregion
+		#endregion ILogColors Members
 	}
 }

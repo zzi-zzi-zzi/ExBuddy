@@ -1,7 +1,7 @@
 ﻿namespace ExBuddy.Logging
 {
-	using System.Windows.Media;
 	using ExBuddy.Interfaces;
+	using System.Windows.Media;
 
 	public class LogColors : ILogColors
 	{
@@ -22,6 +22,6 @@
 			get { return Colors.PaleVioletRed; }
 		}
 
-		#endregion
+		#endregion ILogColors Members
 	}
 }

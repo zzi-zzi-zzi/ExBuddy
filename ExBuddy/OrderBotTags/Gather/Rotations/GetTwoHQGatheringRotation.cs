@@ -1,11 +1,11 @@
 ﻿namespace ExBuddy.OrderBotTags.Gather.Rotations
 {
-	using System.Threading.Tasks;
 	using Buddy.Coroutines;
 	using ExBuddy.Attributes;
 	using ExBuddy.Helpers;
 	using ff14bot;
 	using ff14bot.Managers;
+	using System.Threading.Tasks;
 
 	[GatheringRotation("GetTwoHQ", 18, 600)]
 	public sealed class GetTwoHqGatheringRotation : GatheringRotation

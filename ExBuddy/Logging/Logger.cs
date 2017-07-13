@@ -1,12 +1,12 @@
 ﻿namespace ExBuddy.Logging
 {
-	using System;
-	using System.Globalization;
-	using System.Reflection;
 	using Clio.Utilities;
 	using ExBuddy.Attributes;
 	using ExBuddy.Interfaces;
 	using ff14bot.Helpers;
+	using System;
+	using System.Globalization;
+	using System.Reflection;
 
 	public sealed class Logger
 	{
@@ -21,7 +21,7 @@
 		static Logger()
 		{
 			var assembly = Assembly.GetExecutingAssembly();
-			if (assembly.IsDefined(typeof (AssemblyFileVersionAttribute)))
+			if (assembly.IsDefined(typeof(AssemblyFileVersionAttribute)))
 			{
 				try
 				{
@@ -40,7 +40,7 @@
 		}
 
 		public Logger()
-			: this(new LogColors()) {}
+			: this(new LogColors()) { }
 
 		public Logger(ILogColors logColors, string name = null, bool includeVersion = false)
 		{

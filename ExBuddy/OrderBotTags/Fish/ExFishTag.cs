@@ -1,12 +1,5 @@
 namespace ExBuddy.OrderBotTags.Fish
 {
-	using System;
-	using System.Collections.Generic;
-	using System.ComponentModel;
-	using System.Linq;
-	using System.Text.RegularExpressions;
-	using System.Threading.Tasks;
-	using System.Windows.Media;
 	using Buddy.Coroutines;
 	using Clio.Common;
 	using Clio.Utilities;
@@ -23,6 +16,13 @@ namespace ExBuddy.OrderBotTags.Fish
 	using ff14bot.Objects;
 	using ff14bot.RemoteWindows;
 	using ff14bot.Settings;
+	using System;
+	using System.Collections.Generic;
+	using System.ComponentModel;
+	using System.Linq;
+	using System.Text.RegularExpressions;
+	using System.Threading.Tasks;
+	using System.Windows.Media;
 	using TreeSharp;
 	using Action = TreeSharp.Action;
 
@@ -30,7 +30,7 @@ namespace ExBuddy.OrderBotTags.Fish
     using ActionManager = ff14bot.Managers.Actionmanager;
 #endif
 
-    [LoggerName("ExFish")]
+	[LoggerName("ExFish")]
 	[XmlElement("ExFish")]
 	[XmlElement("Fish")]
 	public class ExFishTag : ExProfileBehavior
@@ -210,7 +210,7 @@ namespace ExBuddy.OrderBotTags.Fish
 					Baits = new List<Bait>();
 				}
 
-				Baits.Insert(0, new Bait {Id = baitItem.Id, Name = baitItem.EnglishName, BaitItem = baitItem, Condition = "True"});
+				Baits.Insert(0, new Bait { Id = baitItem.Id, Name = baitItem.EnglishName, BaitItem = baitItem, Condition = "True" });
 			}
 
 			if (baitItem != null && baitItem.Affinity != 19)
@@ -227,7 +227,7 @@ namespace ExBuddy.OrderBotTags.Fish
 
 			if (Collect && Collectables == null)
 			{
-				Collectables = new List<Collectable> {new Collectable {Name = string.Empty, Value = (int) CollectabilityValue}};
+				Collectables = new List<Collectable> { new Collectable { Name = string.Empty, Value = (int)CollectabilityValue } };
 			}
 
 			GamelogManager.MessageRecevied += ReceiveMessage;
@@ -244,7 +244,7 @@ namespace ExBuddy.OrderBotTags.Fish
 				DoAbility(Abilities.Quit);
 			}
 
-			CordialSpellData = DataManager.GetItem((uint) CordialType.Cordial).BackingAction;
+			CordialSpellData = DataManager.GetItem((uint)CordialType.Cordial).BackingAction;
 
 			cleanup = bot =>
 			{
@@ -258,8 +258,9 @@ namespace ExBuddy.OrderBotTags.Fish
 		internal bool CanUseCordial(ushort withinSeconds = 5)
 		{
 			return CordialSpellData.Cooldown.TotalSeconds < withinSeconds && !HasChum && !HasPatience && !HasFishEyes
-			       && ((CordialType == CordialType.Cordial && Cordial.HasCordials())
-			           || CordialType > CordialType.Cordial && Cordial.HasAnyCordials());
+				   && ((CordialType == CordialType.WateredCordial && Cordial.HasWateredCordials())
+				   || (CordialType == CordialType.Cordial && (Cordial.HasWateredCordials() || Cordial.HasCordials()))
+				   || ((CordialType == CordialType.HiCordial || CordialType == CordialType.Auto) && Cordial.HasAnyCordials()));
 		}
 
 		private async Task<bool> HandleBait()
@@ -284,7 +285,7 @@ namespace ExBuddy.OrderBotTags.Fish
 
 			var baitItem = Fish.Bait.FindMatch(Baits).BaitItem;
 
-			if (!await baitWindow.SelectBait(baitItem.Id, (ushort) BaitDelay))
+			if (!await baitWindow.SelectBait(baitItem.Id, (ushort)BaitDelay))
 			{
 				Logger.Error(Localization.Localization.ExFish_BaitSelectError);
 				return isDone = true;
@@ -326,13 +327,13 @@ namespace ExBuddy.OrderBotTags.Fish
 			{
 				var item = SelectYesNoItem.Item;
 				if (item == null
-				    || !Collectables.Any(c => string.Equals(c.Name, item.EnglishName, StringComparison.InvariantCultureIgnoreCase)))
+					|| !Collectables.Any(c => string.Equals(c.Name, item.EnglishName, StringComparison.InvariantCultureIgnoreCase)))
 				{
 					var ticks = 0;
 					while ((item == null
-					        ||
-					        !Collectables.Any(c => string.Equals(c.Name, item.EnglishName, StringComparison.InvariantCultureIgnoreCase)))
-					       && ticks++ < 60 && Behaviors.ShouldContinue)
+							||
+							!Collectables.Any(c => string.Equals(c.Name, item.EnglishName, StringComparison.InvariantCultureIgnoreCase)))
+						   && ticks++ < 60 && Behaviors.ShouldContinue)
 					{
 						item = SelectYesNoItem.Item;
 						await Coroutine.Yield();
@@ -341,7 +342,7 @@ namespace ExBuddy.OrderBotTags.Fish
 					// handle timeout
 					if (ticks > 60)
 					{
-						required = (uint) Collectables.Select(c => c.Value).Max();
+						required = (uint)Collectables.Select(c => c.Value).Max();
 					}
 				}
 
@@ -353,7 +354,7 @@ namespace ExBuddy.OrderBotTags.Fish
 
 					if (collectable != null)
 					{
-						required = (uint) collectable.Value;
+						required = (uint)collectable.Value;
 					}
 				}
 			}
@@ -420,7 +421,7 @@ namespace ExBuddy.OrderBotTags.Fish
 
 			await Coroutine.Wait(5000, () => FishingManager.State == FishingState.None);
 
-			if (missingGp >= 380 && CordialType >= CordialType.HiCordial)
+			if (missingGp >= 380 && (CordialType == CordialType.HiCordial || CordialType == CordialType.Auto))
 			{
 				if (await UseCordial(CordialType.HiCordial))
 				{
@@ -428,7 +429,15 @@ namespace ExBuddy.OrderBotTags.Fish
 				}
 			}
 
-			if (await UseCordial(CordialType.Cordial))
+			if (missingGp >= 280 && (CordialType == CordialType.Cordial || CordialType == CordialType.Auto))
+			{
+				if (await UseCordial(CordialType.Cordial))
+				{
+					return true;
+				}
+			}
+
+			if (await UseCordial(CordialType.WateredCordial))
 			{
 				return true;
 			}
@@ -440,15 +449,15 @@ namespace ExBuddy.OrderBotTags.Fish
 		{
 			if (CordialSpellData.Cooldown.TotalSeconds < maxTimeoutSeconds)
 			{
-				var cordial = InventoryManager.FilledSlots.FirstOrDefault(slot => slot.RawItemId == (uint) cordialType);
+				var cordial = InventoryManager.FilledSlots.FirstOrDefault(slot => slot.RawItemId == (uint)cordialType);
 
 				if (cordial != null)
 				{
 					StatusText = Localization.Localization.ExFish_UseCordialWhenAvailable;
 
 					Logger.Info(
-                        Localization.Localization.ExFish_UseCordial,
-						(int) CordialSpellData.Cooldown.TotalSeconds,
+						Localization.Localization.ExFish_UseCordial,
+						(int)CordialSpellData.Cooldown.TotalSeconds,
 						ExProfileBehavior.Me.CurrentGP);
 
 					if (await Coroutine.Wait(
@@ -527,7 +536,7 @@ namespace ExBuddy.OrderBotTags.Fish
 			}
 		}
 
-		#endregion
+		#endregion Aura Properties
 
 		#region Fields
 
@@ -535,10 +544,18 @@ namespace ExBuddy.OrderBotTags.Fish
 
 		protected static readonly Random SitRng = new Random();
 
-		protected static Regex FishRegex = new Regex(Localization.Localization.ExFish_FishRegex,RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        protected static Regex FishSizeRegex = new Regex(@"(\d{1,4}\.\d)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+		protected static Regex FishRegex = new Regex(
 
-        protected static FishResult FishResult = new FishResult();
+#if RB_CN
+            @"[\u4e00-\u9fa5A-Za-z0-9·]+成功钓上了|[\u4e00-\u9fa5]+",
+#else
+			@"You land(?: a| an)? (.+) measuring (\d{1,4}\.\d) ilms!", // Entrax fix
+#endif
+			RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
+		protected static Regex FishSizeRegex = new Regex(@"(\d{1,4}\.\d)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
+		protected static FishResult FishResult = new FishResult();
 
 		private Func<bool> conditionFunc;
 
@@ -560,13 +577,13 @@ namespace ExBuddy.OrderBotTags.Fish
 
 		private int amissfish;
 
-		private int fishlimit;
+		private double fishlimit;
 
 		private double sitRoll = 1.0;
 
 		private bool spotinit;
 
-		#endregion
+		#endregion Fields
 
 		#region Public Properties
 
@@ -636,6 +653,10 @@ namespace ExBuddy.OrderBotTags.Fish
 		[XmlAttribute("ShuffleFishSpots")]
 		public bool Shuffle { get; set; }
 
+		[DefaultValue(true)]
+		[XmlAttribute("EnableKeeper")]
+		public bool EnableKeeper { get; set; }
+
 		[XmlAttribute("SitRate")]
 		public float SitRate { get; set; }
 
@@ -655,6 +676,10 @@ namespace ExBuddy.OrderBotTags.Fish
 		[XmlAttribute("Patience")]
 		public Abilities Patience { get; set; }
 
+		[DefaultValue(600)]
+		[XmlAttribute("MinimumGPPatience")]
+		public int MinimumGPPatience { get; set; }
+
 		[XmlAttribute("FishEyes")]
 		public bool FishEyes { get; set; }
 
@@ -664,7 +689,7 @@ namespace ExBuddy.OrderBotTags.Fish
 		[XmlElement("PatienceTugs")]
 		public List<PatienceTug> PatienceTugs { get; set; }
 
-		#endregion
+		#endregion Public Properties
 
 		#region Private Properties
 
@@ -688,7 +713,7 @@ namespace ExBuddy.OrderBotTags.Fish
 			get { return Fish.Bait.FindMatch(Baits).BaitItem.Id == FishingManager.SelectedBaitItemId; }
 		}
 
-		#endregion
+		#endregion Private Properties
 
 		#region Fishing Composites
 
@@ -722,7 +747,7 @@ namespace ExBuddy.OrderBotTags.Fish
 					new Decorator(
 						ret =>
 							!isSitting && (Sit || FishSpots.CurrentOrDefault.Sit || sitRoll < SitRate)
-							&& FishingManager.State == (FishingState) 9,
+							&& FishingManager.State == (FishingState)9,
 						// this is when you have already cast and are waiting for a bite.
 						new Sequence(
 							new Sleep(1, 1),
@@ -812,12 +837,13 @@ namespace ExBuddy.OrderBotTags.Fish
 					new Decorator(
 						ret =>
 							CanDoAbility(Abilities.Mooch) && MoochLevel != 0 && mooch < MoochLevel && MoochConditionCheck()
-							&& (Keepers.Count == 0
-							    || Keepers.All(k => !string.Equals(k.Name, FishResult.FishName, StringComparison.InvariantCultureIgnoreCase))
-							    || Keepers.Any(
-								    k =>
-									    string.Equals(k.Name, FishResult.FishName, StringComparison.InvariantCultureIgnoreCase)
-									    && FishResult.ShouldMooch(k))),
+							&& (!EnableKeeper
+								|| Keepers.Count == 0
+								|| Keepers.All(k => !string.Equals(k.Name, FishResult.FishName, StringComparison.InvariantCultureIgnoreCase))
+								|| Keepers.Any(
+									k =>
+										string.Equals(k.Name, FishResult.FishName, StringComparison.InvariantCultureIgnoreCase)
+										&& FishResult.ShouldMooch(k))),
 						new Sequence(
 							new Action(
 								r =>
@@ -827,9 +853,9 @@ namespace ExBuddy.OrderBotTags.Fish
 									mooch++;
 									if (MoochLevel > 1)
 									{
-								    //  Logger.Info("Mooching, this is mooch " + mooch + " of " + MoochLevel + " mooches.");
-                                        Logger.Info(Localization.Localization.ExFish_Mooch,mooch, MoochLevel);
-                                    }
+										//  Logger.Info("Mooching, this is mooch " + mooch + " of " + MoochLevel + " mooches.");
+										Logger.Info(Localization.Localization.ExFish_Mooch, mooch, MoochLevel);
+									}
 									else
 									{
 										Logger.Info(Localization.Localization.ExFish_Mooch2);
@@ -859,7 +885,7 @@ namespace ExBuddy.OrderBotTags.Fish
 							Patience > Abilities.None
 							&& (FishingManager.State == FishingState.None || FishingManager.State == FishingState.PoleReady) && !HasPatience
 							&& CanDoAbility(Patience) &&
-							(ExProfileBehavior.Me.CurrentGP >= 600 || ExProfileBehavior.Me.CurrentGPPercent > 99.0f),
+							(ExProfileBehavior.Me.CurrentGP >= MinimumGPPatience || ExProfileBehavior.Me.CurrentGPPercent > 99.0f),
 						new Sequence(
 							new Action(
 								r =>
@@ -898,7 +924,7 @@ namespace ExBuddy.OrderBotTags.Fish
 									r =>
 									{
 										// If its not a keeper AND we aren't mooching or we can't mooch, then release
-										if (!Keepers.Any(FishResult.IsKeeper) && (MoochLevel == 0 || !CanDoAbility(Abilities.Mooch)))
+										if (!Keepers.Any(FishResult.IsKeeper) && (MoochLevel == 0 || !CanDoAbility(Abilities.Mooch)) && EnableKeeper)
 										{
 											DoAbility(Abilities.Release);
 											Logger.Info(Localization.Localization.ExFish_Release + FishResult.Name);
@@ -927,8 +953,13 @@ namespace ExBuddy.OrderBotTags.Fish
 			{
 				return new Decorator(
 					// TODO: Log reason for quit.
-					ret => InventoryManager.FilledSlots.Count(c => c.BagId != InventoryBagId.KeyItems) >= 100,
-					IsDoneAction);
+					ret => InventoryManager.FilledSlots.Count(c => c.BagId != InventoryBagId.KeyItems) >=
+#if RB_CN
+				100
+#else
+				140
+#endif
+					, IsDoneAction);
 			}
 		}
 
@@ -942,7 +973,7 @@ namespace ExBuddy.OrderBotTags.Fish
 						r =>
 						{
 							var tugType = FishingManager.TugType;
-							var patienceTug = new PatienceTug {MoochLevel = mooch, TugType = tugType};
+							var patienceTug = new PatienceTug { MoochLevel = mooch, TugType = tugType };
 							var hookset = tugType == TugType.Light ? Abilities.PrecisionHookset : Abilities.PowerfulHookset;
 							if (HasPatience && CanDoAbility(hookset) && (PatienceTugs == null || PatienceTugs.Contains(patienceTug)))
 							{
@@ -960,9 +991,9 @@ namespace ExBuddy.OrderBotTags.Fish
 								fishcount++;
 							}
 
-//							Logger.Info("Fished " + fishcount + " of " + fishlimit + " fish at this FishSpot.");
-                            Logger.Info(Localization.Localization.ExFish_Fish, fishcount, fishlimit);
-                        }));
+							//							Logger.Info("Fished " + fishcount + " of " + fishlimit + " fish at this FishSpot.");
+							Logger.Info(Localization.Localization.ExFish_Fish, fishcount, fishlimit);
+						}));
 			}
 		}
 
@@ -983,7 +1014,7 @@ namespace ExBuddy.OrderBotTags.Fish
 			}
 		}
 
-		#endregion
+		#endregion Fishing Composites
 
 		#region Composites
 
@@ -1053,21 +1084,21 @@ namespace ExBuddy.OrderBotTags.Fish
 			}
 		}
 
-		#endregion
+		#endregion Composites
 
 		#region Ability Checks and Actions
 
 		internal bool CanDoAbility(Abilities ability)
 		{
-			return ActionManager.CanCast((uint) ability, ExProfileBehavior.Me);
+			return ActionManager.CanCast((uint)ability, ExProfileBehavior.Me);
 		}
 
 		internal bool DoAbility(Abilities ability)
 		{
-			return ActionManager.DoAction((uint) ability, ExProfileBehavior.Me);
+			return ActionManager.DoAction((uint)ability, ExProfileBehavior.Me);
 		}
 
-		#endregion
+		#endregion Ability Checks and Actions
 
 		#region Methods
 
@@ -1102,24 +1133,24 @@ namespace ExBuddy.OrderBotTags.Fish
 		protected virtual void FaceFishSpot()
 		{
 			var i = MathEx.Random(0, 25);
-			i = i/100;
+			i = i / 100;
 
 			var i2 = MathEx.Random(0, 100);
 
 			if (i2 > 50)
 			{
-				ExProfileBehavior.Me.SetFacing(FishSpots.Current.Heading - (float) i);
+				ExProfileBehavior.Me.SetFacing(FishSpots.Current.Heading - (float)i);
 			}
 			else
 			{
-				ExProfileBehavior.Me.SetFacing(FishSpots.Current.Heading + (float) i);
+				ExProfileBehavior.Me.SetFacing(FishSpots.Current.Heading + (float)i);
 			}
 		}
 
 		protected virtual void ChangeFishSpot()
 		{
 			FishSpots.Next();
-            Logger.Info(Localization.Localization.ExFish_ChangeSpots);
+			Logger.Info(Localization.Localization.ExFish_ChangeSpots);
 			fishcount = 0;
 			Logger.Info(Localization.Localization.ExFish_ResetCount);
 			fishlimit = GetFishLimit();
@@ -1165,7 +1196,7 @@ namespace ExBuddy.OrderBotTags.Fish
                 float size;
                 float.TryParse(sizematch.Groups[1].Value, out size);
 #else
-            var match = FishRegex.Match(message);
+			var match = FishRegex.Match(message);
 
 			if (match.Success)
 			{
@@ -1173,13 +1204,13 @@ namespace ExBuddy.OrderBotTags.Fish
 				float size;
 				float.TryParse(match.Groups[2].Value, out size);
 #endif
-                fishResult.Size = size;
+				fishResult.Size = size;
 				if (fishResult.Name[fishResult.Name.Length - 2] == ' ')
 				{
 					fishResult.IsHighQuality = true;
 				}
 			}
-            FishResult = fishResult;
+			FishResult = fishResult;
 			isFishIdentified = true;
 		}
 
@@ -1188,14 +1219,14 @@ namespace ExBuddy.OrderBotTags.Fish
 #if RB_CN
             if (e.ChatLogEntry.MessageType == (MessageType)2115 && e.ChatLogEntry.Contents.Contains("成功钓上了"))
 #else
-            if (e.ChatLogEntry.MessageType == (MessageType)2115 && e.ChatLogEntry.Contents.StartsWith("You land"))
+			if (e.ChatLogEntry.MessageType == (MessageType)2115 && e.ChatLogEntry.Contents.StartsWith("You land"))
 #endif
-            {
-                SetFishResult(e.ChatLogEntry.Contents);
+			{
+				SetFishResult(e.ChatLogEntry.Contents);
 			}
 
-			if (e.ChatLogEntry.MessageType == (MessageType) 2115
-			    && e.ChatLogEntry.Contents.Equals(Localization.Localization.ExFish_NoSenceOfFish, StringComparison.InvariantCultureIgnoreCase))
+			if (e.ChatLogEntry.MessageType == (MessageType)2115
+				&& e.ChatLogEntry.Contents.Equals(Localization.Localization.ExFish_NoSenceOfFish, StringComparison.InvariantCultureIgnoreCase))
 			{
 				Logger.Info(Localization.Localization.ExFish_NoSenceOfFish2);
 
@@ -1207,8 +1238,8 @@ namespace ExBuddy.OrderBotTags.Fish
 				ChangeFishSpot();
 			}
 
-			if (e.ChatLogEntry.MessageType == (MessageType) 2115
-			    && e.ChatLogEntry.Contents == Localization.Localization.ExFish_AmissFish2)
+			if (e.ChatLogEntry.MessageType == (MessageType)2115
+				&& e.ChatLogEntry.Contents == Localization.Localization.ExFish_AmissFish2)
 			{
 				Logger.Info(Localization.Localization.ExFish_AmissFish3);
 				amissfish++;
@@ -1222,6 +1253,6 @@ namespace ExBuddy.OrderBotTags.Fish
 			}
 		}
 
-		#endregion
+		#endregion Methods
 	}
 }

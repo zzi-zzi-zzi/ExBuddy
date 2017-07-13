@@ -1,16 +1,18 @@
 namespace ExBuddy.OrderBotTags.Gather.Rotations
 {
-	using System.Linq;
-	using System.Threading.Tasks;
 	using ExBuddy.Attributes;
 	using ExBuddy.Interfaces;
 	using ff14bot;
 	using ff14bot.Managers;
+	using System.Linq;
+	using System.Threading.Tasks;
+
 #if RB_CN
     using ActionManager = ff14bot.Managers.Actionmanager;
 #endif
-    //Name, RequiredTime, RequiredGpBreakpoints
-    [GatheringRotation("Elemental", 0)]
+
+	//Name, RequiredTime, RequiredGpBreakpoints
+	[GatheringRotation("Elemental", 0)]
 	public class ElementalGatheringRotation : SmartGatheringRotation, IGetOverridePriority
 	{
 		#region IGetOverridePriority Members
@@ -36,7 +38,7 @@ namespace ExBuddy.OrderBotTags.Gather.Rotations
 			return -1;
 		}
 
-		#endregion
+		#endregion IGetOverridePriority Members
 
 		public override async Task<bool> ExecuteRotation(ExGatherTag tag)
 		{

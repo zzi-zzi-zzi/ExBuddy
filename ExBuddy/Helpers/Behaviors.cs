@@ -1,11 +1,7 @@
-
 #pragma warning disable 1998
 
 namespace ExBuddy.Helpers
 {
-	using System;
-	using System.Linq;
-	using System.Threading.Tasks;
 	using Buddy.Coroutines;
 	using Clio.Utilities;
 	using ExBuddy.Interfaces;
@@ -16,7 +12,12 @@ namespace ExBuddy.Helpers
 	using ff14bot.Enums;
 	using ff14bot.Managers;
 	using ff14bot.Navigation;
+	using ff14bot.Pathing;
 	using ff14bot.Settings;
+	using System;
+	using System.Linq;
+	using System.Threading.Tasks;
+
 #if RB_CN
     using ActionManager = ff14bot.Managers.Actionmanager;
 #endif
@@ -119,6 +120,7 @@ namespace ExBuddy.Helpers
 						Slot = 2
 					};
 					break;
+
 				default:
 					strategy = new NoOpReturnStrategy();
 					break;
@@ -137,7 +139,7 @@ namespace ExBuddy.Helpers
 					var playerMover = Navigator.PlayerMover as IFlightEnabledPlayerMover;
 					if (playerMover != null)
 					{
-						flightSpecificMountId = (uint) playerMover.FlightMovementArgs.MountId;
+						flightSpecificMountId = (uint)playerMover.FlightMovementArgs.MountId;
 					}
 				}
 
@@ -217,10 +219,11 @@ namespace ExBuddy.Helpers
 			{
 				var moveResult = MoveResult.GeneratingPath;
 				while (Behaviors.ShouldContinue
-				       && (!stopCallback(distance = Core.Player.Location.Distance3D(destination), radius)
-				           || stopCallback == DontStopInRange) && !(moveResult.IsDoneMoving()))
+					   && (!stopCallback(distance = Core.Player.Location.Distance3D(destination), radius)
+						   || stopCallback == DontStopInRange) && !(moveResult.IsDoneMoving()))
 				{
-					moveResult = Navigator.MoveTo(destination, name);
+					//moveResult = Navigator.MoveTo(destination, name);
+					moveResult = Navigator.MoveTo(new MoveToParameters(destination));
 					await Coroutine.Yield();
 
 					if (distance > sprintDistance)
@@ -277,7 +280,8 @@ namespace ExBuddy.Helpers
 			var moveResult = MoveResult.GeneratingPath;
 			while (Behaviors.ShouldContinue && !(moveResult.IsDoneMoving()))
 			{
-				moveResult = Navigator.MoveToPointWithin(destination, radius, name);
+				//moveResult = Navigator.MoveToPointWithin(destination, radius, name);
+				moveResult = Navigator.MoveTo(new MoveToParameters(destination));
 				await Coroutine.Yield();
 
 				var distance = Core.Player.Location.Distance3D(destination);
@@ -332,7 +336,10 @@ namespace ExBuddy.Helpers
 
 		public static async Task<bool> Sprint(int timeout = 500)
 		{
-			if (ActionManager.IsSprintReady && !Core.Player.IsCasting && !Core.Player.IsMounted && Core.Player.CurrentTP == 1000
+			if (ActionManager.IsSprintReady && !Core.Player.IsCasting && !Core.Player.IsMounted
+#if RB_CN
+                && Core.Player.CurrentTP == 1000
+#endif
 			    && MovementManager.IsMoving)
 			{
 				ActionManager.Sprint();
@@ -404,7 +411,7 @@ namespace ExBuddy.Helpers
 				return false;
 			}
 
-			return await TeleportTo((ushort) zoneId, aetheryteId);
+			return await TeleportTo((ushort)zoneId, aetheryteId);
 		}
 
 		public static async Task<bool> TeleportTo(this ITeleportLocation teleportLocation)

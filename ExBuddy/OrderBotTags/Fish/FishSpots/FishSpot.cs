@@ -1,12 +1,12 @@
 ﻿namespace ExBuddy.OrderBotTags.Fish
 {
-	using System.ComponentModel;
-	using System.Threading.Tasks;
 	using Buddy.Coroutines;
 	using Clio.Utilities;
 	using Clio.XmlEngine;
 	using ExBuddy.Helpers;
 	using ff14bot;
+	using System.ComponentModel;
+	using System.Threading.Tasks;
 
 	public interface IFishSpot
 	{
@@ -73,7 +73,7 @@
 			return await Task.FromResult(true);
 		}
 
-		#endregion
+		#endregion IFishSpot Members
 	}
 
 	public class StealthApproachFishSpot : FishSpot
@@ -98,7 +98,7 @@
 				result &= await StealthLocation.MoveToNoMount(UseMesh, tag.Radius, "Stealth Location", tag.MovementStopCallback);
 			}
 
-			if (UnstealthAfter && Core.Player.HasAura((int) AbilityAura.Stealth))
+			if (UnstealthAfter && Core.Player.HasAura((int)AbilityAura.Stealth))
 			{
 				result &= tag.DoAbility(ExFishTag.Abilities.Stealth); // TODO: move into abilities map?
 			}
@@ -127,7 +127,7 @@
 			if (result)
 			{
 				await Coroutine.Yield();
-				if (!Core.Player.HasAura((int) AbilityAura.Stealth))
+				if (!Core.Player.HasAura((int)AbilityAura.Stealth))
 				{
 					tag.DoAbility(ExFishTag.Abilities.Stealth);
 				}
@@ -144,5 +144,5 @@
 		}
 	}
 
-	public class IndirectApproachFishSpot : FishSpot {}
+	public class IndirectApproachFishSpot : FishSpot { }
 }

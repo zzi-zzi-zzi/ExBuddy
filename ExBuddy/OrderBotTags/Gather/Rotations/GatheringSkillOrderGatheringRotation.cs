@@ -1,16 +1,18 @@
 ﻿namespace ExBuddy.OrderBotTags.Gather.Rotations
 {
-	using System.Collections.Generic;
-	using System.Threading.Tasks;
 	using ExBuddy.Attributes;
 	using ff14bot;
 	using ff14bot.Managers;
 	using ff14bot.Objects;
+	using System.Collections.Generic;
+	using System.Threading.Tasks;
+
 #if RB_CN
     using ActionManager = ff14bot.Managers.Actionmanager;
 #endif
-    // Purposely not putting attribute or interface for overriding, This is for backwards compatibility only override turned off automatically.
-    public sealed class GatheringSkillOrderGatheringRotation : SmartGatheringRotation
+
+	// Purposely not putting attribute or interface for overriding, This is for backwards compatibility only override turned off automatically.
+	public sealed class GatheringSkillOrderGatheringRotation : SmartGatheringRotation
 	{
 		// ReSharper disable once InconsistentNaming
 		private static readonly GatheringRotationAttribute attributes = new GatheringRotationAttribute("GatheringSkillOrder");

@@ -1,8 +1,5 @@
 ﻿namespace ExBuddy.Plugins
 {
-	using System;
-	using System.Linq;
-	using System.Windows.Media;
 	using ExBuddy.Attributes;
 	using ExBuddy.Helpers;
 	using ExBuddy.Interfaces;
@@ -10,6 +7,9 @@
 	using ff14bot.AClasses;
 	using ff14bot.Managers;
 	using ff14bot.Objects;
+	using System;
+	using System.Linq;
+	using System.Windows.Media;
 
 	public abstract class ExBotPlugin<T> : BotPlugin, ILogColors
 		where T : ExBotPlugin<T>
@@ -35,7 +35,7 @@
 
 		public static bool IsEnabled
 		{
-			get { return PluginManager.Plugins.Any(p => p.Plugin.GetType() == typeof (T)); }
+			get { return PluginManager.Plugins.Any(p => p.Plugin.GetType() == typeof(T)); }
 		}
 
 		public override Version Version
@@ -80,6 +80,6 @@
 			get { return Warn; }
 		}
 
-		#endregion
+		#endregion ILogColors Members
 	}
 }
