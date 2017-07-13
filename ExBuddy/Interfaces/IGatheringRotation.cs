@@ -1,8 +1,8 @@
 ﻿namespace ExBuddy.Interfaces
 {
-	using System.Threading.Tasks;
 	using ExBuddy.Attributes;
 	using ExBuddy.OrderBotTags.Gather;
+	using System.Threading.Tasks;
 
 	public interface IGatheringRotation
 	{

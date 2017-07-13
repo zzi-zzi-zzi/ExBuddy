@@ -1,14 +1,13 @@
-﻿
-#pragma warning disable 1998
+﻿#pragma warning disable 1998
 
 namespace ExBuddy.OrderBotTags.Gather.GatherSpots
 {
-	using System.ComponentModel;
-	using System.Threading.Tasks;
 	using Clio.Utilities;
 	using Clio.XmlEngine;
 	using ExBuddy.Helpers;
 	using ExBuddy.Interfaces;
+	using System.ComponentModel;
+	using System.Threading.Tasks;
 
 	[XmlElement("GatherSpot")]
 	public class GatherSpot : IGatherSpot
@@ -49,6 +48,6 @@ namespace ExBuddy.OrderBotTags.Gather.GatherSpots
 			return result;
 		}
 
-		#endregion
+		#endregion IGatherSpot Members
 	}
 }

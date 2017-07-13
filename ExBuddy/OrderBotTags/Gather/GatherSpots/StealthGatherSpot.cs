@@ -1,10 +1,10 @@
 namespace ExBuddy.OrderBotTags.Gather.GatherSpots
 {
-	using System.Threading.Tasks;
 	using Buddy.Coroutines;
 	using Clio.XmlEngine;
 	using ExBuddy.Helpers;
 	using ff14bot;
+	using System.Threading.Tasks;
 
 	[XmlElement("StealthGatherSpot")]
 	public class StealthGatherSpot : GatherSpot
@@ -16,7 +16,7 @@ namespace ExBuddy.OrderBotTags.Gather.GatherSpots
 		{
 			tag.StatusText = "Moving from " + this;
 
-			if (UnstealthAfter && Core.Player.HasAura((int) AbilityAura.Stealth))
+			if (UnstealthAfter && Core.Player.HasAura((int)AbilityAura.Stealth))
 			{
 				return await tag.CastAura(Ability.Stealth);
 			}

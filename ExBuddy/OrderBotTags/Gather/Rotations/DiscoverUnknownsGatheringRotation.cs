@@ -1,12 +1,12 @@
 namespace ExBuddy.OrderBotTags.Gather.Rotations
 {
-	using System.Linq;
-	using System.Threading.Tasks;
 	using ExBuddy.Attributes;
 	using ExBuddy.Helpers;
 	using ExBuddy.Interfaces;
 	using ff14bot;
 	using ff14bot.Managers;
+	using System.Linq;
+	using System.Threading.Tasks;
 
 	// TODO: if can peek, then we need to allow it to redo beforegather logic
 	//Name, RequiredTime, RequiredGpBreakpoints
@@ -30,7 +30,7 @@ namespace ExBuddy.OrderBotTags.Gather.Rotations
 			return -1;
 		}
 
-		#endregion
+		#endregion IGetOverridePriority Members
 
 		public override async Task<bool> Prepare(ExGatherTag tag)
 		{

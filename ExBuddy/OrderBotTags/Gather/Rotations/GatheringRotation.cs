@@ -1,17 +1,17 @@
 ﻿namespace ExBuddy.OrderBotTags.Gather.Rotations
 {
-	using System;
-	using System.Threading.Tasks;
 	using Buddy.Coroutines;
 	using ExBuddy.Attributes;
 	using ExBuddy.Helpers;
 	using ExBuddy.Interfaces;
 	using ff14bot;
 	using ff14bot.Managers;
+	using System;
+	using System.Threading.Tasks;
 
 	public abstract class GatheringRotation : IGatheringRotation
 	{
-		protected internal static readonly uint[] WardSkills = {236U, 293U, 234U, 292U, 217U, 219U};
+		protected internal static readonly uint[] WardSkills = { 236U, 293U, 234U, 292U, 217U, 219U };
 
 		protected internal readonly IGetOverridePriority GetOverridePriorityCached;
 
@@ -22,12 +22,12 @@
 
 		protected internal static async Task Wait()
 		{
-			if (GatheringManager.ShouldPause(DataManager.SpellCache[(uint) Ability.Preparation]))
+			if (GatheringManager.ShouldPause(DataManager.SpellCache[(uint)Ability.Preparation]))
 			{
 				var ticks = 0;
 				while (ticks++ < 60 && Behaviors.ShouldContinue)
 				{
-					if (!GatheringManager.ShouldPause(DataManager.SpellCache[(uint) Ability.Preparation]))
+					if (!GatheringManager.ShouldPause(DataManager.SpellCache[(uint)Ability.Preparation]))
 					{
 						break;
 					}
@@ -134,7 +134,7 @@
 
 		public virtual async Task<bool> Prepare(ExGatherTag tag)
 		{
-			if (Core.Player.HasAura((int) AbilityAura.CollectorsGlove))
+			if (Core.Player.HasAura((int)AbilityAura.CollectorsGlove))
 			{
 				return await tag.Cast(Ability.CollectorsGlove);
 			}
@@ -165,6 +165,6 @@
 			return false;
 		}
 
-		#endregion
+		#endregion IGatheringRotation Members
 	}
 }

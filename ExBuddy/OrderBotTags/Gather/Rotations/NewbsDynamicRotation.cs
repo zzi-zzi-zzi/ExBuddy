@@ -1,10 +1,10 @@
 namespace ExBuddy.OrderBotTags.Gather.Rotations
 {
-	using System;
-	using System.Threading.Tasks;
 	using ExBuddy.Attributes;
 	using ExBuddy.Interfaces;
 	using ff14bot;
+	using System;
+	using System.Threading.Tasks;
 
 	[GatheringRotation("NewbCollect", 30, 600)]
 	public sealed class NewbCollectGatheringRotation : CollectableGatheringRotation, IGetOverridePriority
@@ -22,7 +22,7 @@ namespace ExBuddy.OrderBotTags.Gather.Rotations
 			return -1;
 		}
 
-		#endregion
+		#endregion IGetOverridePriority Members
 
 		public override async Task<bool> ExecuteRotation(ExGatherTag tag)
 		{
@@ -182,7 +182,7 @@ namespace ExBuddy.OrderBotTags.Gather.Rotations
 
 		public async Task<bool> GetOne(ExGatherTag tag)
 		{
-			//Get One - Level 51 Minimum           
+			//Get One - Level 51 Minimum
 			await DiscerningMethodical(tag);
 			await UtmostMethodical(tag);
 			await UtmostMethodical(tag);
@@ -255,7 +255,7 @@ namespace ExBuddy.OrderBotTags.Gather.Rotations
 
 		public async Task<bool> TryHard(ExGatherTag tag)
 		{
-			//Try Hard - Level 53 Minimum           
+			//Try Hard - Level 53 Minimum
 			await UtmostImpulsive(tag);
 
 			if (HasDiscerningEye)
@@ -278,7 +278,7 @@ namespace ExBuddy.OrderBotTags.Gather.Rotations
 
 		public async Task<bool> TryHarder(ExGatherTag tag)
 		{
-			//Try Harder - Level 53 Minimum            
+			//Try Harder - Level 53 Minimum
 			await DiscerningImpulsive(tag);
 			await UtmostImpulsive(tag);
 			await UtmostMethodical(tag);

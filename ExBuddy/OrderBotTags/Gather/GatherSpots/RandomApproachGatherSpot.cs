@@ -1,14 +1,14 @@
 ﻿namespace ExBuddy.OrderBotTags.Gather.GatherSpots
 {
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Threading.Tasks;
 	using Buddy.Coroutines;
 	using Clio.Utilities;
 	using Clio.XmlEngine;
 	using ExBuddy.Helpers;
 	using ff14bot;
 	using ff14bot.Navigation;
+	using System.Collections.Generic;
+	using System.Linq;
+	using System.Threading.Tasks;
 
 	[XmlElement("RandomApproachGatherSpot")]
 	public class RandomApproachGatherSpot : GatherSpot
@@ -37,7 +37,7 @@
 				result &= await approachLocation.MoveToNoMount(UseMesh, tag.MovementStopCallback);
 			}
 
-			if (UnstealthAfter && Core.Player.HasAura((int) AbilityAura.Stealth))
+			if (UnstealthAfter && Core.Player.HasAura((int)AbilityAura.Stealth))
 			{
 				result &= await tag.CastAura(Ability.Stealth);
 			}

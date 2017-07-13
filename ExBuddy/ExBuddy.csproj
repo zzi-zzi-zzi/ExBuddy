@@ -18,7 +18,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;RB_CN</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;RB_64</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -31,10 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Clio.Localization">
+    <Reference Include="Clio.Localization, Version=1.0.104.0, Culture=neutral, PublicKeyToken=48d7174f8a943034, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Assembly\Clio.Localization.dll</HintPath>
     </Reference>
-    <Reference Include="GreyMagic">
+    <Reference Include="GreyMagic, Version=1.0.41.0, Culture=neutral, PublicKeyToken=260525fa2b0e778a, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Assembly\GreyMagic.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
@@ -42,8 +44,9 @@
     <Reference Include="Quest Behaviors_1537820551">
       <HintPath>..\Assembly\Quest Behaviors_1537820551.dll</HintPath>
     </Reference>
-    <Reference Include="RebornBuddy">
-      <HintPath>D:\code\qqmoreCN\RebornBuddy.exe</HintPath>
+    <Reference Include="RebornBuddy, Version=1.0.104.0, Culture=neutral, PublicKeyToken=48d7174f8a943034, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Assembly\RebornBuddy.exe</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -70,8 +73,25 @@
       <DependentUpon>Localization.resx</DependentUpon>
     </Compile>
     <Compile Include="Localization\LocalizationInitializer.cs" />
+    <Compile Include="Navigation\FlightEnabledNavigatorbeta.cs" />
     <Compile Include="Navigation\FlightEnabledNavigatorCN.cs" />
     <Compile Include="Offsets\SecondaryOffsets.cs" />
+    <Compile Include="OrderBotTags\Gather\Rotations\Collect321GatheringRotation.cs" />
+    <Compile Include="OrderBotTags\Gather\Rotations\Collect346GatheringRotation.cs" />
+    <Compile Include="OrderBotTags\Gather\Rotations\Collect390GatheringRotation.cs" />
+    <Compile Include="OrderBotTags\Gather\Rotations\Collect402GatheringRotation.cs" />
+    <Compile Include="OrderBotTags\Gather\Rotations\Collect410GatheringRotation.cs" />
+    <Compile Include="OrderBotTags\Gather\Rotations\Collect459GatheringRotation.cs" />
+    <Compile Include="OrderBotTags\Gather\Rotations\Collect460GatheringRotation.cs" />
+    <Compile Include="OrderBotTags\Gather\Rotations\Collect480GatheringRotation.cs" />
+    <Compile Include="OrderBotTags\Gather\Rotations\Collect515GatheringRotation.cs" />
+    <Compile Include="OrderBotTags\Gather\Rotations\Collect600GatheringRotation.cs" />
+    <Compile Include="OrderBotTags\Gather\Rotations\EarthElementGatheringRotation.cs" />
+    <Compile Include="OrderBotTags\Gather\Rotations\FireElementGatheringRotation.cs" />
+    <Compile Include="OrderBotTags\Gather\Rotations\IceElementGatheringRotation.cs" />
+    <Compile Include="OrderBotTags\Gather\Rotations\LightningElementGatheringRotation.cs" />
+    <Compile Include="OrderBotTags\Gather\Rotations\WaterElementGatheringRotation.cs" />
+    <Compile Include="OrderBotTags\Gather\Rotations\WindElementGatheringRotation.cs" />
     <Compile Include="Plugins\Skywatcher\Objects\Location.cs" />
     <Compile Include="Plugins\Skywatcher\Objects\LocationIndex.cs" />
     <Compile Include="Plugins\Skywatcher\Objects\WeatherRate.cs" />
@@ -144,7 +164,7 @@
     <Compile Include="Interfaces\INamedItem.cs" />
     <Compile Include="OrderBotTags\Gather\NamedItemCollection.cs" />
     <Compile Include="OrderBotTags\Gather\Rotations\Collect505GatheringRotation.cs" />
-    <Compile Include="OrderBotTags\Gather\Rotations\Collect495GatheringRotation.cs" />
+    <Compile Include="OrderBotTags\Gather\Rotations\Collect499GatheringRotation.cs" />
     <Compile Include="OrderBotTags\Gather\Rotations\Collect490GatheringRotation.cs" />
     <Compile Include="OrderBotTags\Gather\Rotations\GetTwoHQGatheringRotation.cs" />
     <Compile Include="OrderBotTags\Gather\Rotations\EphemeralRotation.cs" />
@@ -160,7 +180,6 @@
     <Compile Include="Helpers\ObjectCache{T}.cs" />
     <Compile Include="Helpers\ReflectionHelper.cs" />
     <Compile Include="DefaultReturnStrategy.cs" />
-    <Compile Include="Navigation\FlightEnabledNavigatorbeta.cs" />
     <Compile Include="Navigation\FlightEnabledSlideMover.cs" />
     <Compile Include="Navigation\FlightPath.cs" />
     <Compile Include="Navigation\FlightPoint.cs" />
@@ -183,7 +202,6 @@
     <Compile Include="Interfaces\IGatheringRotation.cs" />
     <Compile Include="OrderBotTags\Objects\GatherItem.cs" />
     <Compile Include="Plugins\ExBotPlugin{T}.cs" />
-    <Compile Include="Plugins\RetainerMaid\RetainerMaid.cs" />
     <Compile Include="Providers\MasterPieceSupplyDataProvider.cs" />
     <Compile Include="Agents\Agent{T}.cs" />
     <Compile Include="Agents\Desynthesis.cs" />
@@ -209,7 +227,6 @@
     <None Include="Data\ExBuddy_CN.s3db" />
     <None Include="Data\locationIndex.json" />
     <None Include="Data\weatherRateIndex.json" />
-    <None Include="OrderBotTags\Gather\Prototype\SafeCollectAdamantite.cs.proto" />
     <Compile Include="OrderBotTags\Gather\Rotations\Collect115GatheringRotation.cs" />
     <Compile Include="OrderBotTags\Gather\Rotations\Collect345GatheringRotation.cs" />
     <Compile Include="OrderBotTags\Gather\Rotations\Collect450GatheringRotation.cs" />
@@ -246,35 +263,6 @@
   <ItemGroup>
     <Content Include="Data\msd.xml" />
     <Content Include="Data\msd_cn.xml" />
-    <Content Include="OrderBotTags\Behaviors\Examples\ExBuddy_[O][ALC][LEVE]_Lanolin+EnchantedElectrumInk-TurnIns.xml" />
-    <Content Include="OrderBotTags\Behaviors\Examples\TurnInCollectables.xml" />
-    <Content Include="OrderBotTags\Behaviors\Examples\UseAethernet.xml" />
-    <Content Include="OrderBotTags\Fish\Examples\Fishing_Forager_Supra_Lucis.xml" />
-    <Content Include="OrderBotTags\Fish\Examples\Fishing_IlluminatiPerch.xml" />
-    <Content Include="OrderBotTags\Fish\Examples\Fishing_WarmwaterBichir.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\AdamantiteChysahl.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\AdamantiteOre_AzysLla.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\ChysahlGreens_CWH.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\Cyclops Onion.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\EphemeralAll.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\FreeRangeCollect450.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\FreeRangeCollect550.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\FreeRangeCollectAll.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\FreeRangeGatherAll.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\Hardsilver Ore.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\Highland Wheat.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\Mythrite Ore.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\Mythrite Sand.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\Porcini_Churning.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\Raw Chrysolite.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\Raw Larimar.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\Raw Mormorion.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\Stalk of Ramie.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\Titanium Ore.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\Transform\Botany-Crystal Farming.xml" />
-    <Content Include="OrderBotTags\Gather\Examples\Transform\GatherToGatherCollectable.xslt" />
-    <Content Include="OrderBotTags\Gather\Examples\Wyrm Obsidian.xml" />
-    <Content Include="OrderBotTags\Gather\Prototype\Profiles\AdamantiteOre_AzysLla.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OrderBotTags\Schema\Fish.xsd">
@@ -285,6 +273,7 @@
     <EmbeddedResource Include="Localization\Localization.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Localization.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Localization\Localization.zh-CN.resx" />
   </ItemGroup>

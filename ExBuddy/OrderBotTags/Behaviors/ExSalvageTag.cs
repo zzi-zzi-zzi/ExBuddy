@@ -1,7 +1,5 @@
 ﻿namespace ExBuddy.OrderBotTags.Behaviors
 {
-	using System.ComponentModel;
-	using System.Threading.Tasks;
 	using Buddy.Coroutines;
 	using Clio.Utilities;
 	using Clio.XmlEngine;
@@ -11,6 +9,8 @@
 	using ff14bot.Behavior;
 	using ff14bot.Enums;
 	using ff14bot.Managers;
+	using System.ComponentModel;
+	using System.Threading.Tasks;
 
 	[LoggerName("ExSalvage")]
 	[XmlElement("ExSalvage")]
@@ -45,14 +45,7 @@
 				return isDone = true;
 			}
 
-			var ticks = 0;
-			while (MovementManager.IsFlying && ticks++ < 5 && Behaviors.ShouldContinue)
-			{
-				MovementManager.StartDescending();
-				await Coroutine.Wait(500, () => !MovementManager.IsFlying);
-			}
-
-			if (ticks > 5)
+			if (MovementManager.IsFlying || MovementManager.IsDiving)
 			{
 				Logger.Error(Localization.Localization.ExSalvage_Land);
 				return isDone = true;
@@ -62,14 +55,14 @@
 
 			if (RepairClass > ClassJobType.Thaumaturge && RepairClass < ClassJobType.Miner)
 			{
-				await SalvageDialog.DesynthesizeByRepairClass(RepairClass, (ushort) MaxWait, IncludeArmory, NqOnly);
+				await SalvageDialog.DesynthesizeByRepairClass(RepairClass, (ushort)MaxWait, IncludeArmory, NqOnly);
 			}
 
 			if (ItemIds != null && ItemIds.Length > 0)
 			{
 				foreach (var id in ItemIds)
 				{
-					await SalvageDialog.DesynthesizeByItemId((uint) id, (ushort) MaxWait, IncludeArmory, NqOnly);
+					await SalvageDialog.DesynthesizeByItemId((uint)id, (ushort)MaxWait, IncludeArmory, NqOnly);
 				}
 			}
 

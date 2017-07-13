@@ -1,7 +1,7 @@
 ﻿namespace ExBuddy.OrderBotTags.Gather.Rotations
 {
-	using System.Threading.Tasks;
 	using ExBuddy.Interfaces;
+	using System.Threading.Tasks;
 
 	public abstract class SmartGatheringRotation : GatheringRotation
 	{

@@ -1,11 +1,12 @@
 namespace ExBuddy.Helpers
 {
-	using System.Threading.Tasks;
 	using Buddy.Coroutines;
 	using ExBuddy.Logging;
 	using ff14bot;
 	using ff14bot.Managers;
 	using ff14bot.Objects;
+	using System.Threading.Tasks;
+
 #if RB_CN
     using ActionManager = ff14bot.Managers.Actionmanager;
 #endif
@@ -25,7 +26,7 @@ namespace ExBuddy.Helpers
 			var result = ActionManager.DoAction(id, Core.Player);
 
 			var ticks = 0;
-			while (result == false && ticks++ < 5 && Behaviors.ShouldContinue)
+			while (result == false && ticks++ < 10 && Behaviors.ShouldContinue)
 			{
 				result = ActionManager.DoAction(id, Core.Player);
 				await Coroutine.Yield();

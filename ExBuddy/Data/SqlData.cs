@@ -1,20 +1,18 @@
 ﻿namespace ExBuddy.Data
 {
+	using ff14bot.Managers;
+	using SQLite;
 	using System;
 	using System.Collections.Generic;
 	using System.IO;
 	using System.Linq;
-
-	using ff14bot.Managers;
-
-	using SQLite;
 
 	public class SqlData : SQLiteConnection
 	{
 #if RB_CN
 		private const string DbFileName = "ExBuddy_CN.s3db";
 #else
-		private const string DbFileName = "ExBuddy.s3db";
+		private const string DbFileName = "ExBuddySB.s3db";
 #endif
 		public static readonly string DataFilePath;
 

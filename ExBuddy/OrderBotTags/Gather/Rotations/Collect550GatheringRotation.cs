@@ -1,9 +1,9 @@
 ﻿namespace ExBuddy.OrderBotTags.Gather.Rotations
 {
-	using System.Threading.Tasks;
 	using ExBuddy.Attributes;
 	using ExBuddy.Interfaces;
 	using ff14bot;
+	using System.Threading.Tasks;
 
 	// Get One ++
 	[GatheringRotation("Collect550", 33, 600)]
@@ -22,7 +22,7 @@
 			return -1;
 		}
 
-		#endregion
+		#endregion IGetOverridePriority Members
 
 		public override async Task<bool> ExecuteRotation(ExGatherTag tag)
 		{
@@ -30,7 +30,10 @@
 			{
 				await UtmostCaution(tag);
 				await AppraiseAndRebuff(tag);
-				await UtmostMethodical(tag);
+#if RB_CN
+				await UtmostCaution(tag);
+#endif
+				await Methodical(tag);
 				await AppraiseAndRebuff(tag);
 				await Methodical(tag);
 				await IncreaseChance(tag);

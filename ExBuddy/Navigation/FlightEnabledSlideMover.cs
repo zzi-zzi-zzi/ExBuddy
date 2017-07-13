@@ -1,10 +1,5 @@
 ﻿namespace ExBuddy.Navigation
 {
-	using System;
-	using System.Diagnostics;
-	using System.Threading;
-	using System.Threading.Tasks;
-	using System.Windows.Media;
 	using Buddy.Coroutines;
 	using Clio.Utilities;
 	using ExBuddy.Attributes;
@@ -18,10 +13,24 @@
 	using ff14bot.Navigation;
 	using ff14bot.NeoProfiles;
 	using ff14bot.Settings;
+<<<<<<< HEAD
 #if RB_CN
     using ActionManager = ff14bot.Managers.Actionmanager;
 #endif
     [LoggerName("FlightMover")]
+=======
+	using System;
+	using System.Diagnostics;
+	using System.Threading;
+	using System.Threading.Tasks;
+	using System.Windows.Media;
+
+#if RB_CN
+    using ActionManager = ff14bot.Managers.Actionmanager;
+#endif
+
+	[LoggerName("FlightMover")]
+>>>>>>> d175b5c20a93c41d11f5cbcdec39a039036868c7
 	public class FlightEnabledSlideMover : LogColors, IFlightEnabledPlayerMover
 	{
 		private static Func<Vector3, bool> shouldFlyToFunc = ShouldFlyInternal;
@@ -53,7 +62,7 @@
 		private Task takeoffTask;
 
 		public FlightEnabledSlideMover(IPlayerMover innerMover, bool forceLanding = false)
-			: this(innerMover, new FlightMovementArgs {ForceLanding = forceLanding}) {}
+			: this(innerMover, new FlightMovementArgs { ForceLanding = forceLanding }) { }
 
 		public FlightEnabledSlideMover(IPlayerMover innerMover, IFlightMovementArgs flightMovementArgs)
 		{
@@ -79,6 +88,16 @@
 
 		protected internal bool ShouldFly { get; private set; }
 
+#if RB_CN
+#else
+
+		public bool IsDiving
+		{
+			get { return MovementManager.IsDiving; }
+		}
+
+#endif
+
 		#region IDisposable Members
 
 		public void Dispose()
@@ -91,7 +110,7 @@
 			}
 		}
 
-		#endregion
+		#endregion IDisposable Members
 
 		public void EnsureFlying()
 		{
@@ -167,7 +186,11 @@
 
 		public void ForceLanding()
 		{
+#if RB_CN
 			if (MovementManager.IsFlying)
+#else
+			if (MovementManager.IsFlying && !IsDiving)
+#endif
 			{
 				if (!landingStopwatch.IsRunning)
 				{
@@ -280,11 +303,19 @@
 		internal static bool ShouldFlyInternal(Vector3 destination)
 		{
 			return MovementManager.IsFlying
+<<<<<<< HEAD
 			       || (ActionManager.CanMount == 0
 			           &&
 			           ((destination.Distance3D(GameObjectManager.LocalPlayer.Location) >=
 			             CharacterSettings.Instance.MountDistance)
 			            || !destination.IsGround()));
+=======
+				   || (ActionManager.CanMount == 0
+					   &&
+					   ((destination.Distance3D(GameObjectManager.LocalPlayer.Location) >=
+						 CharacterSettings.Instance.MountDistance)
+						|| !destination.IsGround()));
+>>>>>>> d175b5c20a93c41d11f5cbcdec39a039036868c7
 		}
 
 		private void GameEventsOnMapChanged(object sender, EventArgs e)
@@ -321,7 +352,7 @@
 			return CanFly && (ShouldFly = shouldFlyToFunc(destination));
 		}
 
-		#endregion
+		#endregion IFlightEnabledPlayerMover Members
 
 		#region IPlayerMover Members
 
@@ -358,6 +389,6 @@
 			}
 		}
 
-		#endregion
+		#endregion IPlayerMover Members
 	}
 }

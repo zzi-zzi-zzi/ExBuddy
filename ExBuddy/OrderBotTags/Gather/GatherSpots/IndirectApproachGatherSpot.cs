@@ -1,11 +1,11 @@
 ﻿namespace ExBuddy.OrderBotTags.Gather.GatherSpots
 {
-	using System.ComponentModel;
-	using System.Threading.Tasks;
 	using Buddy.Coroutines;
 	using Clio.Utilities;
 	using Clio.XmlEngine;
 	using ExBuddy.Helpers;
+	using System.ComponentModel;
+	using System.Threading.Tasks;
 
 	[XmlElement("IndirectApproachGatherSpot")]
 	public class IndirectApproachGatherSpot : GatherSpot

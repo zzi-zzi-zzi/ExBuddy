@@ -1,12 +1,12 @@
 ﻿namespace ExBuddy.OrderBotTags.Gather.GatherSpots
 {
-	using System.ComponentModel;
-	using System.Threading.Tasks;
 	using Buddy.Coroutines;
 	using Clio.Utilities;
 	using Clio.XmlEngine;
 	using ExBuddy.Helpers;
 	using ff14bot;
+	using System.ComponentModel;
+	using System.Threading.Tasks;
 
 	[XmlElement("StealthApproachGatherSpot")]
 	public class StealthApproachGatherSpot : GatherSpot
@@ -32,7 +32,7 @@
 				result &= await StealthLocation.MoveToNoMount(UseMesh, tag.Radius, tag.Node.EnglishName, tag.MovementStopCallback);
 			}
 
-			if (UnstealthAfter && Core.Player.HasAura((int) AbilityAura.Stealth))
+			if (UnstealthAfter && Core.Player.HasAura((int)AbilityAura.Stealth))
 			{
 				result &= await tag.CastAura(Ability.Stealth);
 			}

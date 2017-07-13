@@ -1,18 +1,18 @@
 ﻿namespace ExBuddy.Helpers
 {
-	using System;
-	using System.Collections.Concurrent;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Reflection;
 	using Clio.Utilities;
 	using ExBuddy.Logging;
 	using ff14bot.Forms.ugh;
 	using ff14bot.Managers;
 	using ff14bot.NeoProfiles;
 	using Localization;
+	using System;
+	using System.Collections.Concurrent;
+	using System.Collections.Generic;
+	using System.Linq;
+	using System.Reflection;
 
-    public static class Condition
+	public static class Condition
 	{
 		public static readonly TimeSpan OneDay = new TimeSpan(1, 0, 0, 0);
 
@@ -23,7 +23,7 @@
 
 		static Condition()
 		{
-            LocalizationInitializer.Initalize();
+			LocalizationInitializer.Initalize();
 
 			SecondaryOffsetManager.IntalizeOffsets();
 
@@ -99,12 +99,38 @@
 		{
 			foreach (BagSlot slot in InventoryManager.EquippedItems)
 			{
-				if(slot.RawItemId  == id && slot.SpiritBond == 100) 
+				if (slot.RawItemId == id && slot.SpiritBond == 100f)
 				{
 					return true;
 				}
 			}
 			return false;
+		}
+
+		public static bool IsFateActive(int id)
+		{
+			foreach (FateData fate in FateManager.AllFates)
+			{
+				if (fate.Id == id && fate.Status == ff14bot.Enums.FateStatus.ACTIVE)
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+
+		public static int CollectableCount(int id, int collectability)
+		{
+			int count = 0;
+
+			foreach (BagSlot slot in InventoryManager.FilledSlots)
+			{
+				if (slot.RawItemId == id && slot.Collectability >= collectability)
+				{
+					count++;
+				}
+			}
+			return count;
 		}
 
 		public static bool TrueFor(int id, TimeSpan span)
@@ -130,8 +156,8 @@
 		internal static void AddNamespacesToScriptManager(params string[] param)
 		{
 			var field =
-				typeof (ScriptManager).GetFields(BindingFlags.Static | BindingFlags.NonPublic)
-					.FirstOrDefault(f => f.FieldType == typeof (List<string>));
+				typeof(ScriptManager).GetFields(BindingFlags.Static | BindingFlags.NonPublic)
+					.FirstOrDefault(f => f.FieldType == typeof(List<string>));
 
 			if (field == null)
 			{

@@ -1,14 +1,7 @@
-﻿
-#pragma warning disable 1998
+﻿#pragma warning disable 1998
 
 namespace ExBuddy.OrderBotTags.Behaviors
 {
-	using System;
-	using System.Collections.Generic;
-	using System.ComponentModel;
-	using System.Linq;
-	using System.Threading.Tasks;
-	using System.Windows.Media;
 	using Buddy.Coroutines;
 	using Clio.XmlEngine;
 	using ExBuddy.Attributes;
@@ -26,7 +19,13 @@ namespace ExBuddy.OrderBotTags.Behaviors
 	using ff14bot.Navigation;
 	using ff14bot.NeoProfiles;
 	using ff14bot.RemoteWindows;
-    using ShopExchangeCurrency = ExBuddy.Windows.ShopExchangeCurrency;
+	using System;
+	using System.Collections.Generic;
+	using System.ComponentModel;
+	using System.Linq;
+	using System.Threading.Tasks;
+	using System.Windows.Media;
+	using ShopExchangeCurrency = ExBuddy.Windows.ShopExchangeCurrency;
 
 	[LoggerName("ExTurnInCollectables")]
 	[XmlElement("ExTurnInCollectables")]
@@ -49,7 +48,12 @@ namespace ExBuddy.OrderBotTags.Behaviors
 		[XmlAttribute("ForcePurchase")]
 		public bool ForcePurchase { get; set; }
 
+#if RB_CN
 		[DefaultValue(Locations.Idyllshire)]
+#else
+
+		[DefaultValue(Locations.RhalgrsReach)]
+#endif
 		[XmlAttribute("Location")]
 		public Locations Location { get; set; }
 
@@ -73,8 +77,8 @@ namespace ExBuddy.OrderBotTags.Behaviors
 			await CommonTasks.HandleLoading();
 
 			return await ResolveItem() || HandleDeath() || await masterPieceSupplyNpc.TeleportTo() || await MoveToNpc()
-			       || await InteractWithNpc() || await ResolveIndex() || await HandOver() || await HandleSkipPurchase()
-			       || await MoveToShopNpc() || await PurchaseItems();
+				   || await InteractWithNpc() || await ResolveIndex() || await HandOver() || await HandleSkipPurchase()
+				   || await MoveToShopNpc() || await PurchaseItems();
 		}
 
 		protected override void OnDone()
@@ -163,10 +167,10 @@ namespace ExBuddy.OrderBotTags.Behaviors
 			{
 				Logger.Error(Localization.Localization.ExTurnInCollectable_TurnInError);
 				Blacklist.Add(
-					(uint) item.Pointer.ToInt32(),
+					(uint)item.Pointer.ToInt64(),
 					BlacklistFlags.Loot,
 					TimeSpan.FromMinutes(3),
-                    Localization.Localization.ExTurnInCollectable_TurnInBlackList);
+					Localization.Localization.ExTurnInCollectable_TurnInBlackList);
 				item = null;
 				index = 0;
 
@@ -243,7 +247,7 @@ namespace ExBuddy.OrderBotTags.Behaviors
 			foreach (var shopType in result)
 			{
 				Logger.Info(
-                    Localization.Localization.ExTurnInCollectable_ScripsRemaining,
+					Localization.Localization.ExTurnInCollectable_ScripsRemaining,
 					shopType,
 					Memory.Scrips.GetRemainingScripsByShopType(shopType));
 			}
@@ -305,7 +309,11 @@ namespace ExBuddy.OrderBotTags.Behaviors
 
 			var itemsToPurchase = ShopPurchases.Where(ShouldPurchaseItem).ToArray();
 			var npc = GameObjectManager.GetObjectByNPCId(shopExchangeCurrencyNpc.NpcId);
+#if RB_CN
 			var shopType = ShopType.BlueGatherer;
+#else
+			var shopType = ShopType.RedGatherer50;
+#endif
 			var shopExchangeCurrency = new ShopExchangeCurrency();
 			foreach (var purchaseItem in itemsToPurchase)
 			{
@@ -351,25 +359,30 @@ namespace ExBuddy.OrderBotTags.Behaviors
 					return true;
 				}
 
+#if RB_CN
 				if (Location == Locations.MorDhona
-				    && (purchaseItemInfo.ShopType == ShopType.RedCrafter || purchaseItemInfo.ShopType == ShopType.RedGatherer))
+					&& (purchaseItemInfo.ShopType == ShopType.RedCrafter || purchaseItemInfo.ShopType == ShopType.RedGatherer))
 				{
 					Logger.Warn(Localization.Localization.ExTurnInCollectable_FailedPurchaseMorDhona, purchaseItemData.EnglishName);
 					continue;
 				}
-
+#endif
 				ticks = 0;
 				while (SelectIconString.IsOpen && ticks++ < 5 && Behaviors.ShouldContinue)
 				{
+#if RB_CN
 					if (Location == Locations.MorDhona)
 					{
 						// Blue crafter = 0, Blue gather = 1
-						SelectIconString.ClickSlot((uint) purchaseItemInfo.ShopType/2);
+						SelectIconString.ClickSlot((uint)purchaseItemInfo.ShopType / 2);
 					}
 					else
 					{
-						SelectIconString.ClickSlot((uint) purchaseItemInfo.ShopType);
+						SelectIconString.ClickSlot((uint)purchaseItemInfo.ShopType);
 					}
+#else
+					SelectIconString.ClickSlot((uint)purchaseItemInfo.ShopType);
+#endif
 
 					await shopExchangeCurrency.Refresh(5000);
 				}
@@ -388,12 +401,13 @@ namespace ExBuddy.OrderBotTags.Behaviors
 
 				await Coroutine.Sleep(600);
 				int scripsLeft;
-				while (purchaseItemData.ItemCount() < purchaseItem.MaxCount
-				       &&
-				       (scripsLeft = Memory.Scrips.GetRemainingScripsByShopType(purchaseItemInfo.ShopType)) >= purchaseItemInfo.Cost
-				       && Behaviors.ShouldContinue)
+				while (purchaseItemData.ItemCount() < purchaseItem.MaxCount && (scripsLeft = Memory.Scrips.GetRemainingScripsByShopType(purchaseItemInfo.ShopType)) >= purchaseItemInfo.Cost && Behaviors.ShouldContinue)
 				{
-					if (!await shopExchangeCurrency.PurchaseItem(purchaseItemInfo.Index, 20))
+					int QtyLeftToBuy = purchaseItem.MaxCount - (int)purchaseItemData.ItemCount();
+					int QtyBuyable = scripsLeft / purchaseItemInfo.Cost;
+					int QtyToBuy = Math.Min(99, Math.Min(QtyLeftToBuy, QtyBuyable));
+
+					if (!await shopExchangeCurrency.PurchaseItem(purchaseItemInfo.Index, (uint)QtyToBuy, 20))
 					{
 						Logger.Error(Localization.Localization.ExTurnInCollectable_PurchaseTimeout, purchaseItemData.EnglishName);
 						await shopExchangeCurrency.CloseInstance();
@@ -401,7 +415,6 @@ namespace ExBuddy.OrderBotTags.Behaviors
 						return true;
 					}
 
-					// wait until scrips changed
 					var left = scripsLeft;
 					await
 						Coroutine.Wait(
@@ -409,15 +422,47 @@ namespace ExBuddy.OrderBotTags.Behaviors
 							() => (scripsLeft = Memory.Scrips.GetRemainingScripsByShopType(purchaseItemInfo.ShopType)) != left);
 
 					Logger.Info(
-                        Localization.Localization.ExTurnInCollectable_Purchased,
+						Localization.Localization.ExTurnInCollectable_Purchased,
 						purchaseItemData.EnglishName,
-						purchaseItemInfo.Cost,
+						purchaseItemInfo.Cost * QtyToBuy,
 						purchaseItemInfo.ShopType,
 						WorldManager.EorzaTime,
-						scripsLeft);
+						scripsLeft,
+						QtyToBuy);
 
 					await Coroutine.Yield();
 				}
+
+				/*while (purchaseItemData.ItemCount() < purchaseItem.MaxCount
+                       &&
+                       (scripsLeft = Memory.Scrips.GetRemainingScripsByShopType(purchaseItemInfo.ShopType)) >= purchaseItemInfo.Cost
+                       && Behaviors.ShouldContinue)
+                {
+                    if (!await shopExchangeCurrency.PurchaseItem(purchaseItemInfo.Index, (uint)purchaseItem.QtyOnce, 20))
+                    {
+                        Logger.Error(Localization.Localization.ExTurnInCollectable_PurchaseTimeout, purchaseItemData.EnglishName);
+                        await shopExchangeCurrency.CloseInstance();
+                        isDone = true;
+                        return true;
+                    }
+
+                    // wait until scrips changed
+                    var left = scripsLeft;
+                    await
+                        Coroutine.Wait(
+                            5000,
+                            () => (scripsLeft = Memory.Scrips.GetRemainingScripsByShopType(purchaseItemInfo.ShopType)) != left);
+
+                    Logger.Info(
+                        Localization.Localization.ExTurnInCollectable_Purchased,
+                        purchaseItemData.EnglishName,
+                        purchaseItemInfo.Cost,
+                        purchaseItemInfo.ShopType,
+                        WorldManager.EorzaTime,
+                        scripsLeft);
+
+                    await Coroutine.Yield();
+                }*/
 
 				await Coroutine.Sleep(1000);
 			}
@@ -456,12 +501,15 @@ namespace ExBuddy.OrderBotTags.Behaviors
 				case 12828U:
 					index = 9; // Tiny Axotl + Thunderbolt Eel
 					return false;
+
 				case 12900U: // Chysahl Greens
 					index = 11;
 					return false;
+
 				case 12538U: // Adamantite Ore
 					index = 13;
 					return false;
+
 				case 12804U: // Illuminati Perch
 					index = 62;
 					return false;
@@ -472,7 +520,7 @@ namespace ExBuddy.OrderBotTags.Behaviors
 			var classIndex = uint.MaxValue;
 			if (item.Item.RepairClass > 0 && item.Item.EquipmentCatagory != ItemUiCategory.Seafood)
 			{
-				classIndex = MasterPieceSupply.GetClassIndex((ClassJobType) item.Item.RepairClass);
+				classIndex = MasterPieceSupply.GetClassIndex((ClassJobType)item.Item.RepairClass);
 			}
 			else
 			{
@@ -481,11 +529,13 @@ namespace ExBuddy.OrderBotTags.Behaviors
 					case ItemUiCategory.Seafood:
 						classIndex = MasterPieceSupply.GetClassIndex(ClassJobType.Fisher);
 						break;
+
 					case ItemUiCategory.Stone:
 					case ItemUiCategory.Metal:
 					case ItemUiCategory.Bone:
 						classIndex = MasterPieceSupply.GetClassIndex(ClassJobType.Miner);
 						break;
+
 					case ItemUiCategory.Reagent:
 					case ItemUiCategory.Ingredient:
 					case ItemUiCategory.Lumber:
@@ -508,23 +558,29 @@ namespace ExBuddy.OrderBotTags.Behaviors
 				case 80:
 					itemLevel = 0;
 					break;
+
 				case 120:
 					itemLevel = 1;
 					break;
+
 				case 125:
 					itemLevel = 2;
 					break;
+
 				case 150:
 					itemLevel = 10;
 					break;
+
 				case 160:
 					itemLevel = 11;
 					break;
+
 				case 180:
 					itemLevel = 12;
 					break;
+
 				default:
-					itemLevel = itemLevel < 120 ? (byte) 0 : (byte) ((itemLevel - 121)/3);
+					itemLevel = itemLevel < 120 ? (byte)0 : (byte)((itemLevel - 121) / 3);
 					break;
 			}
 
@@ -534,28 +590,28 @@ namespace ExBuddy.OrderBotTags.Behaviors
 			{
 				if (itemLevel >= 10)
 				{
-					indexOffset = (8 + Math.Abs((int) classIndex - 10)*2);
+					indexOffset = (8 + Math.Abs((int)classIndex - 10) * 2);
 				}
 				else
 				{
-					indexOffset = 62 + Math.Abs((int) classIndex - 10)*6;
-					indexOffset += Math.Abs(itemLevel - 10)/2;
+					indexOffset = 62 + Math.Abs((int)classIndex - 10) * 6;
+					indexOffset += Math.Abs(itemLevel - 10) / 2;
 				}
 			}
 			else
 			{
 				if (itemLevel >= 10)
 				{
-					indexOffset = Math.Abs((int) classIndex - 7);
+					indexOffset = Math.Abs((int)classIndex - 7);
 				}
 				else
 				{
-					indexOffset = 14 + Math.Abs((int) classIndex - 7)*6;
-					indexOffset += Math.Abs(itemLevel - 10)/2;
+					indexOffset = 14 + Math.Abs((int)classIndex - 7) * 6;
+					indexOffset += Math.Abs(itemLevel - 10) / 2;
 				}
 			}
 
-			index = (uint) indexOffset;
+			index = (uint)indexOffset;
 
 			return false;
 		}
@@ -569,11 +625,11 @@ namespace ExBuddy.OrderBotTags.Behaviors
 
 			var slots =
 				InventoryManager.FilledInventoryAndArmory.Where(
-					i => !Blacklist.Contains((uint) i.Pointer.ToInt32(), BlacklistFlags.Loot)).ToArray();
+					i => !Blacklist.Contains((uint)i.Pointer.ToInt64(), BlacklistFlags.Loot)).ToArray();
 
 			if (Collectables == null)
 			{
-				item = slots.FirstOrDefault(i => i.Collectability > 0);
+				item = slots.FirstOrDefault(i => i.Collectability > 0 && i.RawItemId != 17557 && i.RawItemId != 17558 && i.RawItemId != 17559 && i.RawItemId != 17560 && i.RawItemId != 17561 && i.RawItemId != 17562 && i.RawItemId != 17563 && i.RawItemId != 17564 && i.RawItemId != 17565 && i.RawItemId != 17566);
 			}
 			else
 			{
@@ -660,7 +716,7 @@ namespace ExBuddy.OrderBotTags.Behaviors
 				return false;
 			}
 
-			// check cost
+#if RB_CN
 			switch (info.ShopType)
 			{
 				case ShopType.BlueCrafter:
@@ -669,18 +725,21 @@ namespace ExBuddy.OrderBotTags.Behaviors
 						return false;
 					}
 					break;
+
 				case ShopType.RedCrafter:
 					if (Memory.Scrips.RedCrafter < info.Cost)
 					{
 						return false;
 					}
 					break;
+
 				case ShopType.BlueGatherer:
 					if (Memory.Scrips.BlueGatherer < info.Cost)
 					{
 						return false;
 					}
 					break;
+
 				case ShopType.RedGatherer:
 					if (Memory.Scrips.RedGatherer < info.Cost)
 					{
@@ -688,6 +747,46 @@ namespace ExBuddy.OrderBotTags.Behaviors
 					}
 					break;
 			}
+#else
+			// check cost
+			switch (info.ShopType)
+			{
+				case ShopType.RedCrafter50:
+					if (Memory.Scrips.RedCrafter < info.Cost)
+					{
+						return false;
+					}
+					break;
+
+				case ShopType.RedCrafter61:
+					if (Memory.Scrips.RedCrafter < info.Cost)
+					{
+						return false;
+					}
+					break;
+
+				case ShopType.RedGatherer50:
+					if (Memory.Scrips.RedGatherer < info.Cost)
+					{
+						return false;
+					}
+					break;
+
+				case ShopType.RedGatherer61:
+					if (Memory.Scrips.RedGatherer < info.Cost)
+					{
+						return false;
+					}
+					break;
+
+				case ShopType.YellowGathererItems:
+					if (Memory.Scrips.YellowGatherer < info.Cost)
+					{
+						return false;
+					}
+					break;
+			}
+#endif
 
 			return true;
 		}
