@@ -168,7 +168,7 @@
 		public void ForceLanding()
 		{
 #if RB_CN
-            if (MovementManager.IsFlying &&)
+            if (MovementManager.IsFlying)
 #else
             if(!MovementManager.IsDiving && MovementManager.IsFlying)
 #endif
