@@ -11,7 +11,7 @@ namespace ExBuddy.Helpers
     using ActionManager = ff14bot.Managers.Actionmanager;
 #endif
 
-    internal static class Actions
+	internal static class Actions
 	{
 		internal static async Task<bool> Cast(uint id, int delay)
 		{
@@ -68,9 +68,9 @@ namespace ExBuddy.Helpers
 			var result = false;
 			if (auraId == -1 || !Core.Player.HasAura(
 #if !RB_CN
-                (uint)
+				(uint)
 #endif
-                auraId))
+				auraId))
 			{
 				SpellData spellData;
 				if (GatheringManager.ShouldPause(spellData = DataManager.SpellCache[spellId]))
@@ -98,9 +98,9 @@ namespace ExBuddy.Helpers
 				//Wait till we have the aura
 				await Coroutine.Wait(3500, () => Core.Player.HasAura(
 #if !RB_CN
-                    (uint)
+					(uint)
 #endif
-                    auraId));
+					auraId));
 				if (delay > 0)
 				{
 					await Coroutine.Sleep(delay);

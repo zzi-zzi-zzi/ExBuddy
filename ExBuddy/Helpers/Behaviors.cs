@@ -22,7 +22,7 @@ namespace ExBuddy.Helpers
     using ActionManager = ff14bot.Managers.Actionmanager;
 #endif
 
-    public static class Behaviors
+	public static class Behaviors
 	{
 		public static readonly Func<float, float, bool> DontStopInRange = (d, r) => false;
 
@@ -340,7 +340,7 @@ namespace ExBuddy.Helpers
 #if RB_CN
                 && Core.Player.CurrentTP == 1000
 #endif
-			    && MovementManager.IsMoving)
+				&& MovementManager.IsMoving)
 			{
 				ActionManager.Sprint();
 

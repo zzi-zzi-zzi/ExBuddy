@@ -1,49 +1,47 @@
 ﻿#if RB_64
+
 namespace ExBuddy.Navigation
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Diagnostics;
-	using System.Runtime.Caching;
-	using System.Threading;
-	using System.Threading.Tasks;
-	using System.Windows.Media;
-	using Buddy.Coroutines;
 	using Clio.Common;
 	using Clio.Utilities;
-	using ExBuddy.Attributes;
 	using ExBuddy.Interfaces;
 	using ExBuddy.Logging;
 	using ff14bot;
 	using ff14bot.Enums;
-	using ff14bot.Interfaces;
 	using ff14bot.Managers;
+	using ff14bot.Navigation;
 	using ff14bot.Pathing;
-    using ff14bot.Pathing.Service_Navigation;
-    using ff14bot.ServiceClient;
-    using ff14bot.Navigation;
+	using ff14bot.Pathing.Service_Navigation;
+	using ff14bot.ServiceClient;
+	using System;
+	using System.Collections.Generic;
+	using System.Diagnostics;
+	using System.Runtime.Caching;
+	using System.Threading.Tasks;
+	using System.Windows.Media;
 
+	public class FlightEnabledNavigatorLogColors : LogColors
+	{
+		#region ILogColors
 
-    public class FlightEnabledNavigatorLogColors : LogColors
-    {
-        #region ILogColors
+		public override Color Error
+		{
+			get { return Colors.Red; }
+		}
 
-        public override Color Error
-        {
-            get { return Colors.Red; }
-        }
+		public override Color Info
+		{
+			get { return Colors.SkyBlue; }
+		}
 
-        public override Color Info
-        {
-            get { return Colors.SkyBlue; }
-        }
-        public override Color Warn
-        {
-            get { return Colors.PaleVioletRed; }
-        }
+		public override Color Warn
+		{
+			get { return Colors.PaleVioletRed; }
+		}
 
-        #endregion
-    }
+		#endregion ILogColors
+	}
+
 	public sealed class FlightEnabledNavigator : WrappingNavigationProvider, IDisposable
 	{
 		private readonly IFlightNavigationArgs flightNavigationArgs;
@@ -65,13 +63,13 @@ namespace ExBuddy.Navigation
 		private Vector3 requestedDestination;
 
 		public FlightEnabledNavigator(NavigationProvider innerNavigator)
-			: this(innerNavigator, new FlightEnabledSlideMover(Navigator.PlayerMover), new FlightNavigationArgs()) {}
+			: this(innerNavigator, new FlightEnabledSlideMover(Navigator.PlayerMover), new FlightNavigationArgs()) { }
 
 		public FlightEnabledNavigator(
-            NavigationProvider innerNavigator,
+			NavigationProvider innerNavigator,
 			IFlightEnabledPlayerMover playerMover,
 			IFlightNavigationArgs flightNavigationArgs) : base(innerNavigator)
-        {
+		{
 			logger = new Logger(new FlightEnabledNavigatorLogColors(), "FlightNav");
 			this.playerMover = playerMover;
 			this.flightNavigationArgs = flightNavigationArgs;
@@ -83,14 +81,15 @@ namespace ExBuddy.Navigation
 
 		public FlightPath CurrentPath { get; internal set; }
 
-        public double PathPrecisionSqr
+		public double PathPrecisionSqr
 		{
 			get { return 4.0; }
 		}
-        public double PathPrecision
-        {
-            get { return 2.0; }
-        }
+
+		public double PathPrecision
+		{
+			get { return 2.0; }
+		}
 
 		public bool VerboseLogging { get; set; }
 
@@ -108,7 +107,7 @@ namespace ExBuddy.Navigation
 			}
 		}
 
-		#endregion
+		#endregion IDisposable Members
 
 		public static Vector3 Lerp(Vector3 value1, Vector3 value2, float amount)
 		{
@@ -121,11 +120,11 @@ namespace ExBuddy.Navigation
 		public static Vector3 SampleParabola(Vector3 start, Vector3 end, float height, float t)
 		{
 			var direction3 = end - start;
-			var computed = start + t*direction3;
+			var computed = start + t * direction3;
 			if (Math.Abs(start.Y - end.Y) < 3.0f)
 			{
 				//start and end are roughly level, pretend they are - simpler solution with less steps
-				computed.Y += (float) (Math.Sin((t*(float) Math.PI)))*height;
+				computed.Y += (float)(Math.Sin((t * (float)Math.PI))) * height;
 			}
 			else
 			{
@@ -139,7 +138,7 @@ namespace ExBuddy.Navigation
 				}
 				up.Normalize();
 
-				computed.Y += ((float) (Math.Sin((t*(float) Math.PI)))*height)*up.Y;
+				computed.Y += ((float)(Math.Sin((t * (float)Math.PI))) * height) * up.Y;
 			}
 
 			return computed;
@@ -184,11 +183,10 @@ namespace ExBuddy.Navigation
 
 		private void HandlePathGenerationResult(Task<GeneratePathResult> task)
 		{
-
-		    foreach (var p in CurrentPath)
-		    {
-		        Logger.Instance.Info("Path: {0}", p.Location);
-		    }
+			foreach (var p in CurrentPath)
+			{
+				Logger.Instance.Info("Path: {0}", p.Location);
+			}
 
 			switch (task.Result)
 			{
@@ -199,6 +197,7 @@ namespace ExBuddy.Navigation
 						CurrentPath.Count,
 						pathGeneratorStopwatch.Elapsed);
 					break;
+
 				case GeneratePathResult.SuccessUseExisting:
 					logger.Info(
 						Localization.Localization.FlightEnabledNavigator_PathFound,
@@ -206,6 +205,7 @@ namespace ExBuddy.Navigation
 						CurrentPath.Count,
 						pathGeneratorStopwatch.Elapsed);
 					break;
+
 				case GeneratePathResult.Failed:
 					logger.Error(Localization.Localization.FlightEnabledNavigator_PathNotViable, finalDestination, origin);
 					break;
@@ -242,10 +242,10 @@ namespace ExBuddy.Navigation
 
 			if (distanceToNextHop >= PathPrecision)
 			{
-                //Navigator.PlayerMover.MoveTowards(CurrentPath.Current);
+				//Navigator.PlayerMover.MoveTowards(CurrentPath.Current);
 
-                playerMover.MoveTowards(CurrentPath.Current);
-                return MoveResult.Moved;
+				playerMover.MoveTowards(CurrentPath.Current);
+				return MoveResult.Moved;
 			}
 
 			if (!CurrentPath.Next())
@@ -267,7 +267,7 @@ namespace ExBuddy.Navigation
 				name,
 				location.Distance(CurrentPath.Current));
 			if (!ExBuddySettings.Instance.VerboseLogging
-			    && (CurrentPath.Index%5 == 0 || CurrentPath.Index == CurrentPath.Count - 1))
+				&& (CurrentPath.Index % 5 == 0 || CurrentPath.Index == CurrentPath.Count - 1))
 			{
 				logger.Info(
 					Localization.Localization.FlightEnabledNavigator_HopMoving2,
@@ -295,7 +295,7 @@ namespace ExBuddy.Navigation
 			if (CurrentPath != null && CurrentPath.Count != 0 && requestedDestination != Vector3.Zero)
 			{
 				// Find the max diagonal of a cube for given radius, this should be the max distance we could receive from random direction method.
-				if (radius > 0 && finalDestination.Distance(target) < Math.Sqrt(3)*radius)
+				if (radius > 0 && finalDestination.Distance(target) < Math.Sqrt(3) * radius)
 				{
 					return false;
 				}
@@ -318,10 +318,10 @@ namespace ExBuddy.Navigation
 			SuccessUseExisting
 		}
 
-        #region INavigationProvider Members
+		#region INavigationProvider Members
 
-        public override Task<List<CanFullyNavigateResult>> CanFullyNavigateTo(
-            ICollection<CanFullyNavigateTarget> targets,
+		public override Task<List<CanFullyNavigateResult>> CanFullyNavigateTo(
+			ICollection<CanFullyNavigateTarget> targets,
 			Vector3 start,
 			ushort zoneid)
 		{
@@ -342,14 +342,14 @@ namespace ExBuddy.Navigation
 
 		public override MoveResult MoveTo(MoveToParameters parameters)
 		{
-            if (generatingPath)
+			if (generatingPath)
 			{
 				return MoveResult.GeneratingPath;
 			}
 
-		    if (!playerMover.IsDiving && (!playerMover.CanFly || (parameters.MapId != null && parameters.MapId != -1 && parameters.MapId != WorldManager.ZoneId) || (!MovementManager.IsFlying && !playerMover.ShouldFlyTo(parameters.Location))))
-            {
-                return Original.MoveTo(parameters);
+			if (!playerMover.IsDiving && (!playerMover.CanFly || (parameters.MapId != null && parameters.MapId != -1 && parameters.MapId != WorldManager.ZoneId) || (!MovementManager.IsFlying && !playerMover.ShouldFlyTo(parameters.Location))))
+			{
+				return Original.MoveTo(parameters);
 			}
 
 			var currentLocation = GameObjectManager.LocalPlayer.Location;
@@ -383,7 +383,8 @@ namespace ExBuddy.Navigation
 			return MoveResult.Done;
 		}
 
-#endregion
+		#endregion INavigationProvider Members
 	}
 }
+
 #endif

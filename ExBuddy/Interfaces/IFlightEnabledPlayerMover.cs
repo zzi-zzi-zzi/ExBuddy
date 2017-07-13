@@ -20,7 +20,7 @@ namespace ExBuddy.Interfaces
 		bool ShouldFlyTo(Vector3 destination);
 
 #if RB_64
-        bool IsDiving { get; }
+		bool IsDiving { get; }
 #endif
 	}
 }

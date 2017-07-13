@@ -297,7 +297,7 @@ namespace ExBuddy.Navigation
 
 				Vector3 deviationWaypoint;
 				var result = collisions.CollisionResult(queuedFlightPoints.ToArray(), out deviationWaypoint);
-			    //await Coroutine.Yield();
+				//await Coroutine.Yield();
 
 				if (result != CollisionFlags.None)
 				{

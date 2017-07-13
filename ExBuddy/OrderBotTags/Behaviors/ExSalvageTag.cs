@@ -1,10 +1,8 @@
 ﻿namespace ExBuddy.OrderBotTags.Behaviors
 {
-	using Buddy.Coroutines;
 	using Clio.Utilities;
 	using Clio.XmlEngine;
 	using ExBuddy.Attributes;
-	using ExBuddy.Helpers;
 	using ExBuddy.Windows;
 	using ff14bot.Behavior;
 	using ff14bot.Enums;

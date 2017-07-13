@@ -4,7 +4,6 @@
 	using ExBuddy.OrderBotTags.Behaviors.Objects;
 	using ff14bot;
 	using ff14bot.Managers;
-	using ff14bot.NeoProfiles;
 	using GreyMagic;
 	using System;
 	using System.Linq;
