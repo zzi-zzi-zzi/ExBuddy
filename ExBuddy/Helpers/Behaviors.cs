@@ -22,7 +22,7 @@ namespace ExBuddy.Helpers
     using ActionManager = ff14bot.Managers.Actionmanager;
 #endif
 
-	public static class Behaviors
+    public static class Behaviors
 	{
 		public static readonly Func<float, float, bool> DontStopInRange = (d, r) => false;
 
@@ -336,8 +336,11 @@ namespace ExBuddy.Helpers
 
 		public static async Task<bool> Sprint(int timeout = 500)
 		{
-			if (ActionManager.IsSprintReady && !Core.Player.IsCasting && !Core.Player.IsMounted && Core.Player.CurrentTP == 1000
-				&& MovementManager.IsMoving)
+			if (ActionManager.IsSprintReady && !Core.Player.IsCasting && !Core.Player.IsMounted
+#if RB_CN
+                && Core.Player.CurrentTP == 1000
+#endif
+			    && MovementManager.IsMoving)
 			{
 				ActionManager.Sprint();
 

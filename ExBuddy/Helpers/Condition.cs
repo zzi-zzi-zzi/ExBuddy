@@ -99,7 +99,7 @@
 		{
 			foreach (BagSlot slot in InventoryManager.EquippedItems)
 			{
-				if (slot.RawItemId == id && slot.SpiritBond == 100)
+				if (slot.RawItemId == id && slot.SpiritBond == 100f)
 				{
 					return true;
 				}

@@ -297,6 +297,8 @@ namespace ExBuddy.Navigation
 
 				Vector3 deviationWaypoint;
 				var result = collisions.CollisionResult(queuedFlightPoints.ToArray(), out deviationWaypoint);
+			    //await Coroutine.Yield();
+
 				if (result != CollisionFlags.None)
 				{
 					// DO THINGS! // check landing + buffer zone of 2.0f

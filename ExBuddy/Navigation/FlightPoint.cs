@@ -31,6 +31,12 @@
 			return new FlightPoint { Location = vector };
 		}
 
+	    public static FlightPoint operator +(FlightPoint first, Vector3 loc)
+	    {
+	        first.Location += loc;
+	        return first;
+	    }
+
 		public override string ToString()
 		{
 			return Location + (IsDeviation ? " *D*" : string.Empty);

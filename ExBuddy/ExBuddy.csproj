@@ -18,7 +18,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;RB_64</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -33,20 +33,19 @@
   <ItemGroup>
     <Reference Include="Clio.Localization, Version=1.0.104.0, Culture=neutral, PublicKeyToken=48d7174f8a943034, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Rebornbuddy64_Mew\Clio.Localization.dll</HintPath>
+      <HintPath>..\Assembly\Clio.Localization.dll</HintPath>
     </Reference>
     <Reference Include="GreyMagic, Version=1.0.41.0, Culture=neutral, PublicKeyToken=260525fa2b0e778a, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Rebornbuddy64_Mew\GreyMagic.dll</HintPath>
+      <HintPath>..\Assembly\GreyMagic.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="Quest Behaviors_1537820551">
       <HintPath>..\Assembly\Quest Behaviors_1537820551.dll</HintPath>
     </Reference>
-    <Reference Include="RebornBuddy, Version=1.0.104.0, Culture=neutral, PublicKeyToken=48d7174f8a943034, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Rebornbuddy64_Mew\RebornBuddy.exe</HintPath>
+    <Reference Include="RebornBuddy">
+      <HintPath>..\Assembly\RebornBuddy.exe</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -73,6 +72,8 @@
       <DependentUpon>Localization.resx</DependentUpon>
     </Compile>
     <Compile Include="Localization\LocalizationInitializer.cs" />
+    <Compile Include="Navigation\FlightEnabledNavigatorbeta.cs" />
+    <Compile Include="Navigation\FlightEnabledNavigatorCN.cs" />
     <Compile Include="Offsets\SecondaryOffsets.cs" />
     <Compile Include="OrderBotTags\Gather\Rotations\Collect321GatheringRotation.cs" />
     <Compile Include="OrderBotTags\Gather\Rotations\Collect346GatheringRotation.cs" />
@@ -178,7 +179,6 @@
     <Compile Include="Helpers\ObjectCache{T}.cs" />
     <Compile Include="Helpers\ReflectionHelper.cs" />
     <Compile Include="DefaultReturnStrategy.cs" />
-    <Compile Include="Navigation\FlightEnabledNavigator.cs" />
     <Compile Include="Navigation\FlightEnabledSlideMover.cs" />
     <Compile Include="Navigation\FlightPath.cs" />
     <Compile Include="Navigation\FlightPoint.cs" />

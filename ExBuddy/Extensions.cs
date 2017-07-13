@@ -10,6 +10,7 @@
 	using ff14bot.Enums;
 	using ff14bot.Managers;
 	using ff14bot.Objects;
+	using GreyMagic;
 	using System;
 	using System.Collections;
 	using System.Collections.Generic;
@@ -19,12 +20,11 @@
 	using System.Security.Cryptography;
 	using System.Text;
 	using System.Threading.Tasks;
-
 #if RB_CN
     using ActionManager = ff14bot.Managers.Actionmanager;
 #endif
 
-	[Flags]
+    [Flags]
 	public enum SphereType
 	{
 		None = 0,
@@ -702,7 +702,7 @@
 				window.SendAction(pairCount, param);
 				return SendActionResult.Success;
 			}
-			catch (InjectionException ex)
+			catch (Exception ex)
 			{
 				Logger.Instance.Error(ex.Message);
 				return SendActionResult.InjectionError;
