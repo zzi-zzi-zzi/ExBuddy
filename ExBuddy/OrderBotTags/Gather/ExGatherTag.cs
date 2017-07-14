@@ -396,6 +396,12 @@
 				   || Node.EnglishName.IndexOf("legendary", StringComparison.InvariantCultureIgnoreCase) >= 0;
 		}
 
+		/// <summary>
+		/// called by moveto.
+		/// </summary>
+		/// <param name="distance">Distance to our target</param>
+		/// <param name="radius">Radius we passed into the moveto</param>
+		/// <returns></returns>
 		internal bool MovementStopCallback(float distance, float radius)
 		{
 			return distance <= radius || !WhileFunc() || ExProfileBehavior.Me.IsDead;
@@ -1317,7 +1323,7 @@
 				while (MovementManager.IsFlying
 #if !RB_CN
 				&& !MovementManager.IsDiving
-#endif 
+#endif
 				&& ticks++ < 5 && Behaviors.ShouldContinue && Poi.Current.Unit.IsVisible
 					   && Poi.Current.Unit.IsValid)
 				{
@@ -1462,7 +1468,11 @@
 				}
 			}
 
-			return distance <= Distance || await GatherSpot.MoveToSpot(this);
+			if (distance <= Distance)
+				return true;
+			await GatherSpot.MoveToSpot(this);
+
+			return false;
 		}
 
 		private async Task<bool> MoveToHotSpot()
