@@ -321,7 +321,9 @@
 			return CanFly && (ShouldFly = shouldFlyToFunc(destination));
 		}
 
-#if !RB_CN
+#if RB_CN
+        public bool IsDiving => false;
+#else
 		public bool IsDiving => MovementManager.IsDiving;
 #endif
 
