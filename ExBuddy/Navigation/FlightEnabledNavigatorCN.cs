@@ -90,7 +90,7 @@ namespace ExBuddy.Navigation
 			}
 		}
 
-#endregion
+#endregion IDisposable Members
 
 		public static Vector3 Lerp(Vector3 value1, Vector3 value2, float amount)
 		{
@@ -191,6 +191,7 @@ namespace ExBuddy.Navigation
 						CurrentPath.Count,
 						pathGeneratorStopwatch.Elapsed);
 					break;
+
 				case GeneratePathResult.SuccessUseExisting:
 					logger.Info(
 						Localization.Localization.FlightEnabledNavigator_PathFound,
@@ -198,6 +199,7 @@ namespace ExBuddy.Navigation
 						CurrentPath.Count,
 						pathGeneratorStopwatch.Elapsed);
 					break;
+
 				case GeneratePathResult.Failed:
 					logger.Error(Localization.Localization.FlightEnabledNavigator_PathNotViable, finalDestination, origin);
 					break;
@@ -458,7 +460,7 @@ namespace ExBuddy.Navigation
 			return MoveResult.Done;
 		}
 
-#endregion
+#endregion INavigationProvider Members
 	}
 }
 #endif
