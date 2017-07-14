@@ -286,7 +286,7 @@ namespace ExBuddy.Helpers
 			while (Behaviors.ShouldContinue && !(moveResult.IsDoneMoving()))
 			{
 #if RB_CN
-                //moveResult = Navigator.MoveToPointWithin(destination, radius, name);
+                moveResult = Navigator.MoveToPointWithin(destination, radius, name);
 #else
                 moveResult = Navigator.MoveTo(new MoveToParameters(destination));
 #endif

@@ -396,12 +396,12 @@
 				   || Node.EnglishName.IndexOf("legendary", StringComparison.InvariantCultureIgnoreCase) >= 0;
 		}
 
-        /// <summary>
-        /// called by moveto. 
-        /// </summary>
-        /// <param name="distance">Distance to our target</param>
-        /// <param name="radius">Radius we passed into the moveto</param>
-        /// <returns></returns>
+		/// <summary>
+		/// called by moveto.
+		/// </summary>
+		/// <param name="distance">Distance to our target</param>
+		/// <param name="radius">Radius we passed into the moveto</param>
+		/// <returns></returns>
 		internal bool MovementStopCallback(float distance, float radius)
 		{
 			return distance <= radius || !WhileFunc() || ExProfileBehavior.Me.IsDead;
@@ -1320,7 +1320,11 @@
 				   && Poi.Current.Unit.IsValid)
 			{
 				var ticks = 0;
-				while (MovementManager.IsFlying && !MovementManager.IsDiving && ticks++ < 5 && Behaviors.ShouldContinue && Poi.Current.Unit.IsVisible
+				while (MovementManager.IsFlying
+#if !RB_CN
+				&& !MovementManager.IsDiving
+#endif
+				&& ticks++ < 5 && Behaviors.ShouldContinue && Poi.Current.Unit.IsVisible
 					   && Poi.Current.Unit.IsValid)
 				{
 					var ground = ExProfileBehavior.Me.Location.GetFloor(5);
@@ -1464,11 +1468,11 @@
 				}
 			}
 
-		    if (distance <= Distance)
-		        return true;
-		    await GatherSpot.MoveToSpot(this);
+		   if (distance <= Distance)
+		       return true;
+		   await GatherSpot.MoveToSpot(this);
 
-		    return false;
+		   return false;
 		}
 
 		private async Task<bool> MoveToHotSpot()

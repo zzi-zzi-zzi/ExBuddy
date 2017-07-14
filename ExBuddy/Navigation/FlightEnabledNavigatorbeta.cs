@@ -183,7 +183,6 @@ namespace ExBuddy.Navigation
 
 		private void HandlePathGenerationResult(Task<GeneratePathResult> task)
 		{
-
 			switch (task.Result)
 			{
 				case GeneratePathResult.Success:

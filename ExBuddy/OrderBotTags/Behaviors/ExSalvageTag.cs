@@ -43,7 +43,11 @@
 				return isDone = true;
 			}
 
-			if (MovementManager.IsFlying || MovementManager.IsDiving)
+			if (MovementManager.IsFlying
+#if !RB_CN
+				|| MovementManager.IsDiving
+#endif
+				)
 			{
 				Logger.Error(Localization.Localization.ExSalvage_Land);
 				return isDone = true;
