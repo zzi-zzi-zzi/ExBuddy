@@ -1458,7 +1458,7 @@
 
 		private async Task<bool> MoveToGatherSpot()
 		{
-			var distance = Poi.Current.Location.Distance3D(ExProfileBehavior.Me.Location);
+			var distance = Poi.Current.Location.Distance3D(ExProfileBehavior.Me.Location); 
 			if (FreeRange)
 			{
 				while (distance > Distance && distance <= Radius && Behaviors.ShouldContinue)
@@ -1468,11 +1468,11 @@
 				}
 			}
 
-			if (distance <= Distance)
-				return true;
-			await GatherSpot.MoveToSpot(this);
+		   if (distance <= Distance)
+		       return true;
+		   await GatherSpot.MoveToSpot(this);
 
-			return false;
+		   return false;
 		}
 
 		private async Task<bool> MoveToHotSpot()
