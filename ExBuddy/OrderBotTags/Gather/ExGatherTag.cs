@@ -1314,7 +1314,11 @@
 				   && Poi.Current.Unit.IsValid)
 			{
 				var ticks = 0;
-				while (MovementManager.IsFlying && !MovementManager.IsDiving && ticks++ < 5 && Behaviors.ShouldContinue && Poi.Current.Unit.IsVisible
+				while (MovementManager.IsFlying
+#if !RB_CN
+				&& !MovementManager.IsDiving
+#endif 
+				&& ticks++ < 5 && Behaviors.ShouldContinue && Poi.Current.Unit.IsVisible
 					   && Poi.Current.Unit.IsValid)
 				{
 					var ground = ExProfileBehavior.Me.Location.GetFloor(5);

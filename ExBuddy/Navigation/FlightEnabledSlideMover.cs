@@ -321,10 +321,8 @@
 			return CanFly && (ShouldFly = shouldFlyToFunc(destination));
 		}
 
-#if RB_64
+#if !RB_CN
 		public bool IsDiving => MovementManager.IsDiving;
-#else
-        public bool IsDiving => false;
 #endif
 
 		#endregion IFlightEnabledPlayerMover Members
