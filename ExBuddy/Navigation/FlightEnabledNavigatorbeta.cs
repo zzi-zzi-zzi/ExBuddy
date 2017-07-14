@@ -184,12 +184,6 @@ namespace ExBuddy.Navigation
 
 		private void HandlePathGenerationResult(Task<GeneratePathResult> task)
 		{
-
-		    foreach (var p in CurrentPath)
-		    {
-		        Logger.Instance.Info("Path: {0}", p.Location);
-		    }
-
 			switch (task.Result)
 			{
 				case GeneratePathResult.Success:

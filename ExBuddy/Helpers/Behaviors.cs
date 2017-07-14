@@ -222,9 +222,12 @@ namespace ExBuddy.Helpers
 					   && (!stopCallback(distance = Core.Player.Location.Distance3D(destination), radius)
 						   || stopCallback == DontStopInRange) && !(moveResult.IsDoneMoving()))
 				{
-					//moveResult = Navigator.MoveTo(destination, name);
-					moveResult = Navigator.MoveTo(new MoveToParameters(destination));
-					await Coroutine.Yield();
+#if RB_CN
+                    moveResult = Navigator.MoveTo(destination, name);
+#else
+                    moveResult = Navigator.MoveTo(new MoveToParameters(destination));
+#endif
+                    await Coroutine.Yield();
 
 					if (distance > sprintDistance)
 					{

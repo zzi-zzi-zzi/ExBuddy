@@ -37,8 +37,8 @@ namespace ExBuddy.OrderBotTags.Gather.GatherSpots
 		{
 			tag.StatusText = "Moving to " + this;
 
-			var result =
-				await
+		    var result =
+		        await
 					NodeLocation.MoveTo(
 						UseMesh,
 						radius: tag.Distance,
