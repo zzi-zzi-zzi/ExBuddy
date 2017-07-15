@@ -20,10 +20,12 @@ namespace ExBuddy.Helpers
 #if RB_CN
     using ActionManager = ff14bot.Managers.Actionmanager;
 #else
+
 	using ff14bot.Pathing;
+
 #endif
 
-    public static class Behaviors
+	public static class Behaviors
 	{
 		public static readonly Func<float, float, bool> DontStopInRange = (d, r) => false;
 
@@ -226,10 +228,10 @@ namespace ExBuddy.Helpers
 #if RB_CN
                     moveResult = Navigator.MoveTo(destination, name);
 #else
-                    moveResult = Navigator.MoveTo(new MoveToParameters(destination));
+					moveResult = Navigator.MoveTo(new MoveToParameters(destination));
 #endif
 
-                    await Coroutine.Yield();
+					await Coroutine.Yield();
 
 					if (distance > sprintDistance)
 					{
@@ -286,11 +288,11 @@ namespace ExBuddy.Helpers
 			while (Behaviors.ShouldContinue && !(moveResult.IsDoneMoving()))
 			{
 #if RB_CN
-                //moveResult = Navigator.MoveToPointWithin(destination, radius, name);
+                moveResult = Navigator.MoveToPointWithin(destination, radius, name);
 #else
-                moveResult = Navigator.MoveTo(new MoveToParameters(destination));
+				moveResult = Navigator.MoveTo(new MoveToParameters(destination));
 #endif
-                await Coroutine.Yield();
+				await Coroutine.Yield();
 
 				var distance = Core.Player.Location.Distance3D(destination);
 				if (distance > sprintDistance)

@@ -1,7 +1,6 @@
 ﻿namespace ExBuddy.OrderBotTags.Gather.GatherSpots
 {
 	using Buddy.Coroutines;
-	using Clio.Utilities;
 	using Clio.XmlEngine;
 	using ExBuddy.Helpers;
 	using ff14bot;
@@ -49,15 +48,12 @@
 		{
 			tag.StatusText = "Moving to " + this;
 
-			if (approachLocation == Vector3.Zero)
+			if (HotSpots == null || HotSpots.Count == 0)
 			{
-				if (HotSpots == null || HotSpots.Count == 0)
-				{
-					return false;
-				}
-
-				approachLocation = HotSpots.Shuffle().First();
+				return false;
 			}
+
+			approachLocation = HotSpots.Shuffle().First();
 
 			var result = await approachLocation.MoveToPointWithin(dismountAtDestination: Stealth);
 
@@ -83,11 +79,6 @@
 			}
 
 			return result;
-		}
-
-		public override string ToString()
-		{
-			return this.DynamicToString("HotSpots", "Stealth", "UnstealthAfter");
 		}
 	}
 }

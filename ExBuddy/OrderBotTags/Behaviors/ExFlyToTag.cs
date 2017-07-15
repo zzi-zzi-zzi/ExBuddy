@@ -173,7 +173,11 @@ namespace ExBuddy.OrderBotTags.Behaviors
 				Logger.Error(Localization.Localization.ExFlyTo_NoViablePath, Target);
 			}
 
-			if (ForceLanding && !MovementManager.IsDiving)
+			if (ForceLanding
+#if !RB_CN
+				&& !MovementManager.IsDiving
+#endif
+				)
 			{
 				await ForceLand();
 			}
