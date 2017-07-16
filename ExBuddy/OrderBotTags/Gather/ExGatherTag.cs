@@ -37,7 +37,7 @@
 	[LoggerName("ExGather")]
 	[XmlElement("ExGather")]
 	[XmlElement("GatherCollectable")]
-	public sealed class ExGatherTag : ExProfileBehavior
+	public class ExGatherTag : ExProfileBehavior
 	{
 		private static readonly object Lock = new object();
 
