@@ -34,8 +34,6 @@
 
 		private readonly Stopwatch totalLandingStopwatch = new Stopwatch();
 
-		private Coroutine coroutine;
-
 		private bool disposed;
 
 		internal bool IsMovingTowardsLocation;
@@ -110,7 +108,8 @@
 								{
 									try
 									{
-										while (!MovementManager.IsFlying && Behaviors.ShouldContinue && IsMovingTowardsLocation)
+									    Coroutine coroutine = null;
+                                        while (!MovementManager.IsFlying && Behaviors.ShouldContinue && IsMovingTowardsLocation)
 										{
 											if (takeoffStopwatch.ElapsedMilliseconds > 10000)
 											{
@@ -285,7 +284,7 @@
 			return MovementManager.IsFlying
 				   || (ActionManager.CanMount == 0
 					   &&
-					   ((destination.Distance3D(GameObjectManager.LocalPlayer.Location) >=
+					   ((destination.Distance3D(Core.Me.Location) >=
 						 CharacterSettings.Instance.MountDistance)
 						|| !destination.IsGround()));
 		}
@@ -350,6 +349,11 @@
 
 		public void MoveTowards(Vector3 location)
 		{
+		    if (IsLanding && location.Distance3D(Core.Me.Location) < CharacterSettings.Instance.MountDistance)
+		    {
+		        ForceLanding();
+		        return;
+		    }
 			if (ShouldFly && !MovementManager.IsFlying && !IsTakingOff)
 			{
 				IsTakingOff = true;
