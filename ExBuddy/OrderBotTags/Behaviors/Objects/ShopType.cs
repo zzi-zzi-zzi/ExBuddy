@@ -20,6 +20,8 @@
 
 		YellowCrafter,
 
+		YellowCrafterItems,
+
 		RedGatherer50,
 
 		RedGatherer61,

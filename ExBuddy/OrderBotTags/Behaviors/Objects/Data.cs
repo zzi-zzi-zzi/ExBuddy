@@ -1459,13 +1459,40 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 
 			#endregion RedCrafter61
 
+		#region YellowGathererItems
+
+		{
+			ShopItem.KoshuPork,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.KoshuPork - 200,
+				ShopType = ShopType.YellowCrafterItems,
+				ItemId = 19876,
+				Cost = 15,
+				Yield = 1
+			}
+		},
+		{
+			ShopItem.TeaBrick,
+			new ShopItemInfo
+			{
+				Index = (int) ShopItem.TeaBrick - 200,
+				ShopType = ShopType.YellowCrafterItems,
+				ItemId = 19840,
+				Cost = 15,
+				Yield = 1
+			}
+		},
+
+		#endregion YellowGathererItems
+
 			#region RedGatherer50
 
 		{
 			ShopItem.HiCordial,
 			new ShopItemInfo
 			{
-				Index = (int) ShopItem.HiCordial - 200,
+				Index = (int) ShopItem.HiCordial - 300,
 				ShopType = ShopType.RedGatherer50,
 				ItemId = 12669,
 				Cost = 20,
@@ -1476,7 +1503,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 			ShopItem.CommercialSurvivalManual,
 			new ShopItemInfo
 			{
-				Index = (int) ShopItem.CommercialSurvivalManual - 200,
+				Index = (int) ShopItem.CommercialSurvivalManual - 300,
 				ShopType = ShopType.RedGatherer50,
 				ItemId = 12668,
 				Cost = 30,
@@ -1487,7 +1514,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 			ShopItem.GiantCraneFly,
 			new ShopItemInfo
 			{
-				Index = (int) ShopItem.GiantCraneFly - 200,
+				Index = (int) ShopItem.GiantCraneFly - 300,
 				ShopType = ShopType.RedGatherer50,
 				ItemId = 12712,
 				Cost = 1,
@@ -1498,7 +1525,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 			ShopItem.BruteLeech,
 			new ShopItemInfo
 			{
-				Index = (int) ShopItem.BruteLeech - 200,
+				Index = (int) ShopItem.BruteLeech - 300,
 				ShopType = ShopType.RedGatherer50,
 				ItemId = 12711,
 				Cost = 1,
@@ -1509,7 +1536,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 			ShopItem.FiendWorm,
 			new ShopItemInfo
 			{
-				Index = (int) ShopItem.FiendWorm - 200,
+				Index = (int) ShopItem.FiendWorm - 300,
 				ShopType = ShopType.RedGatherer50,
 				ItemId = 12710,
 				Cost = 1,
@@ -1520,7 +1547,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 			ShopItem.MagmaWorm,
 			new ShopItemInfo
 			{
-				Index = (int) ShopItem.MagmaWorm - 200,
+				Index = (int) ShopItem.MagmaWorm - 300,
 				ShopType = ShopType.RedGatherer50,
 				ItemId = 12709,
 				Cost = 1,
@@ -1531,7 +1558,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 			ShopItem.RedBalloon,
 			new ShopItemInfo
 			{
-				Index = (int) ShopItem.RedBalloon - 200,
+				Index = (int) ShopItem.RedBalloon - 300,
 				ShopType = ShopType.RedGatherer50,
 				ItemId = 12708,
 				Cost = 1,
@@ -1542,7 +1569,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 			ShopItem.GuerdonIV,
 			new ShopItemInfo
 			{
-				Index = (int) ShopItem.GuerdonIV - 200,
+				Index = (int) ShopItem.GuerdonIV - 300,
 				ShopType = ShopType.RedGatherer50,
 				ItemId = 5687,
 				Cost = 25,
@@ -1553,7 +1580,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 			ShopItem.GuerdonV,
 			new ShopItemInfo
 			{
-				Index = (int) ShopItem.GuerdonV - 200,
+				Index = (int) ShopItem.GuerdonV - 300,
 				ShopType = ShopType.RedGatherer50,
 				ItemId = 5688,
 				Cost = 400,
@@ -1564,7 +1591,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 			ShopItem.GuileIV,
 			new ShopItemInfo
 			{
-				Index = (int) ShopItem.GuileIV - 200,
+				Index = (int) ShopItem.GuileIV - 300,
 				ShopType = ShopType.RedGatherer50,
 				ItemId = 5692,
 				Cost = 25,
@@ -1575,7 +1602,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 			ShopItem.GuileV,
 			new ShopItemInfo
 			{
-				Index = (int) ShopItem.GuileV - 200,
+				Index = (int) ShopItem.GuileV - 300,
 				ShopType = ShopType.RedGatherer50,
 				ItemId = 5693,
 				Cost = 400,
@@ -1586,7 +1613,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 			ShopItem.GraspIV,
 			new ShopItemInfo
 			{
-				Index = (int) ShopItem.GraspIV - 200,
+				Index = (int) ShopItem.GraspIV - 300,
 				ShopType = ShopType.RedGatherer50,
 				ItemId = 5697,
 				Cost = 25,
@@ -1597,7 +1624,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 			ShopItem.GraspV,
 			new ShopItemInfo
 			{
-				Index = (int) ShopItem.GraspV - 200,
+				Index = (int) ShopItem.GraspV - 300,
 				ShopType = ShopType.RedGatherer50,
 				ItemId = 5698,
 				Cost = 400,
@@ -1613,7 +1640,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 			ShopItem.FolkloreGatherToken,
 			new ShopItemInfo
 			{
-				Index = (int) ShopItem.FolkloreGatherToken - 300,
+				Index = (int) ShopItem.FolkloreGatherToken - 400,
 				ShopType = ShopType.RedGatherer61,
 				ItemId = 20260,
 				Cost = 50,
@@ -1624,7 +1651,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 			ShopItem.DomanIronPickaxe,
 			new ShopItemInfo
 			{
-				Index = (int) ShopItem.DomanIronPickaxe - 300,
+				Index = (int) ShopItem.DomanIronPickaxe - 400,
 				ShopType = ShopType.RedGatherer61,
 				ItemId = 19535,
 				Cost = 400,
@@ -1635,7 +1662,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 			ShopItem.DomanIronSledgehammer,
 			new ShopItemInfo
 			{
-				Index = (int) ShopItem.DomanIronSledgehammer - 300,
+				Index = (int) ShopItem.DomanIronSledgehammer - 400,
 				ShopType = ShopType.RedGatherer61,
 				ItemId = 19546,
 				Cost = 400,
@@ -1646,7 +1673,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 			ShopItem.DomanIronHatchet,
 			new ShopItemInfo
 			{
-				Index = (int) ShopItem.DomanIronHatchet - 300,
+				Index = (int) ShopItem.DomanIronHatchet - 400,
 				ShopType = ShopType.RedGatherer61,
 				ItemId = 19536,
 				Cost = 400,
@@ -1657,7 +1684,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 			ShopItem.DomanIronScythe,
 			new ShopItemInfo
 			{
-				Index = (int) ShopItem.DomanIronScythe - 300,
+				Index = (int) ShopItem.DomanIronScythe - 400,
 				ShopType = ShopType.RedGatherer61,
 				ItemId = 19547,
 				Cost = 400,
@@ -1668,7 +1695,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 			ShopItem.PineFishingRod,
 			new ShopItemInfo
 			{
-				Index = (int) ShopItem.PineFishingRod - 300,
+				Index = (int) ShopItem.PineFishingRod - 400,
 				ShopType = ShopType.RedGatherer61,
 				ItemId = 19537,
 				Cost = 400,
@@ -1679,7 +1706,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 			ShopItem.TigerskinCapofGathering,
 			new ShopItemInfo
 			{
-				Index = (int) ShopItem.TigerskinCapofGathering - 300,
+				Index = (int) ShopItem.TigerskinCapofGathering - 400,
 				ShopType = ShopType.RedGatherer61,
 				ItemId = 19637,
 				Cost = 300,
@@ -1690,7 +1717,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 			ShopItem.KudzuCoatofGathering,
 			new ShopItemInfo
 			{
-				Index = (int) ShopItem.KudzuCoatofGathering - 300,
+				Index = (int) ShopItem.KudzuCoatofGathering - 400,
 				ShopType = ShopType.RedGatherer61,
 				ItemId = 19638,
 				Cost = 400,
@@ -1701,7 +1728,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 			ShopItem.TigerskinFingerlessGlovesofGathering,
 			new ShopItemInfo
 			{
-				Index = (int) ShopItem.TigerskinFingerlessGlovesofGathering - 300,
+				Index = (int) ShopItem.TigerskinFingerlessGlovesofGathering - 400,
 				ShopType = ShopType.RedGatherer61,
 				ItemId = 19639,
 				Cost = 200,
@@ -1712,7 +1739,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 			ShopItem.KudzuCulottesofGathering,
 			new ShopItemInfo
 			{
-				Index = (int) ShopItem.KudzuCulottesofGathering - 300,
+				Index = (int) ShopItem.KudzuCulottesofGathering - 400,
 				ShopType = ShopType.RedGatherer61,
 				ItemId = 19640,
 				Cost = 150,
@@ -1723,7 +1750,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 			ShopItem.TigerskinBootsofGathering,
 			new ShopItemInfo
 			{
-				Index = (int) ShopItem.TigerskinBootsofGathering - 300,
+				Index = (int) ShopItem.TigerskinBootsofGathering - 400,
 				ShopType = ShopType.RedGatherer61,
 				ItemId = 19641,
 				Cost = 150,
@@ -1734,7 +1761,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 			ShopItem.SuspendingMinnow,
 			new ShopItemInfo
 			{
-				Index = (int) ShopItem.SuspendingMinnow - 300,
+				Index = (int) ShopItem.SuspendingMinnow - 400,
 				ShopType = ShopType.RedGatherer61,
 				ItemId = 20619,
 				Cost = 50,
@@ -1745,7 +1772,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 			ShopItem.BreamLure,
 			new ShopItemInfo
 			{
-				Index = (int) ShopItem.BreamLure - 300,
+				Index = (int) ShopItem.BreamLure - 400,
 				ShopType = ShopType.RedGatherer61,
 				ItemId = 20618,
 				Cost = 50,
@@ -1756,7 +1783,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 			ShopItem.Silkworm,
 			new ShopItemInfo
 			{
-				Index = (int) ShopItem.Silkworm - 300,
+				Index = (int) ShopItem.Silkworm - 400,
 				ShopType = ShopType.RedGatherer61,
 				ItemId = 20616,
 				Cost = 5,
@@ -1772,7 +1799,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 			ShopItem.BlueBobbit,
 			new ShopItemInfo
 			{
-				Index = (int) ShopItem.BlueBobbit - 400,
+				Index = (int) ShopItem.BlueBobbit - 500,
 				ShopType = ShopType.YellowGathererItems,
 				ItemId = 20676,
 				Cost = 5,
@@ -1783,7 +1810,7 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 			ShopItem.StoneflyLarva,
 			new ShopItemInfo
 			{
-				Index = (int) ShopItem.StoneflyLarva - 400,
+				Index = (int) ShopItem.StoneflyLarva - 500,
 				ShopType = ShopType.YellowGathererItems,
 				ItemId = 20675,
 				Cost = 5,

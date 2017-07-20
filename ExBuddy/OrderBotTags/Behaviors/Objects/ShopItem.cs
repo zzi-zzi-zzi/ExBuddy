@@ -264,75 +264,99 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 
 		TigerskinBootsofCrafting = 120,
 
+		MasterCarpenterV = 121,
+
+		MasterBlacksmithV = 122,
+
+		MasterArmorerV = 123,
+
+		MasterGoldsmithV = 124,
+
+		MasterLeatherworkerV = 125,
+
+		MasterWeaverV = 126,
+
+		MasterAlchemistV = 127,
+
+		MasterCulinarianV = 128,
+
 		#endregion RedCrafter61
+
+		#region YellowGathererItems
+
+		KoshuPork = 200,
+
+		TeaBrick = 201,
+
+		#endregion YellowGathererItems
 
 		#region RedGatherer50
 
-		HiCordial = 200,
+		HiCordial = 300,
 
-		CommercialSurvivalManual = 201,
+		CommercialSurvivalManual = 301,
 
-		GiantCraneFly = 202,
+		GiantCraneFly = 302,
 
-		BruteLeech = 203,
+		BruteLeech = 303,
 
-		FiendWorm = 204,
+		FiendWorm = 304,
 
-		MagmaWorm = 205,
+		MagmaWorm = 305,
 
-		RedBalloon = 206,
+		RedBalloon = 306,
 
-		GuerdonIV = 207,
+		GuerdonIV = 307,
 
-		GuerdonV = 208,
+		GuerdonV = 308,
 
-		GuileIV = 209,
+		GuileIV = 309,
 
-		GuileV = 210,
+		GuileV = 310,
 
-		GraspIV = 211,
+		GraspIV = 311,
 
-		GraspV = 212,
+		GraspV = 312,
 
 		#endregion RedGatherer50
 
 		#region RedGatherer61
 
-		FolkloreGatherToken = 300,
+		FolkloreGatherToken = 400,
 
-		DomanIronPickaxe = 301,
+		DomanIronPickaxe = 401,
 
-		DomanIronSledgehammer = 302,
+		DomanIronSledgehammer = 402,
 
-		DomanIronHatchet = 303,
+		DomanIronHatchet = 403,
 
-		DomanIronScythe = 304,
+		DomanIronScythe = 404,
 
-		PineFishingRod = 305,
+		PineFishingRod = 405,
 
-		TigerskinCapofGathering = 306,
+		TigerskinCapofGathering = 406,
 
-		KudzuCoatofGathering = 307,
+		KudzuCoatofGathering = 407,
 
-		TigerskinFingerlessGlovesofGathering = 308,
+		TigerskinFingerlessGlovesofGathering = 408,
 
-		KudzuCulottesofGathering = 309,
+		KudzuCulottesofGathering = 409,
 
-		TigerskinBootsofGathering = 310,
+		TigerskinBootsofGathering = 410,
 
-		SuspendingMinnow = 311,
+		SuspendingMinnow = 411,
 
-		BreamLure = 312,
+		BreamLure = 412,
 
-		Silkworm = 313,
+		Silkworm = 413,
 
 		#endregion RedGatherer61
 
 		#region YellowGathererItems
 
-		BlueBobbit = 400,
+		BlueBobbit = 500,
 
-		StoneflyLarva = 401
+		StoneflyLarva = 501
 
 		#endregion YellowGathererItems
 

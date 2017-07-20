@@ -765,6 +765,13 @@ namespace ExBuddy.OrderBotTags.Behaviors
 					}
 					break;
 
+				case ShopType.YellowCrafterItems:
+					if (Memory.Scrips.YellowCrafter < info.Cost)
+					{
+						return false;
+					}
+					break;
+
 				case ShopType.RedGatherer50:
 					if (Memory.Scrips.RedGatherer < info.Cost)
 					{

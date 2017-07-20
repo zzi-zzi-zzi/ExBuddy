@@ -151,6 +151,9 @@
 					case ShopType.RedCrafter61:
 						return Scrips.RedCrafter;
 
+					case ShopType.YellowCrafterItems:
+						return Scrips.YellowCrafter;
+
 					case ShopType.RedGatherer50:
 						return Scrips.RedGatherer;
 
