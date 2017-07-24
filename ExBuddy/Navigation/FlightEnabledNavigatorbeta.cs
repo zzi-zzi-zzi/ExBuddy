@@ -83,12 +83,12 @@ namespace ExBuddy.Navigation
 
 		public double PathPrecisionSqr
 		{
-			get { return 4.0; }
+			get { return MovementManager.IsDiving ? 1.0 : 4.0; }
 		}
 
 		public double PathPrecision
 		{
-			get { return 2.0; }
+			get { return MovementManager.IsDiving ? 1.0 : 2.0; }
 		}
 
 		public bool VerboseLogging { get; set; }
