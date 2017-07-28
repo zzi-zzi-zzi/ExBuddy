@@ -34,7 +34,7 @@ namespace ExBuddy.Navigation
 
 			Vector3 hit;
 			Vector3 distances;
-			bool isDiving;
+			bool isDiving = false;
 #if !RB_CN
 			isDiving = MovementManager.IsDiving;
 #endif
