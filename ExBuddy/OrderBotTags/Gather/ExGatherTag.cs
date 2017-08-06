@@ -65,6 +65,8 @@
 
 		internal GatheringPointObject Node;
 
+        internal int GpPerTick;
+
 		internal int NodesGatheredAtMaxGp;
 
 		private Composite poiCoroutine;
@@ -278,6 +280,7 @@
 			SpellDelay = SpellDelay < 0 ? 0 : SpellDelay;
 			WindowDelay = WindowDelay < 500 ? 500 : WindowDelay;
 			SkipWindowDelay = SkipWindowDelay < 200 ? 200 : SkipWindowDelay;
+            GpPerTick = CharacterResource.GetGpPerTick();
 
 			if (Distance > 3.5f)
 			{
@@ -654,7 +657,7 @@
 				//return true;
 			}
 
-			var gp = Math.Min(ExProfileBehavior.Me.CurrentGP + ttg.TicksTillStartGathering * 5, ExProfileBehavior.Me.MaxGP);
+			var gp = CharacterResource.GetEffectiveGp(ttg.TicksTillStartGathering);
 
 			CordialSpellData = CordialSpellData ?? Cordial.GetSpellData();
 
@@ -739,9 +742,7 @@
 				}
 
 				ttg = GetTimeToGather();
-
-				gp = Math.Min(ExProfileBehavior.Me.CurrentGP + ttg.TicksTillStartGathering * 5, ExProfileBehavior.Me.MaxGP);
-
+				gp = CharacterResource.GetEffectiveGp(ttg.TicksTillStartGathering);
 				waitForGp = GetAdjustedWaitForGp(gp, ttg.RealSecondsTillStartGathering, CordialType.None);
 
 				if (!waitForGp.HasValue)
@@ -766,10 +767,9 @@
 				{
 					return await WaitForGpRegain(waitForGp.Value);
 				}
+
 				ttg = GetTimeToGather();
-
-				gp = Math.Min(ExProfileBehavior.Me.CurrentGP + ttg.TicksTillStartGathering * 5, ExProfileBehavior.Me.MaxGP);
-
+				gp = CharacterResource.GetEffectiveGp(ttg.TicksTillStartGathering);
 				waitForGp = GetAdjustedWaitForGp(gp, ttg.RealSecondsTillStartGathering, CordialType.None);
 
 				if (!waitForGp.HasValue)
@@ -796,9 +796,7 @@
 				}
 
 				ttg = GetTimeToGather();
-
-				gp = Math.Min(ExProfileBehavior.Me.CurrentGP + ttg.TicksTillStartGathering * 5, ExProfileBehavior.Me.MaxGP);
-
+				gp = CharacterResource.GetEffectiveGp(ttg.TicksTillStartGathering);
 				waitForGp = GetAdjustedWaitForGp(gp, ttg.RealSecondsTillStartGathering, CordialType.None);
 
 				if (!waitForGp.HasValue)
@@ -1550,7 +1548,7 @@
 
 			initialGatherRotation = gatherRotation = rotation;
 
-			Logger.Info("Using rotation -> " + rotation.Attributes.Name);
+			Logger.Info(string.Format("Using rotation -> {0} ({1} gp per tick)", rotation.Attributes.Name, this.GpPerTick));
 		}
 
 		private void SetFallbackGatherSpot(Vector3 location, bool useMesh)
