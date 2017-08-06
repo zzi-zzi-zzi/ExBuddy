@@ -627,7 +627,6 @@ namespace ExBuddy.OrderBotTags.Behaviors
 				InventoryManager.FilledInventoryAndArmory.Where(
 					i => !Blacklist.Contains((uint)i.Pointer.ToInt64(), BlacklistFlags.Loot)).ToArray();
 
-
 			Dictionary<string, uint> BlackListDictionnary = new Dictionary<string, uint> {
 				{ "Fire Moraine", 5214 },
 				{ "Lightning Moraine", 5218 },
