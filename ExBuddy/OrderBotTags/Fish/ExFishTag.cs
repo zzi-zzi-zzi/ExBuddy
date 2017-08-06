@@ -657,6 +657,10 @@ namespace ExBuddy.OrderBotTags.Fish
 		[XmlAttribute("EnableKeeper")]
 		public bool EnableKeeper { get; set; }
 
+		[DefaultValue(false)]
+		[XmlAttribute("KeepNone")]
+		public bool KeepNone { get; set; }
+
 		[XmlAttribute("SitRate")]
 		public float SitRate { get; set; }
 
@@ -915,7 +919,7 @@ namespace ExBuddy.OrderBotTags.Fish
 					new Decorator(
 						ret =>
 							checkRelease && FishingManager.State == FishingState.PoleReady && CanDoAbility(Abilities.Release)
-							&& Keepers.Count != 0,
+							&& (Keepers.Count != 0 || KeepNone),
 						new Sequence(
 							new Wait(
 								2,
@@ -923,7 +927,7 @@ namespace ExBuddy.OrderBotTags.Fish
 								new Action(
 									r =>
 									{
-										// If its not a keeper AND we aren't mooching or we can't mooch, then release
+										// If its not a keeper AND (we aren't mooching OR we can't mooch) AND Keeper is enable, then release
 										if (!Keepers.Any(FishResult.IsKeeper) && (MoochLevel == 0 || !CanDoAbility(Abilities.Mooch)) && EnableKeeper)
 										{
 											DoAbility(Abilities.Release);
