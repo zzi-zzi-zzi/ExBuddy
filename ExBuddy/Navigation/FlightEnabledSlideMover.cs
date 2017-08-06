@@ -168,7 +168,7 @@
 			if (!IsDiving && MovementManager.IsFlying)
 #endif
 			{
-				Logger.Info("Lading Task Started: {0} {1}", IsDiving, MovementManager.IsFlying);
+				Logger.Info("Landing Task Started: {0} {1}", IsDiving, MovementManager.IsFlying);
 
 				if (!landingStopwatch.IsRunning)
 				{
