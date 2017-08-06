@@ -185,7 +185,11 @@ namespace ExBuddy.OrderBotTags.Gather.Rotations
 			//Get One - Level 51 Minimum
 			await DiscerningMethodical(tag);
 			await UtmostMethodical(tag);
+#if RB_CN
 			await UtmostMethodical(tag);
+#else
+			await Methodical(tag);
+#endif
 			await IncreaseChance(tag);
 			return true;
 		}
@@ -196,7 +200,11 @@ namespace ExBuddy.OrderBotTags.Gather.Rotations
 			await UtmostCaution(tag);
 			await AppraiseAndRebuff(tag);
 			await Methodical(tag);
+#if RB_CN
 			await UtmostMethodical(tag);
+#else
+			await Methodical(tag);
+#endif
 			await IncreaseChance(tag);
 			return true;
 		}
@@ -207,7 +215,9 @@ namespace ExBuddy.OrderBotTags.Gather.Rotations
 			await UtmostCaution(tag);
 			await AppraiseAndRebuff(tag);
 			await Methodical(tag);
+#if RB_CN
 			await UtmostCaution(tag);
+#endif
 			await AppraiseAndRebuff(tag);
 			await Methodical(tag);
 			await IncreaseChance(tag);
@@ -261,7 +271,11 @@ namespace ExBuddy.OrderBotTags.Gather.Rotations
 			if (HasDiscerningEye)
 			{
 				tag.Logger.Info("Discerning Eye Proc!");
+#if RB_CN
 				await UtmostMethodical(tag);
+#else
+				await Methodical(tag);
+#endif
 				await DiscerningMethodical(tag);
 				await IncreaseChance(tag);
 			}
@@ -269,7 +283,11 @@ namespace ExBuddy.OrderBotTags.Gather.Rotations
 			{
 				tag.Logger.Info("No Discerning Eye Proc!");
 				await DiscerningImpulsive(tag);
+#if RB_CN
 				await UtmostMethodical(tag);
+#else
+				await Methodical(tag);
+#endif
 				await IncreaseChance(tag);
 			}
 
@@ -281,7 +299,11 @@ namespace ExBuddy.OrderBotTags.Gather.Rotations
 			//Try Harder - Level 53 Minimum
 			await DiscerningImpulsive(tag);
 			await UtmostImpulsive(tag);
+#if RB_CN
 			await UtmostMethodical(tag);
+#else
+			await Methodical(tag);
+#endif
 			await IncreaseChance(tag);
 			return true;
 		}

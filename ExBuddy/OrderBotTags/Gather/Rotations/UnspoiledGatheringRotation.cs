@@ -44,11 +44,11 @@ namespace ExBuddy.OrderBotTags.Gather.Rotations
 #else
 			if (tag.GatherItem.CanGather)
 			{
-				return tag.GatherItem.TryGatherItem() && await base.Prepare(tag);
+				return await base.Prepare(tag);
 			}
 			else
 			{
-				return await base.Prepare(tag);
+				return tag.GatherItem.TryGatherItem() && await base.Prepare(tag);
 			}
 #endif
 		}

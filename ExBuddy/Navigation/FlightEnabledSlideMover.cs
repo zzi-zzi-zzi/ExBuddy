@@ -108,8 +108,8 @@
 								{
 									try
 									{
-									    Coroutine coroutine = null;
-                                        while (!MovementManager.IsFlying && Behaviors.ShouldContinue && IsMovingTowardsLocation)
+										Coroutine coroutine = null;
+										while (!MovementManager.IsFlying && Behaviors.ShouldContinue && IsMovingTowardsLocation)
 										{
 											if (takeoffStopwatch.ElapsedMilliseconds > 10000)
 											{
@@ -349,11 +349,11 @@
 
 		public void MoveTowards(Vector3 location)
 		{
-		    if (IsLanding && location.Distance3D(Core.Me.Location) < CharacterSettings.Instance.MountDistance)
-		    {
-		        ForceLanding();
-		        return;
-		    }
+			if (IsLanding && location.Distance3D(Core.Me.Location) < CharacterSettings.Instance.MountDistance)
+			{
+				ForceLanding();
+				return;
+			}
 			if (ShouldFly && !MovementManager.IsFlying && !IsTakingOff)
 			{
 				IsTakingOff = true;
