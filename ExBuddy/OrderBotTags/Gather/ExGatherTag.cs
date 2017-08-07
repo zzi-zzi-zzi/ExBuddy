@@ -451,6 +451,9 @@
                 || (CordialType == CordialType.Auto && !(this.HasWateredCordial || this.HasCordial || this.HasHiCordial)))
             {
                 CordialType = CordialType.None;
+
+                Logger.Warn(
+                    Localization.Localization.ExGather_CordialNotAvailable);
             }
         }
 
@@ -729,8 +732,6 @@
 				}
 
 				Logger.Warn(Localization.Localization.ExGather_WithoutMiniumGP);
-				Logger.Warn(
-					Localization.Localization.ExGather_DisabledCordial);
 
 				return true;
 			}
