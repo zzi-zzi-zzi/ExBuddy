@@ -47,6 +47,12 @@
 
 		internal SpellData CordialSpellData;
 
+        internal bool HasWateredCordial;
+
+        internal bool HasCordial;
+
+        internal bool HasHiCordial;
+
 		private Func<bool> freeRangeConditionFunc;
 
 		internal GatheringItem GatherItem;
@@ -207,35 +213,33 @@
 			if (CordialTime.HasFlag(CordialTime.BeforeGather) && cordialType > CordialType.None
 				&& CordialSpellData.Cooldown.TotalSeconds + 2 <= secondsToStartGathering)
 			{
-				switch (cordialType)
-				{
-					case CordialType.WateredCordial:
-						gpBeforeGather += 150;
-						break;
-
-					case CordialType.Cordial:
-						gpBeforeGather += 300;
-						break;
-
-					case CordialType.HiCordial:
-						gpBeforeGather += 400;
-						break;
-
-					case CordialType.Auto:
-						if (DataManager.GetItem((uint)CordialType.HiCordial).ItemCount() > 0)
-						{
-							gpBeforeGather += 400;
-						}
-						else if (DataManager.GetItem((uint)CordialType.Cordial).ItemCount() > 0)
-						{
-							gpBeforeGather += 300;
-						}
-						else
-						{
-							gpBeforeGather += 150;
-						}
-						break;
-				}
+                if (cordialType == CordialType.WateredCordial && this.HasWateredCordial)
+                {
+                    gpBeforeGather += 150;
+                }
+                else if (cordialType == CordialType.Cordial && this.HasCordial)
+                {
+                    gpBeforeGather += 300;
+                }
+                else if (cordialType == CordialType.HiCordial && this.HasHiCordial)
+                {
+                    gpBeforeGather += 400;
+                }
+                else if (cordialType == CordialType.Auto)
+                {
+                    if (this.HasHiCordial)
+                    {
+                        gpBeforeGather += 400;
+                    }
+                    else if (this.HasCordial)
+                    {
+                        gpBeforeGather += 300;
+                    }
+                    else if (this.HasWateredCordial)
+                    {
+                        gpBeforeGather += 150;
+                    }
+                }
 			}
 
 			foreach (var gp in gatherRotation.Attributes.RequiredGpBreakpoints)
@@ -418,6 +422,28 @@
 			GatherItem = null;
 			CollectableItem = null;
 		}
+
+        internal void RefreshCordialStock()
+        {
+            this.HasWateredCordial = false;
+            this.HasCordial = false;
+            this.HasHiCordial = false;
+
+            if (CordialType == CordialType.Auto || CordialType == CordialType.WateredCordial)
+            {
+                this.HasWateredCordial = Cordial.HasWateredCordials();
+            }
+
+            if (CordialType == CordialType.Auto || CordialType == CordialType.Cordial)
+            {
+                this.HasCordial = Cordial.HasCordials();
+            }
+
+            if (CordialType == CordialType.Auto || CordialType == CordialType.HiCordial)
+            {
+                this.HasHiCordial = Cordial.HasHiCordials();
+            }
+        }
 
 		internal async Task<bool> ResolveGatherItem()
 		{
@@ -647,9 +673,30 @@
 
 		private async Task<bool> BeforeGather()
 		{
-			CheckForEstimatedGatherRotation();
+            CheckForEstimatedGatherRotation();
 
-			var ttg = GetTimeToGather();
+            CordialSpellData = CordialSpellData ?? Cordial.GetSpellData();
+
+            if (CordialSpellData == null)
+            {
+                CordialType = CordialType.None;
+            }
+
+            if (CordialType > CordialType.None)
+            {
+                RefreshCordialStock();
+
+                // Set cordial type to none if player does not have the required stock
+                if ((CordialType == CordialType.WateredCordial && !this.HasWateredCordial)
+                    || (CordialType == CordialType.Cordial && !this.HasCordial)
+                    || (CordialType == CordialType.HiCordial && !this.HasHiCordial)
+                    || (CordialType == CordialType.Auto && !(this.HasWateredCordial || this.HasCordial || this.HasHiCordial)))
+                {
+                    CordialType = CordialType.None;
+                }
+            }
+
+            var ttg = GetTimeToGather();
 
 			if (ttg.RealSecondsTillStartGathering < 3)
 			{
@@ -658,15 +705,7 @@
 			}
 
 			var gp = CharacterResource.GetEffectiveGp(ttg.TicksTillStartGathering);
-
-			CordialSpellData = CordialSpellData ?? Cordial.GetSpellData();
-
-			if (CordialSpellData == null)
-			{
-				CordialType = CordialType.None;
-			}
-
-			var waitForGp = GetAdjustedWaitForGp(gp, ttg.RealSecondsTillStartGathering, CordialType);
+            var waitForGp = GetAdjustedWaitForGp(gp, ttg.RealSecondsTillStartGathering, CordialType);
 
 			if (!waitForGp.HasValue)
 			{
@@ -732,8 +771,8 @@
 					return await WaitForGpRegain(waitForGp.Value);
 				}
 			}
-
-			if (gp + 150 >= waitForGp.Value && (CordialType == CordialType.WateredCordial || CordialType == CordialType.Auto))
+            
+            if (gp + 150 >= waitForGp.Value && (CordialType == CordialType.WateredCordial || (CordialType == CordialType.Auto && this.HasWateredCordial)))
 			{
 				// If we used the Watered Cordial or the CordialType is only WateredCordial, not Cordial, Auto or HiCordial, then return
 				if (await UseCordial(CordialType.WateredCordial, ttg.RealSecondsTillStartGathering))
@@ -742,7 +781,7 @@
 				}
 			}
 
-			if (gp + 300 >= waitForGp.Value && (CordialType == CordialType.Cordial || CordialType == CordialType.Auto))
+			if (gp + 300 >= waitForGp.Value && (CordialType == CordialType.Cordial || (CordialType == CordialType.Auto && this.HasCordial)))
 			{
 				// If we used the Cordial or the CordialType is only Cordial, not WateredCordial, Auto or HiCordial, then return
 				if (await UseCordial(CordialType.Cordial, ttg.RealSecondsTillStartGathering))
@@ -751,7 +790,7 @@
 				}
 			}
 
-			if (gp + 400 >= waitForGp.Value && (CordialType == CordialType.HiCordial || CordialType == CordialType.Auto))
+			if (gp + 400 >= waitForGp.Value && (CordialType == CordialType.HiCordial || (CordialType == CordialType.Auto && this.HasHiCordial)))
 			{
 				// If we used the Hi Cordial or the CordialType is only HiCordial, not WateredCordial, Auto or Cordial, then return
 				if (await UseCordial(CordialType.HiCordial, ttg.RealSecondsTillStartGathering))
