@@ -720,8 +720,8 @@
 					return await WaitForGpRegain(waitForGp.Value);
 				}
 
-				var gpNeeded = waitForGp.Value - (ExProfileBehavior.Me.CurrentGP - (ExProfileBehavior.Me.CurrentGP % 5));
-				var gpNeededTicks = gpNeeded / 5;
+				var gpNeeded = waitForGp.Value - (ExProfileBehavior.Me.CurrentGP - (ExProfileBehavior.Me.CurrentGP % this.GpPerTick));
+				var gpNeededTicks = gpNeeded / this.GpPerTick;
 				var gpNeededSeconds = gpNeededTicks * 3;
 
 				if (gpNeededSeconds <= CordialSpellData.Cooldown.TotalSeconds + 2)
@@ -1678,8 +1678,8 @@
 
 			if (ExProfileBehavior.Me.CurrentGP < waitForGp)
 			{
-				var gpNeeded = waitForGp - (ExProfileBehavior.Me.CurrentGP - (ExProfileBehavior.Me.CurrentGP % 5));
-				var gpNeededTicks = gpNeeded / 5;
+				var gpNeeded = waitForGp - (ExProfileBehavior.Me.CurrentGP - (ExProfileBehavior.Me.CurrentGP % this.GpPerTick));
+				var gpNeededTicks = gpNeeded / this.GpPerTick;
 				var gpNeededSeconds = gpNeededTicks * 3;
 
 				if (GatherStrategy == GatherStrategy.TouchAndGo)
