@@ -105,8 +105,8 @@
 		[XmlAttribute("CordialType")]
 		public CordialType CordialType { get; set; }
 
-		// TODO: Look into making this use Type instead of Enum
-		[DefaultValue(GatherSpotType.GatherSpot)]
+        // TODO: Look into making this use Type instead of Enum
+        [DefaultValue(GatherSpotType.GatherSpot)]
 		[XmlAttribute("DefaultGatherSpotType")]
 		public GatherSpotType DefaultGatherSpotType { get; set; }
 
@@ -733,58 +733,22 @@
 				}
 			}
 
-			if (gp + 200 >= waitForGp.Value && CordialType == CordialType.WateredCordial)
+			if (gp + 150 >= waitForGp.Value && (CordialType == CordialType.WateredCordial || CordialType == CordialType.Auto))
 			{
 				// If we used the Watered Cordial or the CordialType is only WateredCordial, not Cordial, Auto or HiCordial, then return
 				if (await UseCordial(CordialType.WateredCordial, ttg.RealSecondsTillStartGathering))
 				{
 					return await WaitForGpRegain(waitForGp.Value);
 				}
-
-				ttg = GetTimeToGather();
-				gp = CharacterResource.GetEffectiveGp(ttg.TicksTillStartGathering);
-				waitForGp = GetAdjustedWaitForGp(gp, ttg.RealSecondsTillStartGathering, CordialType.None);
-
-				if (!waitForGp.HasValue)
-				{
-					if (GatherStrategy == GatherStrategy.TouchAndGo)
-					{
-						return true;
-					}
-
-					Logger.Warn(Localization.Localization.ExGather_NotEnoughGP);
-					BlacklistCurrentNode();
-					return false;
-				}
-
-				return await WaitForGpRegain(waitForGp.Value);
 			}
 
-			if (gp + 350 >= waitForGp.Value && (CordialType == CordialType.Cordial || CordialType == CordialType.Auto))
+			if (gp + 300 >= waitForGp.Value && (CordialType == CordialType.Cordial || CordialType == CordialType.Auto))
 			{
 				// If we used the Cordial or the CordialType is only Cordial, not WateredCordial, Auto or HiCordial, then return
 				if (await UseCordial(CordialType.Cordial, ttg.RealSecondsTillStartGathering))
 				{
 					return await WaitForGpRegain(waitForGp.Value);
 				}
-
-				ttg = GetTimeToGather();
-				gp = CharacterResource.GetEffectiveGp(ttg.TicksTillStartGathering);
-				waitForGp = GetAdjustedWaitForGp(gp, ttg.RealSecondsTillStartGathering, CordialType.None);
-
-				if (!waitForGp.HasValue)
-				{
-					if (GatherStrategy == GatherStrategy.TouchAndGo)
-					{
-						return true;
-					}
-
-					Logger.Warn(Localization.Localization.ExGather_NotEnoughGP);
-					BlacklistCurrentNode();
-					return false;
-				}
-
-				return await WaitForGpRegain(waitForGp.Value);
 			}
 
 			if (gp + 400 >= waitForGp.Value && (CordialType == CordialType.HiCordial || CordialType == CordialType.Auto))
@@ -794,30 +758,30 @@
 				{
 					return await WaitForGpRegain(waitForGp.Value);
 				}
-
-				ttg = GetTimeToGather();
-				gp = CharacterResource.GetEffectiveGp(ttg.TicksTillStartGathering);
-				waitForGp = GetAdjustedWaitForGp(gp, ttg.RealSecondsTillStartGathering, CordialType.None);
-
-				if (!waitForGp.HasValue)
-				{
-					if (GatherStrategy == GatherStrategy.TouchAndGo)
-					{
-						return true;
-					}
-
-					Logger.Warn(Localization.Localization.ExGather_NotEnoughGP);
-					BlacklistCurrentNode();
-					return false;
-				}
-
-				return await WaitForGpRegain(waitForGp.Value);
 			}
 
-			Logger.Error(Localization.Localization.ExGather_WaitForGp, gp, waitForGp.Value);
-			return true;
-			//return await WaitForGpRegain(waitForGp.Value);
-		}
+            ttg = GetTimeToGather();
+            gp = CharacterResource.GetEffectiveGp(ttg.TicksTillStartGathering);
+            waitForGp = GetAdjustedWaitForGp(gp, ttg.RealSecondsTillStartGathering, CordialType.None);
+
+            if (!waitForGp.HasValue)
+            {
+                if (GatherStrategy == GatherStrategy.TouchAndGo)
+                {
+                    return true;
+                }
+
+                Logger.Warn(Localization.Localization.ExGather_NotEnoughGP);
+                BlacklistCurrentNode();
+                return false;
+            }
+
+            return await WaitForGpRegain(waitForGp.Value);
+
+            //Logger.Error(Localization.Localization.ExGather_WaitForGp, gp, waitForGp.Value);
+            //return true;
+            //return await WaitForGpRegain(waitForGp.Value);
+        }
 
 		private void BlacklistCurrentNode()
 		{
