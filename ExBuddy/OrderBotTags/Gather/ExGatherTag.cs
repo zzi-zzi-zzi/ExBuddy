@@ -443,6 +443,15 @@
             {
                 this.HasHiCordial = Cordial.HasHiCordials();
             }
+
+            // Set cordial type to none if player does not have the required stock
+            if ((CordialType == CordialType.WateredCordial && !this.HasWateredCordial)
+                || (CordialType == CordialType.Cordial && !this.HasCordial)
+                || (CordialType == CordialType.HiCordial && !this.HasHiCordial)
+                || (CordialType == CordialType.Auto && !(this.HasWateredCordial || this.HasCordial || this.HasHiCordial)))
+            {
+                CordialType = CordialType.None;
+            }
         }
 
 		internal async Task<bool> ResolveGatherItem()
@@ -675,27 +684,15 @@
 		{
             CheckForEstimatedGatherRotation();
 
+            RefreshCordialStock();
+
             CordialSpellData = CordialSpellData ?? Cordial.GetSpellData();
 
             if (CordialSpellData == null)
             {
                 CordialType = CordialType.None;
             }
-
-            if (CordialType > CordialType.None)
-            {
-                RefreshCordialStock();
-
-                // Set cordial type to none if player does not have the required stock
-                if ((CordialType == CordialType.WateredCordial && !this.HasWateredCordial)
-                    || (CordialType == CordialType.Cordial && !this.HasCordial)
-                    || (CordialType == CordialType.HiCordial && !this.HasHiCordial)
-                    || (CordialType == CordialType.Auto && !(this.HasWateredCordial || this.HasCordial || this.HasHiCordial)))
-                {
-                    CordialType = CordialType.None;
-                }
-            }
-
+            
             var ttg = GetTimeToGather();
 
 			if (ttg.RealSecondsTillStartGathering < 3)
@@ -1647,6 +1644,7 @@
 						Logger.Info(Localization.Localization.ExGather_CordialUsing + cordialType);
 						cordial.UseItem(ExProfileBehavior.Me);
 						await Coroutine.Sleep(1500);
+                        RefreshCordialStock();
 						return true;
 					}
 				}
