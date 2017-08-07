@@ -47,6 +47,12 @@
 
 		internal SpellData CordialSpellData;
 
+        internal bool HasWateredCordial;
+
+        internal bool HasCordial;
+
+        internal bool HasHiCordial;
+
 		private Func<bool> freeRangeConditionFunc;
 
 		internal GatheringItem GatherItem;
@@ -64,6 +70,8 @@
 		private int loopCount;
 
 		internal GatheringPointObject Node;
+
+        internal int GpPerTick;
 
 		internal int NodesGatheredAtMaxGp;
 
@@ -103,8 +111,8 @@
 		[XmlAttribute("CordialType")]
 		public CordialType CordialType { get; set; }
 
-		// TODO: Look into making this use Type instead of Enum
-		[DefaultValue(GatherSpotType.GatherSpot)]
+        // TODO: Look into making this use Type instead of Enum
+        [DefaultValue(GatherSpotType.GatherSpot)]
 		[XmlAttribute("DefaultGatherSpotType")]
 		public GatherSpotType DefaultGatherSpotType { get; set; }
 
@@ -205,35 +213,33 @@
 			if (CordialTime.HasFlag(CordialTime.BeforeGather) && cordialType > CordialType.None
 				&& CordialSpellData.Cooldown.TotalSeconds + 2 <= secondsToStartGathering)
 			{
-				switch (cordialType)
-				{
-					case CordialType.WateredCordial:
-						gpBeforeGather += 150;
-						break;
-
-					case CordialType.Cordial:
-						gpBeforeGather += 300;
-						break;
-
-					case CordialType.HiCordial:
-						gpBeforeGather += 400;
-						break;
-
-					case CordialType.Auto:
-						if (DataManager.GetItem((uint)CordialType.HiCordial).ItemCount() > 0)
-						{
-							gpBeforeGather += 400;
-						}
-						else if (DataManager.GetItem((uint)CordialType.Cordial).ItemCount() > 0)
-						{
-							gpBeforeGather += 300;
-						}
-						else
-						{
-							gpBeforeGather += 150;
-						}
-						break;
-				}
+                if (cordialType == CordialType.WateredCordial && this.HasWateredCordial)
+                {
+                    gpBeforeGather += 150;
+                }
+                else if (cordialType == CordialType.Cordial && this.HasCordial)
+                {
+                    gpBeforeGather += 300;
+                }
+                else if (cordialType == CordialType.HiCordial && this.HasHiCordial)
+                {
+                    gpBeforeGather += 400;
+                }
+                else if (cordialType == CordialType.Auto)
+                {
+                    if (this.HasHiCordial)
+                    {
+                        gpBeforeGather += 400;
+                    }
+                    else if (this.HasCordial)
+                    {
+                        gpBeforeGather += 300;
+                    }
+                    else if (this.HasWateredCordial)
+                    {
+                        gpBeforeGather += 150;
+                    }
+                }
 			}
 
 			foreach (var gp in gatherRotation.Attributes.RequiredGpBreakpoints)
@@ -278,6 +284,7 @@
 			SpellDelay = SpellDelay < 0 ? 0 : SpellDelay;
 			WindowDelay = WindowDelay < 500 ? 500 : WindowDelay;
 			SkipWindowDelay = SkipWindowDelay < 200 ? 200 : SkipWindowDelay;
+            GpPerTick = CharacterResource.GetGpPerTick();
 
 			if (Distance > 3.5f)
 			{
@@ -415,6 +422,40 @@
 			GatherItem = null;
 			CollectableItem = null;
 		}
+
+        internal void RefreshCordialStock()
+        {
+            this.HasWateredCordial = false;
+            this.HasCordial = false;
+            this.HasHiCordial = false;
+
+            if (CordialType == CordialType.Auto || CordialType == CordialType.WateredCordial)
+            {
+                this.HasWateredCordial = Cordial.HasWateredCordials();
+            }
+
+            if (CordialType == CordialType.Auto || CordialType == CordialType.Cordial)
+            {
+                this.HasCordial = Cordial.HasCordials();
+            }
+
+            if (CordialType == CordialType.Auto || CordialType == CordialType.HiCordial)
+            {
+                this.HasHiCordial = Cordial.HasHiCordials();
+            }
+
+            // Set cordial type to none if player does not have the required stock
+            if ((CordialType == CordialType.WateredCordial && !this.HasWateredCordial)
+                || (CordialType == CordialType.Cordial && !this.HasCordial)
+                || (CordialType == CordialType.HiCordial && !this.HasHiCordial)
+                || (CordialType == CordialType.Auto && !(this.HasWateredCordial || this.HasCordial || this.HasHiCordial)))
+            {
+                CordialType = CordialType.None;
+
+                Logger.Warn(
+                    Localization.Localization.ExGather_CordialNotAvailable);
+            }
+        }
 
 		internal async Task<bool> ResolveGatherItem()
 		{
@@ -570,11 +611,13 @@
 				Logger.Info(Localization.Localization.ExGather_RotationReset + initialGatherRotation.Attributes.Name);
 			}
 
-			if (CordialTime.HasFlag(CordialTime.AfterGather))
+            RefreshCordialStock();
+
+			if (CordialTime.HasFlag(CordialTime.AfterGather) && CordialSpellData.Cooldown.TotalSeconds <= 0)
 			{
 				if (CordialType == CordialType.Auto)
 				{
-					if (ExProfileBehavior.Me.MaxGP - ExProfileBehavior.Me.CurrentGP > 550)
+					if (ExProfileBehavior.Me.MaxGP - ExProfileBehavior.Me.CurrentGP > 550 && this.HasHiCordial)
 					{
 						if (await UseCordial(CordialType.HiCordial))
 						{
@@ -582,7 +625,7 @@
 						}
 					}
 
-					if (ExProfileBehavior.Me.MaxGP - ExProfileBehavior.Me.CurrentGP > 390)
+					if (ExProfileBehavior.Me.MaxGP - ExProfileBehavior.Me.CurrentGP > 390 && this.HasCordial)
 					{
 						if (await UseCordial(CordialType.Cordial))
 						{
@@ -590,7 +633,7 @@
 						}
 					}
 
-					if (ExProfileBehavior.Me.MaxGP - ExProfileBehavior.Me.CurrentGP > 260)
+					if (ExProfileBehavior.Me.MaxGP - ExProfileBehavior.Me.CurrentGP > 260 && this.HasWateredCordial)
 					{
 						if (await UseCordial(CordialType.WateredCordial))
 						{
@@ -599,38 +642,23 @@
 					}
 				}
 
-				if (CordialType == CordialType.HiCordial && ExProfileBehavior.Me.MaxGP - ExProfileBehavior.Me.CurrentGP > 430)
+				if (CordialType == CordialType.HiCordial && ExProfileBehavior.Me.MaxGP - ExProfileBehavior.Me.CurrentGP > 430 && this.HasHiCordial)
 				{
 					if (await UseCordial(CordialType.HiCordial))
 					{
 						return true;
 					}
-
-					if (await UseCordial(CordialType.Cordial))
-					{
-						return true;
-					}
-
-					if (await UseCordial(CordialType.WateredCordial))
-					{
-						return true;
-					}
 				}
 
-				if (CordialType == CordialType.Cordial && ExProfileBehavior.Me.MaxGP - ExProfileBehavior.Me.CurrentGP > 330)
+				if (CordialType == CordialType.Cordial && ExProfileBehavior.Me.MaxGP - ExProfileBehavior.Me.CurrentGP > 330 && this.HasCordial)
 				{
 					if (await UseCordial(CordialType.Cordial))
 					{
 						return true;
 					}
-
-					if (await UseCordial(CordialType.WateredCordial))
-					{
-						return true;
-					}
 				}
 
-				if (CordialType == CordialType.WateredCordial && ExProfileBehavior.Me.MaxGP - ExProfileBehavior.Me.CurrentGP > 230)
+				if (CordialType == CordialType.WateredCordial && ExProfileBehavior.Me.MaxGP - ExProfileBehavior.Me.CurrentGP > 230 && this.HasWateredCordial)
 				{
 					if (await UseCordial(CordialType.WateredCordial))
 					{
@@ -644,9 +672,18 @@
 
 		private async Task<bool> BeforeGather()
 		{
-			CheckForEstimatedGatherRotation();
+            CheckForEstimatedGatherRotation();
 
-			var ttg = GetTimeToGather();
+            RefreshCordialStock(); // Will affect CordialType based on type and current stock levels
+
+            CordialSpellData = CordialSpellData ?? Cordial.GetSpellData();
+
+            if (CordialSpellData == null)
+            {
+                CordialType = CordialType.None;
+            }
+            
+            var ttg = GetTimeToGather();
 
 			if (ttg.RealSecondsTillStartGathering < 3)
 			{
@@ -654,16 +691,8 @@
 				//return true;
 			}
 
-			var gp = Math.Min(ExProfileBehavior.Me.CurrentGP + ttg.TicksTillStartGathering * 5, ExProfileBehavior.Me.MaxGP);
-
-			CordialSpellData = CordialSpellData ?? Cordial.GetSpellData();
-
-			if (CordialSpellData == null)
-			{
-				CordialType = CordialType.None;
-			}
-
-			var waitForGp = GetAdjustedWaitForGp(gp, ttg.RealSecondsTillStartGathering, CordialType);
+			var gp = CharacterResource.GetEffectiveGp(ttg.TicksTillStartGathering);
+            var waitForGp = GetAdjustedWaitForGp(gp, ttg.RealSecondsTillStartGathering, CordialType);
 
 			if (!waitForGp.HasValue)
 			{
@@ -690,8 +719,6 @@
 				}
 
 				Logger.Warn(Localization.Localization.ExGather_WithoutMiniumGP);
-				Logger.Warn(
-					Localization.Localization.ExGather_DisabledCordial);
 
 				return true;
 			}
@@ -717,8 +744,8 @@
 					return await WaitForGpRegain(waitForGp.Value);
 				}
 
-				var gpNeeded = waitForGp.Value - (ExProfileBehavior.Me.CurrentGP - (ExProfileBehavior.Me.CurrentGP % 5));
-				var gpNeededTicks = gpNeeded / 5;
+				var gpNeeded = waitForGp.Value - (ExProfileBehavior.Me.CurrentGP - (ExProfileBehavior.Me.CurrentGP % this.GpPerTick));
+				var gpNeededTicks = gpNeeded / this.GpPerTick;
 				var gpNeededSeconds = gpNeededTicks * 3;
 
 				if (gpNeededSeconds <= CordialSpellData.Cooldown.TotalSeconds + 2)
@@ -729,97 +756,56 @@
 					return await WaitForGpRegain(waitForGp.Value);
 				}
 			}
-
-			if (gp + 200 >= waitForGp.Value && CordialType == CordialType.WateredCordial)
+            
+            if (gp + 150 >= waitForGp.Value && (CordialType == CordialType.WateredCordial || (CordialType == CordialType.Auto && this.HasWateredCordial)))
 			{
 				// If we used the Watered Cordial or the CordialType is only WateredCordial, not Cordial, Auto or HiCordial, then return
 				if (await UseCordial(CordialType.WateredCordial, ttg.RealSecondsTillStartGathering))
 				{
 					return await WaitForGpRegain(waitForGp.Value);
 				}
-
-				ttg = GetTimeToGather();
-
-				gp = Math.Min(ExProfileBehavior.Me.CurrentGP + ttg.TicksTillStartGathering * 5, ExProfileBehavior.Me.MaxGP);
-
-				waitForGp = GetAdjustedWaitForGp(gp, ttg.RealSecondsTillStartGathering, CordialType.None);
-
-				if (!waitForGp.HasValue)
-				{
-					if (GatherStrategy == GatherStrategy.TouchAndGo)
-					{
-						return true;
-					}
-
-					Logger.Warn(Localization.Localization.ExGather_NotEnoughGP);
-					BlacklistCurrentNode();
-					return false;
-				}
-
-				return await WaitForGpRegain(waitForGp.Value);
 			}
 
-			if (gp + 350 >= waitForGp.Value && (CordialType == CordialType.Cordial || CordialType == CordialType.Auto))
+			if (gp + 300 >= waitForGp.Value && (CordialType == CordialType.Cordial || (CordialType == CordialType.Auto && this.HasCordial)))
 			{
 				// If we used the Cordial or the CordialType is only Cordial, not WateredCordial, Auto or HiCordial, then return
 				if (await UseCordial(CordialType.Cordial, ttg.RealSecondsTillStartGathering))
 				{
 					return await WaitForGpRegain(waitForGp.Value);
 				}
-				ttg = GetTimeToGather();
-
-				gp = Math.Min(ExProfileBehavior.Me.CurrentGP + ttg.TicksTillStartGathering * 5, ExProfileBehavior.Me.MaxGP);
-
-				waitForGp = GetAdjustedWaitForGp(gp, ttg.RealSecondsTillStartGathering, CordialType.None);
-
-				if (!waitForGp.HasValue)
-				{
-					if (GatherStrategy == GatherStrategy.TouchAndGo)
-					{
-						return true;
-					}
-
-					Logger.Warn(Localization.Localization.ExGather_NotEnoughGP);
-					BlacklistCurrentNode();
-					return false;
-				}
-
-				return await WaitForGpRegain(waitForGp.Value);
 			}
 
-			if (gp + 400 >= waitForGp.Value && (CordialType == CordialType.HiCordial || CordialType == CordialType.Auto))
+			if (gp + 400 >= waitForGp.Value && (CordialType == CordialType.HiCordial || (CordialType == CordialType.Auto && this.HasHiCordial)))
 			{
 				// If we used the Hi Cordial or the CordialType is only HiCordial, not WateredCordial, Auto or Cordial, then return
 				if (await UseCordial(CordialType.HiCordial, ttg.RealSecondsTillStartGathering))
 				{
 					return await WaitForGpRegain(waitForGp.Value);
 				}
-
-				ttg = GetTimeToGather();
-
-				gp = Math.Min(ExProfileBehavior.Me.CurrentGP + ttg.TicksTillStartGathering * 5, ExProfileBehavior.Me.MaxGP);
-
-				waitForGp = GetAdjustedWaitForGp(gp, ttg.RealSecondsTillStartGathering, CordialType.None);
-
-				if (!waitForGp.HasValue)
-				{
-					if (GatherStrategy == GatherStrategy.TouchAndGo)
-					{
-						return true;
-					}
-
-					Logger.Warn(Localization.Localization.ExGather_NotEnoughGP);
-					BlacklistCurrentNode();
-					return false;
-				}
-
-				return await WaitForGpRegain(waitForGp.Value);
 			}
 
-			Logger.Error(Localization.Localization.ExGather_WaitForGp, gp, waitForGp.Value);
-			return true;
-			//return await WaitForGpRegain(waitForGp.Value);
-		}
+            ttg = GetTimeToGather();
+            gp = CharacterResource.GetEffectiveGp(ttg.TicksTillStartGathering);
+            waitForGp = GetAdjustedWaitForGp(gp, ttg.RealSecondsTillStartGathering, CordialType.None);
+
+            if (!waitForGp.HasValue)
+            {
+                if (GatherStrategy == GatherStrategy.TouchAndGo)
+                {
+                    return true;
+                }
+
+                Logger.Warn(Localization.Localization.ExGather_NotEnoughGP);
+                BlacklistCurrentNode();
+                return false;
+            }
+
+            return await WaitForGpRegain(waitForGp.Value);
+
+            //Logger.Error(Localization.Localization.ExGather_WaitForGp, gp, waitForGp.Value);
+            //return true;
+            //return await WaitForGpRegain(waitForGp.Value);
+        }
 
 		private void BlacklistCurrentNode()
 		{
@@ -1550,7 +1536,7 @@
 
 			initialGatherRotation = gatherRotation = rotation;
 
-			Logger.Info("Using rotation -> " + rotation.Attributes.Name);
+			Logger.Info(string.Format("Using rotation -> {0} ({1} gp per tick)", rotation.Attributes.Name, this.GpPerTick));
 		}
 
 		private void SetFallbackGatherSpot(Vector3 location, bool useMesh)
@@ -1646,6 +1632,7 @@
 						Logger.Info(Localization.Localization.ExGather_CordialUsing + cordialType);
 						cordial.UseItem(ExProfileBehavior.Me);
 						await Coroutine.Sleep(1500);
+                        RefreshCordialStock();
 						return true;
 					}
 				}
@@ -1680,8 +1667,8 @@
 
 			if (ExProfileBehavior.Me.CurrentGP < waitForGp)
 			{
-				var gpNeeded = waitForGp - (ExProfileBehavior.Me.CurrentGP - (ExProfileBehavior.Me.CurrentGP % 5));
-				var gpNeededTicks = gpNeeded / 5;
+				var gpNeeded = waitForGp - (ExProfileBehavior.Me.CurrentGP - (ExProfileBehavior.Me.CurrentGP % this.GpPerTick));
+				var gpNeededTicks = gpNeeded / this.GpPerTick;
 				var gpNeededSeconds = gpNeededTicks * 3;
 
 				if (GatherStrategy == GatherStrategy.TouchAndGo)
