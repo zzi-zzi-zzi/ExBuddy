@@ -611,11 +611,13 @@
 				Logger.Info(Localization.Localization.ExGather_RotationReset + initialGatherRotation.Attributes.Name);
 			}
 
-			if (CordialTime.HasFlag(CordialTime.AfterGather))
+            RefreshCordialStock();
+
+			if (CordialTime.HasFlag(CordialTime.AfterGather) && CordialSpellData.Cooldown.TotalSeconds <= 0)
 			{
 				if (CordialType == CordialType.Auto)
 				{
-					if (ExProfileBehavior.Me.MaxGP - ExProfileBehavior.Me.CurrentGP > 550)
+					if (ExProfileBehavior.Me.MaxGP - ExProfileBehavior.Me.CurrentGP > 550 && this.HasHiCordial)
 					{
 						if (await UseCordial(CordialType.HiCordial))
 						{
@@ -623,7 +625,7 @@
 						}
 					}
 
-					if (ExProfileBehavior.Me.MaxGP - ExProfileBehavior.Me.CurrentGP > 390)
+					if (ExProfileBehavior.Me.MaxGP - ExProfileBehavior.Me.CurrentGP > 390 && this.HasCordial)
 					{
 						if (await UseCordial(CordialType.Cordial))
 						{
@@ -631,7 +633,7 @@
 						}
 					}
 
-					if (ExProfileBehavior.Me.MaxGP - ExProfileBehavior.Me.CurrentGP > 260)
+					if (ExProfileBehavior.Me.MaxGP - ExProfileBehavior.Me.CurrentGP > 260 && this.HasWateredCordial)
 					{
 						if (await UseCordial(CordialType.WateredCordial))
 						{
@@ -640,38 +642,23 @@
 					}
 				}
 
-				if (CordialType == CordialType.HiCordial && ExProfileBehavior.Me.MaxGP - ExProfileBehavior.Me.CurrentGP > 430)
+				if (CordialType == CordialType.HiCordial && ExProfileBehavior.Me.MaxGP - ExProfileBehavior.Me.CurrentGP > 430 && this.HasHiCordial)
 				{
 					if (await UseCordial(CordialType.HiCordial))
 					{
 						return true;
 					}
-
-					if (await UseCordial(CordialType.Cordial))
-					{
-						return true;
-					}
-
-					if (await UseCordial(CordialType.WateredCordial))
-					{
-						return true;
-					}
 				}
 
-				if (CordialType == CordialType.Cordial && ExProfileBehavior.Me.MaxGP - ExProfileBehavior.Me.CurrentGP > 330)
+				if (CordialType == CordialType.Cordial && ExProfileBehavior.Me.MaxGP - ExProfileBehavior.Me.CurrentGP > 330 && this.HasCordial)
 				{
 					if (await UseCordial(CordialType.Cordial))
 					{
 						return true;
 					}
-
-					if (await UseCordial(CordialType.WateredCordial))
-					{
-						return true;
-					}
 				}
 
-				if (CordialType == CordialType.WateredCordial && ExProfileBehavior.Me.MaxGP - ExProfileBehavior.Me.CurrentGP > 230)
+				if (CordialType == CordialType.WateredCordial && ExProfileBehavior.Me.MaxGP - ExProfileBehavior.Me.CurrentGP > 230 && this.HasWateredCordial)
 				{
 					if (await UseCordial(CordialType.WateredCordial))
 					{
@@ -687,7 +674,7 @@
 		{
             CheckForEstimatedGatherRotation();
 
-            RefreshCordialStock();
+            RefreshCordialStock(); // Will affect CordialType based on type and current stock levels
 
             CordialSpellData = CordialSpellData ?? Cordial.GetSpellData();
 
