@@ -2,8 +2,9 @@
 {
 	using ExBuddy.Interfaces;
 	using System.Threading.Tasks;
+	using Helpers;
 
-	public abstract class SmartGatheringRotation : GatheringRotation
+    public abstract class SmartGatheringRotation : GatheringRotation
 	{
 		public override Task<bool> Prepare(ExGatherTag tag)
 		{
@@ -12,12 +13,12 @@
 
 		public override bool ShouldForceGather(ExGatherTag tag)
 		{
-			return !tag.IsUnspoiled();
+			return !tag.Node.IsUnspoiled();
 		}
 
 		protected virtual IGatheringRotation ResolveInternalGatheringRotation(ExGatherTag tag)
 		{
-			if (tag.IsUnspoiled())
+			if (tag.Node.IsUnspoiled())
 			{
 				return ExGatherTag.Rotations["Unspoiled"];
 			}

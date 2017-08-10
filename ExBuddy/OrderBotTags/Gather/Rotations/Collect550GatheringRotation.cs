@@ -4,8 +4,9 @@
 	using ExBuddy.Interfaces;
 	using ff14bot;
 	using System.Threading.Tasks;
+	using Helpers;
 
-	// Get One ++
+    // Get One ++
 	[GatheringRotation("Collect550", 33, 600)]
 	public sealed class Collect550GatheringRotation : CollectableGatheringRotation, IGetOverridePriority
 	{
@@ -26,7 +27,7 @@
 
 		public override async Task<bool> ExecuteRotation(ExGatherTag tag)
 		{
-			if (tag.IsUnspoiled())
+			if (tag.Node.IsUnspoiled())
 			{
 				await UtmostCaution(tag);
 				await AppraiseAndRebuff(tag);

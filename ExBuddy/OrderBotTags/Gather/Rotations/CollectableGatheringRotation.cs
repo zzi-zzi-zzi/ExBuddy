@@ -106,7 +106,7 @@
 
 		public override bool ShouldForceGather(ExGatherTag tag)
 		{
-			return !tag.IsEphemeral() && !tag.IsUnspoiled();
+			return !tag.Node.IsEphemeral() && !tag.Node.IsUnspoiled();
 		}
 
 		protected async Task Discerning(ExGatherTag tag)
