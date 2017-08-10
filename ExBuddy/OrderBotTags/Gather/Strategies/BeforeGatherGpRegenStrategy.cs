@@ -146,11 +146,22 @@ namespace ExBuddy.OrderBotTags.Gather
             this.cordialTime = cordialTime;
             this.requestedCordialType = this.effectiveCordialType = cordialType;
 
-            if (this.requestedCordialType > CordialType.None && !this.cordialStockManager.HasStock())
+            // Override cordial type
+            if (this.requestedCordialType > CordialType.None)
             {
-                this.effectiveCordialType = CordialType.None;
+                // Turn off cordial when there is no stock
+                if (!this.cordialStockManager.HasStock())
+                {
+                    this.effectiveCordialType = CordialType.None;
 
-                this.logger.RegeneratingCordialUseDisabledNoStock();
+                    this.logger.RegeneratingCordialUseDisabledNoStock();
+                }
+
+                // Turn off cordial when node is not ephemeral in TnG strategies
+                if (this.gatherStrategy == GatherStrategy.TouchAndGo && !node.IsEphemeral())
+                {
+                    this.effectiveCordialType = CordialType.None;
+                }
             }
             else
             {
