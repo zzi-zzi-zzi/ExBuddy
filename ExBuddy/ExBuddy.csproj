@@ -65,6 +65,7 @@
     <Compile Include="Data\MasterpieceSupplyDutyResult.cs" />
     <Compile Include="Data\RequiredItemResult.cs" />
     <Compile Include="Data\SqlData.cs" />
+    <Compile Include="Helpers\EorzeaTimeHelper.cs" />
     <Compile Include="Helpers\Lazier.cs" />
     <Compile Include="Helpers\CharacterResource.cs" />
     <Compile Include="Helpers\ConditionTimer.cs" />
