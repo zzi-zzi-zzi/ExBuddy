@@ -182,7 +182,7 @@ namespace ExBuddy.OrderBotTags.Gather
             this.EffectiveGp = CharacterResource.GetEffectiveGp(this.NodeLifespan.DeSpawnTicks);
 
             // Set breakpoint and cordial parameters
-            this.CalculateBreakpointAndCordialSelection();
+            this.CalculateTargetAndCordialSelection();
 
             // Calculate regeneration parameters
             this.RegeneratedGp = (short)(this.TargetGp - this.CordialGp - this.StartingGp);
@@ -193,7 +193,7 @@ namespace ExBuddy.OrderBotTags.Gather
         /// <summary>
         /// Calculates the target GP needed to execute gathering strategy with cordials
         /// </summary>
-        protected void CalculateBreakpointAndCordialSelection()
+        protected void CalculateTargetAndCordialSelection()
         {
             // Reset cordial
             this.Cordial = null;
@@ -329,7 +329,7 @@ namespace ExBuddy.OrderBotTags.Gather
                 if (rtn.UseState != InventoryItem.UseResult.OK)
                 {
                     this.effectiveCordialType = CordialType.None;
-                    this.CalculateBreakpointAndCordialSelection();
+                    this.CalculateTargetAndCordialSelection();
 
                     this.logger.LogReport(this);
 
