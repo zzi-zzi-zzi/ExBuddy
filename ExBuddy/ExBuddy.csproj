@@ -92,6 +92,7 @@
     <Compile Include="Navigation\FlightEnabledNavigatorbeta.cs" />
     <Compile Include="Navigation\FlightEnabledNavigatorCN.cs" />
     <Compile Include="Offsets\SecondaryOffsets.cs" />
+    <Compile Include="OrderBotTags\Gather\Strategies\AfterGatherGpRegenStrategy.cs" />
     <Compile Include="OrderBotTags\Gather\Strategies\BeforeGatherGpRegenStrategy.cs" />
     <Compile Include="OrderBotTags\Gather\Strategies\GpRegenStrategyResult.cs" />
     <Compile Include="OrderBotTags\Gather\Strategies\IGpRegenStrategy.cs" />

@@ -66,6 +66,8 @@
 
 	    private IGpRegenStrategy beforeGatherGpRegenStrategy;
 
+	    private IGpRegenStrategy afterGatherGpRegenStrategy;
+
         private bool interactedWithNode;
 
 		private int loopCount;
@@ -94,6 +96,9 @@
 		    this.beforeGatherGpRegenStrategy = new BeforeGatherGpRegenStrategy(
                 this.CordialStock,
                 this.beforeGatherLogger
+            );
+            this.afterGatherGpRegenStrategy = new AfterGatherGpRegenStrategy(
+                this.CordialStock
             );
 
             if (Rotations == null)
@@ -219,29 +224,6 @@
 		protected override Color Info
 		{
 			get { return Colors.Chartreuse; }
-		}
-
-        public int? GetAdjustedWaitForGp(int gpBeforeGather, int secondsToStartGathering, CordialType cordialType)
-		{
-			if (CordialTime.HasFlag(CordialTime.BeforeGather) && cordialType > CordialType.None
-				&& this.CordialStock.GetCordialCooldown().TotalSeconds + 2 <= secondsToStartGathering)
-			{
-			    var largestCordial = this.CordialStock.GetLargestCordial(cordialType);
-			    if (largestCordial != null)
-			    {
-			        gpBeforeGather += CordialStockManager.CordialDataMap[largestCordial.ItemKey].Gp;
-			    }
-			}
-
-			foreach (var gp in gatherRotation.Attributes.RequiredGpBreakpoints)
-			{
-				if (gp <= gpBeforeGather)
-				{
-					return Math.Min(ExProfileBehavior.Me.MaxGP - (ExProfileBehavior.Me.MaxGP % 50), gp);
-				}
-			}
-
-			return null;
 		}
 
 		protected override void DoReset()
@@ -541,14 +523,16 @@
 				Logger.Info(Localization.Localization.ExGather_RotationReset + initialGatherRotation.Attributes.Name);
 			}
 
-		    if (!CordialTime.HasFlag(CordialTime.AfterGather) ||
-		        !(this.CordialStock.GetCordialCooldown().TotalSeconds <= 0)) return true;
+		    var regenResult = await this.afterGatherGpRegenStrategy.RegenerateGp(
+		        this.Node,
+		        this.gatherRotation,
+		        this.GatherStrategy,
+		        this.CordialTime,
+		        this.CordialType
+		    );
 
-		    var missingGp = ExProfileBehavior.Me.MaxGP - ExProfileBehavior.Me.CurrentGP;
-		    var cordial = this.CordialStock.GetBestCordial(missingGp, CordialType);
-		    if (cordial == null) return true;
-
-		    return await cordial.Use(ExProfileBehavior.Me) == InventoryItem.UseResult.OK;
+		    return regenResult.StrategyState == GpRegenStrategyResult.GpRegenStrategyResultState.OK
+		        && regenResult.UseState == InventoryItem.UseResult.OK;
 		}
 
 		private async Task<bool> BeforeGather()
@@ -1318,12 +1302,6 @@
 
 			return true;
 		}
-
-	    internal bool CanUseCordial(ushort withinSeconds = 5)
-	    {
-	        return this.CordialStock.GetCordialCooldown().TotalSeconds <= withinSeconds &&
-	               this.CordialStock.GetLargestCordial(this.CordialType) != null;
-	    }
 	}
 }
  

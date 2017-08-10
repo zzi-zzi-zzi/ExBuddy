@@ -45,7 +45,7 @@
 				if (tag.GatherItem.Chance < 98 && Core.Player.CurrentGP >= 600)
 				{
 					// if 60 or cordial is ready and is 58
-					if (tag.GatherItem.Chance < 97 || tag.CanUseCordial(Attributes.RequiredTimeInSeconds))
+					if (tag.GatherItem.Chance < 97)
 					{
 						var appraisalsRemaining = 4;
 						await Impulsive(tag);
