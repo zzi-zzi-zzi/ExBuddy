@@ -27,6 +27,6 @@
         /// <summary>
         /// Logs when wait time exceeds max ephemeral GP wait time
         /// </summary>
-        void RegeneratingSkippedExceedsEphemeralMaxWait(int expectedWait, int maxWait);
+        void RegeneratingSkippedExceedsEphemeralMaxWait(double expectedWait, double maxWait);
     }
 }

@@ -59,7 +59,7 @@
         /// <summary>
         /// Logs when wait time exceeds max ephemeral GP wait time
         /// </summary>
-        public void RegeneratingSkippedExceedsEphemeralMaxWait(int expectedWait, int maxWait)
+        public void RegeneratingSkippedExceedsEphemeralMaxWait(double expectedWait, double maxWait)
         {
             this.logger.Info(
                 string.Format(Localization.Localization.ExGather_TnGSeconds,

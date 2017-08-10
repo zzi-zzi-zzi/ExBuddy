@@ -64,7 +64,9 @@
 
 		private IGatheringRotation initialGatherRotation;
 
-		private bool interactedWithNode;
+	    private IGpRegenStrategy beforeGatherGpRegenStrategy;
+
+        private bool interactedWithNode;
 
 		private int loopCount;
 
@@ -89,8 +91,12 @@
                 new CordialConsumerLogger(this.Logger),
                 new ProfileBehaviorLogger(this)
             );
+		    this.beforeGatherGpRegenStrategy = new BeforeGatherGpRegenStrategy(
+                this.CordialStock,
+                this.beforeGatherLogger
+            );
 
-			if (Rotations == null)
+            if (Rotations == null)
 			{
 				lock (Lock)
 				{
@@ -549,20 +555,8 @@
 		{
             CheckForEstimatedGatherRotation();
 
-		    var timeToGather = this.GetTimeToGather();
-
-            var regenGpStrategy = new BeforeGatherGpRegenStrategy(
-                this,
-                this.gatherRotation,
-                this.GatherStrategy,
-                this.CordialTime,
-                this.CordialType,
-                timeToGather,
-                this.CordialStock,
-                this.beforeGatherLogger
-            );
-
-		    var strategyResult = await regenGpStrategy.RegenerateGp();
+            // Execute before gather strategy to regen GP for gathering
+		    var strategyResult = await this.beforeGatherGpRegenStrategy.RegenerateGp(this.Node, this.gatherRotation, this.GatherStrategy, this.CordialTime, this.CordialType);
 
 		    // Blacklist the current node if the regen strategy returned a negative result
 		    if (strategyResult.StrategyState != GpRegenStrategyResult.GpRegenStrategyResultState.OK)
@@ -973,46 +967,6 @@
 			return rotation.Rotation;
 		}
 
-		private TimeToGather GetTimeToGather()
-		{
-			var eorzeaMinutesTillDespawn = (int)byte.MaxValue;
-			if (this.Node.IsUnspoiled())
-			{
-				if (WorldManager.ZoneId > 350)
-				{
-					eorzeaMinutesTillDespawn = 55 - WorldManager.EorzaTime.Minute;
-				}
-				else
-				{
-					// We really don't know how much time is left on the node, but it does have at least the 5 more EM.
-					eorzeaMinutesTillDespawn = 60 - WorldManager.EorzaTime.Minute;
-				}
-			}
-
-			if (this.Node.IsEphemeral())
-			{
-				var hoursFromNow = WorldManager.EorzaTime.AddHours(4);
-				var rounded = new DateTime(
-					hoursFromNow.Year,
-					hoursFromNow.Month,
-					hoursFromNow.Day,
-					hoursFromNow.Hour - (hoursFromNow.Hour % 4),
-					0,
-					0);
-
-				eorzeaMinutesTillDespawn = (int)(rounded - WorldManager.EorzaTime).TotalMinutes;
-			}
-
-			var realSecondsTillDespawn = eorzeaMinutesTillDespawn * 35 / 12;
-			var realSecondsTillStartGathering = realSecondsTillDespawn - gatherRotation.Attributes.RequiredTimeInSeconds;
-
-			return new TimeToGather
-			{
-				EorzeaMinutesTillDespawn = eorzeaMinutesTillDespawn,
-				RealSecondsTillStartGathering = realSecondsTillStartGathering
-			};
-		}
-
 		private bool HandleCondition()
 		{
 			if (WhileFunc == null)
@@ -1372,3 +1326,4 @@
 	    }
 	}
 }
+ 

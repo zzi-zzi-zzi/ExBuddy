@@ -10,6 +10,7 @@ namespace ExBuddy.OrderBotTags.Gather
     using Buddy.Coroutines;
     using Enumerations;
     using ff14bot;
+    using ff14bot.Objects;
     using Helpers;
     using Interfaces;
     using Inventory;
@@ -18,46 +19,48 @@ namespace ExBuddy.OrderBotTags.Gather
 
     internal class BeforeGatherGpRegenStrategy : IGpRegenStrategy
     {
-        private const int MAX_TOUCHANDGO_WAIT = 15;
+        public class EffectiveNodeLifespan
+        {
+            public EffectiveNodeLifespan(NodeHelper.NodeLifespan actualNodeLifespan, int rotationSeconds)
+            {
+                this.Set(actualNodeLifespan.DeSpawn - TimeSpan.FromSeconds(rotationSeconds));
+            }
 
-        private readonly ExGatherTag currentTag;
+            private void Set(TimeSpan despawn)
+            {
+                this.DeSpawn = despawn;
+                this.DeSpawnTicks = EorzeaTimeHelper.ConvertSecondsToTicks(Convert.ToInt32(this.DeSpawn.TotalSeconds));
+            }
+
+            public void Clamp(TimeSpan min, TimeSpan max)
+            {
+                this.Set(this.DeSpawn.Clamp(min, max));
+            }
+
+            public TimeSpan DeSpawn { get; protected set; }
+            public int DeSpawnTicks { get; protected set; }
+        }
+
+        private const double MAX_TOUCHANDGO_WAIT = 15;
+
         private readonly IBeforeGatherGpRegenStrategyLogger logger;
-
-        protected readonly IGatheringRotation gatherRotation;
-        protected readonly GatherStrategy gatherStrategy;
-        protected readonly CordialTime cordialTime;
-        protected readonly CordialType requestedCordialType;
-        protected readonly CordialStockManager cordialStockManager;
-        protected readonly TimeToGather timeToGather;
+        private readonly CordialStockManager cordialStockManager;
         protected readonly short gpPerTick;
 
+        protected IGatheringRotation gatherRotation;
+        protected GatherStrategy gatherStrategy;
+        protected CordialTime cordialTime;
+        protected CordialType requestedCordialType;
         protected CordialType effectiveCordialType;
 
         /// <summary>
         /// Instantiates a new instance of the <see cref="BeforeGatherGpRegenStrategy"/> class.
         /// </summary>
-        public BeforeGatherGpRegenStrategy(ExGatherTag currentTag, IGatheringRotation gatherRotation, GatherStrategy gatherStrategy, CordialTime cordialTime, CordialType cordialType, TimeToGather timeToGather, CordialStockManager cordialStockManager, IBeforeGatherGpRegenStrategyLogger logger)
+        public BeforeGatherGpRegenStrategy(CordialStockManager cordialStockManager, IBeforeGatherGpRegenStrategyLogger logger)
         {
-            this.currentTag = currentTag ?? throw new ArgumentNullException("currentTag");
             this.logger = logger ?? throw new ArgumentNullException("logger");
-            this.gatherRotation = gatherRotation ?? throw new ArgumentNullException("gatherRotation");
-            this.gatherStrategy = gatherStrategy;
-            this.cordialTime = cordialTime;
-            this.requestedCordialType = this.effectiveCordialType = cordialType;
             this.cordialStockManager = cordialStockManager ?? throw new ArgumentNullException("cordialStockManager");
-            this.timeToGather = timeToGather;
             this.gpPerTick = CharacterResource.GetGpPerTick();
-
-            // Set effective cordial type if there is absolutely no stock
-            if (this.requestedCordialType > CordialType.None && !this.cordialStockManager.HasStock())
-            {
-                this.effectiveCordialType = CordialType.None;
-
-                this.logger.RegeneratingCordialUseDisabledNoStock();
-            }
-
-            // Initialize expected GP values
-            this.InitializeExpectedValues();
         }
 
         /// <summary>
@@ -131,24 +134,47 @@ namespace ExBuddy.OrderBotTags.Gather
         }
 
         /// <summary>
-        /// Calculates expected GP values for use in strategy logic.
+        /// Configures the strategy for use
         /// </summary>
-        protected void InitializeExpectedValues()
+        protected void Configure(GatheringPointObject node, IGatheringRotation gatherRotation, GatherStrategy gatherStrategy, CordialTime cordialTime, CordialType cordialType)
         {
+            // Set gathering parameters
+            this.gatherRotation = gatherRotation ?? throw new ArgumentNullException("gatherRotation");
+            this.gatherStrategy = gatherStrategy;
+
+            // Set cordial parameters
+            this.cordialTime = cordialTime;
+            this.requestedCordialType = this.effectiveCordialType = cordialType;
+
+            if (this.requestedCordialType > CordialType.None && !this.cordialStockManager.HasStock())
+            {
+                this.effectiveCordialType = CordialType.None;
+
+                this.logger.RegeneratingCordialUseDisabledNoStock();
+            }
+            else
+            {
+                this.effectiveCordialType = this.requestedCordialType;
+            }
+
+            // Set node lifespan parameters
+            this.NodeLifespan = new EffectiveNodeLifespan(NodeHelper.GetNodeLifespan(node), this.gatherRotation.Attributes.RequiredTimeInSeconds);
+            if (this.gatherStrategy == GatherStrategy.TouchAndGo)
+            {
+                this.NodeLifespan.Clamp(TimeSpan.Zero, TimeSpan.FromSeconds(MAX_TOUCHANDGO_WAIT));
+            }
+            this.EffectiveTimeTillGather = this.NodeLifespan.DeSpawn;
+
+            // Set GP parameters
             this.StartingGp = this.CurrentGp;
             this.MaxGp = ExProfileBehavior.Me.MaxGP;
-            this.EffectiveSecondsTillGather = this.gatherStrategy == GatherStrategy.TouchAndGo
-                ? Math.Min(BeforeGatherGpRegenStrategy.MAX_TOUCHANDGO_WAIT, this.timeToGather.RealSecondsTillStartGathering)
-                : this.timeToGather.RealSecondsTillStartGathering;
-            this.EffectiveGp = CharacterResource.GetEffectiveGp(
-                EorzeaTimeHelper.ConvertSecondsToTicks(this.EffectiveSecondsTillGather)
-            );
+            this.EffectiveGp = CharacterResource.GetEffectiveGp(this.NodeLifespan.DeSpawnTicks);
 
-            // Calculate breakpoints, cordials, and targets
-            this.InitializeBreakpointAndCordialSelection();
+            // Set breakpoint and cordial parameters
+            this.CalculateBreakpointAndCordialSelection();
 
-            // Calculate effective wait time
-            this.RegeneratedGp = (short) (this.TargetGp - this.CordialGp - this.StartingGp);
+            // Calculate regeneration parameters
+            this.RegeneratedGp = (short)(this.TargetGp - this.CordialGp - this.StartingGp);
             if (this.RegeneratedGp < 0) this.RegeneratedGp = 0;
             this.EffectiveTimeToRegenerate = CharacterResource.EstimateExpectedRegenerationTime(this.RegeneratedGp);
         }
@@ -156,12 +182,16 @@ namespace ExBuddy.OrderBotTags.Gather
         /// <summary>
         /// Calculates the target GP needed to execute gathering strategy with cordials
         /// </summary>
-        protected void InitializeBreakpointAndCordialSelection()
+        protected void CalculateBreakpointAndCordialSelection()
         {
+            // Reset cordial
+            this.Cordial = null;
+            this.CordialGp = 0;
+
             var lastBreakpointGpValue = 0;
             var useCordial = this.effectiveCordialType > CordialType.None
-                && this.cordialTime.HasFlag(CordialTime.BeforeGather)
-                && this.cordialStockManager.GetCordialCooldown().TotalSeconds + 2 <= this.EffectiveSecondsTillGather;
+                             && this.cordialTime.HasFlag(CordialTime.BeforeGather)
+                             && this.cordialStockManager.GetCordialCooldown().Add(new TimeSpan(0, 0, 0, 2)) <= this.EffectiveTimeTillGather;
 
             foreach (var breakpointGp in this.gatherRotation.Attributes.RequiredGpBreakpoints.OrderByDescending(bp => bp))
             {
@@ -185,18 +215,18 @@ namespace ExBuddy.OrderBotTags.Gather
                     if (bestCordial != null)
                     {
                         this.Cordial = bestCordial;
-                        this.CordialGp = (short) CordialStockManager.CordialDataMap[bestCordial.ItemKey].Gp;
+                        this.CordialGp = (short)CordialStockManager.CordialDataMap[bestCordial.ItemKey].Gp;
                         this.TargetGp = this.BreakpointGp = (short)breakpointGp;
                         return;
                     }
                 }
-                
+
                 // Store the last breakpoint GP in case there is no way to regen
                 lastBreakpointGpValue = breakpointGp;
             }
 
             // There is no way to regenerate the required GP
-            this.BreakpointGp = (short) lastBreakpointGpValue;
+            this.BreakpointGp = (short)lastBreakpointGpValue;
             this.TargetGp = this.StartingGp;
         }
 
@@ -212,17 +242,11 @@ namespace ExBuddy.OrderBotTags.Gather
                 return GpRegenStrategyResult.GpRegenStrategyResultState.OK;
             }
 
-            // Return OK immediately if the rotation forcefully gathers the item
-            if (gatherRotation.ShouldForceGather(currentTag))
-            {
-                return GpRegenStrategyResult.GpRegenStrategyResultState.OK;
-            }
-
             // Execute the wait coroutine
             this.logger.RegeneratingGp(Convert.ToInt16((this.EffectiveTimeToRegenerate.TotalSeconds)));
 
             await Coroutine.Wait(
-                TimeSpan.FromSeconds(this.EffectiveSecondsTillGather),
+                this.EffectiveTimeTillGather,
                 () =>
                 {
                     var gp = this.CurrentGp;
@@ -237,10 +261,8 @@ namespace ExBuddy.OrderBotTags.Gather
         /// Executes the strategy logic in charge of regenerating GP before the gather.
         /// </summary>
         /// <returns></returns>
-        public async Task<GpRegenStrategyResult> RegenerateGp()
+        public async Task<GpRegenStrategyResult> RegenerateGp(GatheringPointObject node, IGatheringRotation gatherRotation, GatherStrategy gatherStrategy, CordialTime cordialTime, CordialType cordialType)
         {
-            this.logger.LogReport(this);
-
             var rtn = new GpRegenStrategyResult()
             {
                 EffectiveCordialType = this.effectiveCordialType,
@@ -248,7 +270,7 @@ namespace ExBuddy.OrderBotTags.Gather
             };
 
             // Return OK immediately if there is no node
-            if (currentTag.Node == null)
+            if (node == null)
             {
                 this.logger.GatheringNodeIsGone();
 
@@ -256,17 +278,21 @@ namespace ExBuddy.OrderBotTags.Gather
                 return rtn;
             }
 
+            // Configure the strategy and report to the log
+            this.Configure(node, gatherRotation, gatherStrategy, cordialTime, cordialType);
+            this.logger.LogReport(this);
+
             // Return not enough time if player has less than 3 seconds to gather
-            if (this.EffectiveSecondsTillGather < 3)
+            if (this.EffectiveTimeTillGather.TotalSeconds < 3)
             {
                 this.logger.GatheringNotEnoughTime();
 
                 rtn.StrategyState = GpRegenStrategyResult.GpRegenStrategyResultState.NotEnoughTime;
                 return rtn;
             }
-            
+
             if (this.gatherStrategy == GatherStrategy.GatherOrCollect)
-            { 
+            {
                 // Return not enough GP if we cannot meet the target breakpoint for the rotation
                 if (this.BreakpointGp > this.TargetGp)
                 {
@@ -276,13 +302,13 @@ namespace ExBuddy.OrderBotTags.Gather
                     return rtn;
                 }
             }
-            
+
             // Use the cordial if one was selected
             if (this.Cordial != null)
             {
                 rtn.UseState = await this.Cordial.Use(
-                    ExProfileBehavior.Me, 
-                    maxTimeout: TimeSpan.FromSeconds(this.EffectiveSecondsTillGather), 
+                    ExProfileBehavior.Me,
+                    maxTimeout: this.EffectiveTimeTillGather,
                     dismount: true
                 );
 
@@ -292,7 +318,7 @@ namespace ExBuddy.OrderBotTags.Gather
                 if (rtn.UseState != InventoryItem.UseResult.OK)
                 {
                     this.effectiveCordialType = CordialType.None;
-                    this.InitializeBreakpointAndCordialSelection();
+                    this.CalculateBreakpointAndCordialSelection();
 
                     this.logger.LogReport(this);
 
@@ -311,7 +337,7 @@ namespace ExBuddy.OrderBotTags.Gather
             if (this.gatherStrategy == GatherStrategy.TouchAndGo)
             {
                 // Do nothing if this is not ephemeral
-                if (!currentTag.Node.IsEphemeral())
+                if (!node.IsEphemeral())
                 {
                     this.logger.GatheringNodeSkippedNotEphemeral();
 
@@ -322,13 +348,20 @@ namespace ExBuddy.OrderBotTags.Gather
                 if (this.EffectiveTimeToRegenerate.TotalSeconds > MAX_TOUCHANDGO_WAIT)
                 {
                     this.logger.RegeneratingSkippedExceedsEphemeralMaxWait(
-                        Convert.ToInt16(this.EffectiveTimeToRegenerate.TotalSeconds),
+                        this.EffectiveTimeToRegenerate.TotalSeconds,
                         MAX_TOUCHANDGO_WAIT
                     );
 
                     rtn.StrategyState = GpRegenStrategyResult.GpRegenStrategyResultState.OK;
                     return rtn;
                 }
+            }
+
+            // Return OK immediately if the rotation forcefully gathers the item
+            if (gatherRotation.ShouldForceGather(node))
+            {
+                rtn.StrategyState = GpRegenStrategyResult.GpRegenStrategyResultState.OK;
+                return rtn;
             }
 
             // Execute wait logic
@@ -357,14 +390,19 @@ namespace ExBuddy.OrderBotTags.Gather
                     : string.Empty,
                 this.Cordial != null
                     ? this.CordialGp
-                    : (short) 0
+                    : (short)0
             );
         }
 
         /// <summary>
+        /// Gets the node lifespan
+        /// </summary>
+        public EffectiveNodeLifespan NodeLifespan { get; protected set; }
+
+        /// <summary>
         /// Gets the seconds until we must gather
         /// </summary>
-        public int EffectiveSecondsTillGather { get; protected set; }
+        public TimeSpan EffectiveTimeTillGather { get; protected set; }
 
         /// <summary>
         /// Gets the seconds to wait to hit target GP
@@ -403,7 +441,7 @@ namespace ExBuddy.OrderBotTags.Gather
         /// Gets the GP target to regenerate to
         /// </summary>
         public short TargetGp { get; protected set; }
-        
+
         /// <summary>
         /// Gets the GP that we will regenerate
         /// </summary>
