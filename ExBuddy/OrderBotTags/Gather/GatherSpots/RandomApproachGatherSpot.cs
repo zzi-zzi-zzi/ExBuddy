@@ -41,6 +41,9 @@
 				result &= await tag.CastAura(Ability.Stealth);
 			}
 
+			//change the approach location for the next time we go to this node.
+			approachLocation = HotSpots.Shuffle().First();
+
 			return result;
 		}
 
@@ -78,9 +81,6 @@
 								stopCallback: tag.MovementStopCallback);
 				}
 			}
-
-			//change the approach location for the next time we go to this node.
-			approachLocation = HotSpots.Shuffle().First();
 
 			return result;
 		}

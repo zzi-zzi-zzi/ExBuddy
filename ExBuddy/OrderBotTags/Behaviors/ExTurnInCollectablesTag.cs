@@ -627,9 +627,41 @@ namespace ExBuddy.OrderBotTags.Behaviors
 				InventoryManager.FilledInventoryAndArmory.Where(
 					i => !Blacklist.Contains((uint)i.Pointer.ToInt64(), BlacklistFlags.Loot)).ToArray();
 
+			Dictionary<string, uint> BlackListDictionnary = new Dictionary<string, uint> {
+				{ "Fire Moraine", 5214 },
+				{ "Lightning Moraine", 5218 },
+				{ "Radiant Fire Moraine", 5220 },
+				{ "Radiant Lightning Moraine", 5224 },
+				{ "Bright Fire Rock", 12966 },
+				{ "Bright Lightning Rock", 12967 },
+				{ "Granular Clay", 12968 },
+				{ "Peat Moss", 12969 },
+				{ "Black Soil", 12970 },
+				{ "Highland Oregano", 12971 },
+				{ "Furymint", 12972 },
+				{ "Clary Sage", 12973 },
+				{ "Lover's Laurel", 15948 },
+				{ "Radiant Astral Moraine", 15949 },
+				{ "Dated Radz-at-Han Coin", 17557 },
+				{ "Ice Stalagmite", 17558 },
+				{ "Duskfall Moss", 17559 },
+				{ "Glass Eye", 17560 },
+				{ "Rainbow Pigment", 17561 },
+				{ "Thavnairian Leaf", 17562 },
+				{ "Ghost Faerie", 17563 },
+				{ "Red Sky Coral", 17564 },
+				{ "Lovers' Clam", 17565 },
+				{ "River Shrimp", 17566 },
+				{ "Windtea Leaves", 19916 },
+				{ "Torreya Branch", 19937 },
+				{ "Schorl", 20009 },
+				{ "Perlite", 20010 },
+				{ "Almandine", 20011 },
+				{ "Doman Yellow", 20012 } };
+
 			if (Collectables == null)
 			{
-				item = slots.FirstOrDefault(i => i.Collectability > 0 && i.RawItemId != 17557 && i.RawItemId != 17558 && i.RawItemId != 17559 && i.RawItemId != 17560 && i.RawItemId != 17561 && i.RawItemId != 17562 && i.RawItemId != 17563 && i.RawItemId != 17564 && i.RawItemId != 17565 && i.RawItemId != 17566);
+				item = slots.FirstOrDefault(i => i.Collectability > 0 && !BlackListDictionnary.ContainsValue(i.RawItemId));
 			}
 			else
 			{

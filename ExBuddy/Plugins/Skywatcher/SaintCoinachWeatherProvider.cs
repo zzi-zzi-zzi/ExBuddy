@@ -54,7 +54,15 @@
 			{402, 2101}, // Azys Lla
 			{418, 2300}, // Foundation
 			{419, 2301}, // The Pillars
-			{478, 2082} // Idyllshire
+			{478, 2082}, // Idyllshire
+			{612, 2406}, // The Fringes
+			{613, 2409}, // The Ruby Sea
+			{614, 2410}, // Yanxia
+			{620, 2407}, // The Peaks
+			{621, 2408}, // The Lochs
+			{622, 2411}, // The Azim Steppe
+			{628, 2404}, // Kugane
+			{635, 2403} // Rhalgr's Reach
 		};
 
 		public bool IsEnabled { get; private set; }

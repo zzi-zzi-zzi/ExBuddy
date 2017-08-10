@@ -86,7 +86,14 @@ namespace ExBuddy.OrderBotTags.Gather.Rotations
 			{
 				if (Core.Player.CurrentGP >= 300)
 				{
-					await tag.Cast(Ability.IncreaseGatherQuality30);
+					if (Core.Player.ClassLevel >= 63)
+					{
+						await tag.Cast(Ability.IncreaseGatherQuality30100);
+					}
+					else
+					{
+						await tag.Cast(Ability.IncreaseGatherQuality30);
+					}
 					return await base.ExecuteRotation(tag);
 					;
 				}

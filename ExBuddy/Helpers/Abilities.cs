@@ -122,7 +122,7 @@
 
 		Truth, // = 238,221
 
-		IncreaseGatherQuality30100, // = 238,221
+		IncreaseGatherQuality30100, // = 270,271
 
 		IncreaseGatherChance50, // = 295,294
 
