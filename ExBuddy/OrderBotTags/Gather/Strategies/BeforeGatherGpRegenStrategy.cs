@@ -1,9 +1,8 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace ExBuddy.OrderBotTags.Gather
+﻿namespace ExBuddy.OrderBotTags.Gather.Strategies
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
     using Behaviors;
     using Buddy.Coroutines;
     using Enumerations;

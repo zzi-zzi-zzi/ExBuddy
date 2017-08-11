@@ -2,6 +2,7 @@
 {
     using System;
     using OrderBotTags.Gather;
+    using OrderBotTags.Gather.Strategies;
 
     internal class BeforeGatherGpRegenStrategyLogger : IBeforeGatherGpRegenStrategyLogger
     {

@@ -1,4 +1,4 @@
-﻿namespace ExBuddy.OrderBotTags.Gather
+﻿namespace ExBuddy.OrderBotTags.Gather.Strategies
 {
     using System;
     using System.Threading.Tasks;

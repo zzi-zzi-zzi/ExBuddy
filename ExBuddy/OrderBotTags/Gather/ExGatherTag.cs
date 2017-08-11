@@ -31,6 +31,7 @@
     using Inventory;
     using Inventory.StockManagers;
     using Logging;
+    using Strategies;
     using TreeSharp;
 
 #if RB_CN
