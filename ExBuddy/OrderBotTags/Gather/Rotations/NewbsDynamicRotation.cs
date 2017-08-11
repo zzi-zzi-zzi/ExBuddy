@@ -47,7 +47,7 @@ namespace ExBuddy.OrderBotTags.Gather.Rotations
 			var rarity = CurrentRarity;
 			tag.Logger.Info("Post non-plus Rarity: " + rarity);
 
-			if (rarity >= 119 && rarity <= 124)
+			if (rarity <= 124)
 			{
 				if (level >= 53)
 				{
