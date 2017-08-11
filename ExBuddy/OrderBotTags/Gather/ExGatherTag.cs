@@ -47,8 +47,6 @@
 
 		internal static volatile Dictionary<string, IGatheringRotation> Rotations;
 
-	    private IBeforeGatherGpRegenStrategyLogger beforeGatherLogger;
-
 	    internal CordialStockManager CordialStock = new CordialStockManager(defaultMountBehavior: true);
 
 		internal Collectable CollectableItem;
@@ -87,19 +85,19 @@
 
 		public ExGatherTag()
 		{
-            this.beforeGatherLogger = new BeforeGatherGpRegenStrategyLogger(
-                this.Logger,
-                new GathererLogger(this.Logger), 
-                new GpRegeneratorLogger(this.Logger), 
-                new CordialConsumerLogger(this.Logger),
-                new ProfileBehaviorLogger(this)
-            );
 		    this.beforeGatherGpRegenStrategy = new BeforeGatherGpRegenStrategy(
                 this.CordialStock,
-                this.beforeGatherLogger
+                new BeforeGatherGpRegenStrategyLogger(
+                    this.Logger,
+                    new GathererLogger(this.Logger),
+                    new GpRegeneratorLogger(this.Logger),
+                    new CordialConsumerLogger(this.Logger),
+                    new ProfileBehaviorLogger(this)
+                )
             );
             this.afterGatherGpRegenStrategy = new AfterGatherGpRegenStrategy(
-                this.CordialStock
+                this.CordialStock,
+                new CordialConsumerLogger(this.Logger)
             );
 
             if (Rotations == null)
