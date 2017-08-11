@@ -208,8 +208,6 @@
                 // If we'll regen enough, do not select a cordial
                 if (this.EffectiveGp >= this.TargetGp)
                 {
-                    this.TargetGp = this.EffectiveGp;
-
                     return;
                 }
 
@@ -224,7 +222,6 @@
                     {
                         this.Cordial = bestCordial;
                         this.CordialGp = (short)CordialStockManager.CordialDataMap[bestCordial.ItemKey].Gp;
-                        this.TargetGp = this.BreakpointGp = (short)breakpointGp;
                         return;
                     }
                 }
