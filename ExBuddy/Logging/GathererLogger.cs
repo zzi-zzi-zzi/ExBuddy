@@ -12,6 +12,8 @@ namespace ExBuddy.Logging
         /// <param name="logger"></param>
         public GathererLogger(Logger logger)
         {
+            if (logger == null) throw new ArgumentNullException("logger");
+
             this.logger = logger;
         }
 

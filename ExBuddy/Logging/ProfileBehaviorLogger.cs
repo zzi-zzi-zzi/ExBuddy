@@ -9,7 +9,9 @@
 
         public ProfileBehaviorLogger(ProfileBehavior profileBehavior)
         {
-            this.profileBehavior = profileBehavior ?? throw new ArgumentNullException("profileBehavior");
+            if (profileBehavior == null) throw new ArgumentNullException("profileBehavior");
+
+            this.profileBehavior = profileBehavior;
         }
 
         public void SetStatusText(string text)

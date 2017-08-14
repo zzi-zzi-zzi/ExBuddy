@@ -17,11 +17,17 @@
         /// </summary>
         public BeforeGatherGpRegenStrategyLogger(Logger logger, IGathererLogger gathererLogger, IGpRegeneratorLogger gpRegeneratorLogger, ICordialConsumerLogger cordialConsumerLogger, IStatusLogger statusLogger)
         {
-            this.logger = logger ?? throw new ArgumentNullException("logger");
-            this.gathererLogger = gathererLogger ?? throw new ArgumentNullException("gathererLogger");
-            this.gpRegeneratorLogger = gpRegeneratorLogger ?? throw new ArgumentNullException("gpRegeneratorLogger");
-            this.cordialConsumerLogger = cordialConsumerLogger ?? throw new ArgumentNullException("cordialConsumerLogger");
-            this.statusLogger = statusLogger ?? throw new ArgumentNullException("statusLogger");
+            if (logger == null) throw new ArgumentNullException("logger");
+            if (gathererLogger == null) throw new ArgumentNullException("gathererLogger");
+            if (gpRegeneratorLogger == null) throw new ArgumentNullException("gpRegeneratorLogger");
+            if (cordialConsumerLogger == null) throw new ArgumentNullException("cordialConsumerLogger");
+            if (statusLogger == null) throw new ArgumentNullException("statusLogger");
+
+            this.logger = logger;
+            this.gathererLogger = gathererLogger;
+            this.gpRegeneratorLogger = gpRegeneratorLogger;
+            this.cordialConsumerLogger = cordialConsumerLogger;
+            this.statusLogger = statusLogger;
         }
 
         /// <summary>
