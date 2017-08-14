@@ -1,5 +1,7 @@
 ﻿namespace ExBuddy.Logging
 {
+    using System;
+
     internal class GpRegeneratorLogger : IGpRegeneratorLogger
     {
         private readonly Logger logger;
@@ -9,6 +11,8 @@
         /// </summary>
         public GpRegeneratorLogger(Logger logger)
         {
+            if (logger == null) throw new ArgumentNullException("logger");
+
             this.logger = logger;
         }
 

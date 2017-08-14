@@ -20,8 +20,11 @@
         /// </summary>
         public AfterGatherGpRegenStrategy(CordialStockManager cordialStock, ICordialConsumerLogger cordialConsumerLogger)
         {
-            this.cordialStock = cordialStock ?? throw new ArgumentNullException("cordialStock");
-            this.logger = cordialConsumerLogger ?? throw new ArgumentNullException("cordialConsumerLogger");
+            if (cordialStock == null) throw new ArgumentNullException("cordialStock");
+            if (cordialConsumerLogger == null) throw new ArgumentNullException("cordialConsumerLogger");
+
+            this.cordialStock = cordialStock;
+            this.logger = cordialConsumerLogger;
         }
 
         private void LogCordialResult(InventoryItem.UseResult result, InventoryItem cordialUsed, int startingGp)

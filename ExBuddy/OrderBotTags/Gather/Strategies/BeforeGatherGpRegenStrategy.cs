@@ -55,8 +55,11 @@
         /// </summary>
         public BeforeGatherGpRegenStrategy(CordialStockManager cordialStockManager, IBeforeGatherGpRegenStrategyLogger logger)
         {
-            this.logger = logger ?? throw new ArgumentNullException("logger");
-            this.cordialStockManager = cordialStockManager ?? throw new ArgumentNullException("cordialStockManager");
+            if (logger == null) throw new ArgumentNullException("logger");
+            if (cordialStockManager == null) throw new ArgumentNullException("cordialStockManager");
+
+            this.logger = logger;
+            this.cordialStockManager = cordialStockManager;
             this.gpPerTick = CharacterResource.GetGpPerTick();
         }
 
@@ -135,8 +138,10 @@
         /// </summary>
         protected void Configure(GatheringPointObject node, IGatheringRotation gatherRotation, GatherStrategy gatherStrategy, CordialTime cordialTime, CordialType cordialType)
         {
+            if (gatherRotation == null) throw new ArgumentNullException("gatherRotation");
+
             // Set gathering parameters
-            this.gatherRotation = gatherRotation ?? throw new ArgumentNullException("gatherRotation");
+            this.gatherRotation = gatherRotation;
             this.gatherStrategy = gatherStrategy;
 
             // Set cordial parameters
