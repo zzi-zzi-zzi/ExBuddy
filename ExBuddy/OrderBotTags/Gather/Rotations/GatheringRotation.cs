@@ -46,7 +46,7 @@
 				return await tag.Cast(Ability.IncreaseGatherChance50);
 			}
 
-			if (Core.Player.CurrentGP >= 100 && tag.GatherItem.Chance < 86 && level > 4)
+			if (Core.Player.CurrentGP >= 100 && tag.GatherItem.Chance < 95 && level > 4)
 			{
 				if (level >= 23 && GatheringManager.SwingsRemaining == 1)
 				{
@@ -56,7 +56,7 @@
 				return await tag.Cast(Ability.IncreaseGatherChance15);
 			}
 
-			if (Core.Player.CurrentGP >= 50 && tag.GatherItem.Chance < 96 && level > 3)
+			if (Core.Player.CurrentGP >= 50 && tag.GatherItem.Chance < 100 && level > 3)
 			{
 				if (level >= 23 && GatheringManager.SwingsRemaining == 1)
 				{
