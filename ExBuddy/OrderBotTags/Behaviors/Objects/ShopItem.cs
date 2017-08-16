@@ -1,10 +1,10 @@
 namespace ExBuddy.OrderBotTags.Behaviors.Objects
 {
-	public enum ShopItem
-	{
+    public enum ShopItem
+    {
 #if RB_CN
 
-		#region BlueCrafter
+        #region BlueCrafter
 
         BlueCrafterToken = 0,
 
@@ -62,9 +62,9 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 
 		CulDelineation = 27,
 
-		#endregion BlueCrafter
+        #endregion BlueCrafter
 
-		#region RedCrafter
+        #region RedCrafter
 
 		SoulOfTheCrafter = -100,
 
@@ -84,9 +84,9 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 
 		CommandV = -92,
 
-		#endregion RedCrafter
+        #endregion RedCrafter
 
-		#region BlueGatherer
+        #region BlueGatherer
 
 		BlueGatherToken = -200,
 
@@ -160,9 +160,9 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 
 		RoyalMistletoeHQ = -166,
 
-		#endregion BlueGatherer
+        #endregion BlueGatherer
 
-		#region RedGatherer
+        #region RedGatherer
 
 		RedGatherToken = -300,
 
@@ -180,186 +180,302 @@ namespace ExBuddy.OrderBotTags.Behaviors.Objects
 
 		GraspV = -293
 
-		#endregion RedGatherer
+        #endregion RedGatherer
 
 #else
 
-		#region RedCrafter50
+        #region RedCrafter50
 
-		SoulOfTheCrafter = 0,
+        SoulOfTheCrafter = 0,
 
-		CommercialEngineeringManual = 1,
+        CommercialEngineeringManual = 1,
 
-		CrpDelineation = 2,
+        CrpDelineation = 2,
 
-		BsmDelineation = 3,
+        BsmDelineation = 3,
 
-		ArmDelineation = 4,
+        ArmDelineation = 4,
 
-		GsmDelineation = 5,
+        GsmDelineation = 5,
 
-		LtwDelineation = 6,
+        LtwDelineation = 6,
 
-		WvrDelineation = 7,
+        WvrDelineation = 7,
 
-		AlcDelineation = 8,
+        AlcDelineation = 8,
 
-		CulDelineation = 9,
+        CulDelineation = 9,
 
-		CompetenceIV = 10,
+        CompetenceIV = 10,
 
-		CompetenceV = 11,
+        CompetenceV = 11,
 
-		CunningIV = 12,
+        CunningIV = 12,
 
-		CunningV = 13,
+        CunningV = 13,
 
-		CommandIV = 14,
+        CommandIV = 14,
 
-		CommandV = 15,
+        CommandV = 15,
 
-		#endregion RedCrafter50
+        #endregion RedCrafter50
 
-		#region RedCrafter61
+        #region RedCrafter58
 
-		DomanIronHalfheartSaw = 100,
+        BlueCrafterToken = 100,
 
-		DomanIronClawHammer = 101,
+        GoblinCup = 101,
 
-		DomanIronLumpHammer = 102,
+        SweetCreamMilk = 102,
 
-		DomanIronFile = 103,
+        SweetCreamMilkHq = 103,
 
-		DomanIronRaisingHammer = 104,
+        StoneCheese = 104,
 
-		DomanIronPliers = 105,
+        StoneCheeseHq = 105,
 
-		DuriumTextureHammer = 106,
+        HeavensEgg = 106,
 
-		SlateGrindingWheel = 107,
+        HeavensEggHq = 107,
 
-		DomanIronHeadKnife = 108,
+        CarbonFiber = 108,
 
-		DomanIronAwl = 109,
+        CarbonFiberHq = 109,
 
-		DzoHornNeedle = 110,
+        LoaghtanFilet = 110,
 
-		PineSpinningWheel = 111,
+        LoaghtanFiletHq = 111,
 
-		DomanIronAlembic = 112,
+        GoldenApple = 112,
 
-		DomanIronMortar = 113,
+        GoldenAppleHq = 113,
 
-		DomanIronFrypan = 114,
+        SolsticeGarlic = 114,
 
-		DomanIronCulinaryKnife = 115,
+        SolsticeGarlicHq = 115,
 
-		KudzuCapofCrafting = 116,
+        MatureOliveOil = 116,
 
-		KudzuRobeofCrafting = 117,
+        MatureOliveOilHq = 117,
 
-		DuriumChaplets = 118,
+        PowderedMermanHorn = 118,
 
-		KudzuCulottesofCrafting = 119,
+        PowderedMermanHornHq = 119,
 
-		TigerskinBootsofCrafting = 120,
+        BouillonCube = 120,
 
-		MasterCarpenterV = 121,
+        BouillonCubeHq = 121,
 
-		MasterBlacksmithV = 122,
+        OrientalSoySauce = 122,
 
-		MasterArmorerV = 123,
+        OrientalSoySauceHq = 123,
 
-		MasterGoldsmithV = 124,
+        OrientalMisoPaste = 124,
 
-		MasterLeatherworkerV = 125,
+        OrientalMisoPasteHq = 125,
 
-		MasterWeaverV = 126,
+        HeavenlyKukuruPowder = 126,
 
-		MasterAlchemistV = 127,
+        HeavenlyKukuruPowderHq = 127,
 
-		MasterCulinarianV = 128,
+        AdeptsHat = 128,
 
-		#endregion RedCrafter61
+        AdeptsGown = 129,
 
-		#region YellowGathererItems
+        AdeptsGloves = 130,
 
-		KoshuPork = 200,
+        AdeptsHose = 131,
 
-		TeaBrick = 201,
+        AdeptsThighboots = 132,
 
-		#endregion YellowGathererItems
+        #endregion RedCrafter58
 
-		#region RedGatherer50
+        #region RedCrafter61
 
-		HiCordial = 300,
+        DomanIronHalfheartSaw = 200,
 
-		CommercialSurvivalManual = 301,
+        DomanIronClawHammer = 201,
 
-		GiantCraneFly = 302,
+        DomanIronLumpHammer = 202,
 
-		BruteLeech = 303,
+        DomanIronFile = 203,
 
-		FiendWorm = 304,
+        DomanIronRaisingHammer = 204,
 
-		MagmaWorm = 305,
+        DomanIronPliers = 205,
 
-		RedBalloon = 306,
+        DuriumTextureHammer = 206,
 
-		GuerdonIV = 307,
+        SlateGrindingWheel = 207,
 
-		GuerdonV = 308,
+        DomanIronHeadKnife = 208,
 
-		GuileIV = 309,
+        DomanIronAwl = 209,
 
-		GuileV = 310,
+        DzoHornNeedle = 210,
 
-		GraspIV = 311,
+        PineSpinningWheel = 211,
 
-		GraspV = 312,
+        DomanIronAlembic = 212,
 
-		#endregion RedGatherer50
+        DomanIronMortar = 213,
 
-		#region RedGatherer61
+        DomanIronFrypan = 214,
 
-		FolkloreGatherToken = 400,
+        DomanIronCulinaryKnife = 215,
 
-		DomanIronPickaxe = 401,
+        KudzuCapofCrafting = 216,
 
-		DomanIronSledgehammer = 402,
+        KudzuRobeofCrafting = 217,
 
-		DomanIronHatchet = 403,
+        DuriumChaplets = 218,
 
-		DomanIronScythe = 404,
+        KudzuCulottesofCrafting = 219,
 
-		PineFishingRod = 405,
+        TigerskinBootsofCrafting = 220,
 
-		TigerskinCapofGathering = 406,
+        #endregion RedCrafter61
 
-		KudzuCoatofGathering = 407,
+        #region YellowCrafterItems
 
-		TigerskinFingerlessGlovesofGathering = 408,
+        KoshuPork = 300,
 
-		KudzuCulottesofGathering = 409,
+        TeaBrick = 301,
 
-		TigerskinBootsofGathering = 410,
+        #endregion YellowCrafterItems
 
-		SuspendingMinnow = 411,
+        #region RedGatherer50
 
-		BreamLure = 412,
+        HiCordial = 400,
 
-		Silkworm = 413,
+        CommercialSurvivalManual = 401,
 
-		#endregion RedGatherer61
+        GiantCraneFly = 402,
 
-		#region YellowGathererItems
+        BruteLeech = 403,
 
-		BlueBobbit = 500,
+        FiendWorm = 404,
 
-		StoneflyLarva = 501
+        MagmaWorm = 405,
 
-		#endregion YellowGathererItems
+        RedBalloon = 406,
+
+        GuerdonIV = 407,
+
+        GuerdonV = 408,
+
+        GuileIV = 409,
+
+        GuileV = 410,
+
+        GraspIV = 411,
+
+        GraspV = 412,
+
+        #endregion RedGatherer50
+
+        #region RedGatherer58
+
+        BlueGatherToken = 500,
+
+        GoblinDice = 501,
+
+        TrailblazersScarf = 502,
+
+        TrailblazersVest = 503,
+
+        TrailblazersWristguards = 504,
+
+        TrailblazersSlops = 505,
+
+        TrailblazersShoes = 506,
+
+        CrownTrout = 507,
+
+        CrownTroutHq = 508,
+
+        RetributionStaff = 509,
+
+        RetributionStaffHq = 510,
+
+        ThiefBetta = 511,
+
+        ThiefBettaHq = 512,
+
+        GoldsmithCrab = 513,
+
+        GoldsmithCrabHq = 514,
+
+        Pterodactyl = 515,
+
+        PterodactylHq = 516,
+
+        Eurhinosaur = 517,
+
+        EurhinosaurHq = 518,
+
+        GemMarimo = 519,
+
+        GemMarimoHq = 520,
+
+        Sphalerite = 521,
+
+        SphaleriteHq = 522,
+
+        WindSilk = 523,
+
+        CloudCottonBoll = 524,
+
+        CloudCottonBollHq = 525,
+
+        DinosaurLeather = 526,
+
+        RoyalMistletoe = 527,
+
+        RoyalMistletoeHq = 528,
+
+        #endregion RedGatherer58
+
+        #region RedGatherer61
+
+        FolkloreGatherToken = 600,
+
+        DomanIronPickaxe = 601,
+
+        DomanIronSledgehammer = 602,
+
+        DomanIronHatchet = 603,
+
+        DomanIronScythe = 604,
+
+        PineFishingRod = 605,
+
+        TigerskinCapofGathering = 606,
+
+        KudzuCoatofGathering = 607,
+
+        TigerskinFingerlessGlovesofGathering = 608,
+
+        KudzuCulottesofGathering = 609,
+
+        TigerskinBootsofGathering = 610,
+
+        SuspendingMinnow = 611,
+
+        BreamLure = 612,
+
+        Silkworm = 613,
+
+        #endregion RedGatherer61
+
+        #region YellowGathererItems
+
+        BlueBobbit = 700,
+
+        StoneflyLarva = 701
+
+        #endregion YellowGathererItems
 
 #endif
-	}
+    }
 }
