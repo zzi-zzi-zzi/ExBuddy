@@ -271,36 +271,6 @@
 			}
 		}
 
-		protected override async Task<bool> IncreaseChance(ExGatherTag tag)
-		{
-			var level = Core.Player.ClassLevel;
-			if (Core.Player.CurrentGP >= 100 && tag.GatherItem.Chance < 95)
-			{
-				if (level >= 23 && GatheringManager.SwingsRemaining == 1)
-				{
-					await tag.Cast(Ability.IncreaseGatherChanceOnce15);
-					return true;
-				}
-
-				await tag.Cast(Ability.IncreaseGatherChance15);
-				return true;
-			}
-
-			if (Core.Player.CurrentGP >= 50 && tag.GatherItem.Chance < 100)
-			{
-				if (level >= 23 && GatheringManager.SwingsRemaining == 1)
-				{
-					await tag.Cast(Ability.IncreaseGatherChanceOnce15);
-					return true;
-				}
-
-				await tag.Cast(Ability.IncreaseGatherChance5);
-				return true;
-			}
-
-			return true;
-		}
-
 		protected async Task UtmostDiscerning(ExGatherTag tag)
 		{
 			await UtmostCaution(tag);
