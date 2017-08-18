@@ -313,10 +313,10 @@
     <value>Unable to find an item to gather, moving on.</value>
   </data>
   <data name="ExGather_NothingToGather2" xml:space="preserve">
-    <value>could not find item by slot or name, gathering</value>
+    <value>could not find item by slot or name, gathering </value>
   </data>
   <data name="ExGather_NothingToGather3" xml:space="preserve">
-    <value>instead.</value>
+    <value> instead.</value>
   </data>
   <data name="ExGather_Rotationbaseoff" xml:space="preserve">
     <value>Estimating rotation based off {0}</value>

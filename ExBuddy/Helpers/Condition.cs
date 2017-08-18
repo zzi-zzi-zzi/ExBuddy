@@ -95,42 +95,19 @@
 			return result;
 		}
 
-		public static bool IsSpiritBondDone(int id)
+		public static bool IsSpiritBondDone(int id, bool nqOnly = false)
 		{
-			foreach (BagSlot slot in InventoryManager.EquippedItems)
-			{
-				if (slot.RawItemId == id && slot.SpiritBond == 100f)
-				{
-					return true;
-				}
-			}
-			return false;
+		    return InventoryManager.EquippedItems.Any(slot => slot.RawItemId == id && slot.SpiritBond == 100f && (!nqOnly || slot.TrueItemId == id));
 		}
 
 		public static bool IsFateActive(int id)
 		{
-			foreach (FateData fate in FateManager.AllFates)
-			{
-				if (fate.Id == id && fate.Status == ff14bot.Enums.FateStatus.ACTIVE)
-				{
-					return true;
-				}
-			}
-			return false;
+		    return FateManager.AllFates.Any(fate => fate.Id == id && fate.Status == ff14bot.Enums.FateStatus.ACTIVE);
 		}
 
 		public static int CollectableCount(int id, int collectability)
 		{
-			int count = 0;
-
-			foreach (BagSlot slot in InventoryManager.FilledSlots)
-			{
-				if (slot.RawItemId == id && slot.Collectability >= collectability)
-				{
-					count++;
-				}
-			}
-			return count;
+		    return InventoryManager.FilledSlots.Count(slot => slot.RawItemId == id && slot.Collectability >= collectability);
 		}
 
 		public static bool TrueFor(int id, TimeSpan span)
