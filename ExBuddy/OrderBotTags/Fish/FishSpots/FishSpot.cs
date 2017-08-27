@@ -100,7 +100,7 @@
 
 			if (UnstealthAfter && Core.Player.HasAura((int)AbilityAura.Stealth))
 			{
-				result &= tag.DoAbility(ExFishTag.Abilities.Stealth); // TODO: move into abilities map?
+				result &= tag.DoAbility(Ability.Stealth); // TODO: move into abilities map?
 			}
 
 			return result;
@@ -129,7 +129,7 @@
 				await Coroutine.Yield();
 				if (!Core.Player.HasAura((int)AbilityAura.Stealth))
 				{
-					tag.DoAbility(ExFishTag.Abilities.Stealth);
+					tag.DoAbility(Ability.Stealth);
 				}
 
 				result = await Location.MoveToNoMount(UseMesh, tag.Radius, tag.Name, tag.MovementStopCallback);
