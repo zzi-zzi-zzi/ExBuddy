@@ -28,8 +28,6 @@
     using Localization;
     using Strategies;
     using TreeSharp;
-    using ff14bot.Pathing;
-    using static ff14bot.Navigation.Navigator;
 
 #if RB_CN
     using ActionManager = ff14bot.Managers.Actionmanager;
@@ -41,8 +39,12 @@
     {
         private static readonly object Lock = new object();
 
-        protected static Regex FishRegex = new Regex(
+        protected static Regex SpearFishRegex = new Regex(
             @"You spear(?: a| an| [2-3])? (.+) measuring (\d{1,4}\.\d) ilms!",
+            RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
+        protected static Regex SpearFishGetAwayRegex = new Regex(
+            @"The fish gets away\.\.\.",
             RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         protected static Regex FishSizeRegex = new Regex(@"(\d{1,4}\.\d)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
@@ -124,7 +126,8 @@
 
         protected void ReceiveMessage(object sender, ChatEventArgs e)
         {
-            if (e.ChatLogEntry.MessageType == (MessageType) 2115 && e.ChatLogEntry.Contents.StartsWith("You spear"))
+            if (e.ChatLogEntry.MessageType == (MessageType) 2115 && e.ChatLogEntry.Contents.StartsWith("You spear") ||
+                e.ChatLogEntry.MessageType == (MessageType) 67 && e.ChatLogEntry.Contents.StartsWith("The fish"))
                 MatchSpearResult(e.ChatLogEntry.Contents);
         }
 
@@ -132,15 +135,18 @@
         {
             var spearResult = new SpearResult();
 
-            var match = FishRegex.Match(message);
-            if (match.Success)
+            var spearFishMatch = SpearFishRegex.Match(message);
+            var spearFishAwayMatch = SpearFishGetAwayRegex.Match(message);
+            if (spearFishMatch.Success)
             {
-                spearResult.Name = match.Groups[1].Value;
-                float.TryParse(match.Groups[2].Value, out float size);
+                spearResult.Name = spearFishMatch.Groups[1].Value;
+                float.TryParse(spearFishMatch.Groups[2].Value, out float size);
                 spearResult.Size = size;
                 if (spearResult.Name[spearResult.Name.Length - 2] == ' ')
                     spearResult.IsHighQuality = true;
             }
+            if (spearFishAwayMatch.Success)
+                spearResult.Name = "none";
 
             SpearResult = spearResult;
         }
@@ -497,9 +503,7 @@
             tag.StatusText = "Moving to " + this;
 
             if (HotSpots == null || HotSpots.Count == 0)
-            {
                 return false;
-            }
 
             var randomApproachLocation = tag.Node.Location.AddRandomDirection(3f);
 
@@ -565,7 +569,7 @@
                 }
 
                 Logger.Warn(Localization.ExGather_GatherWindow2, attempts);
-                //SetFallbackGatherSpot(Node.Location, true);
+                SetFallbackGatherSpot(Node.Location, true);
 
                 await MoveToGatherSpot();
             }
@@ -635,12 +639,13 @@
                 await Coroutine.Sleep(4500);
                 await Cast(Abilities.Map[Core.Player.CurrentJob][Ability.Gig]);
 
-                await Coroutine.Wait(1000, () => SelectYesNoItem.IsOpen);
                 while (SelectYesNoItem.IsOpen && Behaviors.ShouldContinue)
                 {
                     SelectYesNoItem.Yes();
                     await Coroutine.Wait(2000, () => !SelectYesNoItem.IsOpen);
                 }
+
+                await Coroutine.Sleep(1000);
 
                 Logger.Info(Localization.ExSpearFish_SpearFishing, SpearResult.FishName, SpearResult.IsHighQuality, SpearResult.Size, WorldManager.EorzaTime);
                 if (hits == 0 && !Items.Any(SpearResult.ShouldKeep) && Core.Player.CurrentGP >= 200 && await Coroutine.Wait(4000, () => ActionManager.CanCast(7906, Core.Player)))
