@@ -723,4 +723,10 @@
   <data name="ExGather_BeforeGatherWait" xml:space="preserve">
     <value>Regenerating GP for approximately {0} seconds.</value>
   </data>
+  <data name="ExSpearFish_SpearFishing" xml:space="preserve">
+    <value>Spearfish : {0}, HQ : {1}, size: {2} at {3} ET.</value>
+  </data>
+  <data name="ExSpearFish_UsingVeteranTrade" xml:space="preserve">
+    <value>Using Veteran Trade on {0}.</value>
+  </data>
 </root>

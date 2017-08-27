@@ -92,6 +92,8 @@
     <Compile Include="Navigation\FlightEnabledNavigatorbeta.cs" />
     <Compile Include="Navigation\FlightEnabledNavigatorCN.cs" />
     <Compile Include="Offsets\SecondaryOffsets.cs" />
+    <Compile Include="OrderBotTags\Gather\ExSpearFishTag.cs" />
+    <Compile Include="OrderBotTags\Gather\SpearResult.cs" />
     <Compile Include="OrderBotTags\Gather\Strategies\AfterGatherGpRegenStrategy.cs" />
     <Compile Include="OrderBotTags\Gather\Strategies\BeforeGatherGpRegenStrategy.cs" />
     <Compile Include="OrderBotTags\Gather\Strategies\GpRegenStrategyResult.cs" />
@@ -113,6 +115,7 @@
     <Compile Include="OrderBotTags\Gather\Rotations\WaterElementGatheringRotation.cs" />
     <Compile Include="OrderBotTags\Gather\Rotations\WindElementGatheringRotation.cs" />
     <Compile Include="OrderBotTags\Gather\TimeToGather.cs" />
+    <Compile Include="OrderBotTags\Objects\SpearFish.cs" />
     <Compile Include="Plugins\Skywatcher\Objects\Location.cs" />
     <Compile Include="Plugins\Skywatcher\Objects\LocationIndex.cs" />
     <Compile Include="Plugins\Skywatcher\Objects\WeatherRate.cs" />
@@ -226,6 +229,7 @@
     <Compile Include="Providers\MasterPieceSupplyDataProvider.cs" />
     <Compile Include="Agents\Agent{T}.cs" />
     <Compile Include="Agents\Desynthesis.cs" />
+    <Compile Include="Windows\HarpoonTip.cs" />
     <Compile Include="Windows\Bait.cs" />
     <Compile Include="Windows\FreeCompanyChest.cs" />
     <Compile Include="Windows\Gathering.cs" />
@@ -296,7 +300,9 @@
       <LastGenOutput>Localization.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Localization\Localization.zh-CN.resx" />
+    <EmbeddedResource Include="Localization\Localization.zh-CN.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

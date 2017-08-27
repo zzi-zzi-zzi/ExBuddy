@@ -122,7 +122,7 @@
 											if (coroutine == null || coroutine.IsFinished)
 											{
 												Logger.Verbose(Localization.Localization.FlightEnabledSlideMover_TakeoffNew);
-                                                coroutine = new Coroutine(async () => await CommonTasks.TakeOff());
+                                                coroutine = new Coroutine(() => CommonTasks.TakeOff());
                                             }
 
 											if (!coroutine.IsFinished && !MovementManager.IsFlying && Behaviors.ShouldContinue)
