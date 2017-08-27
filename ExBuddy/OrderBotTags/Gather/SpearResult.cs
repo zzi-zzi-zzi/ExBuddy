@@ -15,6 +15,6 @@
 
         public float Size { get; set; }
 
-        public bool IsVeteranTrade(INamedItem item) { return !FishName.Equals(item.Name, StringComparison.InvariantCultureIgnoreCase) && !FishNames.Equals(item.Name, StringComparison.InvariantCultureIgnoreCase); }
+        public bool ShouldKeep(INamedItem item) { return FishName.Equals(item.Name, StringComparison.InvariantCultureIgnoreCase) || FishNames.Equals(item.Name, StringComparison.InvariantCultureIgnoreCase); }
     }
 }

@@ -643,7 +643,7 @@
                 }
 
                 Logger.Info(Localization.ExSpearFish_SpearFishing, SpearResult.FishName, SpearResult.IsHighQuality, SpearResult.Size, WorldManager.EorzaTime);
-                if (hits == 0 && Items.Any(SpearResult.IsVeteranTrade) && Core.Player.CurrentGP >= 200 && await Coroutine.Wait(4000, () => ActionManager.CanCast(7906, Core.Player)))
+                if (hits == 0 && !Items.Any(SpearResult.ShouldKeep) && Core.Player.CurrentGP >= 200 && await Coroutine.Wait(4000, () => ActionManager.CanCast(7906, Core.Player)))
                 {
                     Logger.Info(Localization.ExSpearFish_UsingVeteranTrade, SpearResult.FishName);
                     await Cast(Abilities.Map[Core.Player.CurrentJob][Ability.VeteranTrade]);
