@@ -46,7 +46,7 @@
 
 			if (MovementManager.IsFlying
 #if !RB_CN
-				|| MovementManager.IsDiving
+				&& !MovementManager.IsDiving
 #endif
 				)
 			{
