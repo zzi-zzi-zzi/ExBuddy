@@ -493,33 +493,9 @@
 
             if (distance <= Distance)
                 return true;
-            await MoveToSpot(this);
+            await GatherSpot.MoveToSpot(this);
 
             return false;
-        }
-
-        public async Task<bool> MoveToSpot(ExGatherTag tag)
-        {
-            tag.StatusText = "Moving to " + this;
-
-            if (HotSpots == null || HotSpots.Count == 0)
-                return false;
-
-            var randomApproachLocation = tag.Node.Location.AddRandomDirection(3f);
-
-            var result = await randomApproachLocation.MoveToPointWithin(1f);
-
-            if (!result) return false;
-
-            result =
-                await
-                    tag.Node.Location.MoveTo(
-                        true,
-                        radius: tag.Distance,
-                        name: tag.Node.EnglishName,
-                        stopCallback: tag.MovementStopCallback);
-
-            return result;
         }
 
         private async Task<bool> BeforeSpearFish() { return true; }

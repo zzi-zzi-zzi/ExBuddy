@@ -35,9 +35,15 @@ namespace ExBuddy.OrderBotTags.Gather.GatherSpots
 
 		public virtual async Task<bool> MoveToSpot(ExGatherTag tag)
 		{
-			tag.StatusText = "Moving to " + this;
+		    tag.StatusText = "Moving to " + this;
 
-			var result =
+		    var randomApproachLocation = NodeLocation.AddRandomDirection(3f);
+
+		    var result = await randomApproachLocation.MoveToPointWithin(1f);
+
+		    if (!result) return false;
+
+		    result =
 				await
 					NodeLocation.MoveTo(
 						UseMesh,
@@ -45,7 +51,7 @@ namespace ExBuddy.OrderBotTags.Gather.GatherSpots
 						name: tag.Node.EnglishName,
 						stopCallback: tag.MovementStopCallback);
 
-			return result;
+		    return result;
 		}
 
 		#endregion IGatherSpot Members
