@@ -28,6 +28,8 @@
     using Localization;
     using Strategies;
     using TreeSharp;
+    using ff14bot.Pathing;
+    using static ff14bot.Navigation.Navigator;
 
 #if RB_CN
     using ActionManager = ff14bot.Managers.Actionmanager;
@@ -471,7 +473,7 @@
             }
         }
 
-        private async Task<bool> GatherSequence() { return await MoveToGatherSpot() /*&& await BeforeSpearFish()*/ && await SpearFish() /*&& await AfterSpearFish()*/ && await MoveFromGatherSpot(); }
+        private async Task<bool> GatherSequence() { return await MoveToGatherSpot() /*&& await BeforeSpearFish()*/ && await SpearFish() /*&& await AfterSpearFish()*/; }
 
         private async Task<bool> MoveToGatherSpot()
         {
@@ -485,9 +487,35 @@
 
             if (distance <= Distance)
                 return true;
-            await GatherSpot.MoveToSpot(this);
+            await MoveToSpot(this);
 
             return false;
+        }
+
+        public async Task<bool> MoveToSpot(ExGatherTag tag)
+        {
+            tag.StatusText = "Moving to " + this;
+
+            if (HotSpots == null || HotSpots.Count == 0)
+            {
+                return false;
+            }
+
+            var randomApproachLocation = tag.Node.Location.AddRandomDirection(3f);
+
+            var result = await randomApproachLocation.MoveToPointWithin(1f);
+
+            if (!result) return false;
+
+            result =
+                await
+                    tag.Node.Location.MoveTo(
+                        true,
+                        radius: tag.Distance,
+                        name: tag.Node.EnglishName,
+                        stopCallback: tag.MovementStopCallback);
+
+            return result;
         }
 
         private async Task<bool> BeforeSpearFish() { return true; }
@@ -544,9 +572,6 @@
 
             if (!CanDoAbility(Ability.Gig))
             {
-                if (!FreeRange)
-                    await MoveFromGatherSpot();
-
                 OnResetCachedDone();
                 return false;
             }
@@ -642,8 +667,6 @@
 
             return true;
         }
-
-        private async Task<bool> MoveFromGatherSpot() { return GatherSpot == null || await GatherSpot.MoveFromSpot(this); }
 
         #region Ability Checks and Actions
 
