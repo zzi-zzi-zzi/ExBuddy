@@ -220,12 +220,9 @@
 		[XmlAttribute("WindowDelay")]
 		public int WindowDelay { get; set; }
 
-		protected override Color Info
-		{
-			get { return Colors.Chartreuse; }
-		}
+		protected override Color Info => Colors.Chartreuse;
 
-		protected override void DoReset()
+	    protected override void DoReset()
 		{
 			loopCount = 0;
 			NodesGatheredAtMaxGp = 0;
