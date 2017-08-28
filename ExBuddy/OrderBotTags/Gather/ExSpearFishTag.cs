@@ -39,6 +39,8 @@
     {
         private static readonly object Lock = new object();
 
+        internal SpellData CordialSpellData;
+
         protected static Regex SpearFishRegex = new Regex(
             @"You spear(?: a| an| [2-3])? (.+) measuring (\d{1,4}\.\d) ilms!",
             RegexOptions.Compiled | RegexOptions.IgnoreCase);
@@ -479,7 +481,7 @@
             }
         }
 
-        private async Task<bool> GatherSequence() { return await MoveToGatherSpot() /*&& await BeforeSpearFish()*/ && await SpearFish() /*&& await AfterSpearFish()*/ && await MoveFromGatherSpot(); }
+        private async Task<bool> GatherSequence() { return await MoveToGatherSpot() /*&& await BeforeSpearFish()*/ && await SpearFish() && await AfterSpearFish() && await MoveFromGatherSpot(); }
 
         private async Task<bool> MoveToGatherSpot()
         {
@@ -643,7 +645,93 @@
             return true;
         }
 
-        private async Task<bool> AfterSpearFish() { return true; }
+        private async Task<bool> AfterSpearFish() { return await HandleCordial(); }
+
+        private async Task<bool> HandleCordial()
+        {
+            if (CordialType == CordialType.None)
+            {
+                return false;
+            }
+
+            CordialSpellData = CordialSpellData ?? Cordial.GetSpellData();
+
+            if (CordialSpellData == null)
+            {
+                CordialType = CordialType.None;
+                return false;
+            }
+
+            if (!CanUseCordial(8))
+            {
+                return false;
+            }
+
+            var missingGp = ExProfileBehavior.Me.MaxGP - ExProfileBehavior.Me.CurrentGP;
+
+            if (missingGp < 300)
+            {
+                return false;
+            }
+
+            if (missingGp >= 450 && (CordialType == CordialType.HiCordial || CordialType == CordialType.Auto))
+            {
+                if (await UseCordial(CordialType.HiCordial))
+                {
+                    return true;
+                }
+            }
+
+            if (missingGp < 400 || CordialType != CordialType.Cordial && CordialType != CordialType.Auto) return await UseCordial(CordialType.WateredCordial);
+
+            if (await UseCordial(CordialType.Cordial))
+            {
+                return true;
+            }
+
+            return await UseCordial(CordialType.WateredCordial);
+        }
+
+        internal bool CanUseCordial(ushort withinSeconds = 5)
+        {
+            return CordialSpellData.Cooldown.TotalSeconds < withinSeconds 
+                && (CordialType == CordialType.WateredCordial && Cordial.HasWateredCordials()
+                       || CordialType == CordialType.Cordial && (Cordial.HasWateredCordials() || Cordial.HasCordials())
+                       || (CordialType == CordialType.HiCordial || CordialType == CordialType.Auto) && Cordial.HasAnyCordials());
+        }
+
+        private async Task<bool> UseCordial(CordialType cordialType, int maxTimeoutSeconds = 5)
+        {
+            if (!(CordialSpellData.Cooldown.TotalSeconds < maxTimeoutSeconds)) return false;
+            var cordial = InventoryManager.FilledSlots.FirstOrDefault(slot => slot.RawItemId == (uint)cordialType);
+
+            if (cordial != null)
+            {
+                StatusText = ExBuddy.Localization.Localization.ExFish_UseCordialWhenAvailable;
+
+                Logger.Info(
+                    ExBuddy.Localization.Localization.ExFish_UseCordial,
+                    (int)CordialSpellData.Cooldown.TotalSeconds,
+                    ExProfileBehavior.Me.CurrentGP);
+
+                if (!await Coroutine.Wait(
+                    TimeSpan.FromSeconds(maxTimeoutSeconds),
+                    () =>
+                    {
+                        if (!ExProfileBehavior.Me.IsMounted || !(CordialSpellData.Cooldown.TotalSeconds < 2)) return cordial.CanUse(ExProfileBehavior.Me);
+                        ActionManager.Dismount();
+                        return false;
+                    })) return false;
+                await Coroutine.Sleep(500);
+                Logger.Info("Using " + cordialType);
+                cordial.UseItem(ExProfileBehavior.Me);
+                await Coroutine.Sleep(1500);
+                return true;
+            }
+            Logger.Warn(ExBuddy.Localization.Localization.ExFish_NoCordial + cordialType);
+
+            return false;
+        }
 
         private async Task<bool> WaitForGatherWindowToClose()
         {
