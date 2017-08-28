@@ -2,14 +2,21 @@
 
 namespace ExBuddy.OrderBotTags.Gather.GatherSpots
 {
-	using Clio.Utilities;
+    using System.Collections.Generic;
+    using Clio.Utilities;
 	using Clio.XmlEngine;
 	using ExBuddy.Helpers;
 	using ExBuddy.Interfaces;
 	using System.ComponentModel;
+	using System.Linq;
 	using System.Threading.Tasks;
+	using Buddy.Coroutines;
+	using ff14bot;
+	using ff14bot.Managers;
+	using ff14bot.Navigation;
+	using ff14bot.Pathing;
 
-	[XmlElement("GatherSpot")]
+    [XmlElement("GatherSpot")]
 	public class GatherSpot : IGatherSpot
 	{
 		[DefaultValue(true)]
@@ -37,11 +44,28 @@ namespace ExBuddy.OrderBotTags.Gather.GatherSpots
 		{
 		    tag.StatusText = "Moving to " + this;
 
-		    var randomApproachLocation = NodeLocation.AddRandomDirection(3f);
+		    Vector3 randomApproachLocation;
+		    if (MovementManager.IsFlying
+#if !RB_CN
+		         || MovementManager.IsDiving
+#endif
+		    )
+            {
+		        randomApproachLocation = NodeLocation.AddRandomDirection(3.0f, SphereType.TopHalf);
+		    }
+		    else
+		    {
+		        randomApproachLocation = NodeLocation.AddRandomDirection2D(3.0f);
+		    }
 
-		    var result = await randomApproachLocation.MoveToPointWithin(1f);
+		    var result = await
+		        randomApproachLocation.MoveTo(
+		            UseMesh,
+		            radius: tag.Distance,
+		            name: tag.Node.EnglishName,
+		            stopCallback: tag.MovementStopCallback);
 
-		    if (!result) return false;
+            if (!result) return false;
 
 		    result =
 				await

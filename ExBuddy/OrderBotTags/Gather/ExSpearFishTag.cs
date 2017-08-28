@@ -479,7 +479,7 @@
             }
         }
 
-        private async Task<bool> GatherSequence() { return await MoveToGatherSpot() /*&& await BeforeSpearFish()*/ && await SpearFish() /*&& await AfterSpearFish()*/; }
+        private async Task<bool> GatherSequence() { return await MoveToGatherSpot() /*&& await BeforeSpearFish()*/ && await SpearFish() /*&& await AfterSpearFish()*/ && await MoveFromGatherSpot(); }
 
         private async Task<bool> MoveToGatherSpot()
         {
@@ -552,6 +552,11 @@
 
             if (!CanDoAbility(Ability.Gig))
             {
+                if (!FreeRange)
+                {
+                    await MoveFromGatherSpot();
+                }
+
                 OnResetCachedDone();
                 return false;
             }
@@ -647,6 +652,11 @@
                 await Coroutine.Yield();
 
             return true;
+        }
+
+        private async Task<bool> MoveFromGatherSpot()
+        {
+            return GatherSpot == null || await GatherSpot.MoveFromSpot(this);
         }
 
         #region Ability Checks and Actions

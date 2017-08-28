@@ -194,7 +194,7 @@ namespace ExBuddy.Helpers
 			Func<float, float, bool> stopCallback = null,
 			bool dismountAtDestination = false)
 		{
-			await Mount(destination, mountId);
+			await Mount(destination, CharacterSettings.Instance.MountId);
 			await MoveToNoMount(destination, useMesh, radius, name, stopCallback);
 			return !dismountAtDestination || await Dismount();
 		}
@@ -275,12 +275,15 @@ namespace ExBuddy.Helpers
 			string name = null,
 			bool dismountAtDestination = false)
 		{
-			await Mount(destination, mountId);
+			await Mount(destination, CharacterSettings.Instance.MountId);
 			await MoveToPointWithinNoMount(destination, radius, name);
 			return !dismountAtDestination || await Dismount();
 		}
 
-		public static async Task<bool> MoveToPointWithinNoMount(this Vector3 destination, float radius, string name = null)
+		public static async Task<bool> MoveToPointWithinNoMount(
+            this Vector3 destination, 
+            float radius, 
+            string name = null)
 		{
 			var sprintDistance = Math.Min(20.0f, CharacterSettings.Instance.MountDistance);
 
@@ -395,7 +398,7 @@ namespace ExBuddy.Helpers
 			}
 
 			await Coroutine.Wait(5000, () => CommonBehaviors.IsLoading);
-			await Coroutine.Wait(10000, () => !CommonBehaviors.IsLoading);
+			await Coroutine.Wait(100000, () => !CommonBehaviors.IsLoading);
 
 			return true;
 		}
