@@ -46,9 +46,13 @@
 				{
 					await Impulsive(tag);
 					await Impulsive(tag);
-					await Instinctual(tag);
-				}
-			}
+#if RB_CN
+					await Methodical(tag);
+#else
+				    await Instinctual(tag);
+#endif
+                }
+            }
 			else
 			{
 				if (Core.Player.CurrentGP >= 600)
@@ -72,9 +76,13 @@
 				{
 					await Impulsive(tag);
 					await Impulsive(tag);
-					await Instinctual(tag);
-				}
-			}
+#if RB_CN
+					await Methodical(tag);
+#else
+				    await Instinctual(tag);
+#endif
+                }
+            }
 
 			return true;
 		}
