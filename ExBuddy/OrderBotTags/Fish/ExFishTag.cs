@@ -1052,12 +1052,12 @@ namespace ExBuddy.OrderBotTags.Fish
 
 		internal bool CanDoAbility(Ability ability)
 		{
-			return ActionManager.CanCast(Abilities.Map[Core.Player.CurrentJob][ability], ExProfileBehavior.Me);
+			return ActionManager.CanCast(Abilities.Map[ClassJobType.Fisher][ability], ExProfileBehavior.Me);
 		}
 
 		internal bool DoAbility(Ability ability)
 		{
-			return ActionManager.DoAction(Abilities.Map[Core.Player.CurrentJob][ability], ExProfileBehavior.Me);
+			return ActionManager.DoAction(Abilities.Map[ClassJobType.Fisher][ability], ExProfileBehavior.Me);
 		}
 
 		#endregion Ability Checks and Actions
