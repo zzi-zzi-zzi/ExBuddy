@@ -104,7 +104,7 @@
 						{
 							Logger.Info(Localization.Localization.FlightEnabledSlideMover_TakeoffStart);
 							takeoffTask = Task.Factory.StartNew(
-								() =>
+                                () =>
 								{
 									try
 									{
@@ -117,21 +117,21 @@
 												InnerMover.MoveStop();
 												IsTakingOff = false;
 												return;
-											}
+										    }
 
-											if (coroutine == null || coroutine.IsFinished)
-											{
-												Logger.Verbose(Localization.Localization.FlightEnabledSlideMover_TakeoffNew);
-                                                coroutine = new Coroutine(() => CommonTasks.TakeOff());
-                                            }
+										    if (coroutine == null || coroutine.IsFinished)
+										    {
+										        Logger.Verbose(Localization.Localization.FlightEnabledSlideMover_TakeoffNew);
+										        coroutine = new Coroutine(async () => await CommonTasks.TakeOff());
+										    }
 
-											if (!coroutine.IsFinished && !MovementManager.IsFlying && Behaviors.ShouldContinue)
-											{
-												Logger.Verbose(Localization.Localization.FlightEnabledSlideMover_TakeoffResumed);
-												coroutine.Resume();
-											}
+                                            if (!coroutine.IsFinished && !MovementManager.IsFlying && Behaviors.ShouldContinue)
+										    {
+										        Logger.Verbose(Localization.Localization.FlightEnabledSlideMover_TakeoffResumed);
+										        coroutine.Resume();
+										    }
 
-											Thread.Sleep(66);
+                                            Thread.Sleep(66);
 										}
 									}
 									finally
@@ -216,8 +216,8 @@
 													var move = Core.Player.Location.AddRandomDirection2D(10).GetFloor(8);
 													MovementManager.StopDescending();
 													MovementManager.Jump();
-													landingCoroutine = new Coroutine(() => move.MoveToNoMount(false, 0.8f));
-													Logger.Info(Localization.Localization.FlightEnabledSlideMover_LandNew, move);
+												    landingCoroutine = new Coroutine(async () => await move.MoveToNoMount(false, 0.8f));
+                                                    Logger.Info(Localization.Localization.FlightEnabledSlideMover_LandNew, move);
 												}
 
 												if (!landingCoroutine.IsFinished && MovementManager.IsFlying && !IsDiving)
@@ -359,12 +359,15 @@
 				IsTakingOff = true;
 				IsMovingTowardsLocation = true;
 				EnsureFlying();
-			}
+		    }
 
-			if (!IsTakingOff)
+		    //Logger.Info("IsTakingOff : " + IsTakingOff);
+
+            if (!IsTakingOff)
 			{
 				IsMovingTowardsLocation = true;
-				InnerMover.MoveTowards(location);
+			    //Logger.Info("MoveTowards " + location);
+                InnerMover.MoveTowards(location);
 			}
 		}
 
