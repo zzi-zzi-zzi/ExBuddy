@@ -2,19 +2,13 @@
 
 namespace ExBuddy.OrderBotTags.Gather.GatherSpots
 {
-    using System.Collections.Generic;
     using Clio.Utilities;
 	using Clio.XmlEngine;
 	using ExBuddy.Helpers;
 	using ExBuddy.Interfaces;
 	using System.ComponentModel;
-	using System.Linq;
-	using System.Threading.Tasks;
-	using Buddy.Coroutines;
-	using ff14bot;
-	using ff14bot.Managers;
-	using ff14bot.Navigation;
-	using ff14bot.Pathing;
+    using System.Threading.Tasks;
+    using ff14bot.Managers;
 
     [XmlElement("GatherSpot")]
 	public class GatherSpot : IGatherSpot

@@ -69,7 +69,8 @@
 		{
 			direction.Normalize();
 			forwardNormal = Forward = direction;
-			Forward *= forwardRange;
+		    //Logger.Instance.Verbose("Forward Y: " + Forward.Y);
+            Forward *= forwardRange;
 			Direction2D = new Vector3(direction.X, 0, direction.Z);
 			Direction2D.Normalize();
 			Position = position;
@@ -274,7 +275,8 @@
 				travelDeviation = deviation;
 
 				Logger.Instance.Verbose("Direction of deviation: " + (Flags ^ CollisionFlags.Forward));
-			}
+                //Logger.Instance.Verbose("Deviation Location: " + deviation);
+            }
 
 			return valueFound;
 		}
