@@ -12,7 +12,7 @@
 #if RB_CN
 		private const string DbFileName = "ExBuddy_CN.s3db";
 #else
-		private const string DbFileName = "ExBuddySB.s3db";
+		private const string DbFileName = "ExBuddy.s3db";
 #endif
 		public static readonly string DataFilePath;
 
