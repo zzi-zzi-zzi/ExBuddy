@@ -90,21 +90,22 @@
 
 					case ShopType.RedCrafter61:
 						return Scrips.RedCrafter;
-
-					case ShopType.YellowCrafterItems:
+#if !RB_CN
+                    case ShopType.YellowCrafterItems:
 						return Scrips.YellowCrafter;
-
-					case ShopType.RedGatherer50:
+#endif
+                    case ShopType.RedGatherer50:
 						return Scrips.RedGatherer;
 
 					case ShopType.RedGatherer61:
 						return Scrips.RedGatherer;
-
-					case ShopType.YellowGathererItems:
+#if !RB_CN
+                    case ShopType.YellowGathererItems:
 						return Scrips.YellowGatherer;
-				}
+#endif
+                }
 
-				return 0;
+                return 0;
 			}
 		}
 
