@@ -87,8 +87,7 @@
     <Compile Include="Logging\IGpRegeneratorLogger.cs" />
     <Compile Include="Logging\IStatusLogger.cs" />
     <Compile Include="Logging\ProfileBehaviorLogger.cs" />
-    <Compile Include="Navigation\FlightEnabledNavigatorbeta.cs" />
-    <Compile Include="Navigation\FlightEnabledNavigatorCN.cs" />
+    <Compile Include="Navigation\FlightEnabledNavigator.cs" />
     <Compile Include="Offsets\SecondaryOffsets.cs" />
     <Compile Include="OrderBotTags\Gather\ExSpearFishTag.cs" />
     <Compile Include="OrderBotTags\Gather\SpearResult.cs" />

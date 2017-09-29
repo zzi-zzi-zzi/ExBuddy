@@ -2,10 +2,6 @@
 {
     using Helpers;
 
-#if RB_CN
-    using ActionManager = ff14bot.Managers.Actionmanager;
-#endif
-
     public struct TimeToGather
 	{
 #pragma warning disable 414

@@ -1,6 +1,4 @@
-﻿#if RB_64
-
-namespace ExBuddy.Navigation
+﻿namespace ExBuddy.Navigation
 {
 	using Clio.Common;
 	using Clio.Utilities;
@@ -381,5 +379,3 @@ namespace ExBuddy.Navigation
 		#endregion INavigationProvider Members
 	}
 }
-
-#endif

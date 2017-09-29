@@ -394,7 +394,7 @@
     <value>Error, could not resolve class type for item:</value>
   </data>
   <data name="ExTurnInCollectable_FailedPurchaseMorDhona" xml:space="preserve">
-    <value>Unable to purchase item {0} in MorDhona, set location to Idyllshire.</value>
+    <value>Unable to purchase item {0}, set location to Rhalgr's Reach.</value>
   </data>
   <data name="ExTurnInCollectable_InteractingTimeout" xml:space="preserve">
     <value>Timeout interacting with npc.</value>

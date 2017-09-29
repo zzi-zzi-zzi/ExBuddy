@@ -56,11 +56,7 @@
 				{
 					await Impulsive(tag);
 					await Impulsive(tag);
-#if RB_CN
-					await Methodical(tag);
-#else
 				    await Instinctual(tag);
-#endif
                 }
             }
 

@@ -39,11 +39,7 @@ namespace ExBuddy.OrderBotTags.Gather.GatherSpots
 		    tag.StatusText = "Moving to " + this;
 
 		    Vector3 randomApproachLocation;
-		    if (MovementManager.IsFlying
-#if !RB_CN
-		         || MovementManager.IsDiving
-#endif
-		    )
+		    if (MovementManager.IsFlying || MovementManager.IsDiving)
             {
 		        randomApproachLocation = NodeLocation.AddRandomDirection(3.0f, SphereType.TopHalf);
 		    }

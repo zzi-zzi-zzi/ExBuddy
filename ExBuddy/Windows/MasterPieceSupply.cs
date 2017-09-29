@@ -70,19 +70,7 @@
 					return false;
 				}
 			}
-
-#if RB_CN
-			if (Memory.Request.ItemId1 != bagSlot.RawItemId)
-			{
-				Request.Cancel();
-				var item = DataManager.GetItem(Memory.Request.ItemId1);
-				Logger.Instance.Warn(
-					Localization.Localization.MasterPieceSupply_CannotTurnIn,
-					bagSlot.EnglishName,
-					item.EnglishName);
-				return false;
-			}
-#endif
+            
 			requestAttempts = 0;
 			while (Request.IsOpen && requestAttempts++ < attempts && Behaviors.ShouldContinue && bagSlot.Item != null)
 			{

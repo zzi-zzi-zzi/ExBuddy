@@ -39,66 +39,6 @@
 			}
 		}
 
-#if RB_CN
-		public static class Scrips
-		{
-			public static int BlueCrafter
-			{
-				get { return Core.Memory.Read<int>(ScripsOffsets.BasePtr); }
-			}
-
-			public static int BlueGatherer
-			{
-				get { return Core.Memory.Read<int>(ScripsOffsets.BasePtr + ScripsOffsets.BlueGathererOffset); }
-			}
-
-			public static int CenturioSeals
-			{
-				get { return Core.Memory.Read<int>(ScripsOffsets.BasePtr + ScripsOffsets.CenturioSealsOffset); }
-			}
-
-			public static int RedCrafter
-			{
-				get { return Core.Memory.Read<int>(ScripsOffsets.BasePtr + ScripsOffsets.RedCrafterOffset); }
-			}
-
-			public static int RedGatherer
-			{
-				get { return Core.Memory.Read<int>(ScripsOffsets.BasePtr + ScripsOffsets.RedGathererOffset); }
-			}
-
-			public static int WeeklyRedCrafter
-			{
-				get { return Core.Memory.Read<int>(ScripsOffsets.BasePtr + ScripsOffsets.WeeklyRedCrafterOffset); }
-			}
-
-			public static int WeeklyRedGatherer
-			{
-				get { return Core.Memory.Read<int>(ScripsOffsets.BasePtr + ScripsOffsets.WeeklyRedGathererOffset); }
-			}
-
-			public static int GetRemainingScripsByShopType(ShopType shopType)
-			{
-				switch (shopType)
-				{
-					case ShopType.BlueCrafter:
-						return Scrips.BlueCrafter;
-
-					case ShopType.RedCrafter:
-						return Scrips.RedCrafter;
-
-					case ShopType.BlueGatherer:
-						return Scrips.BlueGatherer;
-
-					case ShopType.RedGatherer:
-						return Scrips.RedGatherer;
-				}
-
-				return 0;
-			}
-		}
-#else
-
 		public static class Scrips
 		{
 			public static int RedCrafter
@@ -137,8 +77,8 @@
 			{
 				get
 				{
-					return Core.Memory.Read<int>(ScripsOffsets.BasePtr + ScripsOffsets.CenturioSealsOffset);
-				}
+				    return (int)SpecialCurrencyManager.GetCurrencyCount(SpecialCurrency.CenturioSeals);
+                }
 			}
 
 			public static int GetRemainingScripsByShopType(ShopType shopType)
@@ -168,6 +108,5 @@
 			}
 		}
 
-#endif
 	}
 }

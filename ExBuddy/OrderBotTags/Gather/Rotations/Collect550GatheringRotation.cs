@@ -31,9 +31,6 @@
 			{
 				await UtmostCaution(tag);
 				await AppraiseAndRebuff(tag);
-#if RB_CN
-				await UtmostCaution(tag);
-#endif
 				await Methodical(tag);
 				await AppraiseAndRebuff(tag);
 				await Methodical(tag);
@@ -62,9 +59,6 @@
 
 						if (HasDiscerningEye)
 						{
-#if RB_CN
-							await UtmostSingleMindMethodical(tag);
-#else
 							if (appraisalsRemaining == 1)
 							{
 								await SingleMindMethodical(tag);
@@ -73,7 +67,6 @@
 							{
 								await UtmostSingleMindMethodical(tag);
 							}
-#endif
 							appraisalsRemaining--;
 						}
 
@@ -84,11 +77,7 @@
 
 						if (appraisalsRemaining == 1)
 						{
-#if RB_CN
-							await UtmostSingleMindMethodical(tag);
-#else
 							await SingleMindMethodical(tag);
-#endif
 						}
 
 						await IncreaseChance(tag);
@@ -98,11 +87,7 @@
 
 				await Impulsive(tag);
 				await Impulsive(tag);
-#if RB_CN
-				await Methodical(tag);
-#else
 			    await Instinctual(tag);
-#endif
 
                 return true;
 			}

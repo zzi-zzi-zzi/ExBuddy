@@ -14,10 +14,6 @@
 	using System.Threading.Tasks;
 	using PurifyDialog = ExBuddy.Windows.PurifyDialog;
 
-#if RB_CN
-    using ActionManager = ff14bot.Managers.Actionmanager;
-#endif
-
 	[LoggerName("ExPurify")]
 	[XmlElement("ExPurify")]
 	[XmlElement("ExReduce")]
@@ -44,11 +40,7 @@
 
 			Navigator.Stop();
 
-			if (MovementManager.IsFlying
-#if !RB_CN
-				&& !MovementManager.IsDiving
-#endif
-				)
+			if (MovementManager.IsFlying && !MovementManager.IsDiving)
 			{
 				Logger.Error(Localization.Localization.ExPurify_Land);
 				return isDone = true;

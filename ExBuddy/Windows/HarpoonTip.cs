@@ -5,10 +5,6 @@
     using ff14bot.Managers;
     using Helpers;
 
-#if RB_CN
-    using ActionManager = ff14bot.Managers.Actionmanager;
-#endif
-
     public sealed class HarpoonTip : Window<HarpoonTip>
     {
         public HarpoonTip()

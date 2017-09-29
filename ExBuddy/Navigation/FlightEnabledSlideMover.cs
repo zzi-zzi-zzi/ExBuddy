@@ -18,10 +18,6 @@
 	using System.Threading.Tasks;
 	using System.Windows.Media;
 
-#if RB_CN
-    using ActionManager = ff14bot.Managers.Actionmanager;
-#endif
-
 	public class FlightEnabledSlideMover : LogColors, IFlightEnabledPlayerMover
 	{
 		private static Func<Vector3, bool> shouldFlyToFunc = ShouldFlyInternal;
@@ -162,11 +158,7 @@
 
 		public void ForceLanding()
 		{
-#if RB_CN
-            if (MovementManager.IsFlying)
-#else
 			if (!IsDiving && MovementManager.IsFlying)
-#endif
 			{
 				Logger.Info("Landing Task Started: {0} {1}", IsDiving, MovementManager.IsFlying);
 
@@ -319,12 +311,8 @@
 
 			return CanFly && (ShouldFly = shouldFlyToFunc(destination));
 		}
-
-#if RB_CN
-        public bool IsDiving => false;
-#else
+        
 		public bool IsDiving => MovementManager.IsDiving;
-#endif
 
 		#endregion IFlightEnabledPlayerMover Members
 

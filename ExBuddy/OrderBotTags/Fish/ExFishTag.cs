@@ -26,10 +26,6 @@ namespace ExBuddy.OrderBotTags.Fish
 	using TreeSharp;
 	using Action = TreeSharp.Action;
 
-#if RB_CN
-    using ActionManager = ff14bot.Managers.Actionmanager;
-#endif
-
 	[LoggerName("ExFish")]
 	[XmlElement("ExFish")]
 	[XmlElement("Fish")]
@@ -507,7 +503,7 @@ namespace ExBuddy.OrderBotTags.Fish
 #if RB_CN
             @"[\u4e00-\u9fa5A-Za-z0-9·]+成功钓上了|[\u4e00-\u9fa5]+",
 #else
-			@"You land(?: a| an)? (.+) measuring (\d{1,4}\.\d) ilms!", // Entrax fix
+			@"You land(?: a| an)? (.+) measuring (\d{1,4}\.\d) ilms!",
 #endif
 			RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
@@ -915,13 +911,7 @@ namespace ExBuddy.OrderBotTags.Fish
 			{
 				return new Decorator(
 					// TODO: Log reason for quit.
-					ret => InventoryManager.FilledSlots.Count(c => c.BagId != InventoryBagId.KeyItems) >=
-#if RB_CN
-				100
-#else
-				140
-#endif
-					, IsDoneAction);
+					ret => InventoryManager.FilledSlots.Count(c => c.BagId != InventoryBagId.KeyItems) >= 140, IsDoneAction);
 			}
 		}
 

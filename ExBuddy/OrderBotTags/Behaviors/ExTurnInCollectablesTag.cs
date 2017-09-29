@@ -47,13 +47,8 @@ namespace ExBuddy.OrderBotTags.Behaviors
 
 		[XmlAttribute("ForcePurchase")]
 		public bool ForcePurchase { get; set; }
-
-#if RB_CN
-		[DefaultValue(Locations.Idyllshire)]
-#else
-
+        
 		[DefaultValue(Locations.RhalgrsReach)]
-#endif
 		[XmlAttribute("Location")]
 		public Locations Location { get; set; }
 
@@ -309,11 +304,7 @@ namespace ExBuddy.OrderBotTags.Behaviors
 
 			var itemsToPurchase = ShopPurchases.Where(ShouldPurchaseItem).ToArray();
 			var npc = GameObjectManager.GetObjectByNPCId(shopExchangeCurrencyNpc.NpcId);
-#if RB_CN
-			var shopType = ShopType.BlueGatherer;
-#else
 			var shopType = ShopType.RedGatherer50;
-#endif
 			var shopExchangeCurrency = new ShopExchangeCurrency();
 			foreach (var purchaseItem in itemsToPurchase)
 			{
@@ -358,36 +349,17 @@ namespace ExBuddy.OrderBotTags.Behaviors
 					isDone = true;
 					return true;
 				}
-
-#if RB_CN
-				if (Location == Locations.MorDhona
-					&& (purchaseItemInfo.ShopType == ShopType.RedCrafter || purchaseItemInfo.ShopType == ShopType.RedGatherer))
-				{
-					Logger.Warn(Localization.Localization.ExTurnInCollectable_FailedPurchaseMorDhona, purchaseItemData.EnglishName);
-					continue;
-				}
-#else
+                
                 if ((Location == Locations.MorDhona || Location == Locations.Idyllshire)
                     && (purchaseItemInfo.ShopType == ShopType.YellowCrafter || purchaseItemInfo.ShopType == ShopType.YellowGatherer))
                 {
                     Logger.Warn(Localization.Localization.ExTurnInCollectable_FailedPurchaseMorDhona, purchaseItemData.EnglishName);
                     continue;
                 }
-#endif
+
 				ticks = 0;
 				while (SelectIconString.IsOpen && ticks++ < 5 && Behaviors.ShouldContinue)
 				{
-#if RB_CN
-					if (Location == Locations.MorDhona)
-					{
-						// Blue crafter = 0, Blue gather = 1
-						SelectIconString.ClickSlot((uint)purchaseItemInfo.ShopType / 2);
-					}
-					else
-					{
-						SelectIconString.ClickSlot((uint)purchaseItemInfo.ShopType);
-					}
-#else
                     if ((Location == Locations.MorDhona || Location == Locations.Idyllshire) && (purchaseItemInfo.ShopType == ShopType.RedGatherer50 || purchaseItemInfo.ShopType == ShopType.RedGatherer61))
                     {
                         SelectIconString.ClickSlot((uint)purchaseItemInfo.ShopType - 2);
@@ -395,8 +367,7 @@ namespace ExBuddy.OrderBotTags.Behaviors
                     else
                     {
                         SelectIconString.ClickSlot((uint)purchaseItemInfo.ShopType);
-                    }	
-#endif
+                    }
 
 					await shopExchangeCurrency.Refresh(5000);
 				}
@@ -446,37 +417,6 @@ namespace ExBuddy.OrderBotTags.Behaviors
 
 					await Coroutine.Yield();
 				}
-
-				/*while (purchaseItemData.ItemCount() < purchaseItem.MaxCount
-                       &&
-                       (scripsLeft = Memory.Scrips.GetRemainingScripsByShopType(purchaseItemInfo.ShopType)) >= purchaseItemInfo.Cost
-                       && Behaviors.ShouldContinue)
-                {
-                    if (!await shopExchangeCurrency.PurchaseItem(purchaseItemInfo.Index, (uint)purchaseItem.QtyOnce, 20))
-                    {
-                        Logger.Error(Localization.Localization.ExTurnInCollectable_PurchaseTimeout, purchaseItemData.EnglishName);
-                        await shopExchangeCurrency.CloseInstance();
-                        isDone = true;
-                        return true;
-                    }
-
-                    // wait until scrips changed
-                    var left = scripsLeft;
-                    await
-                        Coroutine.Wait(
-                            5000,
-                            () => (scripsLeft = Memory.Scrips.GetRemainingScripsByShopType(purchaseItemInfo.ShopType)) != left);
-
-                    Logger.Info(
-                        Localization.Localization.ExTurnInCollectable_Purchased,
-                        purchaseItemData.EnglishName,
-                        purchaseItemInfo.Cost,
-                        purchaseItemInfo.ShopType,
-                        WorldManager.EorzaTime,
-                        scripsLeft);
-
-                    await Coroutine.Yield();
-                }*/
 
 				await Coroutine.Sleep(1000);
 			}
@@ -761,39 +701,7 @@ namespace ExBuddy.OrderBotTags.Behaviors
 			{
 				return false;
 			}
-
-#if RB_CN
-			switch (info.ShopType)
-			{
-				case ShopType.BlueCrafter:
-					if (Memory.Scrips.BlueCrafter < info.Cost)
-					{
-						return false;
-					}
-					break;
-
-				case ShopType.RedCrafter:
-					if (Memory.Scrips.RedCrafter < info.Cost)
-					{
-						return false;
-					}
-					break;
-
-				case ShopType.BlueGatherer:
-					if (Memory.Scrips.BlueGatherer < info.Cost)
-					{
-						return false;
-					}
-					break;
-
-				case ShopType.RedGatherer:
-					if (Memory.Scrips.RedGatherer < info.Cost)
-					{
-						return false;
-					}
-					break;
-			}
-#else
+            
 			// check cost
 			switch (info.ShopType)
 			{
@@ -839,7 +747,6 @@ namespace ExBuddy.OrderBotTags.Behaviors
 					}
 					break;
 			}
-#endif
 
 			return true;
 		}

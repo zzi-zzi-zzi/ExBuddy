@@ -73,11 +73,7 @@
 			// ReSharper disable once PossibleNullReferenceException
 			if (uint.TryParse(result.Element("S").Value, out index))
 			{
-#if RB_CN
 				return 103 - index;
-#else
-				return 103 - index;
-#endif
 			}
 
 			return null;

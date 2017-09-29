@@ -5,10 +5,6 @@
 	using ff14bot.Managers;
 	using System.Threading.Tasks;
 
-#if RB_CN
-    using ActionManager = ff14bot.Managers.Actionmanager;
-#endif
-
 	public sealed class Bait : Window<Bait>
 	{
 		public Bait()

@@ -1240,7 +1240,7 @@ namespace ExBuddy.Localization {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Unable to purchase item {0} in MorDhona, set location to Idyllshire..
+        ///   Recherche une chaîne localisée semblable à Unable to purchase item {0}, set location to Rhalgr&apos;s Reach..
         /// </summary>
         internal static string ExTurnInCollectable_FailedPurchaseMorDhona {
             get {

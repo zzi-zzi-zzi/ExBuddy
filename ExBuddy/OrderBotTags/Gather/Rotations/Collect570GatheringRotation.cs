@@ -25,9 +25,6 @@
 		public override async Task<bool> ExecuteRotation(ExGatherTag tag)
 		{
 			await UtmostMethodical(tag);
-#if RB_CN
-				await UtmostCaution(tag);
-#endif
 			await Methodical(tag);
 			await DiscerningMethodical(tag);
 			await DiscerningMethodical(tag);

@@ -16,12 +16,7 @@ namespace ExBuddy.Helpers
 	using System;
 	using System.Linq;
 	using System.Threading.Tasks;
-
-#if RB_CN
-    using ActionManager = ff14bot.Managers.Actionmanager;
-#else
     using ff14bot.Pathing;
-#endif
 
     public static class Behaviors
 	{
@@ -223,11 +218,7 @@ namespace ExBuddy.Helpers
 					   && (!stopCallback(distance = Core.Player.Location.Distance3D(destination), radius)
 						   || stopCallback == DontStopInRange) && !(moveResult.IsDoneMoving()))
 				{
-#if RB_CN
-                    moveResult = Navigator.MoveTo(destination, name);
-#else
 					moveResult = Navigator.MoveTo(new MoveToParameters(destination));
-#endif
 
 					await Coroutine.Yield();
 
@@ -288,11 +279,7 @@ namespace ExBuddy.Helpers
 			var moveResult = MoveResult.GeneratingPath;
 			while (Behaviors.ShouldContinue && !(moveResult.IsDoneMoving()))
 			{
-#if RB_CN
-                moveResult = Navigator.MoveToPointWithin(destination, radius, name);
-#else
 				moveResult = Navigator.MoveTo(new MoveToParameters(destination));
-#endif
 				await Coroutine.Yield();
 
 				var distance = Core.Player.Location.Distance3D(destination);
@@ -347,11 +334,7 @@ namespace ExBuddy.Helpers
 
 		public static async Task<bool> Sprint(int timeout = 500)
 		{
-			if (ActionManager.IsSprintReady && !Core.Player.IsCasting && !Core.Player.IsMounted
-#if RB_CN
-                && Core.Player.CurrentTP == 1000
-#endif
-				&& MovementManager.IsMoving)
+			if (ActionManager.IsSprintReady && !Core.Player.IsCasting && !Core.Player.IsMounted && MovementManager.IsMoving)
 			{
 				ActionManager.Sprint();
 

@@ -13,10 +13,6 @@ namespace ExBuddy.Inventory
     using Helpers;
     using OrderBotTags.Behaviors;
 
-#if RB_CN
-    using ActionManager = ff14bot.Managers.Actionmanager;
-#endif
-
     /// <summary>
     /// Utility wrapper and tracker around a specific in-game item.
     /// </summary>

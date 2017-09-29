@@ -34,10 +34,6 @@
     using Strategies;
     using TreeSharp;
 
-#if RB_CN
-    using ActionManager = ff14bot.Managers.Actionmanager;
-#endif
-
     [LoggerName("ExGather")]
 	[XmlElement("ExGather")]
 	[XmlElement("GatherCollectable")]
@@ -380,13 +376,7 @@
 			var windowItems = GatheringManager.GatheringWindowItems.ToArray();
 
 			// TODO: move method to common so we use it on fish too
-			if (InventoryItemCount() >=
-#if RB_CN
-				100
-#else
-				140
-#endif
-				)
+			if (InventoryItemCount() >= 140)
 			{
 				if (Items.Count > 0)
 				{
@@ -575,13 +565,7 @@
 			}
 
 			if (ExProfileBehavior.Me.ClassLevel < 46
-				|| ExProfileBehavior.Me.HasAura(
-#if RB_CN
-                    (int)
-#else
-					(uint)
-#endif
-						(ExProfileBehavior.Me.CurrentJob == ClassJobType.Miner
+				|| ExProfileBehavior.Me.HasAura((uint)(ExProfileBehavior.Me.CurrentJob == ClassJobType.Miner
 							? AbilityAura.TruthOfMountains
 							: AbilityAura.TruthOfForests)))
 			{
@@ -1006,11 +990,7 @@
 				   && Poi.Current.Unit.IsValid)
 			{
 				var ticks = 0;
-				while (MovementManager.IsFlying
-#if !RB_CN
-				&& !MovementManager.IsDiving
-#endif
-				&& ticks++ < 5 && Behaviors.ShouldContinue && Poi.Current.Unit.IsVisible
+				while (MovementManager.IsFlying && !MovementManager.IsDiving && ticks++ < 5 && Behaviors.ShouldContinue && Poi.Current.Unit.IsVisible
 					   && Poi.Current.Unit.IsValid)
 				{
 					var ground = ExProfileBehavior.Me.Location.GetFloor(5);
