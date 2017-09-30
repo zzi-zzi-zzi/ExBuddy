@@ -350,14 +350,14 @@ namespace ExBuddy.OrderBotTags.Behaviors
 					return true;
 				}
 
-#if !RB_CN
+
                 if ((Location == Locations.MorDhona || Location == Locations.Idyllshire)
                     && (purchaseItemInfo.ShopType == ShopType.YellowCrafterItems || purchaseItemInfo.ShopType == ShopType.YellowGathererItems))
                 {
                     Logger.Warn(Localization.Localization.ExTurnInCollectable_FailedPurchaseMorDhona, purchaseItemData.EnglishName);
                     continue;
                 }
-#endif
+
 
                 ticks = 0;
 				while (SelectIconString.IsOpen && ticks++ < 5 && Behaviors.ShouldContinue)
@@ -720,15 +720,13 @@ namespace ExBuddy.OrderBotTags.Behaviors
 						return false;
 					}
 					break;
-
-#if !RB_CN
+                    
                 case ShopType.YellowCrafterItems:
 					if (Memory.Scrips.YellowCrafter < info.Cost)
 					{
 						return false;
 					}
 					break;
-#endif
 
                 case ShopType.RedGatherer50:
 					if (Memory.Scrips.RedGatherer < info.Cost)
@@ -743,15 +741,13 @@ namespace ExBuddy.OrderBotTags.Behaviors
 						return false;
 					}
 					break;
-
-#if !RB_CN
+                    
                 case ShopType.YellowGathererItems:
 					if (Memory.Scrips.YellowGatherer < info.Cost)
 					{
 						return false;
 					}
 					break;
-#endif
             }
 
 			return true;

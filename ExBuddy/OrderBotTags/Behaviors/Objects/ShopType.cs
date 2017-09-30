@@ -9,7 +9,15 @@
 
 		RedGatherer50,
 
-		RedGatherer61
+		RedGatherer61,
+
+		YellowCrafter,
+
+		YellowCrafterItems,
+
+		YellowGatherer,
+
+		YellowGathererItems
 #else
         RedCrafter50,
 
