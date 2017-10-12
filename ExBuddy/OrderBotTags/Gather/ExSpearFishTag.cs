@@ -37,11 +37,19 @@
         private static readonly object Lock = new object();
 
         protected static Regex SpearFishRegex = new Regex(
+#if RB_CN
+            @"[\u4e00-\u9fa5A-Za-z0-9·]+获得了|[\u4e00-\u9fa5]+",
+#else
             @"You spear(?: a| an| [2-3])? (.+) measuring (\d{1,4}\.\d) ilms!",
+#endif
             RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         protected static Regex SpearFishGetAwayRegex = new Regex(
+#if RB_CN
+            @"鱼逃走了\.\.\.",
+#else
             @"The fish gets away\.\.\.",
+#endif
             RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         protected static Regex FishSizeRegex = new Regex(@"(\d{1,4}\.\d)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
@@ -133,21 +141,37 @@
 
         protected void ReceiveMessage(object sender, ChatEventArgs e)
         {
+#if RB_CN            
+            if (e.ChatLogEntry.MessageType == (MessageType) 2115 && e.ChatLogEntry.Contents.StartsWith("获得了") ||
+                e.ChatLogEntry.MessageType == (MessageType) 67 && e.ChatLogEntry.Contents.StartsWith("鱼逃走了"))
+                MatchSpearResult(e.ChatLogEntry.Contents);
+#else
             if (e.ChatLogEntry.MessageType == (MessageType) 2115 && e.ChatLogEntry.Contents.StartsWith("You spear") ||
                 e.ChatLogEntry.MessageType == (MessageType) 67 && e.ChatLogEntry.Contents.StartsWith("The fish"))
                 MatchSpearResult(e.ChatLogEntry.Contents);
+#endif
         }
 
         protected void MatchSpearResult(string message)
         {
             var spearResult = new SpearResult();
+            var spearFishSizeMatch = FishSizeRegex.Match(message);
+#if RB_CN
+            var spearFishMatch = SpearFishRegex.Matches(message);
+            var spearFishAwayMatch = SpearFishGetAwayRegex.Match(message);
 
+            if (spearFishSizeMatch.Success)
+            {
+                spearResult.Name = spearFishMatch[0].ToString();
+                float.TryParse(spearFishSizeMatch.Groups[1].Value, out float size);
+#else
             var spearFishMatch = SpearFishRegex.Match(message);
             var spearFishAwayMatch = SpearFishGetAwayRegex.Match(message);
             if (spearFishMatch.Success)
             {
                 spearResult.Name = spearFishMatch.Groups[1].Value;
                 float.TryParse(spearFishMatch.Groups[2].Value, out float size);
+#endif
                 spearResult.Size = size;
                 if (spearResult.Name[spearResult.Name.Length - 2] == ' ')
                     spearResult.IsHighQuality = true;
