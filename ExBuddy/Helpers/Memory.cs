@@ -61,7 +61,7 @@
 			{
 				get
 				{
-					return (int)SpecialCurrencyManager.GetCurrencyCount(SpecialCurrency.YellowGatherersScrips);
+					return (int)SpecialCurrencyManager.GetCurrencyCount(SpecialCurrency.YellowCraftersScrips);
 				}
 			}
 
