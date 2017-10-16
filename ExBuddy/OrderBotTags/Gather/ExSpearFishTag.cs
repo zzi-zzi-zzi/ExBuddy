@@ -142,8 +142,8 @@
         protected void ReceiveMessage(object sender, ChatEventArgs e)
         {
 #if RB_CN            
-            if (e.ChatLogEntry.MessageType == (MessageType) 2115 && e.ChatLogEntry.Contents.StartsWith("获得了") ||
-                e.ChatLogEntry.MessageType == (MessageType) 67 && e.ChatLogEntry.Contents.StartsWith("鱼逃走了"))
+            if (e.ChatLogEntry.MessageType == (MessageType) 2115 && e.ChatLogEntry.Contents.Contains("获得了") ||
+                e.ChatLogEntry.MessageType == (MessageType) 67 && e.ChatLogEntry.Contents.Contains("鱼逃走了"))
                 MatchSpearResult(e.ChatLogEntry.Contents);
 #else
             if (e.ChatLogEntry.MessageType == (MessageType) 2115 && e.ChatLogEntry.Contents.StartsWith("You spear") ||
